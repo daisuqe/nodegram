@@ -273,7 +273,8 @@ function addNode(type, wx, wy){
   if (d.object || d.stage){
     n.angle=0; n.playX=0; n.playY=0; n.layer=50; n.tag="";  // SORTLAYER・タグ
     if(d.object){ n.color=randObjColor(); n.w=80; n.h=80; n.bounce=0; n.friction=0.0; n.flip=false;
-      n.objStyle="fill"; n.coordMode="local"; n.visible=true; n.destroyedBy=""; } // Unity: ObjectStyle/CoordMode/Visible/DestroyedBy
+      n.objStyle="fill"; n.coordMode="local"; n.visible=true; n.destroyedBy="";
+      n.bodyType=(type==="character")?"dynamic":"static"; } // Unity: bodyType(Off/Static/Kinematic/Dynamic)
     else if(d.stage==="text"){ n.color="#8a3bd0"; n.w=240; n.h=70; n.text="TEXT"; n.fontSize=40; n.textColor="#ffffff"; n.align="center"; n.outline=false; }
     else if(d.stage==="stick"){ n.color="#e0892b"; n.w=200; n.h=200;
       n.style="frame"; n.mode="analog"; n.threshold=0.3; n.limitAxis=false;
@@ -499,8 +500,7 @@ function stopPlay(){
   document.getElementById("pad").style.display="none";
   document.getElementById("menuBtn").style.display="flex";
   const h=document.getElementById("hint");
-  if(mode==="layout"){ h.textContent="オブジェクトをドラッグして配置"; h.classList.remove("hidden"); }
-  else h.classList.add("hidden");
+  h.classList.add("hidden");
   const b=document.getElementById("playBtn"); b.classList.remove("stop"); b.innerHTML=""; b.textContent="▶"; updatePlayBtnColor();
 }
 // ▶ボタンの背景：Editor=緑 / Layout=水色（テーマカラー）
@@ -517,8 +517,7 @@ function setMode(m){ // edit ⇄ layout 切り替え
     [...multiSel].forEach(id=>{ const mn=nodeById(id); if(!mn||!showsInLayout(mn)) multiSel.delete(id); });
   }
   propNode=null; hideCreateMenu(); refreshProp();
-  document.getElementById("hint").textContent = (m==="layout") ? "オブジェクトをドラッグして配置" : "矢印 / WASD で移動";
-  document.getElementById("hint").classList.toggle("hidden", m!=="layout");
+  document.getElementById("hint").classList.add("hidden");
   updatePlayBtnColor();
 }
 
@@ -594,18 +593,20 @@ function playStep(dt){
     else stopTone(n);
   }
 
-  const live = objs.filter(n=>!destroyed.has(n.id));
-  // 1) 重力なし（＝足場/静的コライダ）を先に更新
-  const statics = live.filter(n=>!n.dyn);
-  for(const n of statics){
+  // bodyType: off=物理無/static=不動壁/kinematic=速度で動く壁/dynamic=重力あり（Unity RigidBody2D準拠）
+  const bt = n => n.bodyType || (n.type==="character"?"dynamic":"static");
+  const live = objs.filter(n=>!destroyed.has(n.id) && bt(n)!=="off"); // OFFはコリジョン対象外
+  // 1) KINEMATIC / 動く STATIC：速度入力で移動（重力・衝突反力は受けない＝押し返されない壁）
+  const solids = live.filter(n=>bt(n)!=="dynamic"); // dynamicが衝突判定する相手（static+kinematic）
+  for(const n of solids){
     const k = n.type==="character"?100:1; // CHARACTERのX,Y入力は内部で100倍
-    n.playX += inputValue(n,0)*k*dt;   // 速度入力があれば動く足場になる（無ければ静止）
-    n.playY += inputValue(n,1)*k*dt;
+    if(bt(n)==="kinematic"){ n.playX += inputValue(n,0)*k*dt; n.playY += inputValue(n,1)*k*dt; }
+    // static は速度入力があっても動かさない（Unity Static準拠：不動）
   }
 
-  // 2) 重力あり（プレイヤー等）を更新し、静的コライダと衝突解決
+  // 2) DYNAMIC：重力＋速度入力を積分し、solidコライダとスイープ衝突解決（Unity2D相当の分離軸AABB）
   for(const n of live){
-    if(!n.dyn) continue;
+    if(bt(n)!=="dynamic") continue;
     const { hw, hh } = objHalf(n); const bounce=S_BOUNCE, fric=S_FRIC;
     const kc = n.type==="character"?100:1; // CHARACTERのX,Y入力は内部で100倍（Jumpは対象外）
     n.vx = inputValue(n,0)*kc;
@@ -616,20 +617,22 @@ function playStep(dt){
     else jump=(vyIn < -1);
     if(jump && n.grounded){ n.vy = -JUMP*jforce; n.grounded=false; }
 
-    // 横移動 → 足場で左右をブロック（親子関係の相手とは衝突しない）
+    // 横移動 → solidで左右をブロック（親子関係の相手とは衝突しない）
     n.playX += n.vx*dt;
-    for(const s of statics){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
+    for(const s of solids){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
       if(n.vx>0) n.playX = s.playX-(S.hw+hw);
-      else if(n.vx<0) n.playX = s.playX+(S.hw+hw); } }
+      else if(n.vx<0) n.playX = s.playX+(S.hw+hw);
+      else { n.playX += (n.playX<s.playX?-1:1)*((S.hw+hw)-Math.abs(n.playX-s.playX)); } } } // 速度0でもめり込み押し出し
 
-    // 縦移動（重力）→ 足場に着地／頭ぶつけ（反発・摩擦）
+    // 縦移動（重力）→ solidに着地／頭ぶつけ（反発・摩擦）
     n.vy = (n.vy||0) + G*dt;
     if(S_DRAG>0) n.vy *= (1-Math.min(1,S_DRAG*dt*10)); // 空気抵抗（線形ダンピング）
     n.playY += n.vy*dt;
     n.grounded=false;
-    for(const s of statics){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
+    for(const s of solids){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
       if(n.vy>0){ n.playY = s.playY-(S.hh+hh); n.vy = -n.vy*bounce; if(Math.abs(n.vy)<40){n.vy=0; n.grounded=true;} }
-      else if(n.vy<0){ n.playY = s.playY+(S.hh+hh); n.vy=0; } } }
+      else if(n.vy<0){ n.playY = s.playY+(S.hh+hh); n.vy=0; }
+      else { const push=(S.hh+hh)-Math.abs(n.playY-s.playY); if(n.playY<s.playY){ n.playY-=push; n.grounded=true; } else n.playY+=push; } } }
 
     // 摩擦（接地時、速度入力が無ければ徐々に停止）
     if(n.grounded && fric>0 && !conns.some(c=>c.b===n.id&&c.bi===0)) n.vx*=(1-Math.min(1,fric));
@@ -1844,7 +1847,9 @@ function refreshProp(){
     colRow("Color", OBJ_COLORS, ()=>n.color, v=>{ n.color=v; });
     selRow("Style", [{value:"fill",label:"Fill"},{value:"frame",label:"Frame"}], ()=>n.objStyle||"fill", v=>{ n.objStyle=v; }); // ObjectStyle
     chkRow("Flip",     ()=>n.flip, v=>{ n.flip=v; });
-    chkRow("Dynamics", ()=>n.dyn, v=>{ n.dyn=v; }); // 物理ON/OFFのみ（各パラメータはSettingで全体設定）
+    // Dynamics: Unity RigidBody2D.bodyType 準拠（Off=物理無/Static=不動壁/Kinematic=速度で動く壁/Dynamic=重力あり）
+    selRow("Dynamics", [{value:"off",label:"OFF"},{value:"static",label:"STATIC"},{value:"kinematic",label:"KINEMATIC"},{value:"dynamic",label:"DYNAMIC"}],
+      ()=>n.bodyType||"static", v=>{ n.bodyType=v; });
     selRow("Coord", [{value:"world",label:"World"},{value:"local",label:"Local"}], ()=>n.coordMode||"local", v=>{ n.coordMode=v; }); // 入力座標系
     chkRow("Visible", ()=>n.visible!==false, v=>{ n.visible=v; });
   }
@@ -2115,7 +2120,8 @@ function deserialize(s){ const o=JSON.parse(s); nodes=o.nodes||[]; conns=o.conns
     if(n.type==="text"&&n.outline==null) n.outline=false;
     if(n.type==="shot"){ if(n.bulletCount==null)n.bulletCount=1; if(n.bulletInterval==null)n.bulletInterval=0;
       if(n.size==null)n.size=(n.bulletSize||28); if(n.bulletShape==null)n.bulletShape="circle"; }
-    if(NODE_TYPES[n.type]&&NODE_TYPES[n.type].object){ if(n.objStyle==null)n.objStyle="fill"; if(n.coordMode==null)n.coordMode="local"; if(n.visible==null)n.visible=true; if(n.destroyedBy==null)n.destroyedBy=""; }
+    if(NODE_TYPES[n.type]&&NODE_TYPES[n.type].object){ if(n.objStyle==null)n.objStyle="fill"; if(n.coordMode==null)n.coordMode="local"; if(n.visible==null)n.visible=true; if(n.destroyedBy==null)n.destroyedBy="";
+      if(n.bodyType==null){ n.bodyType = (n.dyn===true)?"dynamic":(n.type==="character"?"dynamic":"static"); } } // 旧dyn→bodyType
     if(n.type==="circle"){ const r=Math.min(n.w||80,n.h||80); n.w=r; n.h=r; } }); // 真円：幅=高さに正規化
   nodes.forEach(n=>{ if(isStage(n)&&n.parentNodeId) recomputeLocal(n); }); // 親子ローカル復元
 }
