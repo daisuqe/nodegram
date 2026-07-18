@@ -1558,9 +1558,29 @@ const createMenu=document.getElementById("createMenu");
 function showCreateMenu(sx,sy){
   createMenu._w=s2w(sx,sy); createMenu._sx=sx; createMenu._sy=sy;
   createMenu.style.display="block";
+  const landscape = W>H;
+  const row=createMenu.querySelector(".row");
+  if(landscape){
+    // 横画面：幅を画面の8割にして列数を増やす（右8割スペースを埋める）
+    const width=Math.round(W*0.8);
+    createMenu.style.width=width+"px"; createMenu.style.maxWidth="none";
+    const cols=Math.max(3, Math.floor(width/120));
+    row.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  } else {
+    // 縦画面：従来幅・3列
+    createMenu.style.width=""; createMenu.style.maxWidth="";
+    row.style.gridTemplateColumns="1fr 1fr 1fr";
+  }
   const mw=createMenu.offsetWidth||220, mh=createMenu.offsetHeight||180;
-  createMenu.style.left=Math.max(6,Math.min(W-mw-6, sx-mw/2))+"px";
-  createMenu.style.top =Math.max(10,Math.min(H-mh-6, sy-10))+"px";
+  let left, top;
+  if(landscape){
+    left = W - mw - 12;                         // 画面右側に寄せて8割を埋める
+    top  = Math.max(10, Math.min(H-mh-6, sy-10));
+  } else {
+    left = Math.max(6, Math.min(W-mw-6, sx-mw/2));
+    top  = 16;                                  // 縦画面はもっと上（ほぼ画面上端）に表示
+  }
+  createMenu.style.left=left+"px"; createMenu.style.top=top+"px";
 }
 function hideCreateMenu(){ createMenu.style.display="none"; createMenu._w=null; }
 function isCreateMenuOpen(){ return createMenu.style.display==="block"; }
