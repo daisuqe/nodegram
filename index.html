@@ -615,11 +615,11 @@ function playStep(dt){
     const kc = n.type==="character"?100:1; // CHARACTERのX,Y入力は内部で100倍（Jumpは対象外）
     n.vx = inputValue(n,0)*kc;
     const vyIn = inputValue(n,1)*kc;
-    // ジャンプ：CHARACTERは入力2(J)の立ち上がり、それ以外は上入力(Y<-1)
-    let jump;
-    if(n.type==="character"){ const j=inputValue(n,2); jump=(!n._prevJ && j!==0); n._prevJ=j; }
+    // ジャンプ：CHARACTERは入力2(J)が0より大きくなった瞬間にジャンプ。数値でジャンプ力が変わる（-JUMP*j）
+    let jump, jforce=1;
+    if(n.type==="character"){ const j=inputValue(n,2); jump=((n._prevJ||0)<=0 && j>0); jforce=j; n._prevJ=j; }
     else jump=(vyIn < -1);
-    if(jump && n.grounded){ n.vy = -JUMP; n.grounded=false; }
+    if(jump && n.grounded){ n.vy = -JUMP*jforce; n.grounded=false; }
 
     // 横移動 → 足場で左右をブロック
     n.playX += n.vx*dt;
@@ -791,7 +791,13 @@ function applyHierarchy(){
   kids.sort((a,b)=>stageDepth(a)-stageDepth(b));
   for(const n of kids){ const p=nodeById(n.parentNodeId);
     const pa=(p.playAngle!=null?p.playAngle:(p.angle||0));  // 親の現在角度で回転追従
-    const a=pa*Math.PI/180, lx=n.lx||0, ly=n.ly||0;
+    // 子オブジェクトのX/Y入力は親座標系でのオフセット（基準ローカル位置lx,lyに加算）
+    let ox=0, oy=0;
+    if(NODE_TYPES[n.type].object){
+      if(conns.some(c=>c.b===n.id&&c.bi===0)) ox=inputValue(n,0);
+      if(conns.some(c=>c.b===n.id&&c.bi===1)) oy=inputValue(n,1);
+    }
+    const a=pa*Math.PI/180, lx=(n.lx||0)+ox, ly=(n.ly||0)+oy;
     n.playX = p.playX + lx*Math.cos(a)-ly*Math.sin(a);
     n.playY = p.playY + lx*Math.sin(a)+ly*Math.cos(a);
     n.playAngle = pa + (n.la||0) + (n.type==="rotate"?(n._spin||0):0); // ROTATEは関節として自身の回転を加算
