@@ -621,9 +621,9 @@ function playStep(dt){
     else jump=(vyIn < -1);
     if(jump && n.grounded){ n.vy = -JUMP*jforce; n.grounded=false; }
 
-    // 横移動 → 足場で左右をブロック
+    // 横移動 → 足場で左右をブロック（親子関係の相手とは衝突しない）
     n.playX += n.vx*dt;
-    for(const s of statics){ if(overlapAABB(n,s)){ const S=objHalf(s);
+    for(const s of statics){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
       if(n.vx>0) n.playX = s.playX-(S.hw+hw);
       else if(n.vx<0) n.playX = s.playX+(S.hw+hw); } }
 
@@ -632,7 +632,7 @@ function playStep(dt){
     if(S_DRAG>0) n.vy *= (1-Math.min(1,S_DRAG*dt*10)); // 空気抵抗（線形ダンピング）
     n.playY += n.vy*dt;
     n.grounded=false;
-    for(const s of statics){ if(overlapAABB(n,s)){ const S=objHalf(s);
+    for(const s of statics){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
       if(n.vy>0){ n.playY = s.playY-(S.hh+hh); n.vy = -n.vy*bounce; if(Math.abs(n.vy)<40){n.vy=0; n.grounded=true;} }
       else if(n.vy<0){ n.playY = s.playY+(S.hh+hh); n.vy=0; } } }
 
@@ -771,6 +771,9 @@ function drawEffects(camX,camY){
     ctx.restore(); }
 }
 function stageDepth(n){ let d=0,cur=n,g=0; while(cur.parentNodeId){ const p=nodeById(cur.parentNodeId); if(!p||g++>50)break; d++; cur=p; } return d; }
+// aがbの祖先か（親子チェーン）
+function isAncestorOf(anc,node){ let cur=node,g=0; while(cur&&cur.parentNodeId){ if(cur.parentNodeId===anc.id) return true; cur=nodeById(cur.parentNodeId); if(g++>60)break; } return false; }
+function isRelatedHierarchy(a,b){ return a.id===b.id || isAncestorOf(a,b) || isAncestorOf(b,a); } // 親子・先祖子孫は衝突対象外
 // 子の「親ローカル座標（位置lx,ly・角度la）」を現在のレイアウトから計算・保持
 function recomputeLocal(c){ const p=nodeById(c.parentNodeId); if(!p) return;
   const a=-(p.angle||0)*Math.PI/180, dx=(c.layoutX||0)-(p.layoutX||0), dy=(c.layoutY||0)-(p.layoutY||0);
@@ -1901,9 +1904,14 @@ function refreshProp(){
 }
 // プロパティを画面に収める：はみ出たら2列、それでも/縦画面で収まらなければpbodyをスクロール
 function layoutPropPanel(pbody){
-  pbody.style.gridTemplateColumns="1fr"; pbody.style.maxHeight=""; pbody.style.overflowY="";
+  pbody.style.gridTemplateColumns="1fr"; pbody.style.maxHeight=""; pbody.style.overflowY=""; pbody.style.background=""; pbody.style.columnGap="16px";
+  const landscape = W>H;
+  propPanel.style.minWidth = landscape ? Math.min(W-24, 620)+"px" : "240px"; // 横画面は広め
   const avail = H - 24;
-  if(propPanel.offsetHeight > avail) pbody.style.gridTemplateColumns="1fr 1fr"; // 2列
+  if(propPanel.offsetHeight > avail){ // 2列＋中央に薄い罫線
+    pbody.style.gridTemplateColumns="1fr 1fr"; pbody.style.columnGap="24px";
+    pbody.style.background="linear-gradient(to right, transparent calc(50% - 0.5px), rgba(255,255,255,.18) calc(50% - 0.5px), rgba(255,255,255,.18) calc(50% + 0.5px), transparent calc(50% + 0.5px))";
+  }
   if(propPanel.offsetHeight > avail){ const chrome = propPanel.offsetHeight - pbody.offsetHeight;
     pbody.style.maxHeight = Math.max(120, avail - chrome) + "px"; pbody.style.overflowY="auto"; }
 }
