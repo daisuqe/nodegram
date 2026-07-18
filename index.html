@@ -285,8 +285,8 @@ function addNode(type, wx, wy){
     else if(d.stage==="button"){ n.color="#e0892b"; n.w=150; n.h=150;
       n.style="frame"; n.cntlBtn="off"; n.keyCode=""; n.hideOnPc=false;
       n.useKey=false; n.visible=true; }
-    else if(d.stage==="shot"){ n.color="#c084fc"; n.w=70; n.h=70; n.angle=0; n.destroyTag=""; n.bulletSpd=400;
-      n.size=28; n.bulletShape="circle"; n.bulletColor="#ffe08a"; n.bulletCount=1; n.bulletInterval=0; }
+    else if(d.stage==="shot"){ n.color="#c084fc"; n.w=70; n.h=70; n.angle=0; n.bulletSpd=400;
+      n.bulletShape="circle"; n.bulletColor="#ffe08a"; n.bulletCount=1; n.bulletInterval=0; }
     else if(d.stage==="rotate"){ n.color="#e0c020"; n.w=70; n.h=70; }
     if(type==="character"){ n.color=randObjColor(); n.flip=true; }
     // レイアウト開始位置（重ならないよう少しずらす）
@@ -655,8 +655,9 @@ function playStep(dt){
     const canFire = fire && alive<maxCnt && ( (interval===0 && !n._prevFire) || (interval>0 && (n._shotCd||0)<=0) );
     if(canFire){
       const a=((n.playAngle!=null?n.playAngle:n.angle)-90)*Math.PI/180;
+      const bsize=((n.w||70)+(n.h||70))/2; // 弾サイズ＝発射口の幅と高さの平均（楕円/長方形にしない）
       bullets.push({ x:n.playX, y:n.playY, vx:Math.cos(a)*spd, vy:Math.sin(a)*spd, shotId:n.id,
-        tag:n.destroyTag||"", size:n.size||28, shape:n.bulletShape||"circle", color:n.bulletColor||"#ffe08a" });
+        tag:n.tag||"", size:bsize, shape:n.bulletShape||"circle", color:n.bulletColor||"#ffe08a" });
       if(interval>0) n._shotCd=interval;
     }
     n._prevFire=fire;
@@ -1759,9 +1760,9 @@ function refreshProp(){
     selRow("Screen", [{value:"yoko",label:"Yoko(横)"},{value:"tate",label:"Tate(縦)"}], ()=>n.orient||"yoko", v=>{ n.orient=v; });
     numRow("FPS", ()=>n.fps||60, v=>{ n.fps=Math.max(10,Math.min(120,Math.round(v))); }); }
   if(n.type==="shot"){
-    txtRow("Destroy Tag", ()=>n.destroyTag||"", v=>{ n.destroyTag=v; });
     selRow("Shape", [{value:"circle",label:"Circle"},{value:"rect",label:"Rect"}], ()=>n.bulletShape||"circle", v=>{ n.bulletShape=v; });
-    numRow("Size", ()=>n.size||28, v=>{ n.size=Math.max(2,v); }); // Width/Height/BulletSize統一
+    numRow("Width",  ()=>n.w||70, v=>{ n.w=Math.max(4,v); }); // 発射口の幅（弾サイズ＝(W+H)/2）
+    numRow("Height", ()=>n.h||70, v=>{ n.h=Math.max(4,v); });
     numRow("Bullet Speed", ()=>n.bulletSpd||400, v=>{ n.bulletSpd=v; });
     colRow("Bullet Color", OBJ_COLORS, ()=>n.bulletColor||"#ffe08a", v=>{ n.bulletColor=v; });
     numRow("Bullet Count", ()=>n.bulletCount||1, v=>{ n.bulletCount=Math.max(1,Math.round(v)); });
