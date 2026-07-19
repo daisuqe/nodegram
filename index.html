@@ -727,9 +727,11 @@ function playStep(dt){
       } else if(m.y>0.01 && Math.abs(n.vy)<40) n.vy=0; // 天井
     }
     // ===== 矩形の傾き（辺を斜面に合わせる。V字でも一方の斜辺へ辺で接地）=====
-    if(!isBall && !bestSup && supList.length){ bestSup=supList.reduce((a,o)=>(!a||o.sup>a.sup)?o:a,null); }
+    // CHARACTERは地面に合わせて回転しない（常に直立）。コリジョンは上で通常通り実施済み
+    const canTilt = !isBall && n.type!=="character";
+    if(canTilt && !bestSup && supList.length){ bestSup=supList.reduce((a,o)=>(!a||o.sup>a.sup)?o:a,null); }
     n._tilting=false;
-    if(!isBall && bestSup){
+    if(canTilt && bestSup){
       const cur=(n.playAngle!=null?n.playAngle:(n.angle||0));
       // 支持面リスト。プリスキャンが空でも主支持面(bestSup)を必ず含める（reduceの空配列クラッシュ防止）
       const supArr = supList.length ? supList : [{ang:bestSup.ang, sup:bestSup.sup, sx:n.playX}];
@@ -756,7 +758,8 @@ function playStep(dt){
       if(Math.abs(rot)>1.5) n._tilting=true; // まだ倒れ込み中
       n.playAngle = cur + rot*Math.min(1,dt*10);
       if(aligned){ n._tiltTargetId=null; } // 収まったらコミット解除
-    } else if(!isBall){ n._tiltTargetId=null; n._tilting=false; }
+    } else if(canTilt){ n._tiltTargetId=null; n._tilting=false; }
+    if(n.type==="character") n.playAngle=n.angle||0; // キャラクターは常に直立（回転しない）
 
     // 摩擦（接地時、速度入力が無ければ徐々に停止）。円は「転がり抵抗」なので減衰を大幅に軽く
     if(n.grounded && fric>0 && !conns.some(c=>c.b===n.id&&c.bi===0)){
