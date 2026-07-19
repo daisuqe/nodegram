@@ -312,7 +312,7 @@ function addNode(type, wx, wy){
   if (type==="array"){ n.arrInit=""; }                         // 初期値（, / 区切り）
   if (type==="getpos"||type==="getrot"){ n.getCoord="world"; } // WORLD/LOCAL
   if (type==="keyboard"){ n.keyCode=" "; }                     // 既定：スペース
-  if (type==="sound"){ n.tone=0; n.wave="square"; n.volume=10; } // 音番号(0=ド)・波形・音量
+  if (type==="sound"){ n.tone=0; n.inst="piano"; n.volume=10; } // 音番号(0=ド)・楽器プリセット・音量
   if (type==="velocity"){ n.frames=5; }                        // 速度の平滑化フレーム数
   if (type==="bg"){ n.color="#0a0b10"; }                       // 背景色
   if (type==="setting"){ n.gravity=9.8; n._gv=2; n.orient="yoko"; n.fps=60; n.dynamics=true; // Gravity表記9.8=旧1
@@ -474,6 +474,8 @@ function outputValue(node, port, seen){
 
 function startPlay(){
   if(mode==="edit"||mode==="layout") editModeMemory=mode;
+  if(typeof closeFlick==="function" && isFlickOpen()) closeFlick(false); // フリックメニューを閉じる
+  hideCreateMenu(); hideMultiMenu(); propNode=null; // 各種オーバーレイも閉じる
   mode="play";
   // レイアウトで置いた位置から開始 & 状態ノードをリセット
   nodes.forEach(n=>{
@@ -659,12 +661,13 @@ function playStep(dt){
   // ROTATE：角速度を_spinに積算（関節）。子はRotの位置で回転して追従。親がいる場合はapplyHierarchyで親角度に加算
   for(const n of nodes){ if(n.type==="rotate"){ n._spin=(n._spin||0)+inputValue(n,0)*dt;
     if(!n.parentNodeId||!nodeById(n.parentNodeId)) n.playAngle=(n.angle||0)+n._spin; } }
-  // SOUND：入力1=Signal(S)がある間ずっと鳴る。入力0=Tone(T,接続時は上書き)で音程
+  // SOUND：入力1=Signal(S)。sustain系は信号がある間鳴り、decay/効果音は立ち上がりで1発。入力0=Tone(T,接続時は上書き)
   for(const n of nodes){ if(n.type!=="sound") continue;
     const s=inputValue(n,1);
     const tone = conns.some(c=>c.b===n.id&&c.bi===0) ? inputValue(n,0) : (n.tone||0);
-    if(s!==0) startOrUpdateTone(n, toneToFreq(tone), (n.volume!=null?n.volume:10), n.wave||"square");
-    else stopTone(n);
+    const inst = n.inst || "piano";
+    if(s!==0){ startOrUpdateTone(n, toneToFreq(tone), (n.volume!=null?n.volume:10), inst); }
+    else { if(instrKind(inst)==="sustain") stopTone(n); n._sustaining=false; } // 信号OFFで持続音停止＆1発トリガー再武装
   }
 
   // bodyType: off=物理無/static=不動壁/kinematic=速度で動く壁/dynamic=重力あり（Unity RigidBody2D準拠）
@@ -926,17 +929,183 @@ function beep(freq,wave,vol){
 const MAJOR_STEPS=[0,2,4,5,7,9,11];
 function toneToFreq(t){ const i=Math.round(t); const oct=Math.floor(i/7), deg=((i%7)+7)%7;
   return 261.63*Math.pow(2, (MAJOR_STEPS[deg]+12*oct)/12); }
-// Signalがある間 継続再生するオシレータ（ノードごと）
-function startOrUpdateTone(n,freq,vol,wave){
-  try{ if(!_audioCtx){ _audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }
-    if(_audioCtx.state==="suspended") _audioCtx.resume();
-    if(!n._osc){ const o=_audioCtx.createOscillator(), g=_audioCtx.createGain();
-      o.type=wave; o.frequency.value=freq; g.gain.value=0.06*(vol/10);
-      o.connect(g); g.connect(_audioCtx.destination); o.start(); n._osc=o; n._gain=g; }
-    else { n._osc.frequency.value=freq; n._osc.type=wave; n._gain.gain.value=0.06*(vol/10); }
-  }catch(e){}
+// ===== 楽器プリセット（波形指定の代わり）=====
+// kind: sustain=押している間鳴る / decay=減衰(1発でも鳴り切る) / oneshot=効果音(1発)
+const INSTRUMENTS=[
+  // ── 楽器（音階あり）──
+  {value:"piano",   label:"Piano",     kind:"decay"},
+  {value:"epiano",  label:"E.Piano",   kind:"decay"},
+  {value:"organ",   label:"Organ",     kind:"sustain"},
+  {value:"strings", label:"Strings",   kind:"sustain"},
+  {value:"brass",   label:"Brass",     kind:"sustain"},
+  {value:"flute",   label:"Flute",     kind:"sustain"},
+  {value:"guitar",  label:"Guitar",    kind:"decay"},
+  {value:"bass",    label:"Bass",      kind:"decay"},
+  {value:"bell",    label:"Bell",      kind:"decay"},
+  {value:"marimba", label:"Marimba",   kind:"decay"},
+  // ── 8bit（ファミコン系, 音階あり）──
+  {value:"nes_pulse", label:"8bit Pulse",    kind:"sustain"},
+  {value:"nes_tri",   label:"8bit Triangle", kind:"sustain"},
+  {value:"nes_noise", label:"8bit Noise",    kind:"oneshot"},
+  // ── ボイス（母音の声質。音階あり）──
+  {value:"voice_m",  label:"Voice Male",   kind:"sustain"},
+  {value:"voice_f",  label:"Voice Female", kind:"sustain"},
+  // ── パーカッション（1発）──
+  {value:"perc_kick",  label:"Kick",    kind:"oneshot"},
+  {value:"perc_snare", label:"Snare",   kind:"oneshot"},
+  {value:"perc_hihat", label:"HiHat",   kind:"oneshot"},
+  {value:"perc_tom",   label:"Tom",     kind:"oneshot"},
+  {value:"perc_clap",  label:"Clap",    kind:"oneshot"},
+  {value:"perc_cymbal",label:"Cymbal",  kind:"oneshot"},
+  // ── ゲーム音（1発）──
+  {value:"g_coin",   label:"Coin",    kind:"oneshot"},
+  {value:"g_powerup",label:"Powerup", kind:"oneshot"},
+  {value:"g_jump",   label:"Jump",    kind:"oneshot"},
+  {value:"g_damage", label:"Damage",  kind:"oneshot"},
+  {value:"g_select", label:"Select",  kind:"oneshot"},
+  // ── 効果音（1発）──
+  {value:"sfx_koto",  label:"Kotsu",   kind:"oneshot"},
+  {value:"sfx_don",   label:"Don",     kind:"oneshot"},
+  {value:"sfx_don2",  label:"Don2",    kind:"oneshot"},
+  {value:"sfx_kachi", label:"Click",   kind:"oneshot"},
+  {value:"sfx_explo", label:"Explode", kind:"oneshot"},
+];
+const INSTR_MAP=Object.fromEntries(INSTRUMENTS.map(i=>[i.value,i]));
+function instrKind(v){ return (INSTR_MAP[v]||INSTR_MAP.piano).kind; }
+// 周期波形キャッシュ（デューティ違いのパルス等）
+let _pwCache={};
+function pulseWave(duty){ const key="p"+duty; if(_pwCache[key]) return _pwCache[key];
+  const N=32, real=new Float32Array(N), imag=new Float32Array(N);
+  for(let k=1;k<N;k++){ real[k]=(2/(k*Math.PI))*Math.sin(Math.PI*k*duty); } // 矩形波(デューティ可変)のフーリエ係数
+  const w=_audioCtx.createPeriodicWave(real,imag); _pwCache[key]=w; return w; }
+let _noiseBuf=null;
+function noiseBuffer(){ if(_noiseBuf) return _noiseBuf; const len=_audioCtx.sampleRate*1.0;
+  const buf=_audioCtx.createBuffer(1,len,_audioCtx.sampleRate); const d=buf.getChannelData(0);
+  let x=0x2468; for(let i=0;i<len;i++){ x^=x<<13; x^=x>>17; x^=x<<5; d[i]=((x>>>0)/2147483648)-1; } // 疑似ノイズ
+  _noiseBuf=buf; return buf; }
+let _distCache={};
+function distortionCurve(amt){ if(_distCache[amt]) return _distCache[amt]; const N=1024, c=new Float32Array(N), k=amt;
+  for(let i=0;i<N;i++){ const x=i*2/N-1; c[i]=(3+k)*x*20*Math.PI/180/(Math.PI+k*Math.abs(x)); } // ザラつく歪みカーブ
+  _distCache[amt]=c; return c; }
+function ensureAudio(){ try{ if(!_audioCtx){ _audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }
+  if(_audioCtx.state==="suspended") _audioCtx.resume(); return true; }catch(e){ return false; } }
+// 1発トリガー（decay/oneshot、および試聴の▷）。自動で鳴り切る
+function triggerSound(inst,freq,vol){
+  if(!ensureAudio()) return; const ac=_audioCtx, t=ac.currentTime, A=0.06*(vol/10);
+  const master=ac.createGain(); master.connect(ac.destination); master.gain.value=1;
+  const oscs=[];
+  const addOsc=(type,f,g,detune)=>{ const o=ac.createOscillator(); if(typeof type==="object")o.setPeriodicWave(type); else o.type=type;
+    o.frequency.value=f; if(detune)o.detune.value=detune; const gg=ac.createGain(); gg.gain.value=g; o.connect(gg); gg.connect(master); o.start(t); oscs.push({o,gg}); return {o,gg}; };
+  const env=(g,peak,dur,rel)=>{ g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0001,peak),t+0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur); };
+  const stopAll=(dur)=>{ for(const{o}of oscs){ try{o.stop(t+dur+0.05);}catch(e){} } };
+  switch(inst){
+    case "piano":   { const v=addOsc("triangle",freq,A); env(v.gg,A,1.2); const v2=addOsc("sine",freq*2,A*0.3); env(v2.gg,A*0.3,0.6); stopAll(1.2); break; }
+    case "epiano":  { const v=addOsc("sine",freq,A); env(v.gg,A,1.0); const v2=addOsc("sine",freq*4,A*0.25); env(v2.gg,A*0.25,0.35); stopAll(1.0); break; }
+    case "guitar":  { const v=addOsc("sawtooth",freq,A*0.8); env(v.gg,A*0.8,0.7); stopAll(0.7); break; }
+    case "bass":    { const v=addOsc("triangle",freq/2,A); env(v.gg,A,0.6); stopAll(0.6); break; }
+    case "bell":    { const v=addOsc("sine",freq*2,A*0.7); env(v.gg,A*0.7,1.6); const v2=addOsc("sine",freq*3.01,A*0.4); env(v2.gg,A*0.4,1.2); stopAll(1.6); break; }
+    case "marimba": { const v=addOsc("sine",freq,A); env(v.gg,A,0.5); const v2=addOsc("sine",freq*4,A*0.3); env(v2.gg,A*0.3,0.18); stopAll(0.5); break; }
+    case "nes_noise": { const src=ac.createBufferSource(); src.buffer=noiseBuffer(); const g=ac.createGain(); g.gain.value=A;
+      g.gain.setValueAtTime(A,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.18); src.connect(g); g.connect(master); src.start(t); src.stop(t+0.2); break; }
+    // 効果音
+    case "sfx_koto": { const v=addOsc("sine",520,A*0.9); v.o.frequency.setValueAtTime(520,t); v.o.frequency.exponentialRampToValueAtTime(180,t+0.08);
+      env(v.gg,A*0.9,0.1); stopAll(0.1); break; }
+    case "sfx_don":  { const v=addOsc("sine",140,A); v.o.frequency.setValueAtTime(140,t); v.o.frequency.exponentialRampToValueAtTime(50,t+0.2);
+      env(v.gg,A,0.3); stopAll(0.3); break; }
+    case "sfx_don2": { // より低く迫力のあるドン（サイン下降＋クリック＋低域ノイズ）
+      const v=addOsc("sine",90,A*1.3); v.o.frequency.setValueAtTime(90,t); v.o.frequency.exponentialRampToValueAtTime(32,t+0.35);
+      v.gg.gain.setValueAtTime(A*1.3,t); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
+      const src=ac.createBufferSource(); src.buffer=noiseBuffer(); const lp=ac.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=200;
+      const ng=ac.createGain(); ng.gain.setValueAtTime(A*0.6,t); ng.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
+      src.connect(lp); lp.connect(ng); ng.connect(master); src.start(t); src.stop(t+0.5); stopAll(0.5); break; }
+    case "sfx_kachi":{ // 参考音源(Click.mp3)再現：単発の締まったクリック（広帯域アタック＋715/1830Hz共鳴, 約50msで減衰）
+      // 1) 広帯域アタック（ノイズ, 高域まで含む鋭い当たり。約15ms）
+      const src=ac.createBufferSource(); src.buffer=noiseBuffer(); src.playbackRate.value=1.15;
+      const hp=ac.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=560;
+      const ag=ac.createGain(); ag.gain.setValueAtTime(A*1.7,t); ag.gain.exponentialRampToValueAtTime(0.0001,t+0.015);
+      src.connect(hp); hp.connect(ag); ag.connect(master); src.start(t); src.stop(t+0.03);
+      // 2) 共鳴（少し低め：600Hz主体＋1550Hz。約50msで急減衰）
+      for(const [f,gv,dur] of [[600,A*1.0,0.06],[1550,A*0.55,0.045]]){ const o=ac.createOscillator(); o.type="sine"; o.frequency.value=f;
+        const g=ac.createGain(); g.gain.setValueAtTime(A*0.0001,t); g.gain.linearRampToValueAtTime(gv,t+0.002); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+        o.connect(g); g.connect(master); o.start(t); o.stop(t+dur+0.02); } break; }
+    case "sfx_explo":{ // ザラザラ迫力：歪ませたノイズ＋低域ブーム
+      const shaper=ac.createWaveShaper(); shaper.curve=distortionCurve(60); shaper.oversample="2x";
+      const src=ac.createBufferSource(); src.buffer=noiseBuffer(); src.playbackRate.value=0.7;
+      const lp=ac.createBiquadFilter(); lp.type="lowpass"; lp.frequency.setValueAtTime(2600,t); lp.frequency.exponentialRampToValueAtTime(90,t+0.9);
+      const g=ac.createGain(); g.gain.setValueAtTime(A*2.0,t); g.gain.exponentialRampToValueAtTime(0.0001,t+1.0);
+      src.connect(shaper); shaper.connect(lp); lp.connect(g); g.connect(ac.destination); src.start(t); src.stop(t+1.05);
+      const boom=addOsc("sine",70,A*1.4); boom.o.frequency.setValueAtTime(70,t); boom.o.frequency.exponentialRampToValueAtTime(28,t+0.5);
+      boom.gg.gain.setValueAtTime(A*1.4,t); boom.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.6); stopAll(0.6); break; }
+    // ── ノイズバースト補助（パーカッション用）──
+    // filt:{type,freq,Q}, gain, dur, rate
+    // （ローカル関数）
+    // ── パーカッション ──
+    case "perc_kick": { const v=addOsc("sine",130,A*1.6); v.o.frequency.setValueAtTime(130,t); v.o.frequency.exponentialRampToValueAtTime(45,t+0.12);
+      v.gg.gain.setValueAtTime(A*1.6,t); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.25); stopAll(0.25); break; }
+    case "perc_snare": { const v=addOsc("triangle",190,A*0.6); env(v.gg,A*0.6,0.12);
+      const src=ac.createBufferSource(); src.buffer=noiseBuffer(); const hp=ac.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=1200;
+      const g=ac.createGain(); g.gain.setValueAtTime(A*1.1,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.16); src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t+0.18); stopAll(0.16); break; }
+    case "perc_hihat": { const src=ac.createBufferSource(); src.buffer=noiseBuffer(); src.playbackRate.value=1.8; const hp=ac.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=7000;
+      const g=ac.createGain(); g.gain.setValueAtTime(A*0.8,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.05); src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t+0.06); break; }
+    case "perc_tom": { const v=addOsc("sine",180,A*1.3); v.o.frequency.setValueAtTime(180,t); v.o.frequency.exponentialRampToValueAtTime(90,t+0.25);
+      v.gg.gain.setValueAtTime(A*1.3,t); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.3); stopAll(0.3); break; }
+    case "perc_clap": { for(const d of [0,0.012,0.025,0.05]){ const src=ac.createBufferSource(); src.buffer=noiseBuffer(); const bp=ac.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=1500; bp.Q.value=1.2;
+        const g=ac.createGain(); g.gain.setValueAtTime(0.0001,t+d); g.gain.linearRampToValueAtTime(A*0.9,t+d+0.002); g.gain.exponentialRampToValueAtTime(0.0001,t+d+0.06);
+        src.connect(bp); bp.connect(g); g.connect(master); src.start(t+d); src.stop(t+d+0.08); } break; }
+    case "perc_cymbal": { const src=ac.createBufferSource(); src.buffer=noiseBuffer(); src.playbackRate.value=1.4; const hp=ac.createBiquadFilter(); hp.type="highpass"; hp.frequency.value=5000;
+      const g=ac.createGain(); g.gain.setValueAtTime(A*0.9,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.9); src.connect(hp); hp.connect(g); g.connect(master); src.start(t); src.stop(t+0.95); break; }
+    // ── ゲーム音 ──
+    case "g_coin": { const v=addOsc("square",988,A*0.7); v.gg.gain.setValueAtTime(A*0.7,t); v.gg.gain.setValueAtTime(A*0.7,t+0.07); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.35);
+      v.o.frequency.setValueAtTime(988,t); v.o.frequency.setValueAtTime(1319,t+0.07); stopAll(0.35); break; } // ピロン
+    case "g_powerup": { const v=addOsc("square",300,A*0.6); const notes=[300,450,600,800,1050];
+      notes.forEach((f,i)=>v.o.frequency.setValueAtTime(f,t+i*0.05)); v.gg.gain.setValueAtTime(A*0.6,t); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.4); stopAll(0.4); break; } // 上昇アルペジオ
+    case "g_jump": { const v=addOsc("square",300,A*0.7); v.o.frequency.setValueAtTime(300,t); v.o.frequency.exponentialRampToValueAtTime(900,t+0.15);
+      v.gg.gain.setValueAtTime(A*0.7,t); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.2); stopAll(0.2); break; } // ピッチ上昇
+    case "g_damage": { const v=addOsc("sawtooth",400,A*0.8); v.o.frequency.setValueAtTime(400,t); v.o.frequency.exponentialRampToValueAtTime(80,t+0.25);
+      v.gg.gain.setValueAtTime(A*0.8,t); v.gg.gain.exponentialRampToValueAtTime(0.0001,t+0.3); stopAll(0.3); break; } // 下降
+    case "g_select": { const v=addOsc("square",1200,A*0.5); env(v.gg,A*0.5,0.06); stopAll(0.06); break; } // 短いビープ
+    default: { const v=addOsc("triangle",freq,A); env(v.gg,A,0.8); stopAll(0.8); } // 予備
+  }
+  setTimeout(()=>{ try{ master.disconnect(); }catch(e){} }, 2000);
 }
-function stopTone(n){ if(n&&n._osc){ try{ n._osc.stop(); }catch(e){} try{ n._osc.disconnect(); n._gain.disconnect(); }catch(e){} n._osc=null; n._gain=null; } }
+// 持続再生（sustainのみ。Signalがある間ずっと鳴る）。ノードごとに保持
+function startOrUpdateTone(n,freq,vol,inst){
+  if(!ensureAudio()) return; const ac=_audioCtx, A=0.06*(vol/10);
+  if(instrKind(inst)!=="sustain"){ // decay/oneshotは立ち上がりで1発だけ
+    if(!n._sustaining){ n._sustaining=true; triggerSound(inst,freq,vol); }
+    return; }
+  n._sustaining=true;
+  if(!n._osc){ const o=ac.createOscillator(), g=ac.createGain();
+    if(inst==="voice_m"||inst==="voice_f"){ // 母音「あ」風のフォルマント合成（男女で基音とフォルマントを変える）
+      o.type="sawtooth"; o.frequency.value=freq; n._extra=[];
+      const forms = inst==="voice_m" ? [[700,1.0],[1100,0.6],[2600,0.25]] : [[850,1.0],[1600,0.6],[3200,0.3]];
+      for(const [ff,fg] of forms){ const bp=ac.createBiquadFilter(); bp.type="bandpass"; bp.frequency.value=ff; bp.Q.value=6;
+        const fgn=ac.createGain(); fgn.gain.value=fg; o.connect(bp); bp.connect(fgn); fgn.connect(g); n._extra.push(bp,fgn); }
+      const atk=0.04; g.gain.setValueAtTime(0.0001,ac.currentTime); g.gain.exponentialRampToValueAtTime(Math.max(0.0001,A*1.2),ac.currentTime+atk);
+      g.connect(ac.destination); o.start(); n._osc=o; n._gain=g; n._lp=null; n._inst=inst;
+    } else {
+      // sustain系プリセットの音色
+      if(inst==="nes_pulse"){ o.setPeriodicWave(pulseWave(0.25)); }
+      else if(inst==="nes_tri"||inst==="flute"){ o.type="triangle"; }
+      else if(inst==="organ"){ o.type="sine"; }
+      else if(inst==="strings"||inst==="brass"){ o.type="sawtooth"; }
+      else { o.type="triangle"; }
+      o.frequency.value=freq;
+      const lp=ac.createBiquadFilter(); lp.type="lowpass";
+      lp.frequency.value = (inst==="strings")?1800:(inst==="brass"?2600:6000);
+      const atk=(inst==="strings")?0.25:(inst==="organ"?0.02:0.01);
+      g.gain.setValueAtTime(0.0001,ac.currentTime); g.gain.exponentialRampToValueAtTime(Math.max(0.0001,A),ac.currentTime+atk);
+      o.connect(lp); lp.connect(g); g.connect(ac.destination); o.start(); n._osc=o; n._gain=g; n._lp=lp; n._inst=inst;
+    }
+  } else { if(n._inst!==inst){ stopTone(n); return startOrUpdateTone(n,freq,vol,inst); }
+    n._osc.frequency.value=freq; n._gain.gain.setTargetAtTime(A,ac.currentTime,0.02); }
+}
+function stopTone(n){ n && (n._sustaining=false);
+  if(n&&n._osc){ try{ if(n._gain){ n._gain.gain.setTargetAtTime(0.0001,_audioCtx.currentTime,0.03); } }catch(e){}
+    const o=n._osc,g=n._gain,lp=n._lp,ex=n._extra; setTimeout(()=>{ try{o.stop();}catch(e){} try{o.disconnect();g&&g.disconnect();lp&&lp.disconnect(); if(ex)for(const e2 of ex){try{e2.disconnect();}catch(e){}} }catch(e){} },120);
+    n._osc=null; n._gain=null; n._lp=null; n._extra=null; } }
 // ONBREAK破壊エフェクトを発生（Unity版 BreakEffectUI の挙動を再現。重力なし・時間ベース）
 function spawnBreakEffect(n,o){ const type=n.breakEffect||"none"; if(type==="none") return;
   const x=o.playX||0, y=o.playY||0, w=o.w||40, h=o.h||40, color=n.breakColor||"#ffffff";
@@ -2021,8 +2190,29 @@ function refreshProp(){
     const ex=document.createElement("div"); ex.textContent="ex) 5,-2,0.18|5,-7|-12.6";
     ex.style.cssText="color:#8a92a6;font-size:12px;margin:-4px 0 8px 2px"; propPanel.appendChild(ex); }
   if(n.type==="sound"){ numRow("Tone", ()=>n.tone!=null?n.tone:0, v=>{ n.tone=Math.round(v); }); // 0=ド,1=レ,2=ミ…
-    selRow("Wave", [{value:"square",label:"Square"},{value:"sine",label:"Sine"},{value:"triangle",label:"Triangle"},{value:"sawtooth",label:"Saw"}], ()=>n.wave||"square", v=>{ n.wave=v; });
-    numRow("Volume", ()=>n.volume!=null?n.volume:10, v=>{ n.volume=Math.max(0,Math.min(20,v)); }); } // 0〜20, 既定10
+    // 波形指定→楽器/効果音プリセット
+    selRow("Instrument", INSTRUMENTS.map(i=>({value:i.value,label:i.label})), ()=>n.inst||"piano", v=>{ n.inst=v; });
+    numRow("Volume", ()=>n.volume!=null?n.volume:10, v=>{ n.volume=Math.max(0,Math.min(20,v)); }); // 0〜20, 既定10
+    // 試聴：▷=インパルス(1発) / ▶=押している間（sustain系は持続、それ以外は1発）
+    { const r=document.createElement("div"); r.className="prow";
+      const lb=document.createElement("label"); lb.textContent="Preview";
+      const wrap=document.createElement("div"); wrap.style.cssText="flex:1;display:flex;gap:10px;";
+      const prev={}; // 持続プレビュー用
+      const mkBtn=(txt)=>{ const bt=document.createElement("button"); bt.textContent=txt;
+        bt.style.cssText="flex:1;height:44px;border-radius:9px;border:1px solid #2a91ad;background:#21b3d6;color:#fff;font-size:22px;font-weight:800;cursor:pointer;touch-action:none;"; return bt; };
+      const impBtn=mkBtn("▷"); // インパルス＝1発
+      impBtn.addEventListener("pointerdown",(e)=>{ e.preventDefault(); e.stopPropagation();
+        triggerSound(n.inst||"piano", toneToFreq(n.tone||0), (n.volume!=null?n.volume:10)); });
+      const holdBtn=mkBtn("▶"); // 押している間（持続系は鳴り続ける）
+      const startHold=(e)=>{ e.preventDefault(); e.stopPropagation(); prev._sustaining=false;
+        startOrUpdateTone(prev, toneToFreq(n.tone||0), (n.volume!=null?n.volume:10), n.inst||"piano"); };
+      const endHold=(e)=>{ if(e){e.preventDefault();e.stopPropagation();} stopTone(prev); prev._sustaining=false; };
+      holdBtn.addEventListener("pointerdown",startHold);
+      holdBtn.addEventListener("pointerup",endHold);
+      holdBtn.addEventListener("pointercancel",endHold);
+      holdBtn.addEventListener("pointerleave",endHold);
+      wrap.appendChild(impBtn); wrap.appendChild(holdBtn);
+      r.appendChild(lb); r.appendChild(wrap); propPanel.appendChild(r); } }
   if(n.type==="velocity"){ numRow("Frames", ()=>n.frames||5, v=>{ n.frames=Math.max(1,Math.round(v)); }); }
   if(n.type==="contact"){ // SENSOR：ShapeはRect固定（プロパティ廃止）
     selRow("Target", [{value:"all",label:"ALL"},{value:"rect",label:"RECT"},{value:"circle",label:"CIRCLE"},{value:"character",label:"CHARA"},{value:"shot",label:"SHOT"},{value:"tag",label:"TAG"}],
@@ -2336,7 +2526,9 @@ function deserialize(s){ const o=JSON.parse(s); nodes=o.nodes||[]; conns=o.conns
     if(n.type==="var"&&n.varInit==null) n.varInit=0;
     if(n.type==="array"&&n.arrInit==null) n.arrInit="";
     if((n.type==="getpos"||n.type==="getrot")&&n.getCoord==null) n.getCoord="world";
-    if(n.type==="sound"){ if(n.volume==null)n.volume=10; if(n.tone==null)n.tone=0; }
+    if(n.type==="sound"){ if(n.volume==null)n.volume=10; if(n.tone==null)n.tone=0;
+      if(n.inst==null){ const wm={square:"nes_pulse",sine:"flute",triangle:"nes_tri",sawtooth:"brass"}; n.inst=wm[n.wave]||"piano"; }
+      if(n.inst==="lead"||n.inst==="pad"){ n.inst = n.inst==="lead"?"brass":"strings"; } } // 廃止プリセットを移行
     if(attachesToObject(n)){ if(n.w==null)n.w=60; if(n.h==null)n.h=60; if(n.angle==null)n.angle=0;
       if(n.layoutX==null){ const oc=nodes.filter(m=>showsInLayout(m)).length; n.layoutX=(oc%5)*100-200; n.layoutY=Math.floor(oc/5)*100-100; } }
     if(n.type==="setting"){ if(n.dynamics==null)n.dynamics=true; if(n.setFriction==null)n.setFriction=0.4; if(n.setBounce==null)n.setBounce=0.0; if(n.setDrag==null)n.setDrag=0.0; if(n.stopBtnColor==null)n.stopBtnColor="#ffffff";
