@@ -524,8 +524,31 @@ function setMode(m){ // edit ⇄ layout 切り替え
 let lastT=0;
 const GRAV_SCALE=2000, JUMP=880; // Gravityは倍率(表示1)×2000で内部px/s^2、ジャンプ初速(px/s)
 function objHalf(n){ return { hw:(n.w||80)/2, hh:(n.h||80)/2 }; }
+function objAngle(n){ const a=(n.playAngle!=null?n.playAngle:(n.angle||0)); return a*Math.PI/180; }
 function overlapAABB(a,b){ const A=objHalf(a),B=objHalf(b);
   return Math.abs(a.playX-b.playX) < A.hw+B.hw && Math.abs(a.playY-b.playY) < A.hh+B.hh; }
+// 回転考慮の分離軸(SAT)で2つのOBBの最小押し出しベクトル(MTV)を返す。重ならなければnull。
+// 戻り値 {x,y}: b を動かさず a を (x,y) だけ動かせば分離できる（Unity2Dの押し戻し相当）
+function obbMTV(a,b){
+  const aa=objAngle(a), bb=objAngle(b);
+  const A=objHalf(a), B=objHalf(b);
+  const ax=Math.cos(aa),ay=Math.sin(aa), bx=Math.cos(bb),by=Math.sin(bb);
+  const axes=[ {x:ax,y:ay},{x:-ay,y:ax},{x:bx,y:by},{x:-by,y:bx} ]; // a,bそれぞれのローカル軸
+  const dx=a.playX-b.playX, dy=a.playY-b.playY;
+  let minOv=1e18, mtvX=0, mtvY=0;
+  for(const ax0 of axes){
+    // 各OBBの軸への投影半径
+    const ra=Math.abs((ax*ax0.x+ay*ax0.y))*A.hw + Math.abs((-ay*ax0.x+ax*ax0.y))*A.hh;
+    const rb=Math.abs((bx*ax0.x+by*ax0.y))*B.hw + Math.abs((-by*ax0.x+bx*ax0.y))*B.hh;
+    const dist=dx*ax0.x+dy*ax0.y;
+    const ov=(ra+rb)-Math.abs(dist);
+    if(ov<=0) return null; // この軸で分離＝衝突なし
+    if(ov<minOv){ minOv=ov; const s=(dist<0)?-1:1; mtvX=ax0.x*ov*s; mtvY=ax0.y*ov*s; }
+  }
+  return {x:mtvX, y:mtvY, depth:minOv};
+}
+// いずれかが回転していれば true（AABB高速路と使い分け）
+function isRotated(a,b){ return ((a.playAngle||a.angle||0)!==0) || ((b.playAngle||b.angle||0)!==0); }
 // ARRAYの初期値文字列を配列へ（ , か | で区切る。空白・改行も許容）
 function parseArrInit(s){ if(!s) return [];
   return String(s).split(/[,|\s]+/).filter(x=>x!=="").map(x=>{ const v=parseFloat(x); return isNaN(v)?0:v; }); }
@@ -619,20 +642,30 @@ function playStep(dt){
 
     // 横移動 → solidで左右をブロック（親子関係の相手とは衝突しない）
     n.playX += n.vx*dt;
-    for(const s of solids){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
-      if(n.vx>0) n.playX = s.playX-(S.hw+hw);
-      else if(n.vx<0) n.playX = s.playX+(S.hw+hw);
-      else { n.playX += (n.playX<s.playX?-1:1)*((S.hw+hw)-Math.abs(n.playX-s.playX)); } } } // 速度0でもめり込み押し出し
+    for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
+      if(isRotated(n,s)){ const m=obbMTV(n,s); if(m){ n.playX+=m.x; n.playY+=m.y; // 回転コライダ：MTVで押し出し
+        if(m.y<-0.01) n.grounded=true; } continue; }
+      if(overlapAABB(n,s)){ const S=objHalf(s);
+        if(n.vx>0) n.playX = s.playX-(S.hw+hw);
+        else if(n.vx<0) n.playX = s.playX+(S.hw+hw);
+        else { n.playX += (n.playX<s.playX?-1:1)*((S.hw+hw)-Math.abs(n.playX-s.playX)); } } } // 速度0でもめり込み押し出し
 
     // 縦移動（重力）→ solidに着地／頭ぶつけ（反発・摩擦）
     n.vy = (n.vy||0) + G*dt;
     if(S_DRAG>0) n.vy *= (1-Math.min(1,S_DRAG*dt*10)); // 空気抵抗（線形ダンピング）
     n.playY += n.vy*dt;
     n.grounded=false;
-    for(const s of solids){ if(isRelatedHierarchy(n,s)) continue; if(overlapAABB(n,s)){ const S=objHalf(s);
-      if(n.vy>0){ n.playY = s.playY-(S.hh+hh); n.vy = -n.vy*bounce; if(Math.abs(n.vy)<40){n.vy=0; n.grounded=true;} }
-      else if(n.vy<0){ n.playY = s.playY+(S.hh+hh); n.vy=0; }
-      else { const push=(S.hh+hh)-Math.abs(n.playY-s.playY); if(n.playY<s.playY){ n.playY-=push; n.grounded=true; } else n.playY+=push; } } }
+    for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
+      if(isRotated(n,s)){ const m=obbMTV(n,s); if(m){ n.playX+=m.x; n.playY+=m.y; // 斜面：面法線方向へ押し出し
+        // 押し出しベクトルの向きで接地/天井を判定し、法線方向の速度成分を消す
+        const len=Math.hypot(m.x,m.y)||1, nx=m.x/len, ny=m.y/len;
+        const vn=n.vx*nx+n.vy*ny; if(vn<0){ n.vx-=vn*nx; n.vy-=vn*ny*(1+bounce); }
+        if(m.y<-0.01){ n.grounded=true; if(Math.abs(n.vy)<40) n.vy=0; } }
+        continue; }
+      if(overlapAABB(n,s)){ const S=objHalf(s);
+        if(n.vy>0){ n.playY = s.playY-(S.hh+hh); n.vy = -n.vy*bounce; if(Math.abs(n.vy)<40){n.vy=0; n.grounded=true;} }
+        else if(n.vy<0){ n.playY = s.playY+(S.hh+hh); n.vy=0; }
+        else { const push=(S.hh+hh)-Math.abs(n.playY-s.playY); if(n.playY<s.playY){ n.playY-=push; n.grounded=true; } else n.playY+=push; } } }
 
     // 摩擦（接地時、速度入力が無ければ徐々に停止）
     if(n.grounded && fric>0 && !conns.some(c=>c.b===n.id&&c.bi===0)) n.vx*=(1-Math.min(1,fric));
@@ -2008,7 +2041,7 @@ function slotList(){ try{ return JSON.parse(localStorage.getItem("ng_slots")||"[
 function setSlotList(a){ localStorage.setItem("ng_slots", JSON.stringify(a)); }
 function saveSlot(name){ if(!name) return; localStorage.setItem("ng_slot_"+name, serialize());
   const l=slotList(); if(!l.includes(name)){ if(l.length<64){ l.push(name); setSlotList(l);} } currentFile=name; }
-function loadSlot(name){ const s=localStorage.getItem("ng_slot_"+name); if(s){ recordUndo(); deserialize(s); currentFile=name; } }
+function loadSlot(name){ const s=localStorage.getItem("ng_slot_"+name); if(s){ recordUndo(); deserialize(s); currentFile=name; if(nodes.length) fitView(); } } // Load直後にFITでノードを確実に表示
 function deleteSlot(name){ localStorage.removeItem("ng_slot_"+name); localStorage.removeItem("ng_auto_"+name); setSlotList(slotList().filter(x=>x!==name)); }
 function getAuto(name){ return localStorage.getItem("ng_auto_"+name)!=="0"; }
 function setAuto(name,on){ localStorage.setItem("ng_auto_"+name, on?"1":"0"); }
