@@ -693,7 +693,17 @@ function playStep(dt){
     let jump, jforce=1;
     if(n.type==="character"){ const j=inputValue(n,2); jump=((n._prevJ||0)<=0 && j>0); jforce=j; n._prevJ=j; }
     else jump=(vyIn < -1);
-    if(jump && n.grounded){ n.vy = -JUMP*jforce; n.grounded=false; }
+    // 接地判定：CHARACTERは底辺の左下/中央下/右下いずれかが床に近ければOK（許容距離＝身長の1/5）
+    let canJump = n.grounded;
+    if(n.type==="character" && !canJump){
+      const { hw, hh } = objHalf(n); const tol=(n.h||50)*0.2; // 身長の1/5
+      for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
+        for(const fx of [-hw, 0, hw]){ // 左下・中央下・右下
+          const foot={ playX:n.playX+fx, playY:n.playY+hh+tol*0.5, w:4, h:tol, playAngle:0, type:"rect" };
+          if(collideMTV(foot,s)){ canJump=true; break; } }
+        if(canJump) break; }
+    }
+    if(jump && canJump){ n.vy = -JUMP*jforce; n.grounded=false; }
 
     // 横移動 → solidで左右をブロック（親子関係の相手とは衝突しない）。表面基準MTVで押し出し
     n.playX += n.vx*dt;
