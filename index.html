@@ -2191,7 +2191,7 @@ function refreshProp(){
     ex.style.cssText="color:#8a92a6;font-size:12px;margin:-4px 0 8px 2px"; propPanel.appendChild(ex); }
   if(n.type==="sound"){ numRow("Tone", ()=>n.tone!=null?n.tone:0, v=>{ n.tone=Math.round(v); }); // 0=ド,1=レ,2=ミ…
     // 波形指定→楽器/効果音プリセット
-    selRow("Instrument", INSTRUMENTS.map(i=>({value:i.value,label:i.label})), ()=>n.inst||"piano", v=>{ n.inst=v; });
+    selRow("Source", INSTRUMENTS.map(i=>({value:i.value,label:i.label})), ()=>n.inst||"piano", v=>{ n.inst=v; });
     numRow("Volume", ()=>n.volume!=null?n.volume:10, v=>{ n.volume=Math.max(0,Math.min(20,v)); }); // 0〜20, 既定10
     // 試聴：▷=インパルス(1発) / ▶=押している間（sustain系は持続、それ以外は1発）
     { const r=document.createElement("div"); r.className="prow";
@@ -2482,9 +2482,11 @@ function openSaveDialog(){ modal((box,close)=>{
   const ac=document.createElement("input"); ac.type="checkbox"; ac.checked=getAuto(nm.value); ac.style.cssText="width:26px;height:26px";
   ar.appendChild(ac); ar.appendChild(document.createTextNode("AUTO SAVE")); box.appendChild(ar);
   const row=document.createElement("div"); row.style.cssText="display:flex;gap:10px";
-  const sv=mkBtn("SAVE","#1f7a3a"), ca=mkBtn("CANCEL","#555b68"); sv.style.flex="1"; ca.style.flex="1";
+  const sv=mkBtn("SAVE","#1f7a3a"), ex=mkBtn("EXPORT","#8a6d3b"), ca=mkBtn("CANCEL","#555b68");
+  sv.style.flex="1"; ex.style.flex="1"; ca.style.flex="1";
   sv.onclick=()=>{ const nn=nm.value.trim()||"untitled"; saveSlot(nn); setAuto(nn,ac.checked); close(); };
-  ca.onclick=close; row.appendChild(sv); row.appendChild(ca); box.appendChild(row);
+  ex.onclick=()=>{ exportProject(nm.value.trim()||"untitled"); }; // 外部ファイルへエクスポート
+  ca.onclick=close; row.appendChild(sv); row.appendChild(ex); row.appendChild(ca); box.appendChild(row);
 }); }
 function openLoadDialog(){ modal((box,close)=>{
   const t=document.createElement("div"); t.textContent="LOAD"; t.style.cssText="color:#fff;font-size:18px;font-weight:800;margin-bottom:12px"; box.appendChild(t);
@@ -2496,10 +2498,64 @@ function openLoadDialog(){ modal((box,close)=>{
     const del=mkBtn("×","#a12b2b"); del.style.width="48px"; del.style.fontSize="38px"; del.style.lineHeight="1";
     del.onclick=()=>{ if(confirm(name+" を削除しますか？")){ deleteSlot(name); close(); openLoadDialog(); } };
     r.appendChild(ld); r.appendChild(del); box.appendChild(r); });
-  const ca=mkBtn("CANCEL","#555b68"); ca.style.width="100%"; ca.onclick=close; box.appendChild(ca);
+  // IMPORT を CANCEL と横並びに
+  const brow=document.createElement("div"); brow.style.cssText="display:flex;gap:10px";
+  const im=mkBtn("IMPORT","#2b6fd0"), ca=mkBtn("CANCEL","#555b68"); im.style.flex="1"; ca.style.flex="1";
+  im.onclick=()=>{ importProject((res)=>{ if(res&&res.ok) close(); }); }; // 外部ファイルから取込
+  ca.onclick=close; brow.appendChild(im); brow.appendChild(ca); box.appendChild(brow);
 }); }
 
 function serialize(){ return JSON.stringify({nodes,conns,nextId}); }
+// ===== 外部ファイル入出力（拡張性のあるJSONフォーマット）=====
+// 将来の音色追加・ノード追加に備え、バージョン＋メタ＋本体を包む。app/formatで判別。
+const NG_FORMAT="nodegram-project", NG_FORMAT_VER=1;
+function buildProjectJSON(name){
+  return JSON.stringify({
+    app:"nodegram", format:NG_FORMAT, version:NG_FORMAT_VER, // 判別・移行用
+    name: name||currentFile||"untitled",
+    savedAt: Date.now(),
+    settings: (typeof appSettings!=="undefined"? appSettings : undefined), // アプリ設定（あれば）
+    data: { nodes, conns, nextId }                                          // プロジェクト本体
+  }, null, 2);
+}
+// 取り込み：本フォーマット / 旧来の生{nodes,conns} どちらも許容（前方互換）
+function loadProjectFromText(text){
+  let o; try{ o=JSON.parse(text); }catch(e){ return {ok:false, err:"JSONを解析できません"}; }
+  let payload;
+  if(o && o.data && o.data.nodes){ payload=o.data; }          // 新フォーマット
+  else if(o && o.nodes){ payload=o; }                          // 旧来の生データ
+  else return {ok:false, err:"nodegramのプロジェクトファイルではありません"};
+  try{ recordUndo(); deserialize(JSON.stringify(payload));
+    if(o.settings && typeof applyImportedSettings==="function") applyImportedSettings(o.settings);
+    if(nodes.length) fitView();
+    return {ok:true, name:(o.name||"imported")};
+  }catch(e){ return {ok:false, err:"読み込み中にエラー: "+e.message}; }
+}
+// エクスポート：iPhone/Android対応。Web Share API(ファイル共有)が使えれば優先、無ければダウンロード
+async function exportProject(name){
+  const fname=(name||currentFile||"untitled").replace(/[^\w\-]+/g,"_")+".json";
+  const json=buildProjectJSON(name);
+  const blob=new Blob([json],{type:"application/json"});
+  try{
+    if(navigator.canShare && window.File){ const file=new File([blob],fname,{type:"application/json"});
+      if(navigator.canShare({files:[file]})){ await navigator.share({files:[file], title:fname}); return; } }
+  }catch(e){ /* 共有キャンセル等はダウンロードにフォールバック */ }
+  const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=fname;
+  document.body.appendChild(a); a.click(); setTimeout(()=>{ a.remove(); URL.revokeObjectURL(url); },1000);
+}
+// インポート：<input type=file> でファイル選択（モバイルのファイルアプリ/ドライブから選べる）
+function importProject(onDone){
+  const inp=document.createElement("input"); inp.type="file"; inp.accept="application/json,.json";
+  inp.style.display="none"; document.body.appendChild(inp);
+  inp.onchange=()=>{ const f=inp.files&&inp.files[0]; if(!f){ inp.remove(); return; }
+    const rd=new FileReader();
+    rd.onload=()=>{ const res=loadProjectFromText(String(rd.result));
+      if(!res.ok) alert("インポート失敗: "+res.err); else { currentFile=res.name; }
+      inp.remove(); if(onDone) onDone(res); };
+    rd.onerror=()=>{ alert("ファイルを読み込めませんでした"); inp.remove(); };
+    rd.readAsText(f); };
+  inp.click();
+}
 function deserialize(s){ const o=JSON.parse(s); nodes=o.nodes||[]; conns=o.conns||[]; nextId=o.nextId||1; selected=null; propNode=null; if(typeof multiSel!=="undefined") multiSel.clear();
   // 旧データ移行（size → w/h/angle など）
   nodes.forEach(n=>{ if(NODE_TYPES[n.type]&&isStage(n)){
