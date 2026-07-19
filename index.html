@@ -18,9 +18,9 @@
     border:1px solid rgba(0,0,0,.35); user-select:none; }
   .cplay { top:14px; background:#1f7a3a; color:#fff; font-size:34px; overflow:hidden; }
   .cplay.stop { background:transparent; border-color:transparent; }
-  .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; }
-  /* 停止長押しの「下から白く埋まる」フィル */
-  .cplay .holdfill { position:absolute; left:0; right:0; bottom:0; height:0%; background:rgba(255,255,255,.85); z-index:1; pointer-events:none; }
+  .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; overflow:hidden; }
+  /* 停止長押しの「下から白く埋まる」フィル：角丸正方形(stopsq)いっぱい */
+  .cplay .stopsq .holdfill { position:absolute; left:0; right:0; bottom:0; height:0%; background:rgba(255,255,255,.9); pointer-events:none; }
   .cmenu { top:98px; background:#3b4250; color:#dff2ff; font-size:19px; letter-spacing:.03em; }
   .cmenu:active { background:#4a5262; }
   #flick { position:absolute; inset:0; z-index:11; display:none; }
@@ -189,7 +189,7 @@ const NODE_TYPES = {
 };
 const isStage = n => { const d=NODE_TYPES[n.type]; return !!(d.object || d.stage); };
 // レイアウト画面に表示・配置する対象（オブジェクト系＋CONTACT/ONBREAK。TEXTUREはオブジェクトに描画されるので除外）
-const showsInLayout = n => isStage(n) || n.type==="contact" || n.type==="onbreak" || n.type==="texture";
+const showsInLayout = n => isStage(n) || n.type==="contact" || n.type==="onbreak" || (n.type==="texture" && !n.parentNodeId); // 親付きTEXTUREはLayoutに出さない
 const attachesToObject = n => ['texture','contact','onbreak'].includes(n.type);
 // KEYBOARD/BUTTONで割り当て可能なキー：全アルファベット・全数字・記号・Tab/Esc・矢印・SPACE/ENTER
 const KEYBOARD_OPTS=(function(){
@@ -519,8 +519,9 @@ function startPlay(){
   // ストップボタン＝角丸正方形の枠だけ（枠色はSettingのStopBtnCol、既定は白）
   const sN=nodes.find(n=>n.type==="setting"); const stopCol=(sN&&sN.stopBtnColor)||"#ffffff";
   const b=document.getElementById("playBtn"); b.textContent=""; b.classList.add("stop"); b.style.background="";
-  const fill=document.createElement("div"); fill.className="holdfill"; b.appendChild(fill); // 長押しフィル
-  const sq=document.createElement("div"); sq.className="stopsq"; sq.style.borderColor=stopCol; b.appendChild(sq);
+  const sq=document.createElement("div"); sq.className="stopsq"; sq.style.borderColor=stopCol;
+  const fill=document.createElement("div"); fill.className="holdfill"; sq.appendChild(fill); // 角丸正方形内で下から埋まる
+  b.appendChild(sq);
   mBuildWorld(); // Matter物理ワールドを構築
 }
 function stopPlay(){
@@ -1548,7 +1549,7 @@ function hitLayoutObject(sx,sy){
 // 選択オブジェクトのハンドル判定
 function hitHandle(sx,sy){
   if(selected==null) return null;
-  const n=nodeById(selected); if(!n || !(isStage(n)||n.type==="contact"||n.type==="onbreak")) return null; // SENSOR/ONBREAKもハンドル操作可
+  const n=nodeById(selected); if(!n || !(isStage(n)||n.type==="contact"||n.type==="onbreak"||(n.type==="texture"&&!n.parentNodeId))) return null; // SENSOR/ONBREAK/単体TEXTUREもハンドル操作可
   const hp=handlePositions(n);
   if(Math.hypot(sx-hp.rot.x,sy-hp.rot.y)<HANDLE_R+8) return {kind:"rotate"};
   for(const c of hp.corners){ if(Math.hypot(sx-c.x,sy-c.y)<HANDLE_R+8) return {kind:"resize"}; }
