@@ -16,9 +16,11 @@
   .cbtn { position:absolute; right:14px; width:72px; height:72px; border-radius:14px; z-index:12;
     display:flex; align-items:center; justify-content:center; font-weight:800; cursor:pointer;
     border:1px solid rgba(0,0,0,.35); user-select:none; }
-  .cplay { top:14px; background:#1f7a3a; color:#fff; font-size:34px; }
+  .cplay { top:14px; background:#1f7a3a; color:#fff; font-size:34px; overflow:hidden; }
   .cplay.stop { background:transparent; border-color:transparent; }
-  .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; }
+  .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; }
+  /* 停止長押しの「下から白く埋まる」フィル */
+  .cplay .holdfill { position:absolute; left:0; right:0; bottom:0; height:0%; background:rgba(255,255,255,.85); z-index:1; pointer-events:none; }
   .cmenu { top:98px; background:#3b4250; color:#dff2ff; font-size:19px; letter-spacing:.03em; }
   .cmenu:active { background:#4a5262; }
   #flick { position:absolute; inset:0; z-index:11; display:none; }
@@ -187,7 +189,7 @@ const NODE_TYPES = {
 };
 const isStage = n => { const d=NODE_TYPES[n.type]; return !!(d.object || d.stage); };
 // レイアウト画面に表示・配置する対象（オブジェクト系＋CONTACT/ONBREAK。TEXTUREはオブジェクトに描画されるので除外）
-const showsInLayout = n => isStage(n) || n.type==="contact" || n.type==="onbreak";
+const showsInLayout = n => isStage(n) || n.type==="contact" || n.type==="onbreak" || n.type==="texture";
 const attachesToObject = n => ['texture','contact','onbreak'].includes(n.type);
 // KEYBOARD/BUTTONで割り当て可能なキー：全アルファベット・全数字・記号・Tab/Esc・矢印・SPACE/ENTER
 const KEYBOARD_OPTS=(function(){
@@ -312,6 +314,7 @@ function addNode(type, wx, wy){
     if(type==="onbreak"){ n.breakColor="#ffffff"; n.breakEffect="none"; n.breakTag=""; } } // Unity: Color/Effect/Tag
   // CONTACT/ONBREAK/TEXTURE もレイアウトで配置できるよう位置とサイズを持たせる
   if (attachesToObject(n)){ n.w=n.w||60; n.h=n.h||60; n.angle=n.angle||0;
+    if(type==="texture" && n.layer==null) n.layer=10; // TEXTUREのLayer初期値=10
     const oc=nodes.filter(m=>showsInLayout(m)).length;
     if(n.layoutX==null){ n.layoutX=(oc%5)*100-200; n.layoutY=Math.floor(oc/5)*100-100; } }
   if (type==="compare"){ n.compareMode="gt"; }                 // 比較演算子（既定：＞）
@@ -516,6 +519,7 @@ function startPlay(){
   // ストップボタン＝角丸正方形の枠だけ（枠色はSettingのStopBtnCol、既定は白）
   const sN=nodes.find(n=>n.type==="setting"); const stopCol=(sN&&sN.stopBtnColor)||"#ffffff";
   const b=document.getElementById("playBtn"); b.textContent=""; b.classList.add("stop"); b.style.background="";
+  const fill=document.createElement("div"); fill.className="holdfill"; b.appendChild(fill); // 長押しフィル
   const sq=document.createElement("div"); sq.className="stopsq"; sq.style.borderColor=stopCol; b.appendChild(sq);
   mBuildWorld(); // Matter物理ワールドを構築
 }
@@ -1380,7 +1384,11 @@ function drawStage(cx,cy,n,ang){
     if(mode!=="play"){ const R=Math.min(w,h)/2; ctx.strokeStyle=n.color; ctx.lineWidth=3;
       ctx.beginPath(); ctx.arc(0,0,R,0,7); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(-R,0); ctx.lineTo(R,0); ctx.moveTo(0,-R); ctx.lineTo(0,R); ctx.stroke(); }
-  } else if(attachesToObject(n)){ // SENSOR/ONBREAK/TEXTURE：レイアウト用のマーカー（Play中は非表示）
+  } else if(n.type==="texture" && !n.parentNodeId){ // 親なしTEXTURE：単体でピクセル画像を表示（Layout/Play両方）
+    const vis = conns.some(c=>c.b===n.id && c.bi===0) ? (inputValue(n,0)!==0) : true;
+    if(vis && n.pixels) drawTexInto(n, w, h, false);
+    if(mode!=="play"){ ctx.strokeStyle="rgba(255,255,255,.25)"; ctx.lineWidth=1.5; ctx.strokeRect(-w/2,-h/2,w,h); } // 編集時は枠
+  } else if(attachesToObject(n)){ // SENSOR/ONBREAK/親付きTEXTURE：レイアウト用のマーカー（Play中は非表示）
     if(mode!=="play"){ const R=Math.min(w,h)/2; const col=n.color||d.color;
       ctx.setLineDash([6,4]); ctx.strokeStyle=col; ctx.lineWidth=2.5;
       if(n.type==="contact"||n.type==="onbreak"){ ctx.strokeRect(-w/2,-h/2,w,h); } // SENSOR/ONBREAKは矩形マーカー(ONBREAKは正方形=エフェクト範囲)
@@ -1451,7 +1459,7 @@ function drawPlay(){
   ctx.fillStyle = bgNode ? (bgNode.color||"#0a0b10") : "#0a0b10"; ctx.fillRect(0,0,W,H);
   const camX=playCam.x, camY=playCam.y, camS=playCam.s||1;
   const uiTypes = new Set(["stick","button"]);
-  const drawList = nodes.filter(n=>isStage(n) && !destroyed.has(n.id)
+  const drawList = nodes.filter(n=>(isStage(n) || (n.type==="texture" && !n.parentNodeId)) && !destroyed.has(n.id) // 親なしTEXTUREも表示
     && n.type!=="shot"                                                  // SHOT本体（発射口）はPlayに出さない
     && !((n.type==="stick"||n.type==="button") && uiCtrlHidden(n))
     && !objHidden(n));
@@ -1857,6 +1865,43 @@ document.getElementById("texErase").onclick=()=>{ texMode="erase"; updateTexMode
 document.getElementById("texPick").onclick=()=>{ texMode="pick"; updateTexModeUI(); };
 document.getElementById("texCloseBtn").onclick=closeTexEditor;
 
+// ===== テクスチャエディタ：クリップボード連携 =====
+// hex→rgb / パレット近似（ユークリッド距離）
+function hexToRgb(h){ h=h.replace("#",""); if(h.length===3) h=h.split("").map(c=>c+c).join(""); return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+const _palRGB = UNITY_PALETTE.map(hexToRgb);
+function nearestPaletteColor(r,g,b){ let bi=0,bd=1e18; for(let i=0;i<_palRGB.length;i++){ const p=_palRGB[i]; const d=(p[0]-r)**2+(p[1]-g)**2+(p[2]-b)**2; if(d<bd){bd=d;bi=i;} } return UNITY_PALETTE[bi]; }
+// 画像を N×N に取り込み、左上合わせで貼り付け（アスペクト維持で N セルにサンプリング、透明は無視）
+function pasteImageToTexture(img){ const n=nodeById(texEditNode); if(!n) return; const N=n.texW||16;
+  const tmp=document.createElement("canvas"); tmp.width=N; tmp.height=N; const tc=tmp.getContext("2d");
+  // 左上合わせ：画像を等倍縮小してN×Nの左上に収める（はみ出しは切り捨て、余白は透明のまま）
+  const scale=Math.min(N/img.width, N/img.height); const dw=Math.max(1,Math.round(img.width*scale)), dh=Math.max(1,Math.round(img.height*scale));
+  tc.imageSmoothingEnabled=false; tc.drawImage(img,0,0,dw,dh);
+  const data=tc.getImageData(0,0,N,N).data;
+  recordUndo();
+  for(let y=0;y<N;y++) for(let x=0;x<N;x++){ const i=(y*N+x)*4; const a=data[i+3];
+    if(a<40){ /* 透明はそのまま(既存維持) */ continue; }
+    n.pixels[y*N+x]=nearestPaletteColor(data[i],data[i+1],data[i+2]); }
+}
+// テクスチャ全体を画像としてクリップボードへ（Ctrl+C）
+async function copyTextureToClipboard(){ const n=nodeById(texEditNode); if(!n) return; const N=n.texW||16;
+  const SC=16; const cv2=document.createElement("canvas"); cv2.width=N*SC; cv2.height=N*SC; const c2=cv2.getContext("2d");
+  for(let y=0;y<N;y++) for(let x=0;x<N;x++){ const col=n.pixels[y*N+x]; if(!col) continue; c2.fillStyle=col; c2.fillRect(x*SC,y*SC,SC,SC); }
+  try{ const blob=await new Promise(res=>cv2.toBlob(res,"image/png"));
+    if(navigator.clipboard && window.ClipboardItem){ await navigator.clipboard.write([new ClipboardItem({"image/png":blob})]); }
+  }catch(e){ /* 権限無い場合は無視 */ }
+}
+// クリップボードから画像を取り出して貼り付け確認
+async function pasteFromClipboard(){
+  try{ if(!navigator.clipboard||!navigator.clipboard.read) return;
+    const items=await navigator.clipboard.read(); let blob=null;
+    for(const it of items){ const type=it.types.find(t=>t.startsWith("image/")); if(type){ blob=await it.getType(type); break; } }
+    if(!blob) return; // 画像が無ければ何もしない
+    const url=URL.createObjectURL(blob); const img=new Image();
+    img.onload=()=>{ URL.revokeObjectURL(url); confirmQuery("クリップボードの画像を貼り付けますか？（左上合わせ・色はパレット近似）", ()=>pasteImageToTexture(img)); };
+    img.onerror=()=>URL.revokeObjectURL(url); img.src=url;
+  }catch(e){ /* 権限拒否等は無視 */ }
+}
+
 // pointer events（Editor/Layout は2本指ピンチでズーム＆パン）
 const ptrs=new Map(); let pinchPrev=null;
 function activeView(){ return mode==="layout"?layoutView:view; }
@@ -1937,14 +1982,26 @@ function padStickAxis(mode){ const g=getPad(); if(!g) return {x:0,y:0};
 const PAD_BTN={a:0,b:1,x:2,y:3,lb:4,rb:5,lt:6,rt:7};
 function padButtonPressed(name){ const g=getPad(); if(!g||!(name in PAD_BTN)) return false; const b=(g.buttons||[])[PAD_BTN[name]]; return !!(b&&b.pressed); }
 window.addEventListener("keydown", e=>{
+  // テクスチャエディタ：Ctrl+V=画像貼り付け(確認)、Ctrl+C=全体を画像バッファへ
+  if(mode==="texedit" && (e.ctrlKey||e.metaKey)){
+    if(e.key==="v"||e.key==="V"){ e.preventDefault(); pasteFromClipboard(); return; }
+    if(e.key==="c"||e.key==="C"){ e.preventDefault(); copyTextureToClipboard(); return; }
+  }
   // 入力欄の編集中はショートカット・削除を無効化（CONST値編集でノードが消えるのを防ぐ）
   const ae=document.activeElement; if(ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) return;
   const k=KMAP[e.key]; if(k){ keys[k]=true; e.preventDefault(); }
   heldKeys.add(e.key.toLowerCase());
   if(mode==="play" && (e.key==="Tab"||e.key==="Escape"||e.key===" ")) e.preventDefault(); // ゲームキーの既定動作を抑止
-  if((e.key==="Delete"||e.key==="Backspace") && mode==="edit"){
-    if(multiSel.size){ recordUndo(); [...multiSel].forEach(id=>removeNode(id)); multiSel.clear(); selected=null; }
-    else if(selected){ recordUndo(); removeNode(selected); selected=null; }
+  if((e.key==="Delete"||e.key==="Backspace") && (mode==="edit"||mode==="layout")){
+    const ids = multiSel.size ? [...multiSel] : (selected!=null?[selected]:[]);
+    if(ids.length){ e.preventDefault();
+      confirmQuery(ids.length>1?`${ids.length}個のノードを削除しますか？`:"このノードを削除しますか？", ()=>{
+        recordUndo(); ids.forEach(id=>removeNode(id)); multiSel.clear(); selected=null; propNode=null; refreshProp(); }); }
+  }
+  if((e.ctrlKey||e.metaKey) && (e.key==="d"||e.key==="D") && (mode==="edit"||mode==="layout")){ e.preventDefault();
+    const ids = multiSel.size ? [...multiSel] : (selected!=null?[selected]:[]);
+    if(ids.length){ confirmQuery(ids.length>1?`${ids.length}個のノードを複製しますか？`:"このノードを複製しますか？", ()=>{
+      const s=[...duplicateNodes(ids)]; multiSel=new Set(s); selected=(s.length===1?s[0]:null); propNode=null; refreshProp(); }); }
   }
   if((e.ctrlKey||e.metaKey) && (e.key==="z"||e.key==="Z")){ e.preventDefault(); if(e.shiftKey) redo(); else undo(); }
   if((e.ctrlKey||e.metaKey) && (e.key==="y"||e.key==="Y")){ e.preventDefault(); redo(); }
@@ -2261,6 +2318,10 @@ function refreshProp(){
   if(d.tex){
     selRow("Size", [{value:"8",label:"8"},{value:"16",label:"16"},{value:"32",label:"32"}],
       ()=>String(n.texW||16), v=>{ resizeTexture(n, parseInt(v)); }); // サイズ変更で画像をなるべく残す
+    // 単体表示用の表示サイズ・表示順（親なしTEXTUREをLayoutに描画するとき使用）
+    numRow("Width",  ()=>n.w||60, v=>{ n.w=Math.max(8,Math.round(v)); });
+    numRow("Height", ()=>n.h||60, v=>{ n.h=Math.max(8,Math.round(v)); });
+    numRow("Layer",  ()=>n.layer!=null?n.layer:10, v=>{ n.layer=Math.round(v); }); // 初期値10
     const eb=document.createElement("button"); eb.className="del"; eb.style.background="#c79a10"; eb.style.borderColor="#e0c020";
     eb.textContent="EDIT TEXTURE";
     eb.onclick=()=> openTexEditor(n.id);
@@ -2296,8 +2357,25 @@ function layoutPropPanel(pbody){
     pbody.style.maxHeight = Math.max(120, avail - chrome) + "px"; pbody.style.overflowY="auto"; }
 }
 
-// ▶ ボタン：タップで再生/停止（Editor/Layout どちらからも再生できる）
-document.getElementById("playBtn").onclick=()=> (mode==="play")?stopPlay():startPlay();
+// ▶ ボタン：Play中はタップで再生開始。停止は0.8秒の長押し（下から白く埋まるアニメ）
+(function(){
+  const btn=document.getElementById("playBtn");
+  const HOLD_MS=800; let holdRaf=null, holdStart=0, holding=false;
+  function fillEl(){ return btn.querySelector(".holdfill"); }
+  function resetFill(){ const f=fillEl(); if(f) f.style.height="0%"; }
+  function tick(ts){ if(!holding) return; if(!holdStart) holdStart=ts;
+    const t=Math.min(1,(ts-holdStart)/HOLD_MS); const f=fillEl(); if(f) f.style.height=(t*100)+"%";
+    if(t>=1){ holding=false; holdRaf=null; resetFill(); stopPlay(); return; }
+    holdRaf=requestAnimationFrame(tick);
+  }
+  function beginHold(e){ if(mode!=="play") return; e.preventDefault();
+    holding=true; holdStart=0; if(holdRaf) cancelAnimationFrame(holdRaf); holdRaf=requestAnimationFrame(tick); }
+  function endHold(){ if(!holding && !holdRaf) return; holding=false; if(holdRaf){ cancelAnimationFrame(holdRaf); holdRaf=null; } resetFill(); } // 離すと埋まりリセット
+  btn.addEventListener("pointerdown",(e)=>{ if(mode==="play"){ beginHold(e); } else { startPlay(); } });
+  btn.addEventListener("pointerup",endHold);
+  btn.addEventListener("pointercancel",endHold);
+  btn.addEventListener("pointerleave",endHold);
+})();
 
 // =====================================================================
 //  MENU ボタンのフリックメニュー（元デザイン準拠）
@@ -2401,6 +2479,15 @@ function modal(build){ const ov=document.createElement("div");
   document.getElementById("app").appendChild(ov); return ov; }
 function mkBtn(label,bg){ const b=document.createElement("button");
   b.textContent=label; b.style.cssText=`height:46px;padding:0 16px;border-radius:10px;border:1px solid #3a4150;background:${bg||'#242a37'};color:#fff;font-size:15px;font-weight:800;cursor:pointer`; return b; }
+// Yes/No 確認ダイアログ（Query）
+function confirmQuery(msg, onYes, onNo){ modal((box,close)=>{
+  const t=document.createElement("div"); t.textContent=msg; t.style.cssText="color:#fff;font-size:16px;font-weight:700;margin-bottom:16px;line-height:1.5"; box.appendChild(t);
+  const row=document.createElement("div"); row.style.cssText="display:flex;gap:10px";
+  const yes=mkBtn("Yes","#1f7a3a"), no=mkBtn("No","#555b68"); yes.style.flex="1"; no.style.flex="1";
+  yes.onclick=()=>{ close(); if(onYes) onYes(); };
+  no.onclick=()=>{ close(); if(onNo) onNo(); };
+  row.appendChild(yes); row.appendChild(no); box.appendChild(row);
+}); }
 // カラーピッカー（Unity版パレット）
 function openColorPicker(current, onPick){ modal((box,close)=>{
   // ヘッダー：タイトル＋右上に閉じるボタン（Property同様）
@@ -2543,6 +2630,7 @@ function deserialize(s){ const o=JSON.parse(s); nodes=o.nodes||[]; conns=o.conns
       if(n.inst==null){ const wm={square:"nes_pulse",sine:"flute",triangle:"nes_tri",sawtooth:"brass"}; n.inst=wm[n.wave]||"piano"; }
       if(n.inst==="lead"||n.inst==="pad"){ n.inst = n.inst==="lead"?"brass":"strings"; } } // 廃止プリセットを移行
     if(attachesToObject(n)){ if(n.w==null)n.w=60; if(n.h==null)n.h=60; if(n.angle==null)n.angle=0;
+      if(n.type==="texture"&&n.layer==null)n.layer=10; // TEXTURE Layer初期値10
       if(n.layoutX==null){ const oc=nodes.filter(m=>showsInLayout(m)).length; n.layoutX=(oc%5)*100-200; n.layoutY=Math.floor(oc/5)*100-100; } }
     if(n.type==="setting"){ if(n.dynamics==null)n.dynamics=true; if(n.setFriction==null)n.setFriction=0.4; if(n.setBounce==null)n.setBounce=0.0; if(n.setDrag==null)n.setDrag=0.0; if(n.stopBtnColor==null)n.stopBtnColor="#ffffff";
       if(n.gravity==null)n.gravity=9.8; else if(n.gravity>50)n.gravity=n.gravity/2000;
