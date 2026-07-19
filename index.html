@@ -274,7 +274,7 @@ function addNode(type, wx, wy){
     n.angle=0; n.playX=0; n.playY=0; n.layer=50; n.tag="";  // SORTLAYER・タグ
     if(d.object){ n.color=randObjColor(); n.w=80; n.h=80; n.bounce=0; n.friction=0.0; n.flip=false;
       n.objStyle="fill"; n.coordMode="local"; n.visible=true; n.destroyedBy="";
-      n.bodyType=(type==="character")?"dynamic":"static"; } // Unity: bodyType(Off/Static/Kinematic/Dynamic)
+      n.bodyType=(type==="character")?"dynamic":"off"; } // 作成時はOFF既定（CHARACTERのみDYNAMIC）
     else if(d.stage==="text"){ n.color="#8a3bd0"; n.w=240; n.h=70; n.text="TEXT"; n.fontSize=40; n.textColor="#ffffff"; n.align="center"; n.outline=false; }
     else if(d.stage==="stick"){ n.color="#e0892b"; n.w=200; n.h=200;
       n.style="frame"; n.mode="analog"; n.threshold=0.3; n.limitAxis=false;
@@ -467,7 +467,7 @@ function startPlay(){
   mode="play";
   // レイアウトで置いた位置から開始 & 状態ノードをリセット
   nodes.forEach(n=>{
-    if(isStage(n)){ n.playX=n.layoutX||0; n.playY=n.layoutY||0; n.vy=0; n.grounded=false;
+    if(isStage(n)){ n.playX=n.layoutX||0; n.playY=n.layoutY||0; n.vx=0; n.vy=0; n.grounded=false; n._roll=0; n._prevJ=0; n._still=0; n._asleep=false; n._pushMag=0; n._groundMem=0; n._anchorX=null; n._anchorY=null; n._tiltTargetId=null; n._tilting=false;
       n.playAngle=n.angle||0; n._lastX=n.playX; n._lastY=n.playY; n._vx=0; n._vy=0; n._rawvx=0; n._rawvy=0; n._face=1; n._spin=0; }
     if(n.type==="velocity"){ n._ovx=0; n._ovy=0; }
     if(n.type==="stick"){ n.stickX=0; n.stickY=0; n.stickPid=null; }
@@ -527,6 +527,13 @@ function objHalf(n){ return { hw:(n.w||80)/2, hh:(n.h||80)/2 }; }
 function objAngle(n){ const a=(n.playAngle!=null?n.playAngle:(n.angle||0)); return a*Math.PI/180; }
 function overlapAABB(a,b){ const A=objHalf(a),B=objHalf(b);
   return Math.abs(a.playX-b.playX) < A.hw+B.hw && Math.abs(a.playY-b.playY) < A.hh+B.hh; }
+// 非回転AABB用の最小押し出し。aを (x,y) 動かせばbと分離。重なっていなければnull
+function aabbMTV(a,b){ const A=objHalf(a),B=objHalf(b);
+  const dx=a.playX-b.playX, dy=a.playY-b.playY;
+  const ox=(A.hw+B.hw)-Math.abs(dx), oy=(A.hh+B.hh)-Math.abs(dy);
+  if(ox<=0||oy<=0) return null;
+  if(ox<oy) return {x:(dx<0?-ox:ox), y:0, depth:ox};
+  return {x:0, y:(dy<0?-oy:oy), depth:oy}; }
 // 回転考慮の分離軸(SAT)で2つのOBBの最小押し出しベクトル(MTV)を返す。重ならなければnull。
 // 戻り値 {x,y}: b を動かさず a を (x,y) だけ動かせば分離できる（Unity2Dの押し戻し相当）
 function obbMTV(a,b){
@@ -549,6 +556,39 @@ function obbMTV(a,b){
 }
 // いずれかが回転していれば true（AABB高速路と使い分け）
 function isRotated(a,b){ return ((a.playAngle||a.angle||0)!==0) || ((b.playAngle||b.angle||0)!==0); }
+function isCircle(n){ return NODE_TYPES[n.type] && NODE_TYPES[n.type].object==="circle"; }
+// 円a(半径r) と 矩形b(OBB可) の正確な衝突。円中心から矩形表面の最近点方向に (r-距離) だけ分離。
+// 戻り値 {x,y}: a を (x,y) 動かせば分離（表面基準なので浮かない）。重ならなければnull
+function circleBoxMTV(a,b){
+  const r=(a.w||80)/2; const B=objHalf(b); const ba=objAngle(b);
+  const cb=Math.cos(ba), sb=Math.sin(ba);
+  const dx=a.playX-b.playX, dy=a.playY-b.playY;
+  // 円中心を矩形ローカル座標へ
+  const lx= dx*cb + dy*sb, ly=-dx*sb + dy*cb;
+  // 矩形内の最近点（ローカル）
+  const qx=Math.max(-B.hw,Math.min(B.hw,lx)), qy=Math.max(-B.hh,Math.min(B.hh,ly));
+  let nlx=lx-qx, nly=ly-qy; let d=Math.hypot(nlx,nly);
+  if(d>r) return null; // 表面まで届いていない＝非接触
+  let ux,uy;
+  if(d>1e-6){ ux=nlx/d; uy=nly/d; } // 表面法線（ローカル）
+  else { // 中心が矩形内部：最も近い辺へ押し出す
+    const ex=B.hw-Math.abs(lx), ey=B.hh-Math.abs(ly);
+    if(ex<ey){ ux=(lx<0?-1:1); uy=0; d=-ex; } else { ux=0; uy=(ly<0?-1:1); d=-ey; }
+  }
+  const push=r-d; // 表面から重なった分だけ戻す
+  const wx=ux*cb - uy*sb, wy=ux*sb + uy*cb; // ローカル法線→ワールド
+  return {x:wx*push, y:wy*push, depth:push};
+}
+// 汎用MTV：円が絡む場合は円基準、両方矩形なら回転有無でOBB/AABB
+function collideMTV(a,b){
+  if(isCircle(a)&&!isCircle(b)) return circleBoxMTV(a,b);
+  if(isCircle(b)&&!isCircle(a)){ const m=circleBoxMTV(b,a); return m?{x:-m.x,y:-m.y,depth:m.depth}:null; }
+  if(isCircle(a)&&isCircle(b)){ // 円同士＝距離判定
+    const ra=(a.w||80)/2, rb=(b.w||80)/2, dx=a.playX-b.playX, dy=a.playY-b.playY, d=Math.hypot(dx,dy);
+    if(d>=ra+rb) return null; const push=ra+rb-d; const ux=d>1e-6?dx/d:1, uy=d>1e-6?dy/d:0;
+    return {x:ux*push, y:uy*push, depth:push}; }
+  return isRotated(a,b) ? obbMTV(a,b) : (overlapAABB(a,b) ? aabbMTV(a,b) : null);
+}
 // ARRAYの初期値文字列を配列へ（ , か | で区切る。空白・改行も許容）
 function parseArrInit(s){ if(!s) return [];
   return String(s).split(/[,|\s]+/).filter(x=>x!=="").map(x=>{ const v=parseFloat(x); return isNaN(v)?0:v; }); }
@@ -632,7 +672,11 @@ function playStep(dt){
     if(bt(n)!=="dynamic") continue;
     const { hw, hh } = objHalf(n); const bounce=S_BOUNCE, fric=S_FRIC;
     const kc = n.type==="character"?100:1; // CHARACTERのX,Y入力は内部で100倍（Jumpは対象外）
-    n.vx = inputValue(n,0)*kc;
+    // X入力が繋がっていない dynamic は自由物理（慣性・重力で滑る/転がる）：vxを毎フレーム0にせず保持
+    const hasXin = conns.some(c=>c.b===n.id&&c.bi===0);
+    const freeSlide = !hasXin && n.type!=="character"; // CHARACTERは従来通り入力制御
+    const isBall = (NODE_TYPES[n.type].object==="circle");
+    if(!freeSlide) n.vx = inputValue(n,0)*kc; else n.vx = (n.vx||0); // 自由物理は慣性を維持
     const vyIn = inputValue(n,1)*kc;
     // ジャンプ：CHARACTERは入力2(J)が0より大きくなった瞬間にジャンプ。数値でジャンプ力が変わる（-JUMP*j）
     let jump, jforce=1;
@@ -640,39 +684,134 @@ function playStep(dt){
     else jump=(vyIn < -1);
     if(jump && n.grounded){ n.vy = -JUMP*jforce; n.grounded=false; }
 
-    // 横移動 → solidで左右をブロック（親子関係の相手とは衝突しない）
+    // 横移動 → solidで左右をブロック（親子関係の相手とは衝突しない）。表面基準MTVで押し出し
     n.playX += n.vx*dt;
     for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
-      if(isRotated(n,s)){ const m=obbMTV(n,s); if(m){ n.playX+=m.x; n.playY+=m.y; // 回転コライダ：MTVで押し出し
-        if(m.y<-0.01) n.grounded=true; } continue; }
-      if(overlapAABB(n,s)){ const S=objHalf(s);
-        if(n.vx>0) n.playX = s.playX-(S.hw+hw);
-        else if(n.vx<0) n.playX = s.playX+(S.hw+hw);
-        else { n.playX += (n.playX<s.playX?-1:1)*((S.hw+hw)-Math.abs(n.playX-s.playX)); } } } // 速度0でもめり込み押し出し
+      const m=collideMTV(n,s); if(!m) continue; n.playX+=m.x; n.playY+=m.y;
+      const len=Math.hypot(m.x,m.y)||1, nx=m.x/len, ny=m.y/len, vn=n.vx*nx+n.vy*ny;
+      if(vn<0) n.vx-=vn*nx; // 法線方向(横成分)の速度だけ消す
+      if(m.y<-0.01) n.grounded=true;
+    }
 
-    // 縦移動（重力）→ solidに着地／頭ぶつけ（反発・摩擦）
+    // 縦移動（重力）→ solidに着地／頭ぶつけ（反発・摩擦）。表面基準MTVで正確に接地
     n.vy = (n.vy||0) + G*dt;
     if(S_DRAG>0) n.vy *= (1-Math.min(1,S_DRAG*dt*10)); // 空気抵抗（線形ダンピング）
     n.playY += n.vy*dt;
     n.grounded=false;
+    let bestSup=null, supList=[]; // このフレームの支持面群。矩形はこの中の一面へ辺を合わせる
+    // 事前スキャン：押し出し前に「近接している斜面」を集計（V字で両斜面を同時検出。少し余裕を持たせる）
+    if(!isBall){ for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
+      // 少し下・左右に膨らませた仮ボックスで近接判定（1フレームおきの接触切れでもV字を検知）
+      const probe={playX:n.playX, playY:n.playY+6, w:(n.w||80)+8, h:(n.h||80)+8, playAngle:(n.playAngle!=null?n.playAngle:n.angle), type:n.type};
+      const pm=collideMTV(probe,s);
+      if(pm && pm.y<-0.005) supList.push({ang:(s.playAngle!=null?s.playAngle:(s.angle||0)), sup:-pm.y, sx:s.playX}); } }
     for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
-      if(isRotated(n,s)){ const m=obbMTV(n,s); if(m){ n.playX+=m.x; n.playY+=m.y; // 斜面：面法線方向へ押し出し
-        // 押し出しベクトルの向きで接地/天井を判定し、法線方向の速度成分を消す
-        const len=Math.hypot(m.x,m.y)||1, nx=m.x/len, ny=m.y/len;
-        const vn=n.vx*nx+n.vy*ny; if(vn<0){ n.vx-=vn*nx; n.vy-=vn*ny*(1+bounce); }
-        if(m.y<-0.01){ n.grounded=true; if(Math.abs(n.vy)<40) n.vy=0; } }
-        continue; }
-      if(overlapAABB(n,s)){ const S=objHalf(s);
-        if(n.vy>0){ n.playY = s.playY-(S.hh+hh); n.vy = -n.vy*bounce; if(Math.abs(n.vy)<40){n.vy=0; n.grounded=true;} }
-        else if(n.vy<0){ n.playY = s.playY+(S.hh+hh); n.vy=0; }
-        else { const push=(S.hh+hh)-Math.abs(n.playY-s.playY); if(n.playY<s.playY){ n.playY-=push; n.grounded=true; } else n.playY+=push; } } }
+      const m=collideMTV(n,s); if(!m) continue; n.playX+=m.x; n.playY+=m.y; // 表面の最近点方向へ押し出し（円は浮かない）
+      n._pushMag=(n._pushMag||0)+Math.hypot(m.x,m.y); // 押し出し総量（V字/谷で挟まれると増える）
+      const len=Math.hypot(m.x,m.y)||1, nx=m.x/len, ny=m.y/len;
+      const vn=n.vx*nx+n.vy*ny; if(vn<0){ n.vx-=vn*nx; n.vy-=vn*ny*(1+bounce); } // 法線速度を消す（反発）
+      if(m.y<-0.01){ n.grounded=true; // 上向き押し出し＝床に着地
+        // 斜面接線（下り方向に統一）へ重力成分 g·sinθ を加え、円も矩形も自然に滑り落ちる
+        let sx=-ny, sy=nx; if(sy<0){ sx=-sx; sy=-sy; }
+        const gTan=G*sy; // 重力の接線方向成分（斜面が急なほど大）
+        const settling = ((n._still||0)>=3) && Math.hypot(n.vx||0,n.vy||0)<80; // 収束優先
+        if(freeSlide && !settling){ n.vx += sx*gTan*dt; n.vy += sy*gTan*dt; }
+        else if(Math.abs(n.vy)<40) n.vy=0;
+        if(isBall){
+          n._roll=(n._roll||0)+ (n.vx*dt)/((n.w||80)/2)*180/Math.PI; // 円：接地距離/半径ぶん自転
+          n.playAngle=n._roll;
+        } else {
+          const sup=-m.y, sAng=(s.playAngle!=null?s.playAngle:(s.angle||0));
+          if(!bestSup || sup>bestSup.sup) bestSup={ang:sAng, sup}; // 主支持面
+        }
+      } else if(m.y>0.01 && Math.abs(n.vy)<40) n.vy=0; // 天井
+    }
+    // ===== 矩形の傾き（辺を斜面に合わせる。V字でも一方の斜辺へ辺で接地）=====
+    if(!isBall && !bestSup && supList.length){ bestSup=supList.reduce((a,o)=>(!a||o.sup>a.sup)?o:a,null); }
+    n._tilting=false;
+    if(!isBall && bestSup){
+      const cur=(n.playAngle!=null?n.playAngle:(n.angle||0));
+      // 各支持面へ「辺を合わせる」のに必要な回転量（90°対称で最寄り）を計算
+      const cand = supList.map(o=>{ let d=((o.ang-cur)%90+90)%90; if(d>45)d-=90; return {o, d, need:Math.abs(d)}; });
+      const aligned = cand.some(c=>c.need<4); // どれかの斜面に既に辺が合っている
+      let pick;
+      if(aligned){ pick = cand.reduce((a,c)=>c.need<a.need?c:a); } // 合っている面を維持
+      else {
+        // 目標面をコミット（未確定なら決定）。左右対称なら支持の強い側へ倒す
+        if(n._tiltTargetId==null){
+          // 倒す向き：中心より支持が強い側へ（対称なら+）
+          const left=supList.reduce((a,o)=>o.sx<n.playX-0.1?a+o.sup:a,0), right=supList.reduce((a,o)=>o.sx>n.playX+0.1?a+o.sup:a,0);
+          const dir = (right>=left)?1:-1;
+          // その向きに回して届く斜面のうち一番近いものを目標に
+          let best=null; for(const c of cand){ if(Math.sign(c.d)===dir||c.d===0){ if(!best||c.need<best.need) best=c; } }
+          if(!best) best=cand.reduce((a,c)=>c.need<a.need?c:a);
+          n._tiltTargetId = best.o.ang; n._tiltDir=dir;
+        }
+        pick = cand.reduce((a,c)=>Math.abs(c.o.ang-n._tiltTargetId)<Math.abs(a.o.ang-n._tiltTargetId)?c:a);
+      }
+      let tgt=cur+pick.d; // 実際に回す先（cur近傍の等価角）
+      const rot=(tgt-cur);
+      if(Math.abs(rot)>1.5) n._tilting=true; // まだ倒れ込み中
+      n.playAngle = cur + rot*Math.min(1,dt*10);
+      if(aligned){ n._tiltTargetId=null; } // 収まったらコミット解除
+    } else if(!isBall){ n._tiltTargetId=null; n._tilting=false; }
 
-    // 摩擦（接地時、速度入力が無ければ徐々に停止）
-    if(n.grounded && fric>0 && !conns.some(c=>c.b===n.id&&c.bi===0)) n.vx*=(1-Math.min(1,fric));
+    // 摩擦（接地時、速度入力が無ければ徐々に停止）。円は「転がり抵抗」なので減衰を大幅に軽く
+    if(n.grounded && fric>0 && !conns.some(c=>c.b===n.id&&c.bi===0)){
+      const f = (NODE_TYPES[n.type].object==="circle") ? Math.min(1,fric)*0.05 : Math.min(1,fric); // 円は1/20の抵抗
+      n.vx*=(1-f); }
+    // ===== 収束（スリープ）処理 =====
+    // V字/谷で微振動が続く場合、「実際の移動量」で収束を判定（速度が毎フレーム反転しても確実に静止）
+    if(!conns.some(c=>c.b===n.id&&c.bi===0) && !conns.some(c=>c.b===n.id&&c.bi===1)){
+      // 接地メモリ：接触が1フレームおきに途切れても数フレームは接地扱いにする
+      if(n.grounded) n._groundMem=6; else n._groundMem=Math.max(0,(n._groundMem||0)-1);
+      const supported = (n._groundMem||0)>0;
+      // 前回位置からの実移動量（振動の振幅）。基準位置を中心に、動いていなければ収束
+      if(n._anchorX==null){ n._anchorX=n.playX; n._anchorY=n.playY; }
+      const moved = Math.hypot(n.playX-n._anchorX, n.playY-n._anchorY);
+      if(supported && moved < 2.5 && !n._tilting){ // ほぼ動いておらず、傾き（倒れ込み）も完了＝収束段階
+        n._still=(n._still||0)+1;
+        if(n._still>=4){ n.vx*=0.4; n.vy*=0.4; } // 振動を減衰
+        if(n._still>=10){ n.vx=0; n.vy=0; // 完全停止
+          if(!n._asleep){ n._asleep=true; n._sleepX=n.playX; n._sleepY=n.playY; }
+          else { n.playX=n._sleepX; n.playY=n._sleepY; } } // 位置固定でプルプルを断つ
+      } else { n._still=0; n._asleep=false; n._anchorX=n.playX; n._anchorY=n.playY; } // 動いた/傾き中は基準更新
+    } else { n._still=0; n._asleep=false; n._anchorX=null; }
+    n._pushMag=0; // 次フレーム用にリセット
     // 床・壁は自動生成しない（オブジェクトは限界まで落下・移動可能）
     // 向き（左右反転）
     if(n.flip){ if(n.vx>5) n._face=1; else if(n.vx<-5) n._face=-1; }
   }
+
+  // 2.5) DYNAMIC同士の衝突（すり抜け防止）。MTVで押し分け、法線方向の速度を交換（簡易インパルス）
+  const dyns = live.filter(n=>bt(n)==="dynamic");
+  for(let i=0;i<dyns.length;i++) for(let j=i+1;j<dyns.length;j++){
+    const a=dyns[i], bb=dyns[j]; if(isRelatedHierarchy(a,bb)) continue;
+    const m = collideMTV(a,bb); // 円は表面基準で正確に判定
+    if(!m) continue;
+    // 相対的に接近している（＝ぶつかってきた）ときだけ眠りから覚ます。静かに載っているだけなら眠らせる
+    { const l=Math.hypot(m.x,m.y)||1, nnx=m.x/l, nny=m.y/l, relApproach=((a.vx-bb.vx)*nnx+(a.vy-bb.vy)*nny);
+      if(relApproach < -30){ a._asleep=false; a._still=0; a._anchorX=null; bb._asleep=false; bb._still=0; bb._anchorX=null; } }
+    // 押し分け（両方dynamicなので半々。ただしX入力で動く側は押されにくくする）
+    const aFix = conns.some(c=>c.b===a.id&&c.bi===0), bFix = conns.some(c=>c.b===bb.id&&c.bi===0);
+    let wa=0.5, wb=0.5; if(aFix&&!bFix){ wa=0; wb=1; } else if(bFix&&!aFix){ wa=1; wb=0; }
+    a.playX+=m.x*wa; a.playY+=m.y*wa; bb.playX-=m.x*wb; bb.playY-=m.y*wb;
+    const len=Math.hypot(m.x,m.y)||1, nx=m.x/len, ny=m.y/len; // aから見た分離法線
+    const van=a.vx*nx+a.vy*ny, vbn=bb.vx*nx+bb.vy*ny, rel=van-vbn;
+    if(rel<0){ const e=S_BOUNCE, imp=-(1+e)*rel*0.5; // 相対接近時のみ反発
+      if(!aFix){ a.vx+=imp*nx; a.vy+=imp*ny; } if(!bFix){ bb.vx-=imp*nx; bb.vy-=imp*ny; }
+      if(m.y<-0.01) a.grounded=true; else if(m.y>0.01) bb.grounded=true; }
+    else { // 静かに載っている（接近していない）：法線方向の残留速度を消して積み重ねを収束させる
+      const upper = (m.y<0)?a:bb, uFix=(upper===a)?aFix:bFix; // 上に載っている側
+      if(!uFix){ const un=upper.vx*nx+upper.vy*ny; if(Math.abs(un)<80){ upper.vx-=un*nx; upper.vy-=un*ny; } upper.grounded=true; }
+    }
+  }
+  // 2.6) DYNAMIC同士の押し合いで壁(solid)へめり込んだ分を再度押し出す（壁抜け防止）
+  for(const n of dyns){ for(const s of solids){ if(isRelatedHierarchy(n,s)) continue;
+    const m = collideMTV(n,s);
+    if(!m) continue; n.playX+=m.x; n.playY+=m.y;
+    const len=Math.hypot(m.x,m.y)||1, nx=m.x/len, ny=m.y/len, vn=n.vx*nx+n.vy*ny;
+    if(vn<0){ n.vx-=vn*nx; n.vy-=vn*ny; } if(m.y<-0.01) n.grounded=true; } }
 
   // 3) 親子構造：子は親の移動に追従（親→子の順で解決）
   applyHierarchy();
