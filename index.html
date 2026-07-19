@@ -2033,15 +2033,15 @@ function showCreateMenu(sx,sy){
   if(landscape){
     // 横画面：幅=画面の85%。ボタンが狭くなりすぎないよう1列あたり約108px
     const wWant=Math.round(W*0.85);
-    const cols=Math.min(7, Math.max(4, Math.floor(wWant/108))); // 最大7列
-    const width=Math.min(wWant, cols*112+24); // 7列上限時は幅も詰める（PCで広がりすぎ防止）
+    const cols=Math.min(6, Math.max(4, Math.floor(wWant/108))); // 最大6列
+    const width=Math.min(wWant, cols*112+24); // 6列上限時は幅も詰める（PCで広がりすぎ防止）
     createMenu.style.width=width+"px"; createMenu.style.maxWidth="none";
     row.style.gridTemplateColumns=`repeat(${cols},1fr)`;
   } else {
     // 縦画面：左の隙間なし（ほぼ全幅）。1列あたり約102px
     const width=W-16;
     createMenu.style.width=width+"px"; createMenu.style.maxWidth="none";
-    const cols=Math.min(7, Math.max(3, Math.floor(width/102))); // 最大7列
+    const cols=Math.min(6, Math.max(3, Math.floor(width/102))); // 最大6列
     row.style.gridTemplateColumns=`repeat(${cols},1fr)`;
   }
   const mw=createMenu.offsetWidth||220, mh=createMenu.offsetHeight||180;
