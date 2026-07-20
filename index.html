@@ -854,10 +854,11 @@ function playStep(dt){
     if(b.dyn) b.vy += G*dt; // Dynamic弾は重力の影響を受ける
     b.x+=b.vx*dt; b.y+=b.vy*dt;
     let hitObj=false;
-    if(b.tag){ // タグ一致 or DestroyedBy一致のオブジェクトを破壊
-      for(const o of live){ if(destroyed.has(o.id)) continue;
+    if(b.tag){ // タグ一致 or DestroyedBy一致のオブジェクトを破壊（物理OFFでも全オブジェクトを対象）
+      for(const o of objs){ if(destroyed.has(o.id)) continue;
         if((o.tag||"")!==b.tag && (o.destroyedBy||"")!==b.tag) continue;
-        if(Math.abs(b.x-o.playX)<objHalf(o).hw && Math.abs(b.y-o.playY)<objHalf(o).hh){
+        const ox=(o.playX!=null?o.playX:(o.layoutX||0)), oy=(o.playY!=null?o.playY:(o.layoutY||0));
+        if(Math.abs(b.x-ox)<objHalf(o).hw && Math.abs(b.y-oy)<objHalf(o).hh){
           destroyed.add(o.id); brokenThisFrame.add(o.id); hitObj=true; break; } }
     }
     // 画面外に出たら消滅（カメラ考慮）
