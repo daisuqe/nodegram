@@ -16,12 +16,12 @@
   .cbtn { position:absolute; right:14px; width:72px; height:72px; border-radius:14px; z-index:12;
     display:flex; align-items:center; justify-content:center; font-weight:800; cursor:pointer;
     border:1px solid rgba(0,0,0,.35); user-select:none; }
-  .cplay { top:14px; background:#1f7a3a; color:#fff; font-size:34px; overflow:hidden; }
+  .cplay { top:14px; background:#1f7a3a; color:#fff; font-size:41px; overflow:hidden; }
   .cplay.stop { background:transparent; border-color:transparent; }
   .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; overflow:hidden; }
   /* 停止長押しの「下から白く埋まる」フィル：角丸正方形(stopsq)いっぱい */
   .cplay .stopsq .holdfill { position:absolute; left:0; right:0; bottom:0; height:0%; background:rgba(255,255,255,.9); pointer-events:none; }
-  .cmenu { top:98px; background:#3b4250; color:#dff2ff; font-size:19px; letter-spacing:.03em; }
+  .cmenu { top:98px; background:#1953C8; color:#dff2ff; font-size:20px; letter-spacing:.03em; }
   .cmenu:active { background:#4a5262; }
   #flick { position:absolute; inset:0; z-index:11; display:none; }
   #flick .fi { position:absolute; width:105px; height:60px; border-radius:12px; display:flex; align-items:center;
@@ -47,7 +47,19 @@
   #texWork { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6px; }
   #texWork .tsw { width:35px; height:35px; border-radius:8px; border:3px solid #cfd6e4; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.5); }
   #texWork .tsw.sel { border-color:#ffcc00; transform:scale(1.1); }
+  #texUndoRow { display:flex; gap:6px; margin-top:6px; }
+  #texBar .tbtn.tsmall { width:36px; height:36px; font-size:11px; flex:1; }
   #texCloseBtn { position:absolute; top:14px; right:14px; z-index:17; display:none; }
+  /* 横持ち：角丸セーフエリア対応 */
+  @media (orientation: landscape) {
+    #texBar { left:32px; left:max(32px, env(safe-area-inset-left)); top:6px; gap:6px; }
+    #texBar .tbtn { height:36px; font-size:13px; }
+    #texBar .tbtn.tsmall { height:30px; font-size:10px; }
+    #texWork { gap:5px; margin-top:4px; }
+    #texWork .tsw { width:30px; height:30px; }
+    #texUndoRow { margin-top:4px; gap:4px; }
+    #texCloseBtn { right:32px; right:max(32px, env(safe-area-inset-right)); }
+  }
 
   /* 背景長押しの Create New Node メニュー */
   #createMenu { position:absolute; z-index:20; background:rgba(28,32,42,.98); border:1px solid #3a4150;
@@ -121,8 +133,13 @@
   <div id="texBar">
     <button class="tbtn" id="texDraw">Draw</button>
     <button class="tbtn" id="texErase">Erase</button>
+    <button class="tbtn" id="texPaint">Paint</button>
     <button class="tbtn" id="texPick">Pick</button>
     <div id="texWork"></div>
+    <div id="texUndoRow">
+      <button class="tbtn tsmall" id="texUndo">Undo</button>
+      <button class="tbtn tsmall" id="texRedo">Redo</button>
+    </div>
   </div>
   <button id="texCloseBtn" class="pclose">×</button>
 </div>
@@ -414,7 +431,7 @@ let destroyed=new Set();   // Play中に破壊されたオブジェクト
 let brokenThisFrame=new Set(); // このフレームで破壊された（ONBREAK用）
 // Undo/Redo
 let undoStack=[], redoStack=[];
-function recordUndo(){ try{ undoStack.push(serialize()); if(undoStack.length>60) undoStack.shift(); redoStack.length=0; }catch(e){} }
+function recordUndo(){ try{ undoStack.push(serialize()); if(undoStack.length>30) undoStack.shift(); redoStack.length=0; }catch(e){} }
 function undo(){ if(!undoStack.length) return; redoStack.push(serialize()); deserialize(undoStack.pop()); }
 function redo(){ if(!redoStack.length) return; undoStack.push(serialize()); deserialize(redoStack.pop()); }
 
@@ -1207,11 +1224,11 @@ const PARENT_COL="#ff9b30"; // 親子端子：明るいオレンジ
 const IN_COL="#3ba7ff";     // 入力端子：明るい青
 const OUT_COL="#ff5a5a";    // 出力端子：明るい赤
 function readsParentObject(n){ return n.type==="getpos"||n.type==="getrot"||n.type==="screen"; } // 親オブジェクトを参照（GetPos/GetRot/Screen）
-function canHaveParent(n){ return isStage(n) || attachesToObject(n) || readsParentObject(n); }
+function canHaveParent(n){ if(n.type==="character") return false; return isStage(n) || attachesToObject(n) || readsParentObject(n); }
 function parentPortPos(n){ return w2s(n.x, n.y - NS/2); } // 上：自分の親へつなぐ端子
 function childPortPos(n){  return w2s(n.x, n.y + NS/2); } // 下：子を受け入れる端子
 function isCandidateParent(child,p){
-  if(!child||!p||p.id===child.id) return false;
+  if(!child||!p||p.id===child.id||p.type==="shot") return false; // SHOTは子を受け入れない
   if(readsParentObject(child)) return !!NODE_TYPES[p.type].object; // GETPOS/GETROTはオブジェクトへ
   if(attachesToObject(child)) return !!NODE_TYPES[p.type].object; // TEXTURE/CONTACT/ONBREAKはオブジェクトへ
   if(isStage(child)){ if(!isStage(p)) return false;
@@ -1308,7 +1325,7 @@ function drawNode(n){
   if(canHaveParent(n)) port(parentPortPos(n), PARENT_COL);
   const parentDrag = drag && drag.kind==="parentwire";
   const isCand = parentDrag && isCandidateParent(nodeById(drag.node), n);
-  if(nodes.some(m=>m.parentNodeId===n.id || (m.type==="texture"&&texParentList(m).includes(n.id))) || isCand) port(childPortPos(n), isCand ? "#ffffff" : PARENT_COL);
+  if(n.type!=="shot" && (nodes.some(m=>m.parentNodeId===n.id || (m.type==="texture"&&texParentList(m).includes(n.id))) || isCand)) port(childPortPos(n), isCand ? "#ffffff" : PARENT_COL);
   // 本体。NodeColor=Basic → オブジェクトもカテゴリ色(紫)。Display → Play表示色（テクスチャがあれば描画）
   roundRect(tl.x,tl.y,w,hh,16*view.s);
   // Display＝Play表示色（NodeEditorではテクスチャは反映しない） / Basic＝カテゴリ色(紫)
@@ -1867,14 +1884,20 @@ function playUp(pid){
 }
 
 // ===== テクスチャエディタ =====
-let texEditNode=null, texColor="#ffffff", texMode="draw", texPressed=false, texGeom=null; // texMode: draw / erase / pick
-// 作業用パレット（8色）＋選択インデックス。長押しで通常パレットから色変更可
-let texWork=["#ffffff","#000000","#ff5a5a","#4ade80","#3ba7ff","#ffe08a","#e0892b","#c084fc"];
+let texEditNode=null, texColor="#ffffff", texMode="draw", texPressed=false, texGeom=null; // texMode: draw / erase / pick / paint
+// テクスチャエディタ専用UNDO/REDO（メインとは独立・最大30手）
+let texUndoStack=[], texRedoStack=[];
+function texRecordUndo(){ const n=nodeById(texEditNode); if(!n) return; texUndoStack.push(n.pixels.slice()); if(texUndoStack.length>30) texUndoStack.shift(); texRedoStack.length=0; }
+function texUndo(){ const n=nodeById(texEditNode); if(!n||!texUndoStack.length) return; texRedoStack.push(n.pixels.slice()); n.pixels=texUndoStack.pop(); }
+function texRedo(){ const n=nodeById(texEditNode); if(!n||!texRedoStack.length) return; texUndoStack.push(n.pixels.slice()); n.pixels=texRedoStack.pop(); }
+// 作業用パレット（4色）＋選択インデックス。長押しで通常パレットから色変更可
+let texWork=["#ffffff","#000000","#ff5a5a","#3ba7ff"];
 let texSel=0;
 function updateTexModeUI(){
-  const d=document.getElementById("texDraw"), e=document.getElementById("texErase"), pk=document.getElementById("texPick");
+  const d=document.getElementById("texDraw"), e=document.getElementById("texErase"), pk=document.getElementById("texPick"), pt=document.getElementById("texPaint");
   if(d) d.classList.toggle("active", texMode==="draw");
   if(e) e.classList.toggle("active", texMode==="erase");
+  if(pt) pt.classList.toggle("active", texMode==="paint");
   if(pk) pk.classList.toggle("active", texMode==="pick");
 }
 function buildTexWork(){
@@ -1897,6 +1920,7 @@ function resizeTexture(n,newN){ const oldN=n.texW||16; if(newN===oldN) return;
   n.texW=newN; n.texH=newN; n.pixels=np;
 }
 function openTexEditor(id){ texEditNode=id; mode="texedit"; propNode=null; refreshProp();
+  texUndoStack=[]; texRedoStack=[]; // エディタ開始時にテクスチャUNDOをリセット
   buildTexWork(); texColor=texWork[texSel]; texMode="draw"; updateTexModeUI();
   document.getElementById("texBar").style.display="flex";
   document.getElementById("texCloseBtn").style.display="block";
@@ -1929,11 +1953,30 @@ function texPaint(sx,sy){ const n=nodeById(texEditNode); if(!n||!texGeom) return
   const {ox,oy,cell,N}=texGeom; const x=Math.floor((sx-ox)/cell), y=Math.floor((sy-oy)/cell);
   if(x<0||y<0||x>=N||y>=N) return;
   if(texMode==="pick"){ const c=n.pixels[y*N+x]; if(c){ texWork[texSel]=c; texColor=c; buildTexWork(); } return; } // 色をPick
+  if(texMode==="paint"){ texRecordUndo(); texFloodFill(n,x,y,N); return; } // フラッドフィル
   n.pixels[y*N+x]= (texMode==="erase") ? null : texColor;
+}
+// フラッドフィル：同じ色（またはnull同士）で陸続きの範囲を塗る
+function texFloodFill(n,sx,sy,N){
+  const target=n.pixels[sy*N+sx]; // 塗り先の元色（nullなら透明）
+  const fill=texColor;
+  if(target===fill) return; // 同色なら何もしない
+  const stack=[[sx,sy]];
+  while(stack.length){
+    const [cx,cy]=stack.pop();
+    if(cx<0||cy<0||cx>=N||cy>=N) continue;
+    const idx=cy*N+cx;
+    if(n.pixels[idx]!==target) continue;
+    n.pixels[idx]=fill;
+    stack.push([cx-1,cy],[cx+1,cy],[cx,cy-1],[cx,cy+1]);
+  }
 }
 document.getElementById("texDraw").onclick=()=>{ texMode="draw"; updateTexModeUI(); };
 document.getElementById("texErase").onclick=()=>{ texMode="erase"; updateTexModeUI(); };
+document.getElementById("texPaint").onclick=()=>{ texMode="paint"; updateTexModeUI(); };
 document.getElementById("texPick").onclick=()=>{ texMode="pick"; updateTexModeUI(); };
+document.getElementById("texUndo").onclick=()=>{ texUndo(); };
+document.getElementById("texRedo").onclick=()=>{ texRedo(); };
 document.getElementById("texCloseBtn").onclick=closeTexEditor;
 
 // ===== テクスチャエディタ：クリップボード連携 =====
@@ -1992,7 +2035,7 @@ function doPinch(){
 }
 cv.addEventListener("pointerdown", e=>{ cv.setPointerCapture(e.pointerId);
   if(mode==="play"){ playDown(e.pointerId,e.clientX,e.clientY); return; }
-  if(mode==="texedit"){ texPressed=true; texPaint(e.clientX,e.clientY); return; }
+  if(mode==="texedit"){ texPressed=true; if(texMode!=="paint") texRecordUndo(); texPaint(e.clientX,e.clientY); return; }
   ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
   lastPtr={x:e.clientX,y:e.clientY}; _edgeArmed=false; // 端スクロール用の位置を初期化（初回誤発火防止）
   if((mode==="edit"||mode==="layout") && ptrs.size>=2){ drag=null; cancelLongPress(); pinchPrev=null; return; }
@@ -2329,8 +2372,9 @@ function refreshProp(){
     // 解像度指定：None=未指定 / Long=長辺 / Short=短辺 / Both=指定縦横比で画面いっぱい
     selRow("ScreenSize", [{value:"none",label:"None"},{value:"long",label:"Long"},{value:"short",label:"Short"},{value:"both",label:"Both"}], ()=>n.screenSize||"none", v=>{ n.screenSize=v; refreshProp(); });
     if((n.screenSize||"none")!=="none"){
-      numRow("ScreenLong",  ()=>n.screenLong!=null?n.screenLong:2622, v=>{ n.screenLong=Math.max(1,Math.round(v)); });
-      numRow("ScreenShort", ()=>n.screenShort!=null?n.screenShort:1206, v=>{ n.screenShort=Math.max(1,Math.round(v)); });
+      const ss=n.screenSize;
+      if(ss==="long"||ss==="both") numRow("ScreenLong",  ()=>n.screenLong!=null?n.screenLong:2622, v=>{ n.screenLong=Math.max(1,Math.round(v)); });
+      if(ss==="short"||ss==="both") numRow("ScreenShort", ()=>n.screenShort!=null?n.screenShort:1206, v=>{ n.screenShort=Math.max(1,Math.round(v)); });
     }
     numRow("FPS", ()=>n.fps||60, v=>{ n.fps=Math.max(10,Math.min(120,Math.round(v))); });
     chkRow("Dynamics", ()=>n.dynamics!==false, v=>{ n.dynamics=v; }); // 物理シミュレーション全体ON/OFF
@@ -2646,7 +2690,7 @@ function openLoadDialog(){ modal((box,close)=>{
   list.forEach(name=>{ const r=document.createElement("div"); r.style.cssText="display:flex;gap:8px;margin-bottom:8px;align-items:center";
     const ld=mkBtn(name,"#2b6fd0"); ld.style.flex="1"; ld.style.justifyContent="flex-start"; ld.style.textAlign="left";
     ld.onclick=()=>{ loadSlot(name); close(); };
-    const del=mkBtn("×","#a12b2b"); del.style.width="48px"; del.style.fontSize="38px"; del.style.lineHeight="1";
+    const del=mkBtn("×","#a12b2b"); del.style.width="48px"; del.style.fontSize="38px"; del.style.lineHeight="1"; del.style.padding="0"; del.style.display="flex"; del.style.alignItems="center"; del.style.justifyContent="center";
     del.onclick=()=>{ if(confirm(name+" を削除しますか？")){ deleteSlot(name); close(); openLoadDialog(); } };
     r.appendChild(ld); r.appendChild(del); box.appendChild(r); });
   // IMPORT を CANCEL と横並びに
