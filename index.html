@@ -587,7 +587,7 @@ let mEngine=null, mBodyOf={};           // node.id -> Matter body
 function mNodeShapeKey(n){ return NODE_TYPES[n.type].object==="circle" ? "c" : "r"; } // 形状変化検出用
 function mBodyType(n){
   const setN=nodes.find(m=>m.type==="setting");
-  if(setN && setN.dynamics===false) return "off"; // Settingで物理OFF＝シーン全体が物理なし（パズル等）
+  if(!setN || setN.dynamics===false) return "off"; // Settingが無い or 物理OFF＝シーン全体が物理なし（パズル等）
   return n.bodyType || (n.type==="character"?"dynamic":"static"); }
 function mBuildWorld(){
   mEngine = MTR.Engine.create({ enableSleeping:true, positionIterations:10, velocityIterations:8 });
@@ -748,7 +748,7 @@ function playStep(dt){
   const settingNode = nodes.find(n=>n.type==="setting");
   // Gravity表記は9.8基準（9.8=旧1相当）。内部px/s^2 = (表示/9.8)*2000。Dynamics=OFFで0
   const gDisp = settingNode ? (settingNode.gravity!=null?settingNode.gravity:9.8) : 9.8;
-  const G = (settingNode && settingNode.dynamics===false) ? 0 : (gDisp/9.8)*GRAV_SCALE;
+  const G = (!settingNode || settingNode.dynamics===false) ? 0 : (gDisp/9.8)*GRAV_SCALE;
   // 全オブジェクト共通の物理パラメータ（Settingから）
   const S_FRIC = settingNode && settingNode.setFriction!=null ? settingNode.setFriction : 0.4;
   const S_BOUNCE = settingNode && settingNode.setBounce!=null ? settingNode.setBounce : 0.0;
