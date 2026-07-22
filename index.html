@@ -104,6 +104,15 @@
   #propPanel .del { width:100%; height:48px; border-radius:10px; border:1px solid #cc3b3b; background:#a12b2b;
     color:#fff; font-size:16px; font-weight:800; cursor:pointer; }
   #propPanel .del:active { background:#cc3b3b; }
+  /* Layout画面用 Layer値クイック変更UI */
+  #layerCtrl { position:absolute; right:14px; top:176px; z-index:10; display:none; flex-direction:column; align-items:center; gap:4px; pointer-events:auto; }
+  #layerValText { color:#ffffff; font-size:42px; font-weight:900; text-align:center; font-family:sans-serif; background:transparent; padding:0; border:none; text-shadow:0 3px 10px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.8); user-select:none; line-height:1; }
+  #layerBtnRow { display:flex; gap:6px; }
+  .lbtn { width:36px; height:36px; border-radius:8px; border:1px solid #4a5262; background:#2b313e; color:#fff; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; user-select:none; touch-action:none; box-shadow:0 2px 5px rgba(0,0,0,0.3); }
+  .lbtn:active, .lbtn.active { background:#4f586c; border-color:#7f8ca3; transform:scale(0.95); }
+  /* LAYOUT / NODE 切替ボタン（再生ボタンと同サイズ: 72x72） */
+  #subModeBtn { position:absolute; right:14px; top:98px; z-index:10; width:72px; height:72px; border-radius:14px; border:2px solid #2a91ad; background:#21b3d6; color:#fff; font-size:18px; font-weight:900; font-family:sans-serif; display:flex; align-items:center; justify-content:center; cursor:pointer; user-select:none; box-shadow:0 4px 10px rgba(0,0,0,0.35); letter-spacing:-0.5px; line-height:1; text-shadow:0 1px 3px rgba(0,0,0,0.4); }
+  #subModeBtn:active { background:#1a94b3; border-color:#1f7a94; transform:scale(0.96); }
 </style>
 </head>
 <body>
@@ -112,7 +121,15 @@
 
   <!-- 右上のコントローラ（元デザイン準拠：▶ と MENU） -->
   <div id="playBtn" class="cbtn cplay">▶</div>
+  <div id="subModeBtn">LAYOUT</div>
   <div id="menuBtn" class="cbtn cmenu">MENU</div>
+  <div id="layerCtrl">
+    <div id="layerValText">50</div>
+    <div id="layerBtnRow">
+      <button id="layerDownBtn" class="lbtn">▽</button>
+      <button id="layerUpBtn" class="lbtn">△</button>
+    </div>
+  </div>
   <div id="flick"></div>
 
   <div id="pad">
@@ -282,12 +299,14 @@ let W=0, H=0, DPR=1;
 const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints>0);
 // 右上コントロール（▶/MENU）の位置。携帯は縦=少し下げ、横=少しセンター寄せ（島・時計との被り回避）
 function positionControls(){
-  const pb=document.getElementById("playBtn"), mb=document.getElementById("menuBtn");
+  const pb=document.getElementById("playBtn"), sb=document.getElementById("subModeBtn"), mb=document.getElementById("menuBtn"), lc=document.getElementById("layerCtrl");
   if(!pb||!mb) return;
   let top=14, right=14;
   if(IS_TOUCH){ if(W<=H){ top=40; } else { right=36; } }
   pb.style.top=top+"px"; pb.style.right=right+"px";
-  mb.style.top=(top+84)+"px"; mb.style.right=right+"px";
+  if(sb){ sb.style.top=(top+84)+"px"; sb.style.right=right+"px"; }
+  mb.style.top=(top+168)+"px"; mb.style.right=right+"px";
+  if(lc){ lc.style.top=(top+252)+"px"; lc.style.right=right+"px"; }
 }
 function resize(){
   DPR = Math.min(window.devicePixelRatio||1, 2);
@@ -1232,6 +1251,8 @@ function draw(){
   else if(mode==="layout") drawLayout();
   else if(mode==="texedit") drawTexEditor();
   else drawPlay();
+  updateLayerCtrlUI();
+  updateSubModeBtnUI();
 }
 
 // ---- 親子接続（ノード上端＝子側 / 下端＝親側）----
@@ -1557,8 +1578,14 @@ function drawLayout(){
   // 中央十字ガイド
   ctx.strokeStyle="#2a313d"; ctx.lineWidth=1/S;
   ctx.beginPath(); ctx.moveTo(0,-H/2); ctx.lineTo(0,H/2); ctx.moveTo(-W/2,0); ctx.lineTo(W/2,0); ctx.stroke();
-  // ステージ要素＋付随ノード（ステージ座標で描画）。Layer昇順で描画（Play画面と同じ表示順）
-  const layoutList = nodes.filter(showsInLayout).slice().sort((a,b)=>(a.layer||50)-(b.layer||50));
+  // ステージ要素＋付随ノード（ステージ座標で描画）。オブジェクトノード(0)を先、非オブジェクトノード(1)を最前面に描画
+  const isObjNode = n => !!NODE_TYPES[n.type].object;
+  const layoutList = nodes.filter(showsInLayout).slice().sort((a,b)=>{
+    const aObj = isObjNode(a) ? 0 : 1;
+    const bObj = isObjNode(b) ? 0 : 1;
+    if(aObj !== bObj) return aObj - bObj;
+    return (a.layer||50) - (b.layer||50);
+  });
   for(const n of layoutList){ drawStage(n.layoutX||0, n.layoutY||0, n); }
   ctx.restore();
   // 複数選択のアウトライン＆ハンドル（スクリーン空間）
@@ -1692,10 +1719,18 @@ function cancelLongPress(){ if(lpTimer){ clearTimeout(lpTimer); lpTimer=null; } 
 let portArmTimer=null;
 function cancelPortArm(){ if(portArmTimer){ clearTimeout(portArmTimer); portArmTimer=null; } }
 
-// レイアウト画面：オブジェクトの当たり判定（回転考慮）。上に描かれる(Layer大)ものを優先選択
-function hitLayoutObject(sx,sy){
+// レイアウト画面：オブジェクトの当たり判定（最前面順の全ノードリスト）
+// オブジェクトノード以外（Sensor, Onbreak, Rotate等）は最前面
+function hitLayoutObjectList(sx,sy){
+  const isObj = n => !!NODE_TYPES[n.type].object;
   const list=nodes.filter(showsInLayout).slice()
-    .sort((a,b)=>((b.layer||50)-(a.layer||50)) || (nodes.indexOf(b)-nodes.indexOf(a))); // Layer降順→後勝ち
+    .sort((a,b)=>{
+      const aObj = isObj(a) ? 0 : 1;
+      const bObj = isObj(b) ? 0 : 1;
+      if(aObj !== bObj) return bObj - aObj; // 非オブジェクト(1)が先(前面)、オブジェクト(0)が後
+      return ((b.layer||50)-(a.layer||50)) || (nodes.indexOf(b)-nodes.indexOf(a)); // Layer降順
+    });
+  const hits = [];
   for(const n of list){
     const l=objToLocal(n,sx,sy);
     const w=n.w||80, h=n.h||80;
@@ -1705,12 +1740,16 @@ function hitLayoutObject(sx,sy){
       const innerW = w/2 - margin, innerH = h/2 - margin;
       const inOuter = Math.abs(l.x) <= outerW && Math.abs(l.y) <= outerH;
       const inInner = (innerW > 0 && innerH > 0) && (Math.abs(l.x) < innerW && Math.abs(l.y) < innerH);
-      if(inOuter && !inInner) return n;
+      if(inOuter && !inInner) hits.push(n);
     } else {
-      if(Math.abs(l.x)<=w/2 && Math.abs(l.y)<=h/2) return n;
+      if(Math.abs(l.x)<=w/2 && Math.abs(l.y)<=h/2) hits.push(n);
     }
   }
-  return null;
+  return hits;
+}
+function hitLayoutObject(sx,sy){
+  const hits = hitLayoutObjectList(sx,sy);
+  return hits[0] || null;
 }
 // 選択オブジェクトのハンドル判定
 function hitHandle(sx,sy){
@@ -1721,13 +1760,22 @@ function hitHandle(sx,sy){
   for(const c of hp.corners){ if(Math.hypot(sx-c.x,sy-c.y)<HANDLE_R+8) return {kind:"resize"}; }
   return null;
 }
+let layoutDownInfo = null;
 function onDown(sx,sy){
+  pointerMoved=false;
   if(mode==="layout"){
     if(isCreateMenuOpen()){ hideCreateMenu(); drag=null; return; }
     if(isMultiMenuOpen()){ hideMultiMenu(); drag=null; return; }
     const hd=hitHandle(sx,sy);
     if(hd){ recordUndo(); drag={kind:hd.kind, node:selected}; return; }
-    const n=hitLayoutObject(sx,sy);
+    const hits = hitLayoutObjectList(sx, sy);
+    const wasInHits = selected ? hits.some(h => h.id === selected) : false;
+    let n = null;
+    if(hits.length > 0){
+      const curN = selected ? hits.find(h => h.id === selected) : null;
+      n = curN || hits[0];
+    }
+    layoutDownInfo = { t: performance.now(), x: sx, y: sy, sel: n ? n.id : null, wasInHits };
     if(n){
       if(multiSel.has(n.id)){ // 複数選択をまとめて移動＋長押しメニュー
         recordUndo();
@@ -1881,6 +1929,22 @@ function beginWireDrag(pt, sx, sy){
   portCursor={show:true, x:sx, y:sy};
 }
 function onUp(sx,sy){
+  if(mode==="layout" && layoutDownInfo){
+    const dt = performance.now() - layoutDownInfo.t;
+    const dist = Math.hypot(sx - layoutDownInfo.x, sy - layoutDownInfo.y);
+    if(dt < 350 && dist < 6 && !pointerMoved && !isCreateMenuOpen() && !isMultiMenuOpen()){
+      const hits = hitLayoutObjectList(layoutDownInfo.x, layoutDownInfo.y);
+      if(hits.length > 1 && layoutDownInfo.wasInHits && layoutDownInfo.sel){
+        const idx = hits.findIndex(h => h.id === layoutDownInfo.sel);
+        if(idx !== -1){
+          const nextN = hits[(idx + 1) % hits.length];
+          selected = nextN.id;
+          refreshProp();
+        }
+      }
+    }
+    layoutDownInfo = null;
+  }
   cancelLongPress(); cancelPortArm(); portCursor={show:false,x:0,y:0};
   if(drag && drag.kind==="wire"){
     const pt=hitPort(sx,sy); const o=drag.origin;
@@ -2595,7 +2659,7 @@ function refreshProp(){
     }
   }
   if(hasGeom){
-    numRow("Layer", ()=>n.layer||50, v=>{ n.layer=Math.round(v); });
+    numRow("Layer", ()=>n.layer||50, v=>{ n.layer=Math.min(100,Math.max(1,Math.round(v))); });
   }
   if(d.target){ // GETPOS / GETROT の対象オブジェクト
     const r=document.createElement("div"); r.className="prow";
@@ -2620,7 +2684,7 @@ function refreshProp(){
     // 単体表示用の表示サイズ・表示順（親なしTEXTUREをLayoutに描画するとき使用）
     numRow("Width",  ()=>n.w||60, v=>{ n.w=Math.max(8,Math.round(v)); });
     numRow("Height", ()=>n.h||60, v=>{ n.h=Math.max(8,Math.round(v)); });
-    numRow("Layer",  ()=>n.layer!=null?n.layer:10, v=>{ n.layer=Math.round(v); }); // 初期値10
+    numRow("Layer",  ()=>n.layer!=null?n.layer:10, v=>{ n.layer=Math.min(100,Math.max(1,Math.round(v))); }); // 初期値10
     const eb=document.createElement("button"); eb.className="del"; eb.style.background="#c79a10"; eb.style.borderColor="#e0c020";
     eb.textContent="EDIT TEXTURE";
     eb.onclick=()=> openTexEditor(n.id);
@@ -2706,10 +2770,7 @@ const FLICK_ITEMS=[
 let flickEls=[], flickHot=null;
 function openFlick(){
   flick.innerHTML=""; flickEls=[]; flickHot=null;
-  const modeItem = (mode==="layout")
-    ? { label:"EDITOR", color:"#1f7a3a", run:()=>setMode("edit") }   // Editorテーマ=緑
-    : { label:"LAYOUT", color:"#21b3d6", run:()=>setMode("layout") }; // Layoutテーマ=水色
-  const items=[modeItem, ...FLICK_ITEMS];
+  const items=[...FLICK_ITEMS];
   const leftKeys=new Set(["save","load","new","setting"]);
   const rightCol = items.filter(it=>!leftKeys.has(it.key));
   const leftCol  = items.filter(it=> leftKeys.has(it.key));
@@ -2718,14 +2779,9 @@ function openFlick(){
   const r = IS_TOUCH ? (W<=H?14:36) : 14;
   const t = IS_TOUCH ? (W<=H?40:14) : 14;
   let col2X, col1X, startY;
-  if(W<=H){ // 縦画面：MENUボタンの下に表示
-    col2X = W - r - fw; col1X = col2X - fw - gap;
-    startY = t + 84 + btn + 8;
-  } else {   // 横画面：▶ボタンの左に表示
-    const playLeft = W - r - btn;
-    col2X = playLeft - fw - gap; col1X = col2X - fw - gap;
-    startY = t;
-  }
+  const playLeft = W - r - btn;
+  col2X = playLeft - fw - gap; col1X = col2X - fw - gap;
+  startY = t;
   const place=(list,colX)=>{ list.forEach((it,i)=>{
     const el=document.createElement("div"); el.className="fi"; el.textContent=it.label;
     el.style.background=it.color; el.style.left=colX+"px"; el.style.top=(startY + i*rowH)+"px";
@@ -3038,6 +3094,78 @@ function loop(t){
   draw();
   requestAnimationFrame(loop);
 }
+// ===== Layout画面用 Layer値クイック操作コントロール =====
+function updateLayerCtrlUI(){
+  const lc = document.getElementById("layerCtrl"); if(!lc) return;
+  const n = selected ? nodeById(selected) : null;
+  if(mode === "layout" && n && showsInLayout(n)){
+    lc.style.display = "flex";
+    const txt = document.getElementById("layerValText");
+    if(txt) txt.textContent = (n.layer != null ? n.layer : (n.type==="texture"?10:50));
+  } else {
+    lc.style.display = "none";
+  }
+}
+
+function bindLayerRepeatBtn(btnId, delta){
+  const btn = document.getElementById(btnId); if(!btn) return;
+  let timer = null, interval = null;
+  const stop = () => {
+    if(timer){ clearTimeout(timer); timer=null; }
+    if(interval){ clearInterval(interval); interval=null; }
+    btn.classList.remove("active");
+  };
+  const step = () => {
+    const n = selected ? nodeById(selected) : null;
+    if(!n || mode!=="layout" || !showsInLayout(n)) return;
+    const cur = (n.layer != null ? n.layer : (n.type==="texture"?10:50));
+    n.layer = Math.min(100, Math.max(1, cur + delta));
+    updateLayerCtrlUI();
+    if(typeof refreshProp === "function" && propNode === n.id) refreshProp();
+  };
+  btn.addEventListener("pointerdown", e => {
+    e.preventDefault(); e.stopPropagation();
+    try{ btn.setPointerCapture(e.pointerId); }catch(_){}
+    btn.classList.add("active");
+    recordUndo();
+    step();
+    timer = setTimeout(() => {
+      timer = null;
+      interval = setInterval(step, 60);
+    }, 350);
+  });
+  btn.addEventListener("pointerup", e => { e.stopPropagation(); stop(); try{ btn.releasePointerCapture(e.pointerId); }catch(_){} });
+  btn.addEventListener("pointercancel", e => { stop(); });
+}
+bindLayerRepeatBtn("layerDownBtn", -1);
+bindLayerRepeatBtn("layerUpBtn", 1);
+// ===== LAYOUT / NODE 切替ボタン =====
+function updateSubModeBtnUI(){
+  const sb = document.getElementById("subModeBtn"); if(!sb) return;
+  if(mode === "edit"){
+    sb.style.display = "flex";
+    sb.textContent = "LAYOUT";
+    sb.style.background = "#21b3d6";
+    sb.style.borderColor = "#2a91ad";
+  } else if(mode === "layout"){
+    sb.style.display = "flex";
+    sb.textContent = "NODE";
+    sb.style.background = "#1f7a3a";
+    sb.style.borderColor = "#2ab356";
+  } else {
+    sb.style.display = "none";
+  }
+}
+
+const subModeBtn = document.getElementById("subModeBtn");
+if(subModeBtn){
+  subModeBtn.addEventListener("pointerdown", e => {
+    e.preventDefault(); e.stopPropagation();
+    if(mode === "edit") setMode("layout");
+    else if(mode === "layout") setMode("edit");
+  });
+}
+
 requestAnimationFrame(loop);
 </script>
 </body>
