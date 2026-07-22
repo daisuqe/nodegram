@@ -16,13 +16,13 @@
   .cbtn { position:absolute; right:14px; width:72px; height:72px; border-radius:14px; z-index:12;
     display:flex; align-items:center; justify-content:center; font-weight:800; cursor:pointer;
     border:1px solid rgba(0,0,0,.35); user-select:none; }
-  .cplay { top:14px; background:#1f7a3a; color:#fff; font-size:41px; overflow:hidden; }
+  .cplay { top:14px; background:#DC6C00; color:#fff; font-size:41px; overflow:hidden; }
   .cplay.stop { background:transparent; border-color:transparent; }
   .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; overflow:hidden; }
   /* 停止長押しの「下から白く埋まる」フィル：角丸正方形(stopsq)いっぱい */
   .cplay .stopsq .holdfill { position:absolute; left:0; right:0; bottom:0; height:0%; background:rgba(255,255,255,.9); pointer-events:none; }
-  .cmenu { top:98px; background:#1953C8; color:#dff2ff; font-size:20px; letter-spacing:.03em; }
-  .cmenu:active { background:#4a5262; }
+  .cmenu { top:98px; background:#1660FF; color:#dff2ff; font-size:20px; letter-spacing:.03em; }
+  .cmenu:active { background:#1054dd; }
   #flick { position:absolute; inset:0; z-index:11; display:none; }
   #flick .fi { position:absolute; width:105px; height:60px; border-radius:12px; display:flex; align-items:center;
     justify-content:center; font-size:18px; font-weight:800; color:#fff; border:2px solid rgba(255,255,255,.25);
@@ -110,8 +110,8 @@
   .lbtn { width:36px; height:36px; border-radius:8px; border:1px solid #4a5262; background:#2b313e; color:#fff; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; user-select:none; touch-action:none; box-shadow:0 2px 5px rgba(0,0,0,0.3); }
   .lbtn:active, .lbtn.active { background:#4f586c; border-color:#7f8ca3; transform:scale(0.95); }
   /* LAYOUT / NODE 切替ボタン（再生ボタンと同サイズ: 72x72） */
-  #subModeBtn { position:absolute; right:14px; top:98px; z-index:10; width:72px; height:72px; border-radius:14px; border:2px solid #2a91ad; background:#21b3d6; color:#fff; font-size:18px; font-weight:900; font-family:sans-serif; display:flex; align-items:center; justify-content:center; cursor:pointer; user-select:none; box-shadow:0 4px 10px rgba(0,0,0,0.35); letter-spacing:-0.5px; line-height:1; text-shadow:0 1px 3px rgba(0,0,0,0.4); }
-  #subModeBtn:active { background:#1a94b3; border-color:#1f7a94; transform:scale(0.96); }
+  #subModeBtn { position:absolute; right:14px; top:98px; z-index:10; width:72px; height:72px; border-radius:14px; border:2px solid #289da7; background:#1FACB6; color:#fff; font-size:18px; font-weight:900; font-family:sans-serif; display:flex; align-items:center; justify-content:center; cursor:pointer; user-select:none; box-shadow:0 4px 10px rgba(0,0,0,0.35); letter-spacing:-0.5px; line-height:1; text-shadow:0 1px 3px rgba(0,0,0,0.4); }
+  #subModeBtn:active { background:#198e97; border-color:#1c7a82; transform:scale(0.96); }
 </style>
 </head>
 <body>
@@ -219,7 +219,7 @@ const NODE_TYPES = {
   contact:  { label:"SENSOR", glyph:"SEN",  inputs:[],            outputs:["="], color:"#e0c020", attach:true },
   onbreak:  { label:"ONBREAK",glyph:"BRK",  inputs:["S"],         outputs:["="], color:"#e0c020", attach:true },
   rotate:   { label:"ROTATE", glyph:"ROT",  inputs:["av"],        outputs:[], color:"#e0c020", stage:"rotate" },
-  velocity: { label:"VELOCITY",glyph:"VEL", inputs:[],            outputs:["X","Y"], color:"#e0c020", target:true },
+  velocity: { label:"VELOCITY",glyph:"VEL", inputs:[],            outputs:["X","Y"], color:"#22b8c0", target:true },
   screen:   { label:"SCREEN", glyph:"SCR",  inputs:["X","Y","S"], outputs:["W","H"], color:"#e0c020" },
   // シーン設定（灰）
   bg:       { label:"BG",     glyph:"BG",   inputs:[],            outputs:[], color:"#6b7280" },
@@ -240,10 +240,10 @@ const KEYBOARD_OPTS=(function(){
 })();
 const PALETTE = ["const",
   "add","sub","mul","div","root","compare","not","arctan","angletopos","random","int",
-  "trigger","counter","var","array","getpos","getrot",
+  "trigger","counter","var","array","getpos","getrot","velocity",
   "text","rect","circle","character","shot","sound",
   "stick","button","keyboard","touch",
-  "texture","contact","onbreak","rotate","velocity","screen",
+  "texture","contact","onbreak","rotate","screen",
   "bg","setting"];
 
 // ---- ノードの見た目サイズ（ワールド座標）。元デザイン同様の正方形ノード ----
@@ -590,10 +590,10 @@ function stopPlay(){
   h.classList.add("hidden");
   const b=document.getElementById("playBtn"); b.classList.remove("stop"); b.innerHTML=""; b.textContent="▶"; updatePlayBtnColor();
 }
-// ▶ボタンの背景：Editor=緑 / Layout=水色（テーマカラー）
+// ▶ボタンの背景
 function updatePlayBtnColor(){
   const b=document.getElementById("playBtn");
-  b.style.background = (mode==="layout") ? "#21b3d6" : "#1f7a3a";
+  b.style.background = "#DC6C00";
 }
 function setMode(m){ // edit ⇄ layout 切り替え
   if(mode==="play") return;
@@ -2766,14 +2766,14 @@ function layoutPropPanel(pbody){
 const menuBtn=document.getElementById("menuBtn");
 const flick=document.getElementById("flick");
 const FLICK_ITEMS=[
-  { key:"newnode", label:"NEW NODE", color:"#2f5a8a", run:()=>{ if(mode==="edit"||mode==="layout") showCreateMenu(W/2, Math.max(120,H*0.4)); } },
-  { key:"save", label:"SAVE", color:"#c0392b", run:()=>openSaveDialog() },
-  { key:"load", label:"LOAD", color:"#2b6fd0", run:()=>openLoadDialog() },
-  { key:"undo", label:"UNDO", color:"#8a55c0", run:()=>undo() }, // 赤寄りの紫
-  { key:"redo", label:"REDO", color:"#5560d0", run:()=>redo() }, // 青寄りの紫
-  { key:"fit",  label:"FIT",  color:"#1f7a3a", run:fitView },
-  { key:"new",  label:"NEW",  color:"#555b68", run:doNew },
-  { key:"setting", label:"SETTING", color:"#c99a3f", run:()=>openAppSettings() }, // 彩度を上げ明るく
+  { key:"newnode", label:"NEW NODE", color:"#0ea2f5", run:()=>{ if(mode==="edit"||mode==="layout") showCreateMenu(W/2, Math.max(120,H*0.4)); } },
+  { key:"save", label:"SAVE", color:"#b21c0e", run:()=>openSaveDialog() },
+  { key:"load", label:"LOAD", color:"#0d5fd6", run:()=>openLoadDialog() },
+  { key:"undo", label:"UNDO", color:"#a24ae8", run:()=>undo() }, // 赤寄りの紫
+  { key:"redo", label:"REDO", color:"#4352eb", run:()=>redo() }, // 青寄りの紫
+  { key:"fit",  label:"FIT",  color:"#11a13b", run:fitView },
+  { key:"new",  label:"NEW",  color:"#505c75", run:doNew },
+  { key:"setting", label:"SETTING", color:"#cc9011", run:()=>openAppSettings() }, // 彩度を上げ明るく
 ];
 let flickEls=[], flickHot=null;
 function openFlick(){
@@ -3155,15 +3155,15 @@ function updateSubModeBtnUI(){
     sb.textContent = "LAYOUT";
     sb.style.fontSize = "17px";
     sb.style.letterSpacing = "-0.5px";
-    sb.style.background = "#21b3d6";
-    sb.style.borderColor = "#2a91ad";
+    sb.style.background = "#1FACB6";
+    sb.style.borderColor = "#289da7";
   } else if(mode === "layout"){
     sb.style.display = "flex";
     sb.textContent = "NODE";
     sb.style.fontSize = "19px";
     sb.style.letterSpacing = "0.02em";
-    sb.style.background = "#1f7a3a";
-    sb.style.borderColor = "#2ab356";
+    sb.style.background = "#008126";
+    sb.style.borderColor = "#009e2f";
   } else {
     sb.style.display = "none";
   }
