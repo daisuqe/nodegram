@@ -16,7 +16,7 @@
   .cbtn { position:absolute; right:14px; width:72px; height:72px; border-radius:14px; z-index:12;
     display:flex; align-items:center; justify-content:center; font-weight:800; cursor:pointer;
     border:1px solid rgba(0,0,0,.35); user-select:none; }
-  .cplay { top:14px; background:#DC6C00; color:#fff; font-size:41px; overflow:hidden; }
+  .cplay { top:14px; background:#EB8E00; color:#fff; font-size:41px; overflow:hidden; }
   .cplay.stop { background:transparent; border-color:transparent; }
   .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; overflow:hidden; }
   /* 停止長押しの「下から白く埋まる」フィル：角丸正方形(stopsq)いっぱい */
@@ -593,7 +593,7 @@ function stopPlay(){
 // ▶ボタンの背景
 function updatePlayBtnColor(){
   const b=document.getElementById("playBtn");
-  b.style.background = "#DC6C00";
+  b.style.background = "#EB8E00";
 }
 function setMode(m){ // edit ⇄ layout 切り替え
   if(mode==="play") return;
