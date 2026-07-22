@@ -86,21 +86,20 @@
   #menuBackdrop { position:absolute; inset:0; z-index:19; display:none; background:rgba(0,0,0,.55); } /* CreateNode/Multiメニューの暗転 */
   #propPanel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:15;
     background:rgba(28,32,42,.98); border:1px solid #3a4150; border-radius:14px; padding:16px 18px; display:none;
-    min-width:240px; max-width:calc(100vw - 20px); box-shadow:0 12px 36px rgba(0,0,0,.6); }
-  #propPanel .pbody { display:grid; grid-template-columns:1fr; gap:0 16px; }
+    min-width:240px; max-width:calc(100vw - 20px); box-shadow:0 12px 36px rgba(0,0,0,.6); overflow:hidden; }
+  #propPanel .pbody { display:grid; grid-template-columns:1fr; gap:0 16px; overflow-x:hidden; box-sizing:border-box; }
   #propPanel .pt { color:#fff; font-size:17px; font-weight:800; margin-bottom:10px; display:flex; align-items:center; }
   .pclose { margin-left:auto; width:44px; height:44px; border-radius:8px; border:1px solid #2a91ad;
     background:#21b3d6; color:#fff; font-size:40px; font-weight:800; cursor:pointer; line-height:1; }
   .pclose:active { background:#1a94b3; }
   /* ラベルは左半分固定、コントロールは右半分(50%上限)。入力欄の左位置を揃える */
-  #propPanel .prow { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  #propPanel label { color:#9aa3b5; font-size:16px; font-weight:700; flex:0 0 46%; min-width:0; }
+  #propPanel .prow { display:flex; align-items:center; gap:10px; margin-bottom:10px; min-width:0; }
+  #propPanel label { color:#9aa3b5; font-size:16px; font-weight:700; flex:0 0 46%; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   #propPanel input { flex:0 0 50%; width:50%; max-width:50%; box-sizing:border-box; height:44px; border-radius:9px; border:1px solid #3a4150; background:#181c26;
-    color:#e6e9ef; font-size:18px; font-weight:700; text-align:center; }
+    color:#e6e9ef; font-size:18px; font-weight:700; text-align:center; min-width:0; }
   #propPanel input[type=checkbox] { flex:0 0 auto; width:32px; height:32px; max-width:none; }
-  /* DDLは50%上限だが中身が入りきらない場合は超えてよい */
-  #propPanel select { flex:0 1 auto; min-width:50%; max-width:100%; height:44px; border-radius:9px; border:1px solid #3a4150; background:#181c26;
-    color:#e6e9ef; font-size:16px; font-weight:700; }
+  #propPanel select { flex:0 0 50%; width:50%; max-width:50%; box-sizing:border-box; height:44px; border-radius:9px; border:1px solid #3a4150; background:#181c26;
+    color:#e6e9ef; font-size:16px; font-weight:700; min-width:0; }
   #propPanel .del { width:100%; height:48px; border-radius:10px; border:1px solid #cc3b3b; background:#a12b2b;
     color:#fff; font-size:16px; font-weight:800; cursor:pointer; }
   #propPanel .del:active { background:#cc3b3b; }
@@ -1870,27 +1869,38 @@ function onMove(sx,sy){
   // 実際に移動を伴うドラッグ中は長押しを常にキャンセル（ゆっくり動かしてもPropertyを開かない）
   if(lpTimer && (drag.kind==="node"||drag.kind==="nodegroup"||drag.kind==="layout"||drag.kind==="layoutgroup"||drag.kind==="resize"||drag.kind==="rotate")) cancelLongPress();
   if(drag.kind==="pan"){ view.x=drag.vx-(sx-drag.sx)/view.s; view.y=drag.vy-(sy-drag.sy)/view.s; }
-  else if(drag.kind==="node"){ const wp=s2w(sx,sy); const n=nodeById(drag.node); if(n){ n.x=wp.x+drag.dx; n.y=wp.y+drag.dy; } }
-  else if(drag.kind==="nodegroup"){ const wp=s2w(sx,sy); for(const it of drag.items){ const n=nodeById(it.id); if(n){ n.x=wp.x+it.dx; n.y=wp.y+it.dy; } } }
+  else if(drag.kind==="node"){ const wp=s2w(sx,sy); const n=nodeById(drag.node); if(n){
+    const setN=nodes.find(sn=>sn.type==="setting"); const snap=setN?!!setN.gridSnap:false;
+    let nx=wp.x+drag.dx, ny=wp.y+drag.dy; if(snap){ nx=Math.round(nx/10)*10; ny=Math.round(ny/10)*10; }
+    n.x=nx; n.y=ny; } }
+  else if(drag.kind==="nodegroup"){ const wp=s2w(sx,sy); const setN=nodes.find(sn=>sn.type==="setting"); const snap=setN?!!setN.gridSnap:false;
+    for(const it of drag.items){ const n=nodeById(it.id); if(n){
+      let nx=wp.x+it.dx, ny=wp.y+it.dy; if(snap){ nx=Math.round(nx/10)*10; ny=Math.round(ny/10)*10; }
+      n.x=nx; n.y=ny; } } }
   else if(drag.kind==="selbox"){ drag.x1=sx; drag.y1=sy; }
   else if(drag.kind==="layout"){ const n=nodeById(drag.node); if(n){
-    const p=screenToStageLayout(sx,sy);
-    n.layoutX=p.x+drag.dx; n.layoutY=p.y+drag.dy;
+    const p=screenToStageLayout(sx,sy); const setN=nodes.find(sn=>sn.type==="setting"); const snap=setN?!!setN.gridSnap:false;
+    let nx=p.x+drag.dx, ny=p.y+drag.dy; if(snap){ nx=Math.round(nx/10)*10; ny=Math.round(ny/10)*10; }
+    n.layoutX=nx; n.layoutY=ny;
     if(n.parentNodeId) recomputeLocal(n);  // 親に対する相対を更新
     updateSubtreeWorld(n);                 // 子孫を追従
   } }
-  else if(drag.kind==="layoutgroup"){ const p=screenToStageLayout(sx,sy);
-    for(const it of drag.items){ const n=nodeById(it.id); if(n){ n.layoutX=p.x+it.dx; n.layoutY=p.y+it.dy;
+  else if(drag.kind==="layoutgroup"){ const p=screenToStageLayout(sx,sy); const setN=nodes.find(sn=>sn.type==="setting"); const snap=setN?!!setN.gridSnap:false;
+    for(const it of drag.items){ const n=nodeById(it.id); if(n){
+      let nx=p.x+it.dx, ny=p.y+it.dy; if(snap){ nx=Math.round(nx/10)*10; ny=Math.round(ny/10)*10; }
+      n.layoutX=nx; n.layoutY=ny;
       if(n.parentNodeId) recomputeLocal(n); updateSubtreeWorld(n); } } }
   else if(drag.kind==="selboxL"){ drag.x1=sx; drag.y1=sy; }
   else if(drag.kind==="layoutpan"){ layoutView.x=drag.vx-(sx-drag.sx)/layoutView.s; layoutView.y=drag.vy-(sy-drag.sy)/layoutView.s; }
   else if(drag.kind==="resize"){ const n=nodeById(drag.node); if(n){ const l=objToLocal(n,sx,sy);
-    if(n.type==="circle"){ const r=Math.max(8,Math.round(Math.hypot(l.x,l.y))); n.w=r*2; n.h=r*2; } // 真円：縦横同時
-    else if(n.type==="onbreak"){ const s=Math.max(16,Math.round(Math.max(Math.abs(l.x),Math.abs(l.y))*2)); n.w=s; n.h=s; } // ONBREAK：正方形
-    else { n.w=Math.max(16,Math.round(Math.abs(l.x)*2)); n.h=Math.max(16,Math.round(Math.abs(l.y)*2)); } } }
+    const setN=nodes.find(sn=>sn.type==="setting"); const snap=setN?!!setN.gridSnap:false;
+    if(n.type==="circle"){ let r=Math.round(Math.hypot(l.x,l.y)); if(snap) r=Math.round(r/10)*10; r=Math.max(8,r); n.w=r*2; n.h=r*2; }
+    else if(n.type==="onbreak"){ let s=Math.round(Math.max(Math.abs(l.x),Math.abs(l.y))*2); if(snap) s=Math.round(s/10)*10; s=Math.max(16,s); n.w=s; n.h=s; }
+    else { let nw=Math.round(Math.abs(l.x)*2), nh=Math.round(Math.abs(l.y)*2); if(snap){ nw=Math.round(nw/10)*10; nh=Math.round(nh/10)*10; } n.w=Math.max(16,nw); n.h=Math.max(16,nh); } } }
   else if(drag.kind==="rotate"){ const n=nodeById(drag.node); if(n){ const c=objCenter(n);
     const raw=Math.atan2(sy-c.y,sx-c.x)*180/Math.PI + 90;
-    n.angle=Math.round(raw/5)*5;           // 5度刻み
+    const setN=nodes.find(sn=>sn.type==="setting"); const snap=setN?!!setN.gridSnap:false;
+    n.angle = snap ? Math.round(raw/5)*5 : Math.round(raw); // Grid Snap ONなら0度からの5度刻み、OFFなら1度刻み
     if(n.parentNodeId) recomputeLocal(n);  // 自分の角度が変わったら相対角度を更新
     updateSubtreeWorld(n);                 // 子を親座標系で回転・移動
   } }
@@ -2608,7 +2618,8 @@ function refreshProp(){
     numRow("Friction %", ()=>Math.round((n.setFriction!=null?n.setFriction:0.4)*100), v=>{ n.setFriction=Math.min(1,Math.max(0,v/100)); });
     numRow("Bounce %",   ()=>Math.round((n.setBounce!=null?n.setBounce:0)*100), v=>{ n.setBounce=Math.min(1,Math.max(0,v/100)); });
     numRow("Drag %",     ()=>Math.round((n.setDrag!=null?n.setDrag:0)*100), v=>{ n.setDrag=Math.min(1,Math.max(0,v/100)); });
-    colRow("StopBtnCol", OBJ_COLORS, ()=>n.stopBtnColor||"#ffffff", v=>{ n.stopBtnColor=v; }); } // ストップボタンの枠色
+    colRow("StopBtnCol", OBJ_COLORS, ()=>n.stopBtnColor||"#ffffff", v=>{ n.stopBtnColor=v; });
+    chkRow("Grid Snap", ()=>!!n.gridSnap, v=>{ n.gridSnap=v; }); } // ハンドル操作のスナップON/OFF
   if(n.type==="shot"){
     selRow("Shape", [{value:"circle",label:"Circle"},{value:"rect",label:"Rect"}], ()=>n.bulletShape||"circle", v=>{ n.bulletShape=v; });
     numRow("Width",  ()=>n.w||70, v=>{ n.w=Math.max(4,v); }); // 発射口の幅（弾サイズ＝(W+H)/2）
@@ -2705,7 +2716,7 @@ function refreshProp(){
 // プロパティを画面に収める：はみ出たら2列、それでも/縦画面で収まらなければpbodyをスクロール
 function layoutPropPanel(pbody){
   // まず1列でリセット。パネル幅は画面向きに追従（縦=狭め/横=広め）だが画面幅の90%を超えない（左右5%余白）
-  pbody.style.gridTemplateColumns="1fr"; pbody.style.gridTemplateRows=""; pbody.style.gridAutoFlow="row"; pbody.style.maxHeight=""; pbody.style.overflowY=""; pbody.style.background=""; pbody.style.columnGap="16px";
+  pbody.style.gridTemplateColumns="1fr"; pbody.style.gridTemplateRows=""; pbody.style.gridAutoFlow="row"; pbody.style.maxHeight=""; pbody.style.overflowY=""; pbody.style.overflowX="hidden"; pbody.style.background=""; pbody.style.columnGap="16px"; pbody.style.paddingRight="";
   const landscape = W>H;
   const maxPanel = Math.floor(W * 0.9);          // 左右5%ずつ残す（最大幅90%）
   const base1 = landscape ? 260 : 230;           // 1列時の目安幅
@@ -2725,7 +2736,7 @@ function layoutPropPanel(pbody){
     pbody.style.background="linear-gradient(to right, transparent calc(50% - 0.5px), rgba(255,255,255,.18) calc(50% - 0.5px), rgba(255,255,255,.18) calc(50% + 0.5px), transparent calc(50% + 0.5px))";
   }
   if(propPanel.offsetHeight > avail){ const chrome = propPanel.offsetHeight - pbody.offsetHeight;
-    pbody.style.maxHeight = Math.max(120, avail - chrome) + "px"; pbody.style.overflowY="auto"; }
+    pbody.style.maxHeight = Math.max(120, avail - chrome) + "px"; pbody.style.overflowY="auto"; pbody.style.paddingRight="4px"; }
 }
 
 // ▶ ボタン：Play中はタップで再生開始。停止は0.8秒の長押し（下から白く埋まるアニメ）
@@ -2996,7 +3007,7 @@ function deserialize(s){ const o=JSON.parse(s); nodes=o.nodes||[]; conns=o.conns
       if(n.type==="texture"){ if(n.layer==null)n.layer=10; // TEXTURE Layer初期値10
         if(!Array.isArray(n.texParents)) n.texParents = n.parentNodeId!=null?[n.parentNodeId]:[]; } // 旧単一親→配列
       if(n.layoutX==null){ const oc=nodes.filter(m=>showsInLayout(m)).length; n.layoutX=(oc%5)*100-200; n.layoutY=Math.floor(oc/5)*100-100; } }
-    if(n.type==="setting"){ if(n.dynamics==null)n.dynamics=false; if(n.setFriction==null)n.setFriction=0.4; if(n.setBounce==null)n.setBounce=0.0; if(n.setDrag==null)n.setDrag=0.0; if(n.stopBtnColor==null)n.stopBtnColor="#ffffff";
+    if(n.type==="setting"){ if(n.dynamics==null)n.dynamics=false; if(n.gridSnap==null)n.gridSnap=false; if(n.setFriction==null)n.setFriction=0.4; if(n.setBounce==null)n.setBounce=0.0; if(n.setDrag==null)n.setDrag=0.0; if(n.stopBtnColor==null)n.stopBtnColor="#ffffff";
       if(n.screenSize==null)n.screenSize="none"; if(n.screenLong==null)n.screenLong=2622; if(n.screenShort==null)n.screenShort=1206;
       if(n.gravity==null)n.gravity=9.8; else if(n.gravity>50)n.gravity=n.gravity/2000;
       if(n._gv!==2){ n.gravity=(n.gravity||1)*9.8; n._gv=2; } } // 旧倍率→9.8表示へ一度だけ変換
