@@ -121,8 +121,8 @@
 
   <!-- 右上のコントローラ（元デザイン準拠：▶ と MENU） -->
   <div id="playBtn" class="cbtn cplay">▶</div>
-  <div id="subModeBtn">LAYOUT</div>
   <div id="menuBtn" class="cbtn cmenu">MENU</div>
+  <div id="subModeBtn">LAYOUT</div>
   <div id="layerCtrl">
     <div id="layerValText">50</div>
     <div id="layerBtnRow">
@@ -304,8 +304,8 @@ function positionControls(){
   let top=14, right=14;
   if(IS_TOUCH){ if(W<=H){ top=40; } else { right=36; } }
   pb.style.top=top+"px"; pb.style.right=right+"px";
-  if(sb){ sb.style.top=(top+84)+"px"; sb.style.right=right+"px"; }
-  mb.style.top=(top+168)+"px"; mb.style.right=right+"px";
+  mb.style.top=(top+84)+"px"; mb.style.right=right+"px";
+  if(sb){ sb.style.top=(top+168)+"px"; sb.style.right=right+"px"; }
   if(lc){ lc.style.top=(top+252)+"px"; lc.style.right=right+"px"; }
 }
 function resize(){
