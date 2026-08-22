@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>nodegram ユーザーガイド</title>
+  <style>
+    body { margin: 0; background: #ffffff; color: #282828;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; }
+    img, iframe { max-width: 100%; }
+    table { max-width: 100%; }
+  </style>
+</head>
+<body>
+<h1 style="text-align: left;">
+</h1>
+<h1 style="text-align: left;"><span style="color: #ffa400; font-size: x-large;">&nbsp;<span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="letter-spacing: 0.3px;">nodegram</span></span>
+</h1>
+<h1 style="text-align: left;">
+  <div class="separator" style="clear: both; text-align: center;"><span style="font-size: small;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhJGKmdub1GBW_QNqeG8cpZ7ebgG8CvQwpA5GJaVLW0P1SS2wdXZzkW4niQm-G5MZ2nsbZeFgZm225dLAhXphMPoQP5My_zXoTNJNBqUtEx5BN-RxhmOGsP81WGhSTGVGh6l1q_BJGx9xvON6-h5bVzZBPk5dDKCCAHXGYkPAcz0QQqARDFAa4j04eU_mo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="360" data-original-width="914" height="252" src="https://blogger.googleusercontent.com/img/a/AVvXsEhJGKmdub1GBW_QNqeG8cpZ7ebgG8CvQwpA5GJaVLW0P1SS2wdXZzkW4niQm-G5MZ2nsbZeFgZm225dLAhXphMPoQP5My_zXoTNJNBqUtEx5BN-RxhmOGsP81WGhSTGVGh6l1q_BJGx9xvON6-h5bVzZBPk5dDKCCAHXGYkPAcz0QQqARDFAa4j04eU_mo=w640-h252" width="640" /></a></span>
+  </div>
+</h1>
+<header class="hero" style="background-attachment: initial; background-clip: initial; background-image: none; background-origin: initial; background-position: initial; background-repeat: initial; background-size: initial; border: 0px; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; padding: 0px;">
+  <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">
+    <p class="lead" style="box-sizing: border-box; margin: 0px 0px 14px;"><span style="color: #555555;"><span style="font-weight: 700;">ノードプログラミングツール。<br /></span>スマホ、タブレット、PCのブラウザ上でノードプログラミングができます。</span><br /><span style="color: red; font-size: 16px;"><b>現在まだ開発途中のバージョンです。告知なく機能の追加等を行います。<br />テストプレイよろしくお願いします。<br />（８月中にはリリースしたい。）</b></span>
+    </p>
+    <p class="lead" style="box-sizing: border-box; color: #555555; font-size: 16px; margin: 0px 0px 14px;">
+    </p>
+    <div style="color: #282828; font-size: 16px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-j-4v0t1X2LLVCySmjgPacFC7zdyPsItiPPib1nnkjtd8xBXGSuu-DoeAdu_R6dXCGtKB5_tefBFsOJvHDgY-36vtga0SZVFxie3kJeZmQhVflMrPJ318-uRtewDX6j0jMV4vByHpq2CKD6xSlnQf9vPmvayYiublxnlTRAhE_W8FT0WOKd0aPAg13FQ/s2622/IMG_5121.PNG"></a>
+    </div>
+    <div style="color: #282828; font-size: 16px; text-align: center;"><br />
+    </div>
+    <div class="separator" style="clear: both; text-align: center;">
+      <iframe class="BLOG_video_class" width="435" height="362" style="max-width: 100%; border: 0; aspect-ratio: 435 / 362;" src="https://www.youtube.com/embed/7lw8kAczw_o" title="nodegram" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+      </iframe>
+    </div>
+    <div style="color: #282828; font-size: 16px; text-align: center;"><br />
+    </div>
+    <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;">nodegram : <a href="https://daisuqe.github.io/nodegram/" rel="noopener" style="box-sizing: border-box; color: #1466b8;" target="_blank">https://daisuqe.github.io/nodegram/</a></span>
+    </p>
+    <div class="links" style="box-sizing: border-box; color: #282828; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-color: transparent; border-image: none 100% / 1 / 0 stretch; border-radius: 8px; border-style: solid; border-width: 1px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ ブラウザで開く</a><br />
+    </div>
+    <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"><br />プログラムサンプル（シューティングゲーム）：<br /></span>
+    </p>
+    <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"></span>
+    </p>
+    <div class="links" style="box-sizing: border-box; color: #282828; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-color: transparent; border-image: none 100% / 1 / 0 stretch; border-radius: 8px; border-style: solid; border-width: 1px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ ブラウザで開く</a><br />
+    </div>
+  </div>
+</header><main style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 6px 16px 48px;">
+<nav class="toc" style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-radius: 10px; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 20px 0px; padding: 14px 18px;">
+  <h2 style="box-sizing: border-box; color: #666666; font-size: 13px; letter-spacing: 1px; margin: 0px 0px 8px; text-transform: uppercase;">目次
+  </h2>
+  <ol style="box-sizing: border-box; column-gap: 26px; columns: 2; margin: 0px; padding-left: 20px;">
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#about" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">Nodegram とは</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#basic" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">基本的な使い方</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#views" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ビューの操作</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#nodeops" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ノード操作</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">仕様</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#mobile" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">スマホ、PCでの挙動</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#nodes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ノード解説</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">Compo ノード</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#share" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">プログラムを遊んでもらう</a>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><a href="https://d00harada.blogspot.com/p/nodegram.html#notes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">注意点</a>
+    </li>
+  </ol>
+</nav>
+<section id="about" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">1. Nodegram とは
+  </h2>
+  <p style="box-sizing: border-box; margin: 8px 0px;"><span style="color: #282828;">Nodegram は、ブラウザで動作する</span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">ノードでプログラミングするツール</span></strong><span style="color: #282828;">です。</span><br /><span style="color: #282828;"><br />キャラクターノードと</span><span style="color: #282828;">ジョイスティックノード</span><span style="color: #282828;">を繋ぐだけでキャラクターを</span><span style="color: #282828;">&nbsp;</span><span style="color: #ffa400;"><b style="box-sizing: border-box;">Play画面</b> </span><span style="color: #282828;">で動かすことができます。</span>
+  </p>
+  <p style="box-sizing: border-box; margin: 8px 0px;"><br /><span style="color: #282828;">・スマホやPCでプログラミングができます。<br />・作ったゲームを他の人に遊んでもらうことができます。</span><br /><span style="color: #282828;">・nodegram はインターネット上にあるのでネットに繋がっていればどこでもプログラミングできます（nodegram のプログラムのサイズは画像1枚分程度です）。</span><br /><br />
+  </p>
+  <div class="separator" style="clear: both; color: #282828; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhjYvxjzLadyhufjsqMzNx6YEWiB7dAIZPkYMVCXRqOm2A-glwXANO5zPlfb4RsDtK-5bFusk8nEXHQ4wY2QuGVmD3Wh59az_E9Kdp7g1eLsr2KOfXjQ8pJ9YlvgziK8dR3W9O2ScaOUdeYejLiSxKudAzp_U-vFX4pQctvZmED63Olv5Tjs5ZVL1Q3LuM" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="4508" height="172" src="https://blogger.googleusercontent.com/img/a/AVvXsEhjYvxjzLadyhufjsqMzNx6YEWiB7dAIZPkYMVCXRqOm2A-glwXANO5zPlfb4RsDtK-5bFusk8nEXHQ4wY2QuGVmD3Wh59az_E9Kdp7g1eLsr2KOfXjQ8pJ9YlvgziK8dR3W9O2ScaOUdeYejLiSxKudAzp_U-vFX4pQctvZmED63Olv5Tjs5ZVL1Q3LuM=w640-h172" width="640" /></a>
+  </div><br />
+  <div class="separator" style="clear: both; color: #282828; text-align: center;">
+    <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /><br /><br /></a>
+    </div>
+  </div>
+</section>
+<section id="basic" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">2. 基本的な使い方
+  </h2>
+  <p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;"><span style="color: #282828;">Nodegram には <br />　プログラミングをする</span><b style="box-sizing: border-box;"><span style="color: #ffa400;">NodeEditor</span></b><span style="color: #282828;"><br />　オブジェクトを配置する</span><b style="box-sizing: border-box;"><span style="color: #ffa400;">Layout画面<br /></span></b><span style="color: #282828;">　プログラムを実行する</span><b style="box-sizing: border-box;"><span style="color: #ffa400;">Play画面</span></b><b style="box-sizing: border-box; color: #282828;">&nbsp;<br /></b><span style="color: #282828;">　の3つの操作画面があります。<br /><br /></span>
+  </p>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">2-1. ノードを作成する（NodeEditor）
+  </h3>
+  <ul style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">NodeEditor画面の</span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">何もない黒いエリアを長押し</span></strong><span><span style="color: #282828;">すると「</span><b><span style="color: #ffa400;">CREATE NEW NODE</span></b><span style="color: #282828;">」画面が開きます。</span></span><br /><br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="412" data-original-width="709" height="233" src="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI=w400-h233" width="400" /></a>
+      </div><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">Node 一覧から追加したいノードを選ぶと、NodeEditor にノードが作成されます。
+    </li>
+    <li><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="color: #282828;">各ノードを長押し、もしくはダブルクリックすると各ノードの詳細を設定するプロパティ（Property）画面 になります。<br />オブジェクトの色などをここで変更可能です。<br />「OK」ボタンは無く、値は変更した時点で反映されます。右上の×ボタンを押すか、ダイアログの外を押してダイアログを閉じてください。<br />DUPLICATEはノードの複製、DELETEは削除を行います。<br /><br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs=w400-h184" width="400" /></a>
+      </div><br /></span>
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">ノードをドラッグ（タッチして移動）するとノードが移動します
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">ノードの右にある出力ポートから入力ポート（ノードの左）へドラッグして<strong style="box-sizing: border-box;">ワイヤーを接続</strong>します。ワイヤーを接続すると数値が赤い端子から青い端子に渡されます。<br /><br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8=w400-h184" width="400" /></a><br /><br />
+      </div>
+    </li>
+  </ul>
+  <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; margin: 4px 0px;"><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="color: #282828;">ノードの上側に端子（子端子）があるノードは、子端子から親端子（他のノードの下）に接続すると親子関係になり、親が移動すると子も一緒に移動します。</span><br />
+      <div><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="color: #282828;"><br /></span>
+      </div>
+      <div>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg=w400-h184" width="400" /></a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+  </ul>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">2-2. ノードを画面に配置する（Layout 画面）
+  </h3>
+  <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+    <li style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 4px 0px;">Layout画面に切り替えるには「Layout」ボタンを押してください。<br /><br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="265" data-original-width="217" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" width="197" /></a>
+      </div><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 4px 0px;">Rect・Circle・Character・Text などの<strong style="box-sizing: border-box;">オブジェクト系、<br /></strong>Button・Stick・Shot などの<strong style="box-sizing: border-box;">操作系ノード</strong>は Layoutで画面 で配置位置を決めます。<br /><br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="464" data-original-width="876" height="338" src="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA=w640-h338" width="640" /></a>
+      </div><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 4px 0px;">オブジェクトのドラッグで移動、オブジェクトの４隅にある白いハンドルでサイズを、上にある丸いハンドルで向きを調整します。
+    </li>
+    <li style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 4px 0px;">「NODE」ボタンを押すとNodeEditorに戻ります。
+    </li>
+  </ul>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">2-3. 実行する（Play 画面）
+  </h3>
+  <ul style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">NodeEditor、またはLayout画面に右上の&nbsp;</span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">▶（Play）ボタン</span></strong><span style="color: #282828;">でPlay画面に切りわかります。</span><br /><span style="color: #282828;">切り替わるとすぐにプログラムを実行します。</span>
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">Play 画面右上の □</span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">（Stop）ボタンの長押し</span></strong><span style="color: #282828;">で Play を停止し、Edit画面に戻ります。</span>
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">Play 画面では60分の1秒（1フレーム）ごとにオブジェクトノードが表示され、物理演算とともに動きます。
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">JoyStick、キーボード、マウスなどで操作させることができます。<br /><br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj2mtifbvqP9FBbyj1ZUKSBPAkQFq01_rm7nl0-2i5JcJcspALQ2FeGWetsp6DiqzReaKXKZaT9bFK9wEM7QIm4KI8vHrTDzujX8f6L-Yw4M_F1Pux_dUqiZ07KcxH9Frs_6DwXoELvUNxqavf20Btp4R5WbeEtY0ndfjEAVSga6tzuRHcw9o-M8PGnuoc" style="margin-left: 1em; margin-right: 1em;"></a>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="294" src="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY=w640-h294" width="640" /></a>
+        </div><br />
+      </div>
+    </li>
+  </ul>
+  <div style="text-align: center;">
+    <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+      <li><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="color: #282828; font-size: 16px;">Play画面内で重力を表現することもできます。<br /></span>ピンボールやマリオのようなゲームを作る場合はDynamicsをオンにします。<br style="color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px;" /><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="font-size: 16px;"><b><span style="color: #ffa400;">Settingノード</span></b><span style="color: #282828;">を追加し、Property の Dynamicsをオンにするとプログラム全体でDynamics処理が有効になります。</span><br /><span style="color: #282828;">各オブジェクト系ノードにもDynamics設定項目があるので個別にオンにする必要があります。</span><br /><br /></span>
+      </li>
+    </ul>
+  </div>
+</section>
+<section id="views" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">3. ビューの説明と操作
+  </h2>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-1. NodeEditor の操作
+  </h3>
+  <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">ノードを並べてワイヤーでつなぐ、ノード構築画面です。<br /><br />
+  </p>
+  <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="360" data-original-width="914" height="253" src="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E=w640-h253" width="640" /></a>
+  </div><br />
+  <p style="color: #282828;">
+  </p>
+  <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; width: 704px;">
+    <tbody style="box-sizing: border-box;">
+      <tr style="box-sizing: border-box;">
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">操作
+        </th>
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">内容
+        </th>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">背景1本指ドラッグ
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ビューの移動
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2本指ピンチ、マウスホイール回転
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ビューの拡大・縮小
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ダブルクリック→ドラッグ（背景）
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">範囲選択（複数ノード選択）
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">背景を長押し
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">CREATE NEW NODE 画面を開く
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ノードをドラッグ
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ノード移動（複数選択時はまとめて移動）<br />ドラッグ中に画面端へ寄せるその方向へビューが自動スクロール
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ノードをダブルクリック／長押し
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">プロパティ画面を開く（複数選択時は Duplicate/Delete メニュー）
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">端子間をドラッグ
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ワイヤー接続（誤動作防止のためタップ後一瞬指を置いてからドラッグする仕様になっています）
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">接続線を長押し／ドラッグアウト
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">接続の解除<br />端子から外側へドラッグして離しても解除できます
+        </td>
+      </tr>
+    </tbody>
+  </table><span style="color: #282828;"><br />右上の再生ボタン▶を押すとPlay画面になりプログラムを実行します。</span><br /><br />
+  <div style="color: #282828; text-align: center;">
+    <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjA1jyvN525v6YqvzGfbzGsM2ViacPMTaJrW4WTP5uP9L2R6wjzDO-MTHEwFdrVKb1tEvkEEi-sd7N6O5lXSwOBO2W1IN-2LCvs8_Zxo8O3VIADm6OHyBHNjPrGEbfhFFH_5VHsJkZ7jVRtoYaPq7Fh0LhyPDDI6JRhO8bfHwybt64J-tFq5WwOhac7Heo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="309" data-original-width="429" height="230" src="https://blogger.googleusercontent.com/img/a/AVvXsEjA1jyvN525v6YqvzGfbzGsM2ViacPMTaJrW4WTP5uP9L2R6wjzDO-MTHEwFdrVKb1tEvkEEi-sd7N6O5lXSwOBO2W1IN-2LCvs8_Zxo8O3VIADm6OHyBHNjPrGEbfhFFH_5VHsJkZ7jVRtoYaPq7Fh0LhyPDDI6JRhO8bfHwybt64J-tFq5WwOhac7Heo" width="320" /></a>
+    </div><br />
+  </div><span style="color: #282828;">Menuボタンはフリックメニューになっています。<br /></span>（ボタンを押して移動し、放したところのボタンの機能が実行される。押しボタンメニューとしても動作します）<span style="color: #282828;"><br />
+  <ul style="text-align: left;">
+    <li><span style="color: #282828;"><b>Layout</b>：Layout画面に切り替わります。</span>
+    </li>
+    <li><b>New Node</b>：CreateNewNode画面が開きます。
+    </li>
+    <li><b>Undo、Redo</b>：操作を１つ前に戻す（Undo）、戻しをキャンセル（Redo）を行うことができます。
+    </li>
+    <li><b>FIT</b>：全ノードがビューに入るようにビューの表示位置を移動します。<br /><br />
+    </li>
+    <li><b>SAVE、LOAD</b>：デバイスに保存、デバイスからの読み込みができます。<br />またExport、Importを使用するとプログラムをファイルとして出力することができ、GoogleDrive等を利用してスマホとPCの間でプログラムを共有したり編集の続きをしたりすることができます。<br />またImport には現在作業中のプログラムに追加読み込み（Merge）する機能もあります。<br />auto save チェックボックスをオンにすると 1分ごとに上書き保存します。<br /><b style="color: black;"><span style="color: red;">Saveをしてもアプリのアイコンを消したりするとプログラムが無くなってしまう可能性があるので、大事なプログラムは Export でバックアップを取っておくことをおすすめします。<br /><br /></span></b>
+    </li>
+    <li><b>NEW</b>：ノードを全て消します。
+    </li>
+    <li><b>Setting</b>：重力や画面の向きなど、アプリで共通の値を設定します。<br />　　　　プログラム内の設定は Setting ノードを作成し、そこで行います。
+    </li>
+  </ul></span>
+  <div class="separator" style="clear: both; color: #282828; text-align: center;">
+    <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEh7Y8P3EUbDW-odIIa0gVZt9CctscHVgJKn5luW1KBNsVhLzSiPa-h7rz3iIvkTs6jWtPGymBPUyGXFWehVdsTy-8MGyAXXMdGoQlTJeWaSS8vhY5CrpfHTeC3KXETTm0DOL4bxcSxDJ5HXoI3_TjDoNoVFOLZxIfNFOzKsbNjExQA0AyHz6IMQ5YjV4wU" style="margin-left: 1em; margin-right: 1em;"></a>
+    </div>
+  </div>
+</section>
+<section id="views" style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-2. Layout 画面の操作
+  </h3>
+  <p style="box-sizing: border-box; margin: 8px 0px;">オブジェクトの配置・サイズ・回転を決める画面です。グレーの矩形が Play時の表示エリアを表します。
+  </p>
+  <p style="box-sizing: border-box; margin: 8px 0px;">
+  </p>
+  <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="411" data-original-width="804" height="328" src="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E=w640-h328" width="640" /></a>
+  </div><br />基本的にはNodeEditorと同じ操作です。<br />
+  <p>
+  </p>
+  <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+    <tbody style="box-sizing: border-box;">
+      <tr style="box-sizing: border-box;">
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">操作
+        </th>
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">内容
+        </th>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1本指ドラッグ（背景）
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ビューの移動
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">マウスホイール／2本指ピンチ
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">拡大・縮小
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">オブジェクトをドラッグ
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">移動（複数選択時はまとめて移動）
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">オブジェクトをタップ
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">選択。この選択はNodeEditorと共有
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ハンドルをドラッグ
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">サイズ変更・回転
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ダブルクリック→ドラッグ（背景）
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">範囲選択（複数選択）
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">背景を長押し
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">CREATE NODE 画面を開く
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">選択を長押し
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><span style="color: #282828;">プロパティ画面を開く（複数選択時は Duplicate/Delete メニュー）</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>オブジェクトを選択すると右に「50」などの数字が表れます。<br />この数字はSortingLayer値で、値が大きいほど手前に、少ないと奥に表示されます。<br />下の上下ボタンで増減ができます。<br /><br />また、SETTINGノードを作成するとプロパティにGridSnap があります。<br />オンにするとオブジェクトの移動が10ピクセル単位になります。
+</section>
+<section id="views" style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-3. Play 画面の操作
+  </h3>
+  <p style="box-sizing: border-box; margin: 8px 0px;">プログラム実行画面です。<br /><br />
+  </p>
+  <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhnN7Gx3oON30UhxaY8OOCp5HH6Ku3ZvjWaRI6yKRzb4PPdL8fNowU-9V3UIoiPDd4iaJIALPeXbka0wK9SebFZ0CC1KoARDWbfoNRcB_6dcbn1o7LqvWUa5Zop2TMMFYE4MxCGv6FGFE08Wbp0cLu8N9G5Rd2Z-Fh_dRaXtHisq9-Rkt5bOv2CAHrkrWg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="294" src="https://blogger.googleusercontent.com/img/a/AVvXsEhnN7Gx3oON30UhxaY8OOCp5HH6Ku3ZvjWaRI6yKRzb4PPdL8fNowU-9V3UIoiPDd4iaJIALPeXbka0wK9SebFZ0CC1KoARDWbfoNRcB_6dcbn1o7LqvWUa5Zop2TMMFYE4MxCGv6FGFE08Wbp0cLu8N9G5Rd2Z-Fh_dRaXtHisq9-Rkt5bOv2CAHrkrWg=w640-h294" width="640" /></a>
+  </div><br /><br />
+  <p>
+  </p>
+  <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+    <tbody style="box-sizing: border-box;">
+      <tr style="box-sizing: border-box;">
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">操作
+        </th>
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">内容
+        </th>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">右上の □ ボタン
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">実行停止してEditor画面に戻る
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Stick・Button
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">画面上の仮想入力デバイスを操作
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">キーボード / ゲームパッド
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Keyboard・Stick・Button ノードにマッピングして操作
+        </td>
+      </tr>
+    </tbody>
+  </table><br />
+</section>
+<section id="nodeops" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">4. ノード操作
+  </h2>
+  <div style="color: #282828;">
+    <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="346" data-original-width="517" height="268" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w=w400-h268" width="400" /></a>
+    </div><br />
+  </div>
+  <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+    <li style="color: #282828;"><b style="box-sizing: border-box;">作成：</b> Editor/Layoutの背景（ノードが無い空間）を長押しして CREATE NODE 画面を開いて作りたいノード名 を選択。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">接続（ワイヤー）：</b> 出力ポート（右の赤い丸）→入力ポート（左の青い丸）へドラッグ。<br />数値が出力から入力に渡されます。<br />ノードへの入力は複数繋ぐことができます。複数の入力があるとその数値の総和がノードに渡されます。<br />接続の解除は 接続線を長押し、または端子から外側へドラッグして離す。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">親子接続：</b> オブジェクト系ノード上部中央の「子端子」を、親にしたいノードの下にある「親端子」へドラッグ。親の移動・回転に子が追従します。<br />またオブジェクト系ノード以外でもTextureノードやOnBreakノードのようにノードの指定に使うこともあります。<br />親が子を複数持つことはできますが、子は親を複数指定することはできません。<br />Textureノードだけは複数の親（Texture の割り当て先）を持つことができます。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">プロパティ編集：</b> ノードをタップ（または長押し）してプロパティ画面を開き、値・サイズ・色・物理モード・回転などを編集。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">複製・削除：</b>&nbsp;ノードを長押しし、プロパティ画面内の DUPLICATE / DELETE ボタン。複数ノード選択時は長押しして Duplicate / Delete。
+    </li>
+  </ul>
+</section>
+<section id="spec" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">5. 仕様
+  </h2>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">5-1. 2D 専用
+  </h3>
+  <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">Nodegram は 2D 専用です。座標は X（右が＋）・Y（上が＋）の2軸で。SettingノードでDynamicsをオンにするとキャラクターは画面下方向に落ちます。<br />トップビューのゲームを作る時はSETTINGノードでDynamicsをオフにするか、ゲーム全体の重力を0にします。
+  </p>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">5-2. FPS
+  </h3>
+  <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">目標フレームレートは <b style="box-sizing: border-box;">60</b> または <b style="box-sizing: border-box;">30</b> を SETTING ノードで選択します（デフォルト 60）。ノードの評価も物理も、このFPSを基準に進行します。処理が重くなるとPlayの挙動が遅くなり、フレームレートが指定値より下がります。
+  </p>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">5-3. Dynamics（物理的挙動）
+  </h3>
+  <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">Rect、Circle、Character、Shot などのオブジェクトには物理モード（Dynamics）を設定できます。挙動は Unity の Rigidbody2D とほぼ同様です。
+  </p>
+  <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; width: 704px;">
+    <tbody style="box-sizing: border-box;">
+      <tr style="box-sizing: border-box;">
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">モード
+        </th>
+        <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">挙動
+        </th>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Off</b>
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">物理なし。ノード入力（X,Y）で座標を直接移動するだけ。
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Static</b>
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">動かない壁・床。重力や衝突では動かない。
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Dynamic</b>
+        </td>
+        <td style="background: rgb(250, 250, 250); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">重力・衝突を受けて物理的に動く。ノードのX/Y入力は「力（フォース）」として加わる。
+        </td>
+      </tr>
+      <tr style="box-sizing: border-box;">
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Kinematic</b>
+        </td>
+        <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">重力・衝突では動かないが、ノード入力で強制移動でき、他のDynamicに衝突・干渉できる。
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="small" style="box-sizing: border-box; color: #666666; font-size: 13px; margin: 8px 0px;">比重の指定はありませんが一般的な木材程度を基準にしています。
+  </p>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">5-4. SortingLayer（表示順）
+  </h3>
+  <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">各オブジェクトの <b style="box-sizing: border-box;">SortingLayer</b>（0〜100、既定 50）で Play 画面での表示の重なり順を決めます。<strong style="box-sizing: border-box;">数値が大きいほど手前（上）</strong>に描画されます。BG（背景）は常に最背面です。<br />同じ値どうしは、追加した順に表示されます。<br /><span style="background-color: #eef5fb;"><br /></span>
+  </p>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">5-5. 座標
+  </h3>
+  <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; margin: 4px 0px;">座標系は X（右＋）・Y（上＋）。Layoutの中心が原点(0,0)です。
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;">角度は度（degree）で表し、<b style="box-sizing: border-box;">反時計回りが＋</b>です。0°＝右（X＋）、90°＝上（Y＋）、180°＝左（X−）、270°＝下（Y−）。ANGLE POS / POS ANGLE / GetRot / ROTATE / オブジェクトの Angle プロパティは、すべてこの向きで統一されています。
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;">オブジェクトのPropertyの Coord プロパティで、ノード入力のX/Yの数値の意味が変わります。
+      <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+        <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">WORLD</b>：入力値を絶対座標として適用（親がいる場合は親基準のローカル絶対座標）。
+        </li>
+        <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">LOCAL</b>：入力値を初期配置位置からの相対オフセットとして適用。親を指定している場合は親からのオフセットも含みます（Parent座標系）。
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">5-6. 解像度
+  </h3>
+  <p style="box-sizing: border-box; margin: 8px 0px;"><span style="color: #282828;">Play時の表示エリアはLayoutのグレー矩形のサイズです。<br />画面向き（横=Holizontal／縦=Vertical）はSETTINGノード（Settingメニューではない）で切り替えられ、実機の画面サイズに合わせてフィット表示されます。<br />また固定解像度にする場合はSettingノードのScreenSizeから行ってください。<br /><br /></span>
+  </p>
+  <p style="box-sizing: border-box; margin: 8px 0px;"><span style="color: #282828;"></span>
+  </p>
+  <div class="separator" style="clear: both; text-align: center;">
+    <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="701" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo=w400-h217" width="400" /></a>
+    </div>
+    <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">5-7. Tag
+    </h3>
+    <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><span style="color: #282828;">Tag はグループです。<br />例えばザコ敵にはすべて「Enemy_tiny」というTagを付けたり、壊れる背景と壊れない背景で「bg_destroyed」「bg」のようにTagを付けたりします。<br />Shot, OnBreak, Rect, Circle, Character ノードなどが Tagを使用します。<br /><br /></span>
+    </p>
+    <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">5-8. １フレーム内の処理
+    </h3>
+    <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><span style="color: #282828;">ノードはすべて同時に処理されます。<br />どのノード先に作ったかで結果が変わることはありません。<br /><br />オブジェクトノードなどは1フレームに1回処理が行われます。<br />Counter, Var, Trigger, Random, Array などの「値を覚えるノード」も 1フレームに1回だけ更新されます。<br />＋ や × のような計算ノードは値を覚えないので、必要になったときに計算されます。<br />ただし計算ノードがループになっている場合は、1つのノードは1フレームの中で一度しか処理されません。<br /><br /></span>
+    </p>
+  </div>
+  <p>
+  </p>
+</section>
+<section id="mobile" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">6. スマホ、PCでの挙動
+  </h2><br /><b style="box-sizing: border-box; color: #282828;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;">　</span><span style="font-size: medium;">スマホでの挙動<br /></span><br /></b>
+  <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">タッチ操作：</b> <br />1本指でパン、2本指でピンチズーム。長押しやダブルタップ→ドラッグなどPCと同様に操作できます。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">縦横の切り替え：</b> <br />端末を回転すると画面の縦横に追従します。Play中の表示向きはSETTINGノードでの指定の向き（横=Holizontal／縦=Vertical）に従い、想定と違う向きのときは案内が表示されます。
+    </li>
+    <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box; color: #282828;">iOS での注意点：</b><span style="color: #282828;">&nbsp;<br /></span><span style="color: #282828;">iPhone などの iOS で全画面表示させるには、</span><span style="color: #282828;">Safariのメニューから</span>以下の①、②をクリックし、ツールバーを非表示にするとほぼ全画面になり使いやすくなります。<br />
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="641" data-original-width="1289" height="199" src="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0=w400-h199" width="400" /></a>
+      </div><span style="color: #282828;">完全に全画面表示させるには</span><span style="color: #282828;">Safariのメニューから共有アイコンをタップ、ホーム画面に追加を選択します。nodegram がアプリのように扱えるのでおすすめです。<br /></span><b><span style="color: red;">ただしホーム画面に追加したアイコンを消すとSAVEしたデータが消える可能性があります。大切なデータはスマホ内のフォルダにExportしてください。</span></b>
+    </li>
+  </ul><br /><b style="box-sizing: border-box; color: #282828;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;">　</span><span style="font-size: medium;">PCでの挙動<br /></span><br /></b>
+  <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">ショートカット：<br /></b><br />
+      <p dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">NodeEditor / Layout画面共通</span>
+      </p>
+      <div class="overflow-x-auto" dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+        <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+          <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+            <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">キー</span>
+              </th>
+              <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">動作</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">Delete</code> または <code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">Backspace</code></span>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">選択中のノード（複数選択時はまとめて）を削除（確認ダイアログあり）</span>
+              </td>
+            </tr>
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">Ctrl+D</code>（Macは<code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">Cmd+D</code>）</span>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">選択中のノードを複製（確認ダイアログあり）</span>
+              </td>
+            </tr>
+            <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 15ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="el" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Ctrl+Z</span></code></span>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">Undo</span>
+              </td>
+            </tr>
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Ctrl+Y または Ctrl+Shift+Z<br /></span></code>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 8ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Redo</span></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;"><br />TEXTUREエディタを開いているとき（上記に加えて）</span></span>
+      </p>
+      <div class="overflow-x-auto" dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+        <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+          <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+            <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">キー</span></span>
+              </th>
+              <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">動作</span></span>
+              </th>
+            </tr>
+          </thead>
+          <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Ctrl+V</span></code>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">クリップボードの画像を貼り付け</span>
+              </td>
+            </tr>
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Ctrl+C</span></code>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">編集中のテクスチャ全体をクリップボードへコピー</span>
+              </td>
+            </tr>
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style="background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: &quot;calt&quot; 0, &quot;liga&quot; 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Ctrl+Z</span></code>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">テクスチャ編集の Undo</span>
+              </td>
+            </tr>
+            <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="color: #0b0b0b; font-family: arial; font-size: 13px; font-variant-ligatures: none;">Ctrl+Y または Ctrl+Shift+Z</span>
+              </td>
+              <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">テクスチャ編集の Redo</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+  </ul>
+</section>
+<section id="nodes" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">7. ノード解説
+  </h2>
+  <p style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;">
+  </p>
+  <div class="separator" style="clear: both; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhElpzs_62w4PYYXXQvNbziDoolx0vATkkN2Ig3P6kEp5H3Lq3BPvt3RsEMt0PryRdXOvahVj7zSL0eINC3SZtWlxKOx82JQ0RBHTXmjSAK8uOAu4Hw_BhMUc79piLzYsIAIRbzM8hVjXueKiIzsP7GhXu6bc2FgSc4x9mexzcZSzq1-AanVmqE8SLBI4I" style="margin-left: 1em; margin-right: 1em;"></a>
+    <div class="separator" style="clear: both; text-align: center;"><br />
+    </div>
+    <div style="text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E"><img alt="" data-original-height="1072" data-original-width="2262" height="304" src="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E=w640-h304" width="640" /></a>
+    </div><br />
+  </div>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">
+    <p style="background-color: white; box-sizing: border-box; color: #282828; font-size: 16px; font-weight: 400; margin: 8px 0px;">入／出は入力端子数／出力端子数です）。<br />
+    </p>
+  </h3>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">&nbsp; 定数
+  </h3>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">
+    <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-green" style="background: rgb(46, 166, 110); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Constant
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 1
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Value の数字を出力します。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </h3>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-blue" style="background: rgb(31, 115, 224); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>&nbsp; 計算系
+  </h3>
+  <div><br />
+  </div>
+  <div><br />
+  </div>
+  <div>
+    <table style="background-color: white; border-collapse: collapse; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">＋
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力① ＋ 入力② の結果を出力。<br />＋ノードを使わなくても。全てのノードの入力端子は複数のワイヤーを繋ぐことができ、合算の機能がある。なので入力①に２つのワイヤーをつないでも加算結果を出力する。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">－
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力① － 入力② の結果を出力
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">×
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力① × 入力② の結果を出力
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">÷
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力① ÷ 入力② の結果を出力。分母0なら0。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;"><span style="font-family: trebuchet;">√</span>
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力①の平方根を出力します。入力が0以下のときは0を返します。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Compare
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力①と入力②を比較（= &gt; &lt; ≠ ≧ ≦）。成り立つなら1、成り立たないなら0 を出力。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Not ( ! )
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力①が0なら1、それ以外は0。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Pos Angle
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">位置を角度に。ArcTan2(入力②, 入力①) を度で出力。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Angle Pos
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 2
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">角度を位置に。角度(度)から(cos, sin) を出力。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Random
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0以上 Number 未満の整数乱数を出力します。Play開始時と、入力①が0以外である各フレームに値を更新します。Use SeedをオンにしてSeed値を指定すると、Playを開始するたびに同じ順序の乱数を再現します。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Int
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">整数化。Round プロパティで Floor / Round / Integer を選べます。<br />既定の Floor は入力値以下で一番近い整数で、2.8 は 2、-0.1 は -1 になります。Round は四捨五入、Integerは整数部分の取得です。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-cyan" style="background: rgb(0, 191, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>&nbsp; 数値操作系
+  </h3>
+  <div>
+    <table style="background-color: white; border-collapse: collapse; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Trigger
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力が0から0以外になった瞬間だけ1フレーム1を出力。<br />DELAY(F)で指定フレーム遅延で１を出力。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Counter
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">カウンター。①に入力された数字を毎フレーム加算。②を減算。内部に保持している数字を出力。Type＝Clampは最大値と最小値指定、Loopは範囲を繰り返し。Value（初期値）、Min/Max を設定可。<br />counter の出力値を計算して入力側に再び入力に入れる場合など遅延が起こらず思った値にならない場合があります。この場合はTriggerノードのDELAYプロパティを併用してください。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Var
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">変数として使用できるノード。ノード内に保持した数値１つを出力する。<br />入力②のセット信号に0以外の数値が指定されたとき入力①を記憶。<br />初期値設定あり。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Array
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">配列として使用できるノード。<br />入力②のインデックス(配列内の位置、1番目は0)を指定すると配列の値を出力する。インデックスは0始まりなので配列長さが3ならインデックスは0か1か2。0未満、3以上を指定すると値無しとして0を返す。<br />入力③のセット信号で入力①の値を指定インデックス②の配列要素に上書きする。<br />初期値リストは複数の数字を「,」（カンマ）もしくは改行で区切って書き込んでください。<br />配列はSoundノードと併用して楽譜のように利用したり、Lineノードと併用して折れ線のグラフィック表示をすることもできます。プロパティの SEQUENCER / LINE ボタンから楽譜、折れ線のグラフィックとしてエディタで編集することもできます。<br />SEQUENCERのChromaticをONにすると配列の値が半音刻みになります（0=ド、1=ド#、2=レ…）。この配列をSoundノードの音階として使うときは、Sound側のChromaticも同じ設定にしてください。<br />プロパティの SEQUENCER / LINE ボタンから楽譜、折れ線のグラフィックとしてエディタで編集することもできます（下記）。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetPos
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 2
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">親オブジェクトの現在位置 X, Y を取得。WORLD/LOCAL切替。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetRot
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">親オブジェクトの現在角度を、反時計回りを正として出力します。WORLD/LOCALを切り替えられます。角度は±180度に正規化されないため、連続回転後などは範囲を超えることがあります。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Velocity
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 2
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">親オブジェクトのX/Y速度を1秒あたりの値で出力します（Yは上方向が正）。Framesを増やすと参照されるフレーム範囲が増え、緩やかな変化になります。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">Array の専用エディタ（SEQUENCER / LINE）
+    </h3>
+    <p style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;"><br />
+    </p>
+    <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+      <li style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">LINE エディタ</b>：<br />Line ノードにつなぐ折れ線を描くツールです。<br />編集エリアは中央が原点で、X は右が＋、Y は上が＋の -99〜99。<br />DRAWで折れ線描画。描いている間はDRAWボタンが Endpoint ボタンに変わり、押すと一筆書きが確定します。<br />MOVEで頂点移動、ERASEで線分を1本だけ削除。VIEWで視点移動、◁ ▷でUndo / Redo。閉じると x,y の数値列に変換され、x,y = (9999,9999) で線が途切れます。<br />Array ノードの親にLINEノードを指定するとLINEノードがArrayの情報で描画を行います。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="364" data-original-width="494" height="236" src="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ=w320-h236" width="320" /></a>
+        </div><br />
+      </li>
+      <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px;">SEQUENCER エディタ</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">Sound ノードにつなぐ楽譜のArrayを作るツールです。8分音符のみ・1小節＝8個・最大500小節・</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">3オクターブ。</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">DRAW モードのクリックやドラッグで音符を置き、ERASE モードのドラッグで消します。背景のドラッグで左右スクロール、ピンチやホイールで拡大縮小できます。</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">閉じると8分音符ごとの音階の並びに変換され、休符は </span><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="box-sizing: border-box; color: #282828; font-size: 16px;">99（SOUND ノードにも対応）</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">、最後の音符がある小節の終わりまでは休符で埋められます。</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">Arrayだけでは音はなりません。下記のリンク先のようなプログラムが必要です。</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">
+        <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"></span>
+        </p>
+        <div class="links" style="box-sizing: border-box; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/xtty3xoo2man3cppp2vw0/turip02.json?rlkey=ber1bizk17rugdkbe8czrm9cx&amp;st=4itsm9sm&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-color: transparent; border-image: none 100% / 1 / 0 stretch; border-radius: 8px; border-style: solid; border-width: 1px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ サンプルを開く</a>
+        </div></span>
+      </li>
+    </ul>
+  </div>
+  <div style="color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px;">
+    <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="327" data-original-width="528" height="198" src="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" width="320" /></a>
+    </div>
+    <div class="separator" style="clear: both; text-align: center;"><br />
+    </div>
+    <div class="separator" style="clear: both; text-align: left;">　複数のシーケンス（Array）を同時に編集する機能もあります。
+    </div>
+    <div class="separator" style="clear: both; text-align: left;">　NodeEdotorで複数のArrayノードをまとめて選択し、ノードを長押しして
+    </div>
+    <div class="separator" style="clear: both; text-align: left;">　「SEQUENCER」を選択します。
+    </div>
+    <div class="separator" style="clear: both; text-align: left;">　番号ボタンクリックで編集するArrayを選択、長押しで音量調整メニュー、
+    </div>
+    <div class="separator" style="clear: both; text-align: left;">　ドラッグで順番を変えることもできます。<br /><br />
+    </div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="549" data-original-width="1010" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU=w400-h217" width="400" /></a>
+      </div>
+    </div>
+    <div class="separator" style="clear: both; text-align: left;"><br />
+    </div><br /><span class="swatch nc-purple" style="background: rgb(163, 51, 191); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span style="background-color: white; color: #161616; font-size: 18px;">&nbsp; 出力系</span>
+  </div>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">
+    <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Text
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">テキスト表示。入力が未接続なら Text プロパティで指定した文字を表示。接続時は数値を表示。入力②で表示のオンオフ。数値は小数点以下6桁を四捨五入し5桁目まで表示します。文字色、レイアウト、周りの四角の表示オンオフを設定可能。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Rect
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">長方形オブジェクト。Dynamics Off なら入力①/②は座標 x,y。Dynamics On は外力 x,y。入力③は表示のオン/オフです。色、枠、Tag、サイズ、回転、Sorting Layerなどを設定できます。Broken by 1～3には、このオブジェクトを破壊できる相手のMy Tagを指定します。<br />Dynamics、Tag については 5.仕様 を参考にしてください。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Circle
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">円形オブジェクト。形状とRadius以外の入力・Dynamics・Tag・Broken byなどの仕様はRECTと同じです。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Character
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">移動とジャンプができるキャラクター。入力①/②は移動速度、入力③は0以下から正の値へ変化した瞬間のジャンプです。ジャンプ力は入力値に比例し、接地中のみ有効です。物理とジャンプにはSETTINGとCharacterのDynamicsを両方オンにします。トップビューではDynamicsをオンのままGravityを0にできます。Flip、AutoRot、KeepOnScrを設定でき、親にできるのはWARP INだけです。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Shot
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力①で弾を発射します。Bullet Countは同時に存在できる弾数です。My Tagは相手側のBroken byと一致したとき相手を破壊し、SHOT側のBroken by 1～3は弾が消える相手の種類またはTagを指定します。発射できたフレームだけ出力が1になります。Keep Off-Screenでは画面外の弾を残し、弾数上限を超えると古い弾は消えます。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Line
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">5 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">(X1,Y1)から(X2,Y2)への線を描きます。入力⑤(SET)が接続されている場合だけ、0以外の間に座標を更新し、0の間は直前の形状を保持します。未接続なら毎フレーム更新します。子にARRAYを指定すると入力①～④を無視し、配列の(x,y)組を一筆書きの折れ線として描きます。(9999,9999)で線を区切ります。CoordでWORLD/LOCALを選べます。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Sound
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力①は音階（ハ長調、0=C4）、入力②は音量、入力③は再生信号です。入力①/②が未接続ならTone/Volumeプロパティを使います。持続音は信号が0以外の間鳴り続け、減衰音・効果音は信号の立ち上がりまたは音程変更時に1回鳴ります。音階99は休符です。Toneプロパティは0.5刻みですが、入力①は連続した小数値を使用できます。<br />ChromaticをONにするとToneが半音刻みの数値になります（0=ド、1=ド#、2=レ…）。OFFのときは長音階の度数で、0.5が黒鍵です。Arrayを音階として繋ぐ場合は、ArrayのSEQUENCER側のChromaticと設定を揃えてください。揃っていないと音程がずれます。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </h3>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-orange" style="background: rgb(217, 115, 26); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>&nbsp; 操作系
+  </h3>
+  <h3 style="box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;">
+    <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-orange" style="background: rgb(217, 115, 26); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Stick
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 2
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">仮想ジョイスティック。スティックのX方向傾き=出力①/Y=出力②。アナログ/デジタル、1軸制限、キー/パッド割当あり。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-orange" style="background: rgb(217, 115, 26); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Button
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">仮想ボタン。押下中に1。見た目、出力タイプ、ゲームパッド割当あり。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-orange" style="background: rgb(217, 115, 26); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Keyboard
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 1
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">指定キーが押されていれば1。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-orange" style="background: rgb(217, 115, 26); border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Touch
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 3
+          </td>
+          <td style="border-color: rgb(226, 226, 226); border-image: none 100% / 1 / 0 stretch; border-style: solid; border-width: 1px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">画面タッチ。タッチ位置 X=出力①, Y=出力②（中央が0,0）、タッチ中なら出力③=1。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </h3>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-yellow" style="background: rgb(230, 191, 0); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>&nbsp; そのほかのノード
+  </h3>
+  <div class="tblwrap" style="background-color: white; box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; overflow-x: auto;">
+    <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">TEXTURE
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ドット絵を編集、保持し、親として割り当てたオブジェクトに絵を貼り付ける。<br />Rect、Circle、Chara、Shot、BG に割当可。複数の親（オブジェクトノード）を指定することができる。入力0で非表示。1つのオブジェクトに複数のテクスチャを繋ぎ、1つだけをVisibleにすることで表示するテクスチャの切り替えができる。<br />オブジェクトに張り付ける時フィットさせるかタイリングで貼るか選択できる。<br />親指定しないでテクスチャのみで表示することもできる。<br />TextureEditor ではパレットの長押しで色の選択が可能。市松模様は透明を表します。<br />他のソフトでコピーしたグラフィックバッファの貼り付けできます。<br />テクスチャサイズはなるべく小さいサイズを使用することをおすすめします。特にSHOTノードに大きいテクスチャを貼ると動作が重くなります。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SENSOR
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">センサー領域に重なる対象数を出力します。結果はTargetの一致数とTag 1～3それぞれの一致数の合計なので、同じオブジェクトが複数条件に一致すると複数回数えられます。Target=SCREENはセンサー領域が現在の表示範囲と重なるかを0/1で返します。親を指定するとセンサーは親に追従し、その親自身は判定対象から除外されます。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ONBREAK
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">現在のフレームで、親オブジェクトまたは指定Tagのオブジェクトが破壊された数を出力します。入力①が0以下から正の値へ変化した場合も1を加え、ノード位置にエフェクトを出します。エフェクトはNONE/PARTICLE/LINE/CIRCLE/BOXと色を設定できます。親やTagを指定しなくても、入力トリガー式のエフェクトノードとして使えます。<br />Onbreakノードで参照先を指定しないとエフェクトノードとして使用できる（入力でエフェクト発生）。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ROTATE
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">親子オブジェクトを回転させるための回転ヒンジです。ROTATEを親にしたオブジェクトは、その位置と回転を引き継ぎます。入力①はLayoutで設定した角度または親の角度に対する回転オフセットで、正の値は反時計回りの角度です。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SCREEN
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 2
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Play時のカメラを制御します。X/Yはカメラ位置（親がある場合は親位置へのオフセット、Yは上方向が正）、Sはズームで最小0.05です。SCREENを親にしたオブジェクトはカメラに影響されない固定HUDになります。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">RESTART
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">入力が0から0以外へ変化したとき、プログラム全体をPlay開始時の状態へ戻します。実行中の位置、変数、カウンター、配列、弾などが初期化されます。再始動のきっかけになった入力値は再始動後も出力に保持されるため、残機数やスコアの引き継ぎに使えます。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">COMPO
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3 / 3
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">複数ノードを1つにまとめた部品。E＝有効/無効、1・2＝内部とのやりとり。<br />Compo ノードの詳細については後述。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-warpin" style="background: rgb(122, 133, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-warpout" style="background: rgb(223, 107, 246); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>　ワープ系
+  </h3>
+  <div class="tblwrap" style="background-color: white; box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; overflow-x: auto;">
+    <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-warpin" style="background: rgb(122, 133, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP IN
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">オブジェクトを別の場所へ瞬間移動させる仕組みの「入口」。子に指定したオブジェクトが対象になります。入力に0以外が入ると、子に指定したオブジェクトが同じ Index を持つ WARP OUT の位置、角度へ移動します。0以外が入り続けている間はそこに固定され、0になると固定が解除されて再び自由に動けるようになります。プロパティは Index のみ。Compo の中に入れることはできません。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-warpout" style="background: rgb(223, 107, 246); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP OUT
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ワープの「出口」。同じ Index を持つ WARP IN から送られてきたオブジェクトが、この位置と角度に移動します。プロパティは Index のみ。Layout 画面では位置の移動と回転ができます（大きさは持たないのでリサイズはできません）。オブジェクトを親に指定して一緒に動かすこともできます。Compo の中に入れることはできません。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-sigout" style="background: rgb(255, 131, 131); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>　接続系
+  </h3>
+  <div class="tblwrap" style="background-color: white; box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; overflow-x: auto;">
+    <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+      <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+          </th>
+          <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+          </th>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-sigin" style="background: rgb(96, 157, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">IN
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1 / 0
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ノード出力先のワイヤーを遠くにつなげる時に使用する。INノードに接続した信号は同じインデックスを持つOUTノードに出力されれる。同じインデックスを持つINノードを複数作ることはできない。Compo ノードのインデックスを指定すれば Compo 内部へのアクセスにも使用できる。<br />Compo ノードについては後述。
+          </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+          <td class="nc nc-sigout" style="background: rgb(255, 131, 131); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">OUT
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 1
+          </td>
+          <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ノード入力先のワイヤーを遠くからつなげる時に使用する。INノードに接続した信号は同じインデックスを持つOUTノードに出力されれる。同じインデックスを持つOUTノードを複数作ることができる。INに入った数値が全ての同じインデックスを持つOUTノードに出力される。Compo ノードのインデックスを指定すれば Compo 内部へのアクセスにも使用できる。<br />Compo ノードについては後述。
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-gray" style="background: rgb(107, 114, 128); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>設定系
+  </h3>
+  <div style="color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px;">
+    <section id="nodes" style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+      <div class="tblwrap" style="box-sizing: border-box; overflow-x: auto;">
+        <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ノード
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">説明
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">MEMO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 0
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">画面に書き込む注釈（メモ書き）。Play 時には表示もされません。
+          </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">BG
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 0
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">実行画面の背景。シーンに1つ。常に最背面。<br />TEXTURE ノードを割り当てると、その絵をタイリングして背景に敷き詰めます。TEXTURE 未割り当てのときは Color の単色で塗ります。
+          </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SETTING
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 / 0
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">シーン全体を設定します。ScreenOrient、ScreenSize、ScreenLong、ScreenShort、FPS、Dynamics、Gravity、Friction%、Bounce%、Drag%、StopBtnCol、GridSnapを変更できます。シーンに1つだけ作成できます。
+          </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>
+<section id="compo" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">8. Compo ノード
+  </h2>
+  <div style="text-align: left;">
+    <ul style="text-align: left;">
+      <li><span style="box-sizing: border-box;"><b>複数のノードを１つのノードのように扱うことができる特殊なノードです。<br /></b></span><b><br /></b>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="534" data-original-width="1030" height="297" src="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q=w571-h297" width="571" /></a>
+        </div><br />例えば同じ処理を行うノードの組み合わせがプログラムに10回出てきたら何らかの形で1箇所にまとめて流用したくなりますよね。<br />nodegram では複数のノードを１つの Compo ノードとしてまとめ、その Compo ノードを複製して使うことができます。<br /><br />同じ敵キャラを10体作りたい場合は1体のプログラムを作成し、1体に使用するノード達を１つの Compo にまとめ、Compoを複製し、Layoutに配置することができます。<br /><br />複製した Compo ノードの中身はプログラム的には同じものになっているので、１つのプログラムを変えると他のコンポのプログラムも書き換わりますが、それぞれが持つ座標や変数、寿命などはコンポごとに別々に処理されます。<br /><br />
+      </li>
+    </ul>
+    <ul style="text-align: left;">
+      <li><span style="box-sizing: border-box;"><b>Compo ノード作成手順</b></span><br />
+      </li>
+    </ul>
+    <ol style="text-align: left;">
+      <li>ひとまとめにしたいコンポ達をまとめて選択します。<br />まとめて選択はダブルクリック＋ドラッグで行います。<br />ダブルクリックの2クリック目をマウスを離さずドラッグして範囲選択します。<br />スマホだと「トン、ト、ツー」って感じです。<br />（このサンプルプログラムは左が自機、囲んだエリアが自機に近づくいてくる敵機１体のプログラムです）<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="432" data-original-width="1419" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw=w640-h194" width="640" /></a><br /><br />
+        </div>
+      </li>
+      <li>ノードが複数選択された状態でどれか１つのノードを長押しするとメニューが表れます。「MAKE COMPO」を選択すると Compo にまとめるか聞かれるので「Yes」を押します。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="440" data-original-width="1347" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY=w640-h210" width="640" /></a>
+        </div><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="147" data-original-width="402" height="117" src="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" width="320" /></a><br /><br />
+        </div>
+      </li>
+      <li>複数のノードが「C1」という１つの Conpo ノードになりました。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="307" data-original-width="1026" height="192" src="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw=w640-h192" width="640" /></a>
+        </div><br />
+      </li>
+      <li>C1 ノードを長押し（もしくはダブルクリック）すると Compo の中を編集する NodeEditor に入ります。<br />Compo に繋がっていた接続線が「C1&nbsp; 1」「C1&nbsp; 2」という OUT ノードに変わっています。<br /><br />右の「MENU」ボタンを押すと左の列が Compo 関連のコマンドに変わっています。<br />「Duplicate」を押すとこの Compo ノードが複製されます。<br />右下の「PARENT」ボタンを押すとこの NodeEditor を出て親の NodeEditor に戻ります。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="963" height="254" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU=w640-h254" width="640" /></a><br /><br />
+        </div>
+      </li>
+      <li>親の NodeEditor で Compo ノードが複数できているのが確認できます。<br />「C1 (2)」にも同じ入力値を渡したいのでノードの入出力に接続します。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="304" data-original-width="957" height="204" src="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I=w640-h204" width="640" /></a><br /><br />
+        </div>
+      </li>
+      <li>「LAYOUT」ボタンを押してレイアウトをコンポごとに調整します。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="429" data-original-width="918" height="188" src="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug=w400-h188" width="400" /></a>
+        </div><br />
+      </li>
+      <li>Playボタン「▶」を押すと敵機が複数あり、それぞれ独自に動いていることが確認できます。<br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="453" data-original-width="907" height="200" src="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU=w400-h200" width="400" /></a>
+        </div><br />
+      </li>
+      <li>Compo を数多く複製したい場合は Compo ノードをまとめて選択、ノードを長押しし「Duplicate」を行ってください。<br />また全ての Compo ノードに同じ値を渡す場合は INノード、OUTノードを使うと便利です。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="352" data-original-width="1164" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ=w640-h194" width="640" /></a>
+        </div>
+      </li>
+    </ol>
+    <ol style="text-align: left;"><br />
+    </ol>
+    <div>
+      <ul>
+        <li><span style="box-sizing: border-box;"><b>Compo ノードとインスタンス<br /></b></span><br />２つの Compo ノードが同じ内容で片方のコンポの内容を編集するともう片方のノードの内容も変わるような場合「２つのノードはインスタンスの関係にある」と言い、複製で作成する時「Compo ノードのインスタンスを作成する」と言います。<br />Compo 番号が同じノードはインスタンスの関係にあり同じプログラムを共用しています。<br />（ちなみにインスタンスを切ることを Unique と呼びます。Compo のフリックメニューにあります。後述）<br /><br />C の後の番号が同じだとインスタンス関係にある同じ Compo です。<br />「C1 (1)」と「C1 (2)」はインスタンスの関係にあります。<br />「C1 (1)」と「C2 (1)」は別のコンポです。インスタンスの関係にありません。<br />(&nbsp; ) 内の数字は同じコンポを識別するための番号です。<br /><br />Compo がインスタンスの関係にあっても Play時は Compo ごとにパラメータは別々に扱われます。<br />キャラクターの発生、消滅、座標、ノード内にある count , var, array 等は個別の値を持ちます。<br /><br />
+        </li>
+        <li><span style="box-sizing: border-box;"><b>Compo ノード 内の MENU<br /></b></span><br />
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="366" data-original-width="458" height="256" src="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo=w320-h256" width="320" /></a>
+          </div><br /><b>Duplicate、Delete</b>：Compo ノードの複製と削除です<br /><b><br />Unique</b>：Compo ノードのインスタンスを切るノードです。Compoの内容を流用して別の敵キャラを作る場合に使用します。コンボ番号が別の番号になります。<br /><b><br />Expand</b>：操作中の Compo の中のノードたちをメインの NodeEditor に戻します。操作中の Compo は無くなります。Make Compo の逆の処理です。インスタンス関係にある Compo は一緒に Expand（展開）されません。<br /><br />
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><span style="box-sizing: border-box;"><b>Compo ノード と IN、OUT ノード<br /></b></span><br />Compo ノードは2つの入力と2つの出力端子しかありませんが、INノード、OUTノードを使うことで入力を増やせます。<br />IN、OUT ノードのプロパティにはコンポ番号の指定ができるので特定のコンポに値を渡すことができます。<br /><br />
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="377" data-original-width="1608" height="150" src="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s=w640-h150" width="640" /></a>
+          </div><br />Compo 内で Compo 番号無しの IN ノードを利用することができます。<br />Compo 内で Compo 番号無しの OUT ノードは利用することはできません（同じ OUT ノードは複数作れないので）。<br /><br />Compo 番号付き IN、OUT ノードは全く同じ値でも Compo の中にあるか外にあるかで全く別の物であることに注意してください。<br />上の図に「INノード（青）：C1 インデックス２」はCompo 内とCompo 外にありますが別の意味です。Compo 内の方は Compo の出力２に繋がるノードですが、Compo の外の方は&nbsp;Compo の入力２に繋がり Compo 内の「OUTノード：C1 インデックス２」に値を渡すノードです。<br /><br />
+        </li>
+        <li><span style="box-sizing: border-box;"><b>Compo の Enable 入力と Enable 出力<br /></b></span><b><br /></b>Compo ノードをキャラクターとして使った時にそのキャラクターの出現と消滅を Enable 入出力でコントロールすることができます。<br /><br />Enable出力はキャラクターが存在している間は１を出力してキャラクターが破壊などで無くなったら０を出力します。<br /><br />Enable入力が０から１（０以外）に変わった時に Compo 内のプログラムが起動し、キャラクターが有効になります。キャラクターを存在し続けるには０以外を入力しつづけなければいけません。入力が０になるかキャラクターが破壊されるとキャラクターは消滅します。<br />Enable入力は何も繋がっていなければ１がずっと入力されているのと同じです。<br /><br />消滅したキャラクターでも入力を０から０以外にすればキャラクターは初期状態から再開することができます。<br />以下はキャラクターが壊れたら３秒後に最初の位置に再発生するプログラムです。<br /><br />
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="219" data-original-width="1131" height="124" src="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM=w640-h124" width="640" /></a>
+          </div><br />
+        </li>
+      </ul>
+    </div>
+    <ul style="text-align: left;">
+      <li><span style="box-sizing: border-box;"><b>Compo ノード内では親は１つ<br /></b></span><b><br /></b>Compo 内のオブジェクトの親子関係において複数の親オブジェクトノードがあってはいけません。２つのキャラクターを１つの Compo ノードに作成する状態は現在想定していません。<br />親が２つあってもその２つに共通の親が設定されていれば問題ありません。<br />オブジェクトノードを１つも持たない（親が１つもない）状態は問題ありません。<br /><br />
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="488" data-original-width="1203" height="163" src="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg=w400-h163" width="400" /></a>
+        </div><br />
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul style="text-align: left;">
+      <li><span style="box-sizing: border-box;"><b>Compo 内に作成できないノード<br /></b></span><br />BG, Setting, Stick, Button, Screen, OnBreak は Compo 内に作成できません。<br /><br /><br />
+      </li>
+    </ul>
+  </div>
+</section>
+<section id="share" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">9. プログラムをほかの人に遊んでもらう
+  </h2>
+  <div style="box-sizing: border-box; margin: 22px 0px 8px; text-align: left;"><span style="background-color: white;"><span style="font-size: small;">URLを教えるだけで自分が作った作品を他の人に遊んでもらうことができます。<br /></span></span><span style="background-color: white;">URL を開くと Play 画面から始まるので遊ぶ人は nodegram の知識は必要がありません。</span>
+  </div>
+  <section id="save" style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px; text-align: start;">
+    <p style="box-sizing: border-box; margin: 8px 0px;"><span style="background-color: initial; font-family: &quot;SF Mono&quot;, Consolas, Menlo, monospace;">https://daisuqe.github.io/nodegram/?url=</span>
+    </p>
+    <p style="box-sizing: border-box; margin: 8px 0px;"><span style="background-color: initial; font-family: &quot;SF Mono&quot;, Consolas, Menlo, monospace;"><span style="font-size: 0.9em;">の後に作品を置いた場所（URL）を追記するだけです。</span></span>
+    </p>
+    <pre style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(245, 246, 247); border-radius: 8px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; overflow: auto; padding: 12px 14px;"><code style="background: none; border-color: currentcolor; border-image: none; border-radius: 5px; border-style: none; border-width: medium; box-sizing: border-box; font-family: &quot;SF Mono&quot;, Consolas, Menlo, monospace; font-size: 0.9em; padding: 0px;">例）<br />https://daisuqe.github.io/nodegram/?url=https://example.com/mygame.json</code>
+    </pre>
+    <p class="small" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; margin: 12px 0px 8px;"><br />URL（リンク）のサンプル（シューティングゲーム）：
+    </p>
+    <div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-color: transparent; border-image: none 100% / 1 / 0 stretch; border-radius: 8px; border-style: solid; border-width: 1px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ ブラウザで開く</a><br /><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="font-size: 16px;"><br />
+      <div class="separator" style="clear: both; color: #282828; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="540" data-original-width="1249" height="277" src="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4=w640-h277" width="640" /></a>
+      </div><br />手順：<br />１．ゲームを MENU&gt;SAVE&gt;EXPORT で .json 形式のファイルでPC内やスマホ内に保存します。<br />２．</span>保存した .json ファイルを<a href="https://www.dropbox.com/" target="_blank">Dropbox</a>等のインターネット上のファイル管理サービスにアップロードし、アップロードしたリンク先のURLをサービス内の「リンク先のURLを取得」などから取得します。<br />３．「<span style="font-family: &quot;SF Mono&quot;, Consolas, Menlo, monospace;">https://daisuqe.github.io/nodegram/?url=」</span><span style="font-family: &quot;SF Mono&quot;, Consolas, Menlo, monospace; font-size: 14.4px;">の後に作品を置いた場所（URL）を追記した文字を自分のブラウザで開きます。</span>
+    </div><span style="font-family: &quot;SF Mono&quot;, Consolas, Menlo, monospace; font-size: 14.4px;"><br /></span>
+    <p style="box-sizing: border-box; margin: 8px 0px;">ファイルのアップロード先として <a href="https://www.dropbox.com/home" target="_blank">Dropbox</a> や <a href="https://github.co.jp/" target="_blank">GitHub</a> の raw URL、GitHub Pages は無料で安全に使うことができます。Dropbox であればスマホからのアップロードも簡単です。<br />GoogleDriveはブラウザの制限によりアプリからファイルを直接読むことがでないので追加のURLとしては使うことができません（CORS制限）。<br /><br />
+    </p>
+  </section>
+</section>
+<section id="notes" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+  <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">10. 注意点
+  </h2>
+  <ul style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+    <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;"><span><span>スマホ使用時<span style="font-weight: 400;">：<br />nodegram のショートカットをホーム画面に追加することでアプリのように扱うことができます。ただアプリと同じようにアプリを消す（ホーム画面のショートカットを消す）とSaveデータが消える可能性が高いです。完成したプログラムは Exportを使ってプログラムを外部ファイルとしてバックアップを取ってください。<br /><br />スマホのブラウザによっては表示や操作位置がズレることがあります。</span><br /></span><span style="font-weight: 400;">そのような場合は</span></span><span style="font-weight: 400;"> nodegram を終了。タスクを消し（アプリを削除するのではない）、スマホの向きをしっかり横向きにして再度起動すると直ります。<br /><br /></span></b>
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">自動セーブ：</b> <br />save 画面の「auto save」がオンになっていると、1分ごとに直前のファイルへ上書きされます。別名で残したいときはSaveで新しい名前を付けてください。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">権利：</b>&nbsp;<br />nodegram で作った作品は作った人に全ての権利があります。こちらが勝手に使用したり権利を主張することはありません。<br />nodegram のコードや仕様については私（harada）に権限があります。nodegram のコードの再配布は許可なしに行わないでください。<br /><br />
+    </li>
+    <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;"><b style="box-sizing: border-box;">著作権やトラブルについて：</b>&nbsp;<br />著作権のあるものを配慮無く使うことはお控えください。<br />また、nodegram の使用により発生した問題はこちらでは責任は負いません（故意で問題が起きるコードを入れることはありません）。
+    </li>
+  </ul>
+  <div>
+    <section id="nodes" style="box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;">
+      <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; width: 704px;">
+        <tbody style="box-sizing: border-box;">
+        </tbody>
+      </table>
+    </section>
+    <section id="notes" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+      <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">11. 連絡先
+      </h2>
+      <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+        <li style="box-sizing: border-box; margin: 4px 0px;"><span style="box-sizing: border-box;"><span face="-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif" style="color: #282828; font-size: 16px;">バグ報告、連絡があれば Xに連絡ください</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;"><b><a href="https://x.com/daiii">https://x.com/daiii</a></b></span><br /></span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section></main>
+<footer style="box-sizing: border-box; color: #666666; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Hiragino Sans&quot;, &quot;Noto Sans JP&quot;, Meiryo, sans-serif; font-size: 13px; padding: 16px 20px 24px; text-align: center;">
+  <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">Nodegram ユーザーガイド —
+  </div>
+</footer>
+</body>
+</html>
