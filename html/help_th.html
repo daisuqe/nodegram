@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>คู่มือการใช้งาน nodegram</title>
+  <style>
+    body { margin: 0; background: #ffffff; color: #282828;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; }
+    /* keep images with a height attribute from stretching when the page narrows */
+    img { max-width: 100%; height: auto; }
+    iframe { max-width: 100%; height: auto; }
+    table { max-width: 100%; }
+  </style>
+</head>
+<body>
+<div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 32px 0px;">
+<h1 style="text-align: left;"></h1><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"><br /></span></div><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"> <span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="letter-spacing: 0.3px;"><b>nodegram</b></span></span></div><div style="text-align: left;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiDstkyryoE0SJSgoUgAbrjBqCLne_phBA-cSV50I-G-TFO3lvBmK5IIqH0dsW08cW7-X2i0X5Fx4l9m7pUkgrBoIDhyMyGwSXDHSFwLFOTUpKtLJSWQ9vyPgTvXBDkv1HjMhd2k-m7KJ5GokqW-PQ2RdA2Xv09I-rEi-QPLg6KHvkktXDXvWaA0O7g8n0" style="margin-left: 1em; margin-right: 1em;"><span style="font-size: small;"></span></a><span style="font-size: small;"><div class="separator" style="clear: both; text-align: center;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="350" data-original-width="1065" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw=w640-h210" width="640" /></a></div></div><br /></span><div style="text-align: left;"><b style="color: #444444; font-size: large;"><span><span><span><span>เครื่องมือสำหรับเขียนโปรแกรมด้วยโหนด</span></span></span></span></b></div><div style="text-align: left;"><span style="color: #444444; font-size: medium;"><b>เขียนโปรแกรมได้ทันทีในเบราว์เซอร์ ทั้งบนมือถือ แท็บเล็ต และพีซี</b></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: medium;"><br /></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: large;">nodegram : </span></div><div style="text-align: left;"><a href="https://daisuqe.github.io/nodegram/" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">https://daisuqe.github.io/nodegram/</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  เปิด nodegram ในเบราว์เซอร์</a></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666; font-size: x-large;"><div style="color: black; font-size: medium;"><br />URL แบบสั้น</div><div style="color: black; font-size: medium;"><a href="https://bit.ly/nodegram" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">bit.ly/nodegram</a></div><a href="https://i.gg/ng" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">i.gg/ng</a></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666;"><span style="font-size: medium;"><br />ตัวอย่างโปรแกรม (เกมยิง):</span></span></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  เปิดตัวอย่างในเบราว์เซอร์</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="562" data-original-width="1000" height="225" src="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY=w400-h225" width="400" /></a></div></div></div>
+</div>
+<header class="hero" style="background-attachment: initial; background-clip: initial; background-image: none; background-origin: initial; background-position: initial; background-repeat: initial; background-size: initial; border: 0px; box-sizing: border-box; padding: 0px;">
+  <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">
+    <div style="text-align: center;"><main style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 6px 16px 48px; text-align: start;">
+      <nav class="toc" style='background: rgb(250, 250, 250); border-radius: 10px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 20px 0px; padding: 14px 18px;'>
+        <h2 style="box-sizing: border-box; color: #666666; font-size: 13px; letter-spacing: 1px; margin: 0px 0px 8px; text-transform: uppercase;">สารบัญ
+        </h2>
+        <ol style="box-sizing: border-box; column-gap: 26px; columns: 2; margin: 0px; padding-left: 20px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#about" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">nodegram คืออะไร</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#basic" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">เริ่มต้นอย่างไร</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#views" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">สามหน้าจอ</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#menu" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">MENU</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#mobile" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">บนมือถือและบนพีซี</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#nodes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">คำอธิบายโหนด</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">โหนด Compo</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#share" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ให้คนอื่นเล่นโปรแกรมของคุณ</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ข้อกำหนด</a></li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#notes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">เรื่องที่ควรรู้</a>
+          </li>
+        </ol>
+      </nav>
+      <section id="about" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">1. nodegram คืออะไร
+        </h2>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">nodegram คือ<strong style="box-sizing: border-box;"><span style="color: #ffa400;">เครื่องมือสำหรับเขียนโปรแกรมด้วยโหนด</span></strong><br /><br />เพียงต่อโหนด Stick เข้ากับโหนด Character ตัวละครก็ขยับได้แล้ว
+        <br /><br /></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="2051" data-original-width="3950" height="261" src="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4=w503-h261" width="503" /></a><br /><br /></div><p></p>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• เขียนโปรแกรมได้ทั้งบนมือถือและบนพีซี</p><p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• ให้คนอื่นเล่นเกมที่คุณสร้างได้<br />• nodegram ทำงานบนเว็บ จึงเขียนโปรแกรมได้ทุกที่ที่มีอินเทอร์เน็ต (โปรแกรม nodegram หนึ่งชิ้นมีขนาดราว ๆ รูปภาพหนึ่งรูปเท่านั้น)<br /><br /></p><div class="column" style="background: #f7fafd; border: 1px solid #cfe0ef; border-left: 4px solid #3d85c6; border-radius: 8px; box-sizing: border-box; margin: 18px 0px; padding: 14px 16px;"><div style="box-sizing: border-box; color: #3d85c6; font-weight: 700; margin-bottom: 8px;">การเขียนโปรแกรมด้วยโหนด (Node Programming) คืออะไร</div><div style="box-sizing: border-box; color: #282828;">nodegram มีโหนดมากกว่า 40 ชนิด เช่น โหนดที่ทำหน้าที่บวกอย่างเดียว โหนดที่จำตัวเลขไว้ โหนดที่ตรวจว่ามีการกดปุ่มหรือไม่ เป็นต้น<br />การเขียนโปรแกรมด้วยโหนดเปรียบเหมือนทีมคนงาน (โหนด) ที่ส่งต่อข้อมูลให้กันเพื่อทำงานใหญ่ชิ้นหนึ่งให้สำเร็จ แต่ละคนรับค่าจากคนก่อนหน้า ทำงานส่วนเล็ก ๆ ของตน แล้วส่งผลลัพธ์ต่อไป ทุกคนทำงานอยู่ตลอดเวลาไม่หยุด<br />ส่วนการเขียนโปรแกรมแบบข้อความนั้นต่างออกไป คนงานเพียงคนเดียวอ่านคำสั่งทีละบรรทัดแล้วทำตามลำดับ</div></div><p style="color: #282828;"></p>
+        <div class="separator" style="clear: both; color: #282828; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /><br /><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a>
+          </div>
+        </div>
+      </section>
+      <section id="basic" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <br />
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">2. เริ่มต้นอย่างไร</h2><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;"></p><p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px; text-align: center;'><video controls playsinline preload="metadata" width="440" style="max-width: 100%;"><source src="sample_shoot_blog.mp4" type="video/mp4" />เบราว์เซอร์ของคุณเล่นวิดีโอนี้ไม่ได้</video><br />วิธีสร้างเกมยิง (2 นาที)<br /></p>nodegram มีสามหน้าจอ ได้แก่<br /> สำหรับประกอบโปรแกรม <b style="box-sizing: border-box;"><span style="color: #ffa400;">NodeEditor</span></b><br /> สำหรับวางออบเจ็กต์ และ <span style="box-sizing: border-box;"><span style="color: #ffa400;"><b>Layout</b><br /><span style="color: #282828;"><b> </b></span><b style="box-sizing: border-box; color: #282828; font-weight: bold;"><span style="color: #ffa400;">Play</span></b><b style="box-sizing: border-box; color: #282828; font-weight: bold;"> </b></span></span><p></p><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;"> สำหรับรันโปรแกรม<br /><br /></p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-1. การสร้างโหนด (NodeEditor)
+        </h3>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">ใน NodeEditor <strong style="box-sizing: border-box;"><span style="color: #ffa400;">ให้กดค้างที่พื้นหลัง (พื้นที่สีดำว่าง ๆ)</span></strong> จะเปิดหน้าต่าง “<b><span style="color: #ffa400;">CREATE NEW NODE</span></b>”<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="412" data-original-width="709" height="373" src="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI=w640-h373" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">เลือกโหนดที่ต้องการจากรายการ แล้วโหนดนั้นจะปรากฏใน NodeEditor
+          </li>
+          <li style="color: #282828;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>กดค้างที่โหนด หรือดับเบิลคลิก เพื่อเปิดหน้าต่าง Property ที่ใช้ตั้งค่าโดยละเอียด<br />สิ่งอย่างเช่นสีของออบเจ็กต์ก็เปลี่ยนที่นี่<br />ไม่มีปุ่ม OK เพราะทุกการเปลี่ยนแปลงมีผลทันที ปิดหน้าต่างด้วยเครื่องหมาย × มุมขวาบน หรือแตะนอกหน้าต่าง<br />DUPLICATE ใช้ทำสำเนาโหนด ส่วน DELETE ใช้ลบ<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="229" src="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs=w498-h229" style="max-width: 100%;" width="498" /></a>
+            </div><br /></span>
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">ลากโหนด (แตะแล้วเลื่อน) เพื่อย้ายตำแหน่ง
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">ลากจากพอร์ตขาออกด้านขวาของโหนดไปยังพอร์ตขาเข้า (ด้านซ้ายของอีกโหนดหนึ่ง) เพื่อ</span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">ต่อสาย</span></strong><span style="color: #282828;"> เมื่อต่อแล้ว ระหว่างรันโปรแกรมค่าจะไหลไปตามสายนั้นจากปลายสีแดงไปยังปลายสีน้ำเงิน</span><br /><br />
+            <div class="separator" style="clear: both; color: #282828; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8=w400-h184" style="max-width: 100%;" width="400" /></a><br /><br />
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>โหนดที่มีขั้วอยู่ด้านบน (ขั้วลูก) สามารถต่อจากตรงนั้นไปยังขั้วแม่ (ด้านล่างของอีกโหนดหนึ่ง) ได้ ทั้งสองจะกลายเป็นคู่แม่-ลูก และลูกจะเคลื่อนที่ไปพร้อมกับแม่<br /></span>เช่น ถ้าผู้เล่นยิงกระสุน ให้จุดที่กระสุนออกเป็นลูก และให้ผู้เล่นเป็นแม่<br />
+            <div><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'><br /></span>
+            </div>
+            <div>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg=w400-h184" style="max-width: 100%;" width="400" /></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-2. การวางออบเจ็กต์ (หน้าจอ Layout)
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">กดปุ่ม “Layout” เพื่อไปยังหน้าจอ Layout<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="265" data-original-width="217" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="max-width: 100%;" width="197" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">ใน Layout คุณจะวาง<strong style="box-sizing: border-box;">โหนดออบเจ็กต์ เช่น Rect, Circle, Character และ Text<br /></strong> รวมทั้ง<strong style="box-sizing: border-box;">โหนดควบคุม เช่น Button และ Stick</strong><br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="464" data-original-width="876" height="338" src="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA=w640-h338" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">ลากออบเจ็กต์เพื่อย้าย ใช้จุดจับสีขาวที่มุมทั้งสี่เพื่อปรับขนาด และใช้จุดจับกลมด้านบนเพื่อกำหนดทิศทาง
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">กด “NODE” เพื่อกลับไปยัง NodeEditor
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-3. การรันโปรแกรม (หน้าจอ Play)
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><strong style="box-sizing: border-box;"><span style="color: #ffa400;">ปุ่ม ▶ (Play) </span></strong>ที่มุมขวาบนของ NodeEditor หรือ Layout จะพาไปยังหน้าจอ Play และเริ่มรันโปรแกรม
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">กดค้างที่ปุ่ม □ <strong style="box-sizing: border-box;"><span style="color: #ffa400;">(Stop)</span></strong> มุมขวาบนของหน้าจอ Play เพื่อหยุดและกลับไปแก้ไข
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">ในหน้าจอ Play โหนดออบเจ็กต์จะถูกวาดทุก 1/60 วินาที (หนึ่งเฟรม) และเคลื่อนที่ไปพร้อมกับการคำนวณฟิสิกส์
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">ควบคุมได้ด้วยการแตะหน้าจอ ใช้ JoyStick บนหน้าจอ ใช้แป้นพิมพ์ หรือใช้เมาส์<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj2mtifbvqP9FBbyj1ZUKSBPAkQFq01_rm7nl0-2i5JcJcspALQ2FeGWetsp6DiqzReaKXKZaT9bFK9wEM7QIm4KI8vHrTDzujX8f6L-Yw4M_F1Pux_dUqiZ07KcxH9Frs_6DwXoELvUNxqavf20Btp4R5WbeEtY0ndfjEAVSga6tzuRHcw9o-M8PGnuoc" style="margin-left: 1em; margin-right: 1em;"></a>
+              <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="294" src="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY=w640-h294" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </div>
+          </li>
+        </ul>
+        <div style="color: #282828; text-align: center;">
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+            <li><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">ในหน้าจอ Play ยังแสดงแรงโน้มถ่วงได้ด้วย<br /></span>หากต้องการเกมแนวพินบอลหรือมาริโอ ให้เปิด Dynamics (การคำนวณฟิสิกส์) <br style="font-size: 16px;" /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><b><span style="color: #ffa400;">เพิ่มโหนด Setting</span></b> แล้วเปิด Dynamics ใน Property ของมัน ฟิสิกส์จะมีผลกับทั้งโปรแกรม<br />โหนดออบเจ็กต์แต่ละตัวก็มีการตั้งค่า Dynamics ของตัวเองด้วย จึงต้องเปิดทีละตัว<br /><br /></span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="views" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">3. สามหน้าจอ
+        </h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-1. การใช้ NodeEditor
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">เป็นหน้าจอสำหรับวางโหนดและต่อสายเชื่อมกัน<br /><br />
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="360" data-original-width="914" height="253" src="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E=w640-h253" style="max-width: 100%;" width="640" /></a>
+        </div><br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">การกระทำ
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ผลลัพธ์
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ลากด้วยนิ้วเดียวบนพื้นหลัง
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เลื่อนมุมมอง
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">หุบสองนิ้ว หรือหมุนล้อเมาส์
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ย่อ/ขยายมุมมอง
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ดับเบิลคลิกแล้วลาก (บนพื้นหลัง)
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เลือกแบบครอบกรอบ (เลือกหลายโหนด)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">กดค้างที่พื้นหลัง
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เปิด CREATE NEW NODE
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ลากโหนด
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ย้ายโหนด (ถ้าเลือกไว้หลายตัวจะย้ายพร้อมกัน)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ดับเบิลคลิกหรือกดค้างที่โหนด
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เปิด Property (ถ้าเลือกหลายตัวจะเป็นเมนูสำหรับหลายโหนด)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ลากระหว่างขั้ว
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ต่อสาย (เพื่อไม่ให้พลาด หลังแตะให้หยุดนิดหนึ่งแล้วค่อยลาก)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">กดค้างที่สาย หรือดึงสายออกไปด้านนอก
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ตัดการเชื่อมต่อ<br />ลากจากขั้วออกไปด้านนอกแล้วปล่อยก็ตัดการเชื่อมต่อได้เช่นกัน
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-2. การใช้หน้าจอ Layout
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">เป็นหน้าจอสำหรับกำหนดตำแหน่ง ขนาด และการหมุนของออบเจ็กต์ สี่เหลี่ยมสีเทาคือพื้นที่ที่มองเห็นตอน Play
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="411" data-original-width="804" height="328" src="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E=w640-h328" style="max-width: 100%;" width="640" /></a>
+        </div><br />วิธีควบคุมโดยพื้นฐานเหมือนกับ NodeEditor<br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">การกระทำ
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ผลลัพธ์
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ลากด้วยนิ้วเดียว (พื้นหลัง)
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เลื่อนมุมมอง
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ล้อเมาส์ / หุบสองนิ้ว
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ย่อ/ขยาย
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ลากออบเจ็กต์
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ย้าย (ถ้าเลือกไว้หลายตัวจะย้ายพร้อมกัน)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">แตะออบเจ็กต์
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เลือก การเลือกนี้ใช้ร่วมกับ NodeEditor ด้วย
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ลากจุดจับ
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ปรับขนาด / หมุน
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ดับเบิลคลิกแล้วลาก (พื้นหลัง)
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เลือกแบบครอบกรอบ
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">กดค้างที่พื้นหลัง
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เปิด CREATE NODE
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">กดค้างที่สิ่งที่เลือกไว้
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><span style="color: #282828;">เปิด Property (ถ้าเลือกหลายออบเจ็กต์จะเป็นเมนู Duplicate/Delete)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>เมื่อเลือกออบเจ็กต์ จะมีตัวเลขเช่น “50” ปรากฏทางขวาของมัน<br />ตัวเลขนั้นคือ SortingLayer ยิ่งค่ามากยิ่งวาดไว้ด้านหน้า ยิ่งค่าน้อยยิ่งอยู่ด้านหลัง<br />เปลี่ยนค่าได้ด้วยปุ่ม ▲▼ ที่อยู่ด้านล่าง<br /><br />นอกจากนี้โหนด SETTING ยังมีตัวเลือก GridSnap<br />เมื่อเปิดใช้ ออบเจ็กต์จะขยับทีละ 10 พิกเซล<br /><br />ขนาดของพื้นที่สีเทาปรับได้ที่โหนด Setting</section>
+      <section id="menu" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+        <h2 class="sec" style='border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;'>4. MENU
+        </h2>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="351" data-original-width="374" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" width="256" /></a>
+        </div>
+        <p>
+        </p>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>กดค้างที่ปุ่ม <b>MENU</b> มุมขวาบน แล้วเลื่อนนิ้วไปทางรายการที่ต้องการและปล่อย รายการนั้นจะทำงาน ใช้กดแบบปุ่มธรรมดาก็ได้<br /><br />ปุ่ม ▶ มุมขวาบนจะพาไปยังหน้าจอ Play และเริ่มรันโปรแกรม<br /><b>Layout </b> จะพาไปยังหน้าจอ Layout
+        </p>
+        <p style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-items">4-1. รายการในเมนู
+        </h3>
+        <table style='border-collapse: collapse; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; margin: 14px 0px; max-width: 100%;'>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW NODE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">เปิด CREATE NODE เพื่อเพิ่มโหนดใหม่ การกดค้างที่พื้นหลังก็เปิดหน้าต่างเดียวกัน
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SAVE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">บันทึกโปรแกรมปัจจุบันโดยตั้งชื่อ (ดู<a href="#menu-save" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-2</a>)
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">LOAD
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">โหลดโปรแกรมที่บันทึกไว้ (ดู<a href="#menu-load" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-3</a>)
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">UNDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ยกเลิกการกระทำล่าสุด
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">REDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ทำซ้ำการกระทำที่ยกเลิกไป
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">FIT
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ปรับการซูมและตำแหน่งให้โหนดทั้งหมดพอดีกับหน้าจอ
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ลบทั้งหมดแล้วเริ่มโปรแกรมใหม่</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SETTING
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">เปิดการตั้งค่าของตัวแอปเอง (ดู<a href="#menu-setting" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-4</a>) ซึ่งเป็นคนละอย่างกับโหนด SETTING
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">OPEN HELP
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">เปิดหน้าช่วยเหลือนี้
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>ขณะที่แก้ไขอยู่ภายใน Compo รายการทางซ้ายจะเปลี่ยนเป็นรายการสำหรับ Compo ซึ่งอธิบายไว้ในบท “โหนด Compo”
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-save">4-2. SAVE (การบันทึก)
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>บันทึกโปรแกรมโดยตั้งชื่อไว้ในเครื่องนี้ ถ้ามีชื่อเดิมอยู่แล้วจะถูกเขียนทับ ชื่อใช้ตัวอักษรละติน ตัวเลข และสัญลักษณ์บางตัวได้<br /><b>AUTO</b> จะเปิด<b>การบันทึกอัตโนมัติ</b> หลังจากนั้นโปรแกรมจะถูกบันทึกทุก 30 วินาที (ไม่บันทึกระหว่าง Play)<br /><b>EXPORT</b> จะส่งออกโปรแกรมเป็นไฟล์ สะดวกสำหรับสำรองข้อมูลหรือส่งให้ผู้อื่น<br />เลือกรูปแบบได้ระหว่าง <b>.ngz (บีบอัดแบบ gzip)</b> กับ <b>.json (ข้อความ)</b><br />เพียงเปลี่ยนนามสกุลของไฟล์ .ngz เป็น <b>.gz</b> โปรแกรมแตกไฟล์ทั่วไปก็ดึง JSON ออกมาได้
+        </p>
+        <p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'><span style="color: #282828;">บันทึกได้สูงสุด <b>256</b> รายการ ข้อมูลเก็บอยู่ในเบราว์เซอร์ที่ใช้ จึงมองไม่เห็นจากเครื่องอื่นหรือเบราว์เซอร์อื่น<br />ข้อมูลที่บันทึกอยู่ภายใน nodegram หากลบทางลัด nodegram ออกจากมือถือ ข้อมูลอาจหายไปด้วย<br /></span><span style="color: red;"><b>สำหรับสิ่งสำคัญ ควรใช้ EXPORT แล้วเก็บเป็นไฟล์ไว้</b></span>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-load">4-3. LOAD (การโหลด)
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>แสดงรายการโปรแกรมที่บันทึกไว้ ปุ่มข้างชื่อแต่ละรายการใช้ลบได้ด้วย<br /><b>IMPORT</b> ใช้โหลดไฟล์ที่ส่งออกไว้ก่อนหน้า การโหลดมีสองแบบ คือ <b>โหลด</b> ซึ่งแทนที่เนื้อหาปัจจุบัน กับ <b>โหลดเพิ่ม</b> ซึ่งคงโปรแกรมที่ทำอยู่ไว้แล้วต่อไฟล์เข้าไปข้างใต้</p><p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>หากนำเข้าไฟล์ <b>.obj</b> ที่สร้างจากซอฟต์แวร์ 3 มิติ ข้อมูล 3 มิติจะถูกอ่านเป็นโหนด POLYGON หรือเป็นโหนด ARRAY ที่ต่อกับโหนด LINE (การแสดงผลแบบ 3 มิติ) รายละเอียดดู<a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. ออบเจ็กต์ 3 มิติ</a>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-setting">4-4. SETTING (การตั้งค่าแอป)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">การตั้งค่าของตัวแอปเอง สิ่งที่เปลี่ยนที่นี่จะไม่ถูกบันทึกลงในโปรแกรม แต่คงอยู่เฉพาะในเครื่องนี้</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Wire</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：เลือกรูปแบบของสาย (เส้นโค้ง／เส้นตรง)</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>NodeColor</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：เลือกสีของโหนด</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Language</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：เปลี่ยนภาษาที่แสดง
+        </span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">ญี่ปุ่น อังกฤษ จีน (ตัวย่อ) ฝรั่งเศส เยอรมัน ฮินดี อินโดนีเซีย อิตาลี เกาหลี โปรตุเกส รัสเซีย สเปน ไทย ตุรกี และเวียดนาม</span></p><p style="box-sizing: border-box; margin: 8px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;">การตั้งค่าของแต่ละฉาก เช่น FPS หรือ Dynamics ไม่ได้อยู่ที่นี่ แต่อยู่ที่</span><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>โหนด SETTING</b><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;"> ชื่อคล้ายกันมาก อย่าสับสน</span></p>
+      </section>
+      <section id="mobile" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">5. บนมือถือและบนพีซี
+        </h2><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>บนมือถือ<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">การควบคุมด้วยการสัมผัส:</b><br />เลื่อนด้วยนิ้วเดียว ขยายด้วยการหุบสองนิ้ว การกดค้าง การแตะสองครั้งแล้วลาก และอื่น ๆ ทำงานเหมือนบนพีซี<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">การหมุนหน้าจอ:</b><br />มุมมองจะหมุนตามทิศทางของเครื่อง ระหว่าง Play จะใช้ทิศทางที่กำหนดไว้ในโหนด SETTING (แนวนอน=Horizontal／แนวตั้ง=Vertical) หากถือเครื่องกลับด้านจะมีข้อความแจ้ง
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">ข้อแนะนำสำหรับ iOS:</b> <br />บนอุปกรณ์ iOS อย่าง iPhone ให้เปิดเมนูของ Safari แล้วแตะ ① และ ② เพื่อซ่อนแถบเครื่องมือ จะได้ภาพเกือบเต็มจอและใช้ nodegram ได้สบายขึ้นมาก<br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="641" data-original-width="1289" height="199" src="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0=w400-h199" style="max-width: 100%;" width="400" /></a>
+            </div>หากต้องการเต็มจอจริง ๆ ให้เปิดเมนูแชร์ของ Safari แล้วเลือก “เพิ่มไปยังหน้าจอโฮม” nodegram จะทำงานเหมือนแอป ซึ่งเราแนะนำวิธีนี้<br /><b><span style="color: red;">พึงระวังว่าการลบไอคอนนั้นออกจากหน้าจอโฮมอาจทำให้ข้อมูลที่บันทึกไว้หายไปด้วย ให้ Export สิ่งสำคัญไปเก็บไว้ในโฟลเดอร์ของเครื่อง</span></b>
+          </li>
+        </ul><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>บนพีซี<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">ปุ่มลัด:<br /></b><br />
+            <p dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">ใช้ได้ทั้งใน NodeEditor และ Layout</span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">ปุ่ม</span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">การทำงาน</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Delete</code> หรือ <code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Backspace</code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">ลบโหนดที่เลือกไว้ (มีหน้าต่างยืนยัน)</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Ctrl+D</code> (บน Mac คือ Cmd+D<code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Cmd+D</code>)</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">ทำสำเนาโหนดที่เลือกไว้ (มีหน้าต่างยืนยัน)</span>
+                    </td>
+                  </tr>
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 15ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="el" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Y หรือ Ctrl+Shift+Z<br /></span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 8ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Redo</span></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;"><br />เมื่อเปิดตัวแก้ไข TEXTURE อยู่ (เพิ่มเติมจากข้างต้น)</span></span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">ปุ่ม</span></span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">การทำงาน</span></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+V</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">วางรูปภาพจากคลิปบอร์ด</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+C</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">คัดลอกเท็กซ์เจอร์ที่กำลังแก้ไขทั้งหมดไปยังคลิปบอร์ด</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">ย้อนกลับในตัวแก้ไขเท็กซ์เจอร์</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="color: #0b0b0b; font-family: arial; font-size: 13px; font-variant-ligatures: none;">Ctrl+Y หรือ Ctrl+Shift+Z</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">ทำซ้ำในตัวแก้ไขเท็กซ์เจอร์</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table><br />รองรับ Mac ด้วย</div>
+          </li>
+        </ul>
+      </section>
+      <section id="nodes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">6. คำอธิบายโหนด
+        </h2>
+        <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; font-size: 16px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhElpzs_62w4PYYXXQvNbziDoolx0vATkkN2Ig3P6kEp5H3Lq3BPvt3RsEMt0PryRdXOvahVj7zSL0eINC3SZtWlxKOx82JQ0RBHTXmjSAK8uOAu4Hw_BhMUc79piLzYsIAIRbzM8hVjXueKiIzsP7GhXu6bc2FgSc4x9mexzcZSzq1-AanVmqE8SLBI4I" style="margin-left: 1em; margin-right: 1em;"></a>
+          <div class="separator" style="clear: both;"><br />
+          </div>
+          <div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E"><img alt="" data-original-height="1072" data-original-width="2262" height="304" src="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E=w640-h304" style="max-width: 100%;" width="640" /></a>
+          </div><br />
+        </div>
+        <p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">In/Out หมายถึงจำนวนขั้วขาเข้า／จำนวนขั้วขาออก
+        </p>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"> ค่าคงที่
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">ขาเข้า/ขาออก</th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-green" style="background: rgb(46, 166, 110); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Constant
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกตัวเลขที่ตั้งไว้ใน Value
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-blue" style="background: rgb(31, 115, 224); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> การคำนวณ
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">＋
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1</td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกผลของ ขาเข้า① ＋ ขาเข้า②<br />ไม่จำเป็นต้องมีโหนดบวกเสมอไป เพราะขั้วขาเข้าหนึ่งขั้วรับสายได้หลายเส้นและบวกกันเองอยู่แล้ว ต่อสองสายเข้าที่ขาเข้า① ก็ได้ผลรวมของทั้งสองแล้ว
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">－
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกผลของ ขาเข้า① － ขาเข้า②
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">×
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกผลของ ขาเข้า① × ขาเข้า②
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">÷
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกผลของ ขาเข้า① ÷ ขาเข้า② ถ้าตัวหารเป็น 0 จะส่งออก 0
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;"><span style="font-family: trebuchet;">√</span>
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกรากที่สองของขาเข้า① ถ้าขาเข้าเป็น 0 หรือน้อยกว่าจะส่งออก 0
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Compare
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เปรียบเทียบขาเข้า① กับขาเข้า② (=, &gt;, &lt;, ≠, ≥, ≤) ถ้าเงื่อนไขเป็นจริงจะส่งออก 1 ถ้าไม่จริงจะส่งออก 0
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Not ( ! )
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออก 1 ถ้าขาเข้า① เท่ากับ 0 นอกนั้นส่งออก 0
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Pos Angle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">จากตำแหน่งเป็นมุม ส่งออก ArcTan2(ขาเข้า②, ขาเข้า①) เป็นองศา
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Angle Pos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">จากมุมเป็นตำแหน่ง ส่งออก (cos, sin) ของมุมที่กำหนดเป็นองศา
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Random
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกจำนวนเต็มสุ่มตั้งแต่ 0 จนถึงน้อยกว่า Number ค่าจะถูกสุ่มใหม่เมื่อเริ่ม Play และในทุกเฟรมที่ขาเข้า① ไม่เป็นศูนย์ หากเปิด Use Seed และกำหนดค่า Seed ทุกครั้งที่ Play จะได้ลำดับเดิมซ้ำ
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Int
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ทำให้เป็นจำนวนเต็ม คุณสมบัติ Round เลือกได้ระหว่าง Floor / Round / Integer<br />Floor (ค่าเริ่มต้น) เลือกจำนวนเต็มที่ใกล้ที่สุดซึ่งไม่เกินค่าขาเข้า เช่น 2.8 กลายเป็น 2 และ -0.1 กลายเป็น -1 ส่วน Round ปัดไปยังค่าที่ใกล้ที่สุด และ Integer เก็บเฉพาะส่วนที่เป็นจำนวนเต็ม
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-cyan" style="background: rgb(0, 191, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> ค่าและเวลา
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Trigger
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออก 1 เพียงหนึ่งเฟรม ในจังหวะที่ขาเข้าเปลี่ยนจาก 0 ไปเป็นค่าอื่น<br />DELAY(F) จะหน่วงเลข 1 นั้นออกไปตามจำนวนเฟรมที่กำหนด
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Counter
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ตัวนับ ในแต่ละเฟรมจะบวกขาเข้า① ลบขาเข้า② แล้วส่งออกค่าที่เก็บไว้<br />Type＝Clamp จะคุมค่าไว้ระหว่าง Min กับ Max ส่วน Loop จะวนค่าอยู่ในช่วงนั้น ตั้งค่า Value (ค่าเริ่มต้น) Min และ Max ได้</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Var
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ใช้เป็นตัวแปร เก็บตัวเลขหนึ่งค่าไว้แล้วส่งออก<br />เมื่อสัญญาณเซ็ตที่ขาเข้า② ไม่เป็นศูนย์ จะจดจำค่าขาเข้า①<br />กำหนดค่าเริ่มต้นได้
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Array
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ใช้เป็นอาร์เรย์<br />ให้ดัชนีที่ขาเข้า② (ตำแหน่งในอาร์เรย์ เริ่มจาก 0) แล้วโหนดจะส่งออกสมาชิกตัวนั้น การนับเริ่มที่ 0 อาร์เรย์ความยาว 3 จึงใช้ 0, 1 หรือ 2 ส่วนค่าที่น้อยกว่า 0 และตั้งแต่ 3 ขึ้นไปจะได้ 0<br />สัญญาณเซ็ตที่ขาเข้า③ จะเขียนทับสมาชิกที่ดัชนี (ขาเข้า②) ด้วยค่าของขาเข้า①<br />ค่าเริ่มต้นให้คั่นด้วยเครื่องหมายจุลภาคหรือขึ้นบรรทัดใหม่<br />อาร์เรย์ยังใช้เป็นโน้ตเพลงให้โหนด Sound และเป็นเส้นหักให้โหนด Line ได้ ปุ่ม SEQUENCER และ LINE ใน Property จะเปิดตัวแก้ไขที่ทำมาเพื่อสองงานนี้โดยเฉพาะ (ดูด้านล่าง)<br />นอกจากนี้อาร์เรย์ยังเก็บโครงลวด 3 มิติได้ด้วย (ดู<a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. ออบเจ็กต์ 3 มิติ</a>)</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetPos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">อ่านตำแหน่ง X และ Y ปัจจุบันของออบเจ็กต์แม่ สลับระหว่าง WORLD กับ LOCAL ได้
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetRot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกมุมปัจจุบันของออบเจ็กต์แม่ โดยทวนเข็มนาฬิกาเป็นบวก สลับระหว่าง WORLD กับ LOCAL ได้</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Velocity
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกความเร็ว X และ Y ต่อวินาทีของออบเจ็กต์แม่ (Y เป็นบวกเมื่อขึ้นบน) ยิ่งตั้ง Frames มาก ยิ่งเฉลี่ยจากหลายเฟรมและค่าจะเปลี่ยนอย่างนุ่มนวลขึ้น
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">ตัวแก้ไขเฉพาะของ ARRAY (SEQUENCER / LINE)
+          </h3>
+          <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;"><br />
+          </p>
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+            <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">ตัวแก้ไข LINE</b>：<br />เครื่องมือสำหรับวาดเส้นหักที่จะส่งให้โหนด Line<br />จุดกำเนิดอยู่กลางพื้นที่วาด X เป็นบวกไปทางขวา Y เป็นบวกขึ้นบน ทั้งคู่มีค่าตั้งแต่ -99 ถึง 99<br />DRAW ใช้วาดเส้น ระหว่างวาดปุ่ม DRAW จะเปลี่ยนเป็น Endpoint กดแล้วเส้นที่กำลังวาดจะจบลง<br />MOVE ใช้ย้ายจุด ERASE ใช้ลบเส้นทีละเส้น VIEW ใช้เลื่อนมุมมอง และ ◁ ▷ คือย้อนกลับ／ทำซ้ำ เมื่อปิด ภาพวาดจะกลายเป็นรายการตัวเลข x,y โดย x,y = (9999,9999) จะตัดเส้นให้ขาด<br />ตั้งโหนด LINE เป็นแม่ของโหนด ARRAY แล้วโหนด LINE นั้นจะวาดตามข้อมูลในอาร์เรย์ โหนด ARRAY หนึ่งตัวมีแม่ได้หลายตัว (โหนด LINE หลายตัว)<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="364" data-original-width="494" height="236" src="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ=w320-h236" style="max-width: 100%;" width="320" /></a>
+              </div><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box; font-size: 16px;">ตัวแก้ไข SEQUENCER</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">：</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">เครื่องมือสำหรับสร้าง ARRAY โน้ตเพลงให้โหนด Sound มีเฉพาะตัวเขบ็ตหนึ่งชั้น 1 ห้อง＝8 ตัว สูงสุด 500 ห้อง </span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">3 ช่วงเสียง</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">ในโหมด DRAW ให้คลิกหรือลากเพื่อวางโน้ต ในโหมด ERASE ให้ลากเพื่อลบ</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">เมื่อปิด จะได้อาร์เรย์ของตัวเขบ็ตที่โดเท่ากับ 0 และเรเท่ากับ 1 ตัวหยุดคือ </span><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="box-sizing: border-box; font-size: 16px;">99 (อันที่จริงค่าที่มากกว่า 80 ทั้งหมดถือเป็นตัวหยุด)</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif"> และห้องที่มีโน้ตตัวสุดท้ายจะถูกเติมตัวหยุดจนเต็ม ครึ่งเสียงเขียนเป็น 0.5<br /></span>ถ้าติ๊ก Chromatic แต่ละช่องจะกลายเป็นหนึ่งใน 12 ครึ่งเสียง (โด=0, โด♯=1, เร=2, เร♯=3, มี=4, ฟา=5, ฟา♯=6, ซอล=7, ซอล♯=8, ลา=9, ลา♯=10, ที=11) และหนึ่งช่วงเสียงเท่ากับ 12 โหนด Sound ก็มีช่องติ๊กเดียวกัน ให้ตั้งค่าทั้งสองให้ตรงกัน<br /><br /><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">ลำพัง ARRAY อย่างเดียวไม่มีเสียง ต้องมีโปรแกรมอย่างในลิงก์ด้านล่าง</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">
+              <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"></span>
+              </p>
+              <div class="links" style="box-sizing: border-box; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/xtty3xoo2man3cppp2vw0/turip02.json?rlkey=ber1bizk17rugdkbe8czrm9cx&amp;st=4itsm9sm&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ เปิดตัวอย่าง</a>
+              </div></span>
+            </li>
+          </ul>
+        </div>
+        <div style="font-size: 16px;">
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="327" data-original-width="528" height="198" src="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="max-width: 100%;" width="320" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;"><br />
+          </div>
+          <div class="separator" style="clear: both;"> ยังแก้ไขหลายลำดับ (ARRAY) พร้อมกันได้ด้วย
+          </div>
+          <div class="separator" style="clear: both;"> เลือกโหนด ARRAY หลายตัวใน NodeEditor แล้วกดค้างที่ตัวใดตัวหนึ่ง
+          </div>
+          <div class="separator" style="clear: both;"> จากนั้นเลือก “SEQUENCER”
+          </div>
+          <div class="separator" style="clear: both;"> ปุ่มตัวเลขใช้เลือกอาร์เรย์ที่จะแก้ไข กดค้างจะเปิดเมนูระดับเสียง
+          </div>
+          <div class="separator" style="clear: both;"> และลากเพื่อสลับลำดับได้<br /><br />
+          </div>
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="549" data-original-width="1010" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU=w400-h217" style="max-width: 100%;" width="400" /></a>
+            </div>
+          </div>
+          <div class="separator" style="clear: both;"><br />
+          </div><br /><span class="swatch nc-purple" style="background: rgb(163, 51, 191); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span style="background-color: white; color: #161616; font-size: 18px;"> การแสดงผลและออบเจ็กต์</span>
+        </div>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Text
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">แสดงข้อความ ถ้าไม่ได้ต่ออะไรจะแสดงข้อความในคุณสมบัติ Text แต่ถ้าต่อสายไว้จะแสดงค่านั้น ขาเข้า② ใช้เปิด/ปิดการแสดงผล ตัวเลขจะถูกปัดที่ทศนิยมตำแหน่งที่หกและแสดงถึงตำแหน่งที่ห้า ตั้งค่าสีตัวอักษร การจัดวาง และกรอบรอบ ๆ ได้
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Rect
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ออบเจ็กต์สี่เหลี่ยม เมื่อ Dynamics ปิดอยู่ ขาเข้า①② คือพิกัด x, y แต่เมื่อเปิดอยู่จะเป็นแรงภายนอก x, y ขาเข้า③ ใช้เปิด/ปิดการแสดงผล ตั้งค่าสี เส้นขอบ Tag ขนาด การหมุน Sorting Layer และอื่น ๆ ได้ ส่วน Broken by 1〜3 ใช้ระบุ My Tag ของฝ่ายที่ทำลายมันได้<br />เรื่อง Dynamics และ Tag ดู<a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9. ข้อกำหนด</a>
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Circle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ออบเจ็กต์วงกลม นอกจากรูปทรงและคุณสมบัติ Radius แล้ว ขาเข้าและคุณสมบัติเหมือนกับ RECT
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Character
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ตัวละครที่เดินและกระโดดได้ ขาเข้า①② คือความเร็ว ส่วนขาเข้า③ จะทำให้กระโดดในจังหวะที่เปลี่ยนจาก 0 หรือน้อยกว่าไปเป็นค่าบวก<br />ความสูงของการกระโดดแปรตามค่าขาเข้า และทำงานเฉพาะตอนที่แตะพื้นเท่านั้น หากต้องการให้ฟิสิกส์และการกระโดดทำงาน ต้องเปิด Dynamics ทั้งใน SETTING และในตัว Character สำหรับเกมมุมมองจากด้านบน ให้เปิด Dynamics ไว้แล้วตั้ง Gravity เป็น 0 ส่วน Flip จะพลิกเท็กซ์เจอร์ตามทิศทาง AutoRot จะหันตัวละครไปตามทิศที่เคลื่อนที่ และ KeepOnScr จะคุมให้อยู่ในหน้าจอ<br />มันมีขั้วลูก แต่ไม่สามารถเป็นลูกของออบเจ็กต์ได้ สิ่งเดียวที่เป็นแม่ของมันได้คือ WARP IN
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Shot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ขาเข้า① ใช้ยิงกระสุน Bullet Count คือจำนวนกระสุนที่มีอยู่พร้อมกันได้ My Tag จะทำลายสิ่งที่มี Broken by ตรงกัน ส่วน Broken by 1〜3 ของโหนด SHOT เองใช้ระบุว่ากระสุนของมันจะหายไปเมื่อชนกับอะไร โดยระบุตามชนิดโหนดหรือ Tag ขาออกจะเป็น 1 เฉพาะในเฟรมที่ยิงจริงเท่านั้น Keep Off-Screen จะคงกระสุนที่อยู่นอกจอไว้ และเมื่อเกินขีดจำกัด กระสุนเก่าสุดจะหายไปก่อน
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Line
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">5/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">วาดเส้นจาก (X1,Y1) ไปยัง (X2,Y2) หากต่อขาเข้า⑤ (SET) ไว้ รูปร่างจะอัปเดตตราบที่ขาเข้านั้นไม่เป็นศูนย์ และคงรูปเดิมไว้เมื่อเป็น 0 หากไม่ได้ต่อไว้ รูปร่างจะอัปเดตทุกเฟรม<br />หากตั้ง ARRAY เป็นลูก ขาเข้า①〜④ จะถูกละเลย โดยอ่านอาร์เรย์เป็น x1,y1,x2,y2,… แล้ววาดเป็นเส้นหักต่อเนื่องเส้นเดียว x=9999, y=9999 จะตัดเส้นให้ขาด Coord ใช้สลับระหว่าง WORLD กับ LOCAL<br />หาก ARRAY ที่เป็นลูกมีข้อมูล 3 มิติ (x,y,z ชุดละสามค่า) จะวาดเป็น<b>3D LINE</b>โดยอัตโนมัติ รายละเอียดดู<a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. ออบเจ็กต์ 3 มิติ</a>
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Sound
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ขาเข้า① คือระดับเสียง (โด=0, เร=1, …) ขาเข้า② คือความดัง และขาเข้า③ คือสัญญาณเล่นเสียง หากไม่ได้ต่อขาเข้า①② จะใช้คุณสมบัติ Tone และ Volume เสียงที่ลากยาวจะดังตราบที่สัญญาณไม่เป็นศูนย์ ส่วนเสียงที่ค่อย ๆ จางและเสียงเอฟเฟกต์จะดังครั้งเดียวตอนสัญญาณขึ้นหรือตอนเปลี่ยนระดับเสียง ระดับเสียงที่มากกว่า 80 (เช่น 99) คือตัวหยุด คุณสมบัติ Tone ขยับทีละ 0.5 (ครึ่งเสียง) แต่ขาเข้า① รับค่าทศนิยมใด ๆ ก็ได้<br />เมื่อเปิด Chromatic ค่า Tone จะกลายเป็นหมายเลขครึ่งเสียงจาก 12 ค่า (0=โด, 1=โด#, 2=เร…) ถ้าปิดจะได้บันไดเสียง 7 ขั้นที่ 0.5 คือคีย์ดำ หากป้อนอาร์เรย์เป็นระดับเสียง ให้ตั้งค่านี้ให้ตรงกับ Chromatic ใน SEQUENCER ของอาร์เรย์นั้น มิฉะนั้นเสียงจะเพี้ยน
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Polygon
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">7/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ออบเจ็กต์ที่แสดงหน้า (โพลิกอน) ของโมเดล 3 มิติ สร้างจาก CREATE NEW NODE ไม่ได้ เกิดขึ้นเฉพาะตอน IMPORT ไฟล์ .obj เท่านั้น<br />ขาเข้าของมันคือตำแหน่ง 3 มิติ การหมุน 3 มิติ และอัตราส่วนขนาด<br />รายละเอียดดู<a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. ออบเจ็กต์ 3 มิติ</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-orange" style="background: rgb(217, 115, 26); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> การควบคุม
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Stick
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">จอยสติ๊กบนหน้าจอ ความเอียงแนวนอนของก้านคือขาออก① แนวตั้งคือขาออก② เลือกเป็นอนาล็อกหรือดิจิทัลได้ และกำหนดให้แป้นพิมพ์หรือเกมแพดได้
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Button
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ปุ่มบนหน้าจอ ส่งออก 1 ตราบที่ยังกดอยู่ กำหนดให้แป้นพิมพ์หรือเกมแพดได้</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Keyboard
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออก 1 ตราบที่ยังกดปุ่มที่กำหนดไว้
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Touch
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">การแตะหน้าจอ ค่า X ของจุดที่แตะคือขาออก① และ Y คือขาออก② (จุดกลางคือ 0,0) ส่วนขาออก③ จะเป็น 1 ตราบที่ยังแตะหน้าจออยู่
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-yellow" style="background: rgb(230, 191, 0); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> โหนดอื่น ๆ
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">TEXTURE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เก็บภาพพิกเซลที่คุณวาดเอาไว้ แล้วแปะลงบนออบเจ็กต์ที่ตั้งเป็นแม่ แปะได้กับ Rect, Circle, Chara, Shot และ BG และมีแม่ได้หลายตัว (โหนดออบเจ็กต์หลายตัว)<br />ถ้าขาเข้าเป็น 0 จะซ่อนไว้ หากต่อเท็กซ์เจอร์หลายตัวเข้ากับออบเจ็กต์เดียวแล้วเปิด Visible ไว้ตัวเดียว ก็สลับเท็กซ์เจอร์ที่แสดงได้<br />เลือกได้ว่าจะให้ภาพพอดีกับออบเจ็กต์ หรือปูซ้ำแบบกระเบื้อง<br />หากไม่ตั้งแม่ ก็แสดงเท็กซ์เจอร์เดี่ยว ๆ เป็นภาพแบนได้เช่นกัน<br />เมื่อต้องใช้ภาพเดียวกันหลายที่ เช่น ฉากหลัง เท็กซ์เจอร์ตัวเดียวก็กำหนดให้ออบเจ็กต์หลายตัวได้<br />วิธีใช้ตัวแก้ไขเท็กซ์เจอร์โดยละเอียดดู<a href="#texeditor" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">“ตัวแก้ไข TEXTURE”</a></td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SENSOR
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกจำนวนออบเจ็กต์ที่สัมผัสกับพื้นที่เซ็นเซอร์ (ขอบเขตที่กำหนดในหน้าจอ Layout) ออบเจ็กต์จะถูกนับเมื่อตรงกับเงื่อนไข Target หรือตรงกับ Tag 1〜3 ข้อใดข้อหนึ่ง และนับออบเจ็กต์หนึ่งตัวเพียงครั้งเดียวแม้จะตรงหลายเงื่อนไข หาก Target=SCREEN จะส่งออก 0 หรือ 1 ตามว่าพื้นที่เซ็นเซอร์ทับกับหน้าจอที่มองเห็นอยู่หรือไม่ หากตั้งแม่ไว้ เซ็นเซอร์จะเคลื่อนที่ตามแม่ และตัวแม่เองจะไม่ถูกตรวจจับ
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ONBREAK
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ส่งออกจำนวนออบเจ็กต์แม่ หรือออบเจ็กต์ที่มี Tag ตามที่กำหนด ซึ่งถูกทำลายในเฟรมนี้ กำหนดออบเจ็กต์แม่ได้หลายตัว<br />แม้ไม่ได้กำหนดสิ่งที่จะเฝ้าดู โหนด Onbreak ก็ยังใช้เป็นโหนดเอฟเฟกต์ได้ โดยจะแสดงเอฟเฟกต์ที่ตำแหน่งของตัวเองเมื่อขาเข้า① เปลี่ยนจาก 0 ไปเป็นค่าอื่นด้วย ตั้งค่าชนิดเอฟเฟกต์ (NONE, PARTICLE, LINE, CIRCLE, BOX) และสีได้</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ROTATE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">บานพับสำหรับหมุนกลุ่มออบเจ็กต์แม่-ลูก ออบเจ็กต์ที่ตั้ง ROTATE เป็นแม่จะรับตำแหน่งและการหมุนของมันมา ขาเข้า① คือส่วนต่างของการหมุนจากมุมเริ่มต้นที่ตั้งไว้ใน Layout และค่าบวกจะหมุนทวนเข็มนาฬิกา
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SCREEN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ควบคุมกล้องระหว่าง Play X/Y คือตำแหน่งกล้อง (ถ้ามีแม่ จะเป็นส่วนต่างจากแม่ โดย Y เป็นบวกขึ้นบน) ส่วน S คืออัตราขยายซึ่งต่ำสุดคือ 0.05 ออบเจ็กต์ที่ตั้ง SCREEN เป็นแม่จะกลายเป็น HUD ที่ตรึงอยู่กับที่และไม่ได้รับผลจากกล้อง
+                <br />ถ้าตั้งออบเจ็กต์ของผู้เล่นเป็นแม่ของ SCREEN มุมมองจะเคลื่อนตามผู้เล่น</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">RESTART
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เมื่อขาเข้าเปลี่ยนจาก 0 ไปเป็นค่าอื่น โปรแกรมทั้งหมดจะกลับสู่สถานะตอนเริ่ม Play ตำแหน่ง ตัวแปร ตัวนับ อาร์เรย์ กระสุน และอื่น ๆ จะถูกตั้งค่าใหม่ ค่าที่ทำให้เริ่มใหม่จะยังคงอยู่ที่ขาออกหลังจากนั้น จึงสะดวกสำหรับสืบทอดจำนวนชีวิตหรือคะแนน
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">COMPO
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ชิ้นส่วนที่รวมโหนดหลายตัวไว้เป็นตัวเดียว E＝เปิด/ปิด ส่วน ① และ ②＝แลกเปลี่ยนค่ากับภายใน<br />รายละเอียดดู<a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. โหนด Compo</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li id="texeditor" style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">ตัวแก้ไข TEXTURE</b>：<br />เปิดจากปุ่ม “Edit Texture” ใน Property ของโหนด TEXTURE ที่นี่คุณวาดภาพพิกเซลแล้วนำไปแปะบนออบเจ็กต์ที่ตั้งเป็นแม่ได้<div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="404" data-original-width="492" height="263" src="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo=w320-h263" width="320" /></a></div><table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%;"><tbody><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Draw</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">วาดจุดด้วยสีที่เลือกไว้ ลากแล้ววาดต่อเนื่อง</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Paint</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">เติมสีพื้นที่สีเดียวกันที่ติดกันทั้งผืนในครั้งเดียว</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Pick</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ดูดสีจากภาพมาเป็นสีปัจจุบัน</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">View</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ขยายและเลื่อนมุมมอง</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Copy / Paste</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">คัดลอกพื้นที่ที่เลือกแล้ววางที่อื่น</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">◁ / ▷</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">UNDO / REDO</td></tr></tbody></table><p style="box-sizing: border-box; margin: 8px 0px;">เลือกสีจากจานสีด้านล่าง หากต้องการลบ ให้เลือกสีโปร่งใสแล้ววาด<br />จำนวนจุดปรับได้จากคุณสมบัติ Size ขยายได้ถึง 256*256 แต่จำนวนครั้งของ Undo จะลดลงและตัวแก้ไขจะช้าลง สำหรับออบเจ็กต์ SHOT ควรทำเท็กซ์เจอร์ให้เล็กที่สุดเท่าที่จะทำได้<br />เมื่อวาดเสร็จ ให้ปิดด้วยเครื่องหมาย × มุมขวาบน<br />กดค้างที่ช่องจานสีเพื่อเลือกสีใดก็ได้ตามต้องการ</p><p style="box-sizing: border-box; margin: 8px 0px;">บนพีซี สามารถวางภาพที่คัดลอกมาจากโปรแกรมอื่นลงในตัวแก้ไขได้โดยตรง ขึ้นอยู่กับแอปและอุปกรณ์ บนมือถือก็อาจทำได้เช่นกัน</p></div>
+          </li>
+        </ul>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-warpin" style="background: rgb(122, 133, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-warpout" style="background: rgb(223, 107, 246); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> วาร์ป
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpin" style="background: rgb(122, 133, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">“ทางเข้า” ของกลไกที่ย้ายออบเจ็กต์ มีผลกับออบเจ็กต์ที่ตั้งเป็นลูกของมัน ทันทีที่ขาเข้าไม่เป็นศูนย์ ลูกตัวนั้นจะย้ายไปยังตำแหน่งและมุมของ WARP OUT ที่มี Index เดียวกัน และตรึงอยู่ตรงนั้นตราบที่ขาเข้ายังไม่เป็นศูนย์ เมื่อกลับเป็น 0 ก็จะถูกปล่อยและเคลื่อนที่อย่างอิสระอีกครั้ง มีคุณสมบัติเพียง Index เท่านั้น วางไว้ภายใน Compo ไม่ได้
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpout" style="background: rgb(223, 107, 246); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">“ทางออก” ของวาร์ป ออบเจ็กต์ที่ WARP IN ซึ่งมี Index เดียวกันส่งมาจะปรากฏที่ตำแหน่งและมุมนี้ มีคุณสมบัติเพียง Index เท่านั้น ในหน้าจอ Layout ย้ายและหมุนได้ (ไม่มีขนาด จึงย่อขยายไม่ได้) ถ้าตั้งออบเจ็กต์เป็นแม่ก็จะเคลื่อนที่ตามไปด้วย วางไว้ภายใน Compo ไม่ได้
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-sigout" style="background: rgb(255, 131, 131); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> สัญญาณ
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigin" style="background: rgb(96, 157, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ใช้ส่งค่าไปยังจุดที่อยู่ไกลในโปรแกรม สิ่งที่คุณต่อเข้ากับโหนด IN จะออกมาที่โหนด OUT ทุกตัวที่มีดัชนีเดียวกัน จะมีโหนด IN ดัชนีเดียวกันสองตัวไม่ได้ หากระบุดัชนีของ Compo ก็จะส่งถึงภายใน Compo นั้นด้วย<br />เรื่องโหนด Compo ดู<a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. โหนด Compo</a></td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigout" style="background: rgb(255, 131, 131); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ใช้รับค่าที่ส่งมาจากที่ไกล ๆ สิ่งที่เข้าไปในโหนด IN จะออกมาที่นี่ คือที่โหนด OUT ทุกตัวที่มีดัชนีนั้น โดยมีโหนด OUT ดัชนีเดียวกันหลายตัวได้ หากระบุดัชนีของ Compo ก็จะส่งถึงภายใน Compo นั้นด้วย<br />เรื่องโหนด Compo ดู<a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. โหนด Compo</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-gray" style="background: rgb(107, 114, 128); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>การตั้งค่าฉาก
+        </h3>
+        <div style="font-size: 16px;">
+          <section style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+            <div class="tblwrap" style="box-sizing: border-box; overflow-x: auto;">
+              <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+                <tbody style="box-sizing: border-box;">
+                  <tr style="box-sizing: border-box;">
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหนด
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">คำอธิบาย
+                    </th>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">MEMO
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">บันทึกย่อที่คุณเขียนไว้บนพื้นที่ทำงาน จะไม่ถูกวาดตอน Play
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">BG
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">พื้นหลังของหน้าจอ Play มีได้ฉากละหนึ่งตัว และอยู่หลังสุดเสมอ<br />ถ้ากำหนดโหนด TEXTURE ให้ ภาพนั้นจะถูกปูซ้ำแบบกระเบื้องเต็มพื้นหลัง ถ้าไม่มี TEXTURE จะถมด้วยสีเดียวจาก Color
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SETTING
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">การตั้งค่าของทั้งฉาก<br />ทิศทางหน้าจอมือถือ (ScreenOrient) ขนาดพื้นที่ Play (ScreenSize, ScreenLong, ScreenShort) FPS, Dynamics (Gravity, Friction%, Bounce%, Drag%) สีของปุ่มหยุด Play (StopBtnCol) และ GridSnap สร้างได้ฉากละหนึ่งตัวเท่านั้น
+                    <br />ถ้าในฉากมีโหนดที่เกี่ยวกับ 3 มิติ จะมีคุณสมบัติสำหรับความสูงของจุดมองและระยะห่างถึงหน้าจอปรากฏขึ้นด้วย</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section id="compo" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">7. โหนด Compo
+        </h2>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>โหนดพิเศษที่ทำให้จัดการโหนดหลายตัวเสมือนเป็นโหนดเดียวได้<br /></b></span><b><br /></b>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="534" data-original-width="1030" height="297" src="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q=w571-h297" style="max-width: 100%;" width="571" /></a>
+              </div><br />ลองนึกว่าชุดโหนดแบบเดียวกันปรากฏในโปรแกรมถึงสิบครั้ง ย่อมอยากประกอบไว้ครั้งเดียวแล้วนำกลับมาใช้ซ้ำ<br />ใน nodegram เรารวมโหนดหลายตัวไว้เป็นโหนด Compo ตัวเดียว แล้วทำสำเนา Compo นั้นไปใช้<br /><br />ถ้าจะสร้างศัตรูเหมือนกันสิบตัว ให้สร้างโปรแกรมของตัวหนึ่งก่อน รวมโหนดของมันเป็น Compo แล้วทำสำเนา Compo ไปวางใน Layout<br /><br />โหนด Compo ที่ทำสำเนามาถือเป็นโปรแกรมเดียวกัน แก้ตัวหนึ่งตัวอื่นก็เปลี่ยนตาม แต่พิกัด ตัวแปร อายุ และอื่น ๆ จะทำงานแยกกันตาม Compo แต่ละตัวขณะรัน<br /><br />
+            </li>
+          </ul>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>ขั้นตอนการสร้างโหนด Compo</b></span><br />
+            </li>
+          </ul>
+          <ol>
+            <li>เลือกโหนดที่ต้องการรวมเข้าด้วยกัน<br />หากต้องการเลือกหลายตัวพร้อมกัน ให้ดับเบิลคลิกแล้วลาก<br />ในการคลิกครั้งที่สองของดับเบิลคลิก อย่าปล่อยเมาส์ ให้ลากครอบพื้นที่ที่ต้องการ<br />บนมือถือจะให้ความรู้สึกเหมือน “แตะ แตะค้าง แล้วปาด”<br />(ในตัวอย่างนี้ ยานของผู้เล่นอยู่ทางซ้าย ส่วนที่ครอบกรอบไว้คือโปรแกรมของยานศัตรูหนึ่งลำที่บินเข้ามา)<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="432" data-original-width="1419" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw=w640-h194" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>เมื่อเลือกโหนดไว้หลายตัว ให้กดค้างที่ตัวใดตัวหนึ่งจะมีเมนูขึ้นมา เลือก “MAKE COMPO” แล้วตอบ “Yes” ในหน้าต่างยืนยัน<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="440" data-original-width="1347" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY=w640-h210" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="147" data-original-width="402" height="117" src="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="max-width: 100%;" width="320" /></a><br /><br />
+              </div>
+            </li>
+            <li>โหนดหลายตัวได้กลายเป็นโหนด Compo ตัวเดียวชื่อ “C1” แล้ว<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="307" data-original-width="1026" height="192" src="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw=w640-h192" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </li>
+            <li>กดค้างที่โหนด C1 (หรือดับเบิลคลิก) เพื่อเข้าไปแก้ไขภายใน Compo ใน NodeEditor ต่างหาก<br />สายที่เคยต่อเข้ากับ Compo ตอนนี้กลายเป็นโหนด OUT ชื่อ “C1  1” และ “C1  2”<br /><br />กด “MENU” ทางขวา แถวซ้ายจะเปลี่ยนเป็นคำสั่งที่เกี่ยวกับ Compo<br />กด “Duplicate” แล้วโหนด Compo นี้จะถูกทำสำเนา<br />กด “PARENT” มุมขวาล่างเพื่อออกจาก NodeEditor นี้และกลับไปยัง NodeEditor ชั้นบน<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="963" height="254" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU=w640-h254" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>ใน NodeEditor ชั้นบนจะเห็นว่ามีโหนด Compo หลายตัวแล้ว<br />“C1 (2)” ก็ต้องรับค่าขาเข้าเดียวกัน จึงต้องต่อขาเข้าและขาออกให้เหมือนกันด้วย<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="304" data-original-width="957" height="204" src="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I=w640-h204" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>กด “LAYOUT” แล้วจัดตำแหน่งของ Compo แต่ละตัวตามต้องการ<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="429" data-original-width="918" height="188" src="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug=w400-h188" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>กด Play “▶” จะเห็นยานศัตรูหลายลำ และแต่ละลำเคลื่อนที่ของมันเอง<br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="453" data-original-width="907" height="200" src="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU=w400-h200" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>ถ้าต้องการทำสำเนาจำนวนมากในคราวเดียว ให้เลือกโหนด Compo พร้อมกัน กดค้างที่ตัวใดตัวหนึ่งแล้วเลือก “Duplicate”<br />และถ้าต้องการส่งค่าเดียวกันให้ Compo ทุกตัว โหนด IN และโหนด OUT จะสะดวกที่สุด<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="352" data-original-width="1164" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ=w640-h194" style="max-width: 100%;" width="640" /></a>
+              </div>
+            </li>
+          </ol>
+          <ol><br />
+          </ol>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>โหนด Compo กับอินสแตนซ์<br /></b></span><br />เมื่อโหนด Compo สองตัวมีเนื้อหาเหมือนกันจนแก้ตัวหนึ่งแล้วอีกตัวเปลี่ยนตาม เรียกว่า “ทั้งสองมีความสัมพันธ์แบบอินสแตนซ์” และการทำสำเนาก็คือ “การสร้างอินสแตนซ์ของโหนด Compo”<br />โหนด Compo ที่มีหมายเลข Compo เดียวกันมีความสัมพันธ์แบบอินสแตนซ์ และใช้โปรแกรมชุดเดียวกัน<br />(อนึ่ง การตัดความสัมพันธ์แบบอินสแตนซ์เรียกว่า Unique ซึ่งอยู่ในเมนูปัดของ Compo <a href="#compo-unique" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ดูด้านล่าง</a>)<br /><br />ตัวเลขหลัง C ถ้าเหมือนกัน แปลว่าเป็น Compo เดียวกันที่มีความสัมพันธ์แบบอินสแตนซ์<br />“C1 (1)” กับ “C1 (2)” มีความสัมพันธ์แบบอินสแตนซ์<br />“C1 (1)” กับ “C2 (1)” เป็นคนละ Compo และไม่มีความสัมพันธ์แบบอินสแตนซ์<br />ตัวเลขในวงเล็บมีไว้แยกแยะสำเนาของ Compo เดียวกันเท่านั้น<br /><br />แม้ Compo จะมีความสัมพันธ์แบบอินสแตนซ์ต่อกัน แต่ระหว่าง Play พารามิเตอร์ของแต่ละ Compo จะถูกจัดการแยกกัน<br />การเกิดและการหายไปของตัวละคร พิกัด รวมทั้งโหนด count, var, array ที่อยู่ข้างใน ต่างก็มีค่าของตัวเอง<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>MENU ภายในโหนด Compo<br /></b></span><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="366" data-original-width="458" height="256" src="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo=w320-h256" style="max-width: 100%;" width="320" /></a>
+                </div><br /><b>Duplicate, Delete</b>：ใช้ทำสำเนาและลบโหนด Compo<br /><b><br /><span id="compo-unique">Unique</span></b>：ใช้ตัดความสัมพันธ์แบบอินสแตนซ์ของโหนด Compo นี้ มีประโยชน์เมื่อต้องการนำเนื้อหาของ Compo หนึ่งไปดัดแปลงเป็นศัตรูอีกตัว หมายเลข Compo จะเปลี่ยนเป็นหมายเลขใหม่<br /><b><br />Expand</b>：นำโหนดที่อยู่ใน Compo ที่กำลังแก้ไขกลับไปยัง NodeEditor หลัก แล้วตัว Compo เองจะหายไป เป็นการทำงานตรงข้ามกับ Make Compo ส่วน Compo ที่เป็นอินสแตนซ์ของมันจะไม่ถูก Expand ตามไปด้วย<br /><br />
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>โหนด Compo กับโหนด IN, OUT<br /></b></span><br />โหนด Compo มีขั้วขาเข้าและขาออกอย่างละสองขั้วเท่านั้น แต่เพิ่มขาเข้าได้ด้วยโหนด IN และโหนด OUT<br />คุณสมบัติของโหนด IN และ OUT ระบุหมายเลข Compo ได้ จึงส่งค่าไปยัง Compo ตัวใดตัวหนึ่งโดยเฉพาะได้<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="377" data-original-width="1608" height="150" src="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s=w640-h150" style="max-width: 100%;" width="640" /></a>
+                </div><br />ภายใน Compo ใช้โหนด IN ที่ไม่มีหมายเลข Compo ได้<br />ภายใน Compo ใช้โหนด OUT ที่ไม่มีหมายเลข Compo ไม่ได้ (เพราะมีโหนด OUT เหมือนกันหลายตัวไม่ได้)<br /><br />พึงระวังว่าโหนด IN หรือ OUT ที่มีหมายเลข Compo กำกับนั้น แม้จะหน้าตาเหมือนกันทุกประการ แต่ความหมายจะต่างกันโดยสิ้นเชิงขึ้นอยู่กับว่าอยู่ภายในหรือภายนอก Compo<br />ในภาพด้านบน “โหนด IN (สีน้ำเงิน): C1 ดัชนี 2” มีอยู่ทั้งภายในและภายนอก Compo แต่ทั้งสองไม่ใช่สิ่งเดียวกัน ตัวที่อยู่ภายในต่อกับขาออก② ของ Compo ส่วนตัวที่อยู่ภายนอกต่อกับขาเข้า② ของ Compo และส่งค่าไปยัง “โหนด OUT: C1 ดัชนี 2” ที่อยู่ภายใน<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>ขาเข้า Enable และขาออก Enable ของ Compo<br /></b></span><b><br /></b>เมื่อใช้โหนด Compo เป็นตัวละคร ขาเข้าและขาออก Enable จะควบคุมว่าตัวละครนั้นจะปรากฏและหายไปเมื่อใด<br /><br />ขาออก Enable จะเป็น 1 ตราบที่ตัวละครยังอยู่ และกลายเป็น 0 เมื่อถูกทำลาย<br /><br />เมื่อขาเข้า Enable เปลี่ยนจาก 0 เป็น 1 (หรือค่าอื่นที่ไม่ใช่ศูนย์) โปรแกรมภายใน Compo จะเริ่มทำงานและตัวละครจะทำงาน ตัวละครจะคงอยู่ตราบที่ขาเข้านั้นยังไม่เป็นศูนย์เท่านั้น หากกลับเป็น 0 หรือตัวละครถูกทำลาย ตัวละครก็จะหายไป<br />หากไม่ได้ต่ออะไรไว้ที่ขาเข้า Enable จะเสมือนป้อนค่า 1 อยู่ตลอดเวลา<br /><br />แม้ตัวละครจะหายไปแล้ว ทันทีที่ขาเข้าเปลี่ยนจาก 0 ไปเป็นค่าอื่นอีกครั้ง ก็จะเริ่มใหม่จากสถานะเริ่มต้น<br />ด้านล่างคือโปรแกรมที่ทำให้ตัวละครปรากฏขึ้นใหม่ที่ตำแหน่งเริ่มต้นหลังถูกทำลายไปแล้ว 3 วินาที<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="219" data-original-width="1131" height="124" src="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM=w640-h124" style="max-width: 100%;" width="640" /></a>
+                </div><br />
+              </li>
+            </ul>
+          </div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>แม่ในโหนด Compo มีได้ตัวเดียว<br /></b></span><b><br /></b>ภายใน Compo ความสัมพันธ์แม่-ลูกของออบเจ็กต์ต้องไม่มีโหนดออบเจ็กต์แม่ชั้นบนสุดเกินหนึ่งตัว การสร้างตัวละครสองตัวในโหนด Compo เดียวไม่ได้ถูกออกแบบไว้<br />ถ้ามีแม่สองตัวแต่ทั้งคู่มีแม่ร่วมกันอยู่เหนือขึ้นไป ก็ไม่มีปัญหา<br />หากไม่มีโหนดออบเจ็กต์เลย (จึงไม่มีแม่) ก็ไม่มีปัญหาเช่นกัน<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="488" data-original-width="1203" height="163" src="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg=w400-h163" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>โหนดที่สร้างภายใน Compo ไม่ได้<br /></b></span><br />BG, Setting, Stick, Button, Screen และ OnBreak สร้างภายใน Compo ไม่ได้<br /><br /></li></ul></div></section>
+      <section id="share" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">8. ให้คนอื่นเล่นโปรแกรมของคุณ
+        </h2>
+        <div style="box-sizing: border-box; margin: 22px 0px 8px;"><span style="background-color: white;"><span style="font-size: small;">เพียงบอก URL ก็ให้คนอื่นเล่นผลงานของคุณได้แล้ว<br /></span></span><span style="background-color: white;">เมื่อเปิด URL จะเริ่มจากหน้าจอ Play ทันที ผู้เล่นจึงไม่จำเป็นต้องรู้จัก nodegram เลย</span>
+        </div>
+        <section id="save" style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span>
+          </p>
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'><span style="font-size: 0.9em;"> แล้วต่อท้ายด้วยที่อยู่ (URL) ของผลงาน เท่านั้นเอง</span></span>
+          </p>
+          <pre style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(245, 246, 247); border-radius: 8px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; overflow: auto; padding: 12px 14px;"><code style='background: none; border-color: currentcolor; border-image: none; border-radius: 5px; border-style: none; border-width: medium; box-sizing: border-box; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 0.9em; padding: 0px;'>ตัวอย่าง)<br />https://daisuqe.github.io/nodegram/?url=https://example.com/mygame.json</code>
+          </pre>
+          <p class="small" style="box-sizing: border-box; margin: 12px 0px 8px;"><br />ตัวอย่าง URL (เกมยิง):
+          </p>
+          <div><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ เปิดในเบราว์เซอร์</a><br /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="540" data-original-width="1249" height="277" src="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4=w640-h277" style="max-width: 100%;" width="640" /></a>
+            </div><br />ขั้นตอน:<br />1. บันทึกเกมเป็นไฟล์ .json ลงพีซีหรือมือถือด้วย MENU&gt;SAVE&gt;EXPORT<br />2. </span>อัปโหลดไฟล์ .json ที่บันทึกไว้ขึ้นไปที่ <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> หรือบริการฝากไฟล์ออนไลน์ที่คล้ายกัน แล้วนำ URL ของไฟล์มาด้วยเมนูอย่าง “คัดลอกลิงก์”<br />3. นำ <span style='font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'> มาต่อท้ายด้วยที่อยู่ (URL) ของผลงาน แล้วเปิดข้อความที่ได้ในเบราว์เซอร์</span>
+          </div><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'><br /></span>
+          <p style="box-sizing: border-box; margin: 8px 0px;">ที่สำหรับอัปโหลดไฟล์นั้น <a href="https://www.dropbox.com/home" target="_blank">Dropbox</a> หรือ <a href="https://github.co.jp/" target="_blank">GitHub</a> แบบ raw URL และ GitHub Pages ใช้ได้ฟรีและปลอดภัย ถ้าเป็น Dropbox ก็อัปโหลดจากมือถือได้ง่ายด้วย<br />Google Drive ใช้เป็น URL ต่อท้ายแบบนี้ไม่ได้ เพราะข้อจำกัดของเบราว์เซอร์ทำให้แอปอ่านไฟล์จากที่นั่นโดยตรงไม่ได้ (ข้อจำกัด CORS)<br /><br />
+          </p>
+        </section>
+      </section>
+      <section id="spec" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">9. ข้อกำหนด</h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-1. รองรับเฉพาะ 2 มิติ
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">nodegram รองรับเฉพาะ 2 มิติ พิกัดมีสองแกนคือ X (ขวาเป็น ＋) และ Y (บนเป็น ＋) หากเปิด Dynamics ในโหนด Setting ตัวละครจะตกลงไปทางด้านล่างของหน้าจอ<br />หากทำเกมมุมมองจากด้านบน ให้ปิด Dynamics ในโหนด SETTING หรือตั้งแรงโน้มถ่วงรวมเป็น 0
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-2. FPS
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">อัตราเฟรมเป้าหมายเลือกได้ที่โหนด SETTING เป็น <b style="box-sizing: border-box;">60</b> หรือ <b style="box-sizing: border-box;">30</b> (ค่าเริ่มต้นคือ 60) ทั้งการคำนวณโหนดและการคำนวณฟิสิกส์จะเดินตาม FPS นี้ หากงานหนักเกินไป Play จะช้าลงและอัตราเฟรมจริงจะต่ำกว่าค่าที่ตั้งไว้
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-3. Dynamics (พฤติกรรมทางฟิสิกส์)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">ออบเจ็กต์อย่าง Rect, Circle, Character และ Shot กำหนดโหมดฟิสิกส์ (Dynamics) ได้ พฤติกรรมใกล้เคียงกับ Rigidbody2D ของ Unity
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">โหมด
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">พฤติกรรม
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Off</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ไม่มีฟิสิกส์ ค่าขาเข้าของโหนด (X,Y) จะย้ายพิกัดโดยตรง
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Static</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">กำแพงหรือพื้นที่ไม่ขยับ แรงโน้มถ่วงและการชนไม่ทำให้เคลื่อนที่
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Dynamic</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">เคลื่อนที่ตามหลักฟิสิกส์จากแรงโน้มถ่วงและการชน ค่าขาเข้า X/Y ของโหนดทำหน้าที่เป็น “แรง”
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Kinematic</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">แรงโน้มถ่วงและการชนไม่ทำให้เคลื่อนที่ แต่ค่าขาเข้าของโหนดทำให้เคลื่อนที่ได้ และยังชนกับออบเจ็กต์ Dynamic แล้วผลักมันได้ด้วย
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small" style="box-sizing: border-box; color: #666666; font-size: 13px; margin: 8px 0px;">ไม่มีการตั้งค่าความหนาแน่น ทุกอย่างถูกมองว่าเป็นไม้ธรรมดาโดยประมาณ
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-4. SortingLayer (ลำดับการแสดงผล)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">ค่า <b style="box-sizing: border-box;">SortingLayer</b> ของออบเจ็กต์แต่ละตัว (0〜100 ค่าเริ่มต้น 50) กำหนดลำดับการซ้อนทับบนหน้าจอ Play <strong style="box-sizing: border-box;">ยิ่งตัวเลขมากยิ่งอยู่ด้านหน้า</strong> ส่วน BG (พื้นหลัง) อยู่หลังสุดเสมอ<br />ออบเจ็กต์ที่มีค่าเท่ากันจะแสดงตามลำดับที่เพิ่มเข้ามา<br /><span style="background-color: #eef5fb;"><br /></span>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-5. พิกัด
+        </h3>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">พิกัดคือ X (ขวาเป็น ＋) และ Y (บนเป็น ＋) จุดกึ่งกลางของ Layout คือจุดกำเนิด (0,0)
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">มุมใช้หน่วยองศา และ<b style="box-sizing: border-box;">ทวนเข็มนาฬิกาเป็น ＋</b> โดย 0°＝ขวา (X＋), 90°＝บน (Y＋), 180°＝ซ้าย (X−), 270°＝ล่าง (Y−) ทั้ง ANGLE POS / POS ANGLE / GetRot / ROTATE และคุณสมบัติ Angle ของออบเจ็กต์ ล้วนยึดตามนี้
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">คุณสมบัติ Coord ใน Property ของออบเจ็กต์จะเปลี่ยนความหมายของค่าขาเข้า X/Y ของโหนด
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">WORLD</b>：ค่าขาเข้าทำหน้าที่เป็นพิกัดสัมบูรณ์ (ถ้ามีแม่ก็เทียบกับแม่)
+              </li>
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">LOCAL</b>：ค่าขาเข้าทำหน้าที่เป็นส่วนต่างจากตำแหน่งที่วางไว้ตอนแรก ถ้ากำหนดแม่ไว้ ส่วนต่างจากแม่ก็จะถูกรวมเข้าไปด้วย (พิกัดแบบ Parent)
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">พิกัดของออบเจ็กต์ 3 มิติ ดู<a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. ออบเจ็กต์ 3 มิติ</a>
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-6. ความละเอียด
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">พื้นที่ที่มองเห็นตอน Play เท่ากับสี่เหลี่ยมสีเทาใน Layout<br />ทิศทางหน้าจอ (แนวนอน=Horizontal／แนวตั้ง=Vertical) เปลี่ยนที่โหนด SETTING ไม่ใช่ที่เมนู Setting และภาพจะปรับให้พอดีกับขนาดหน้าจอจริง<br />หากต้องการความละเอียดคงที่ ให้ใช้ ScreenSize ในโหนด Setting<br /><br />
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="701" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo=w400-h217" style="max-width: 100%;" width="400" /></a>
+          </div>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-7. Tag
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">Tag คือกลุ่ม<br />เช่น ใส่ Tag “Enemy_tiny” ให้ศัตรูตัวเล็กทั้งหมด หรือแยกฉากหลังที่ทำลายได้กับที่ทำลายไม่ได้ด้วย “bg_destroyed” และ “bg”<br />โหนด Shot, OnBreak, Rect, Circle และ Character ล้วนใช้ Tag</p><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br /></p><h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-8. การจัดการโหนด</h3><div style="text-align: start;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="346" data-original-width="517" height="243" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w=w363-h243" style="max-width: 100%;" width="363" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div></div><ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: start;"><li style="box-sizing: border-box; margin: 4px 0px;">ขาเข้าหนึ่งขั้วของโหนดต่อสายได้หลายเส้น เมื่อมีหลายขาเข้า โหนดจะได้รับผลรวมของทั้งหมด ในภาพ ขั้วบนสุดได้รับ 10+20→30<br /><br /></li><li style="box-sizing: border-box; margin: 4px 0px;">การเชื่อมแม่-ลูกระหว่างโหนด (จากขั้วบนไปยังขั้วล่าง) ไม่ได้มีไว้เพียงเพื่อให้ออบเจ็กต์เคลื่อนที่ไปด้วยกัน (Transform) แต่ยังใช้แสดง “ความสัมพันธ์” ด้วย<br />เช่น โหนด Texture กับโหนดออบเจ็กต์ โหนด OnBreak กับออบเจ็กต์ที่มันเฝ้าดู และโหนด Array กับโหนด Line<br />โดยปกติ แม่หนึ่งตัวมีลูกได้หลายตัว แต่ลูกหนึ่งตัวมีแม่ได้ตัวเดียว<br />โหนด Texture, โหนด OnBreak และโหนด Array เป็นข้อยกเว้น แต่ละตัวมีแม่ได้หลายตัว</li></ul><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br />
+          </p>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-9. การประมวลผลภายในหนึ่งเฟรม
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">โหนดทั้งหมดถูกประมวลผลพร้อมกัน<br />ผลลัพธ์ไม่เปลี่ยนไปตามว่าสร้างโหนดใดก่อนหลัง<br /><br />โหนดออบเจ็กต์และอื่น ๆ ถูกประมวลผลหนึ่งครั้งต่อเฟรม<br />โหนดที่ “จำค่าไว้” อย่าง Counter, Var, Trigger, Random, Array ก็อัปเดตเพียงครั้งเดียวต่อเฟรมเช่นกัน<br />โหนดคำนวณอย่าง ＋ หรือ × ไม่จำค่าไว้ จึงคำนวณเมื่อมีการเรียกใช้ค่านั้น<br />ถึงแม้โหนดคำนวณจะต่อกันเป็นวง แต่ละโหนดก็ยังถูกประมวลผลเพียงครั้งเดียวในหนึ่งเฟรม<br /><br />
+          </p>
+        </div>
+        <p>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-10. UNDO / REDO
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">ใช้ <b>UNDO</b> / <b>REDO</b> ใน MENU เพื่อยกเลิกหรือทำซ้ำการสร้าง ลบ ย้าย เชื่อมต่อ เปลี่ยนคุณสมบัติ และอื่น ๆ ย้อนกลับได้ <b>ถึง 50 ขั้น</b>
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">ตัวแก้ไข TEXTURE / LINE / SEQUENCER แต่ละตัวมีประวัติ UNDO แยกกัน ให้ใช้ปุ่ม ◁ / ▷ ที่อยู่ในตัวแก้ไขนั้น ๆ ตัวแก้ไข LINE และ SEQUENCER ก็ย้อนได้ 50 ขั้นเช่นกัน ส่วน TEXTURE จำนวนครั้งขึ้นอยู่กับขนาดของเท็กซ์เจอร์</p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">พึงทราบว่าการรัน Play ยกเลิกไม่ได้ และการบันทึกกับการโหลดก็ยกเลิกไม่ได้เช่นกัน
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;" id="spec-3d">9-11. ออบเจ็กต์ 3 มิติ
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="215" data-original-width="526" height="202" src="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0=w492-h202" width="492" /></a></div><br />nodegram มีสองวิธีในการแสดงออบเจ็กต์ 3 มิติ คือ <b>Polygon</b> และ <b>ARRAY＋LINE (สำหรับแสดงผลแบบ 3 มิติ)</b> ทั้งสองแบบเกิดขึ้นได้เฉพาะตอน IMPORT ไฟล์ .obj เท่านั้น (สร้างจาก CREATE NEW NODE ไม่ได้)<p></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">อย่างไรก็ดี ตัว nodegram เองยังคงเป็น<b>เวทีแบบ 2 มิติ</b> ออบเจ็กต์ 3 มิติเป็นเพียงวิธีนำภาพที่ดูเหมือน 3 มิติมาใช้เป็นวัสดุแบบ 2 มิติเท่านั้น และเช่นเดียวกับออบเจ็กต์ 2 มิติอื่น ๆ ลำดับการแสดงผลของมันก็ถูกกำหนดด้วยการตั้งค่า <b>Sorting Layer</b> โหนด Polygon ที่มี Sorting Layer เดียวกันจะถูกประมวลผลรวมกันเสมือนเป็นฉาก 3 มิติเดียว จึงซ้อนหน้าหลังตามความลึกได้ถูกต้อง
+        <br /><br />ออบเจ็กต์ 3 มิติมีพิกัด Z ระนาบหน้าจอคือ z=0 ลึกเข้าไปเป็น +z และเข้าหาผู้ชมเป็น -z ระยะจากจุดมองถึงหน้าจอและความสูงของจุดมองเปลี่ยนได้ที่โหนด setting<br />ยังสร้างความสัมพันธ์แม่-ลูกกับออบเจ็กต์ 2 มิติได้ แต่ในกรณีนั้นควรทำงานที่ z=0<br /><br /></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">หากต้องการแสดงเป็น LINE (แบบ 3 มิติ) ให้ใส่ค่าใน ARRAY ที่เป็นลูกของโหนด LINE เป็น<b>ลำดับของ x,y,z ชุดละสามค่า</b> ส่วนที่อยู่ก่อนตัวคั่น (9999,9999,9999) จะกลายเป็นเส้นต่อเนื่องเส้นเดียว และส่วนที่ตามมาจะเริ่มเป็นเส้นใหม่ (รูปแบบ: x,y,z, x,y,z, ,,, 9999,9999,9999, x,y,z, ,,,, 9999,9999,9999) และ ARRAY หนึ่งตัวก็กำหนด LINE เป็นแม่ได้หลายตัว</p>
+      </section>
+      <section id="notes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">10. เรื่องที่ควรรู้
+        </h2>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">เมื่อใช้งานบนมือถือ<span style="font-weight: 400;">：<br />การเพิ่มทางลัด nodegram ไว้บนหน้าจอโฮมทำให้ใช้งานได้เหมือนแอป แต่เช่นเดียวกับแอป หากลบมันทิ้ง (ลบทางลัดจากหน้าจอโฮม) ข้อมูลที่บันทึกไว้ก็มีโอกาสสูงที่จะหายไปด้วย โปรแกรมที่ทำเสร็จแล้วควรเก็บไว้เป็นไฟล์ต่างหากด้วย Export<br /><br />ในเบราว์เซอร์มือถือบางตัว การแสดงผลหรือตำแหน่งที่สัมผัสอาจคลาดเคลื่อนได้</span><br /><span style="font-weight: 400;">ในกรณีนั้นให้</span><span style="font-weight: 400;">ปิด nodegram ลบทาสก์ทิ้ง (คนละอย่างกับการลบแอป) ถือเครื่องให้อยู่ในแนวนอนพอดี ๆ แล้วเปิดใหม่ ก็จะดีขึ้น<br /><br /></span></b>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">การบันทึกอัตโนมัติ:</b><br />ตราบที่ “auto save” ในหน้าจอบันทึกยังเปิดอยู่ ไฟล์ล่าสุดจะถูกเขียนทับทุก 1 นาที หากต้องการเก็บไว้ต่างหาก ให้ใช้ Save แล้วตั้งชื่อใหม่<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">สิทธิ์:</b> <br />ผลงานที่คุณสร้างด้วย nodegram เป็นสิทธิ์ของคุณทั้งหมด เราจะไม่นำไปใช้ตามอำเภอใจและจะไม่อ้างสิทธิ์ใด ๆ<br />ส่วนสิทธิ์ในโค้ดและข้อกำหนดของตัว nodegram เองเป็นของผม (harada) กรุณาอย่าเผยแพร่โค้ดของ nodegram ต่อโดยไม่ได้รับอนุญาต<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">ลิขสิทธิ์และปัญหา:</b> <br />กรุณาอย่านำสิ่งที่มีลิขสิทธิ์มาใช้อย่างไม่รอบคอบ<br />อนึ่ง เราไม่สามารถรับผิดชอบต่อปัญหาที่เกิดจากการใช้ nodegram ได้ (แน่นอนว่าเราจะไม่ใส่โค้ดที่ก่อปัญหาโดยเจตนา)
+          </li>
+        </ul>
+      </section>
+      <section id="contact" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">11. ติดต่อ
+        </h2>
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><span style="box-sizing: border-box;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">หากพบข้อผิดพลาดหรือมีเรื่องอื่นใด ติดต่อผมทาง X</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif"><b><a href="https://x.com/daiii">https://x.com/daiii</a></b></span><br /></span>
+              </li>
+        </ul>
+      </section></main>
+      <footer style='box-sizing: border-box; color: #666666; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 13px; padding: 16px 20px 24px;'>
+        <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">nodegram users guide
+        </div>
+      </footer>
+    </div>
+  </div>
+</header>
+</body>
+</html>

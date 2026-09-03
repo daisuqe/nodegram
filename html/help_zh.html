@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>nodegram 用户指南</title>
+  <style>
+    body { margin: 0; background: #ffffff; color: #282828;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; }
+    /* keep images with a height attribute from stretching when the page narrows */
+    img { max-width: 100%; height: auto; }
+    iframe { max-width: 100%; height: auto; }
+    table { max-width: 100%; }
+  </style>
+</head>
+<body>
+<div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 32px 0px;">
+<h1 style="text-align: left;"></h1><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"><br /></span></div><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"> <span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="letter-spacing: 0.3px;"><b>nodegram</b></span></span></div><div style="text-align: left;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiDstkyryoE0SJSgoUgAbrjBqCLne_phBA-cSV50I-G-TFO3lvBmK5IIqH0dsW08cW7-X2i0X5Fx4l9m7pUkgrBoIDhyMyGwSXDHSFwLFOTUpKtLJSWQ9vyPgTvXBDkv1HjMhd2k-m7KJ5GokqW-PQ2RdA2Xv09I-rEi-QPLg6KHvkktXDXvWaA0O7g8n0" style="margin-left: 1em; margin-right: 1em;"><span style="font-size: small;"></span></a><span style="font-size: small;"><div class="separator" style="clear: both; text-align: center;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="350" data-original-width="1065" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw=w640-h210" width="640" /></a></div></div><br /></span><div style="text-align: left;"><b style="color: #444444; font-size: large;"><span><span><span><span>节点编程工具。</span></span></span></span></b></div><div style="text-align: left;"><span style="color: #444444; font-size: medium;"><b>在手机、平板和电脑的浏览器上都能进行节点编程。</b></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: medium;"><br /></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: large;">nodegram : </span></div><div style="text-align: left;"><a href="https://daisuqe.github.io/nodegram/" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">https://daisuqe.github.io/nodegram/</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  在浏览器中打开 nodegram</a></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666; font-size: x-large;"><div style="color: black; font-size: medium;"><br />短网址</div><div style="color: black; font-size: medium;"><a href="https://bit.ly/nodegram" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">bit.ly/nodegram</a></div><a href="https://i.gg/ng" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">i.gg/ng</a></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666;"><span style="font-size: medium;"><br />示例程序（射击游戏）：</span></span></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  在浏览器中打开示例</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="562" data-original-width="1000" height="225" src="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY=w400-h225" width="400" /></a></div></div></div>
+</div>
+<header class="hero" style="background-attachment: initial; background-clip: initial; background-image: none; background-origin: initial; background-position: initial; background-repeat: initial; background-size: initial; border: 0px; box-sizing: border-box; padding: 0px;">
+  <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">
+    <div style="text-align: center;"><main style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 6px 16px 48px; text-align: start;">
+      <nav class="toc" style='background: rgb(250, 250, 250); border-radius: 10px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 20px 0px; padding: 14px 18px;'>
+        <h2 style="box-sizing: border-box; color: #666666; font-size: 13px; letter-spacing: 1px; margin: 0px 0px 8px; text-transform: uppercase;">目录
+        </h2>
+        <ol style="box-sizing: border-box; column-gap: 26px; columns: 2; margin: 0px; padding-left: 20px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#about" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">nodegram 是什么</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#basic" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">基本用法</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#views" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">三个视图的说明与操作</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#menu" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">MENU</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#mobile" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">在手机和电脑上的表现</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#nodes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">全部节点说明</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">Compo 节点</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#share" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">让别人玩你做的程序</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">规格与细节</a></li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#notes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">注意事项</a>
+          </li>
+        </ol>
+      </nav>
+      <section id="about" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">1. nodegram 是什么
+        </h2>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">nodegram 是<strong style="box-sizing: border-box;"><span style="color: #ffa400;">用节点来编程的工具</span></strong>。<br /><br />只要把摇杆节点和角色节点连起来，角色就能动起来。
+        <br /><br /></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="2051" data-original-width="3950" height="261" src="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4=w503-h261" width="503" /></a><br /><br /></div><p></p>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• 在手机或电脑上都能编程。</p><p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• 可以让别人玩你做的游戏。<br />• nodegram 在网上运行，只要能联网，随时随地都能编程（一个 nodegram 程序的大小大约只相当于一张图片）。<br /><br /></p><div class="column" style="background: #f7fafd; border: 1px solid #cfe0ef; border-left: 4px solid #3d85c6; border-radius: 8px; box-sizing: border-box; margin: 18px 0px; padding: 14px 16px;"><div style="box-sizing: border-box; color: #3d85c6; font-weight: 700; margin-bottom: 8px;">什么是节点编程（Node Programming）</div><div style="box-sizing: border-box; color: #282828;">nodegram 提供了 40 多种节点：只做加法的节点、记住数字的节点、检查按键是否被按下的节点等等。<br />节点编程就是让许多“负责人”（Node）互相传递信息，一起完成一件大事。每个负责人都会接过前一个人交来的数值，做完自己那一份工作，再交给下一个人。所有负责人始终都在工作。<br />相比之下，一般的文字编程是由一个负责人按顺序理解并执行指令。</div></div><p style="color: #282828;"></p>
+        <div class="separator" style="clear: both; color: #282828; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /><br /><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a>
+          </div>
+        </div>
+      </section>
+      <section id="basic" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <br />
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">2. 基本用法</h2><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;"></p><p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px; text-align: center;'><video controls playsinline preload="metadata" width="440" style="max-width: 100%;"><source src="sample_shoot_blog.mp4" type="video/mp4" />您的浏览器不支持播放该视频。</video><br />射击游戏的制作方法（2 分钟）<br /></p>nodegram 有三个操作画面：<br /> 编写程序的 <b style="box-sizing: border-box;"><span style="color: #ffa400;">NodeEditor</span></b><br /> 摆放对象的 <span style="box-sizing: border-box;"><span style="color: #ffa400;"><b>Layout 画面</b><br /><span style="color: #282828;"><b> </b>运行程序的 </span><b style="box-sizing: border-box; color: #282828; font-weight: bold;"><span style="color: #ffa400;">Play 画面</span></b><b style="box-sizing: border-box; color: #282828; font-weight: bold;"> </b></span></span><p></p><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">。<br /><br /></p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-1. 创建节点（NodeEditor）
+        </h3>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">在 NodeEditor 画面中<strong style="box-sizing: border-box;"><span style="color: #ffa400;">长按背景（什么都没有的黑色区域）</span></strong>，就会打开“<b><span style="color: #ffa400;">CREATE NEW NODE</span></b>”对话框。<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="412" data-original-width="709" height="373" src="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI=w640-h373" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">从节点列表中选择想要添加的节点，NodeEditor 中就会生成该节点。
+          </li>
+          <li style="color: #282828;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>长按或双击已创建的节点，会打开用于设置该节点细节的属性（Property）对话框。<br />对象的颜色等各项设置都在这里更改。<br />这里没有“OK”按钮，数值一经修改立即生效。请按右上角的 × 或点击对话框外部来关闭它。<br />DUPLICATE 用于复制节点，DELETE 用于删除节点。<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="229" src="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs=w498-h229" style="max-width: 100%;" width="498" /></a>
+            </div><br /></span>
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">拖动节点（触摸并移动）即可移动节点。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">从节点右侧的输出端口拖到（其他节点左侧的）输入端口，即可</span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">连接连线</span></strong><span style="color: #282828;">。连好之后，程序运行时数值就会从红色端子传递到蓝色端子。</span><br /><br />
+            <div class="separator" style="clear: both; color: #282828; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8=w400-h184" style="max-width: 100%;" width="400" /></a><br /><br />
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>顶部带有端子（子端子）的节点，从子端子连到（其他节点下方的）父端子后就形成父子关系，父对象移动时子对象也会跟着移动。<br /></span>例如玩家发射子弹的结构，就把发射口设为子、把玩家设为父。<br />
+            <div><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'><br /></span>
+            </div>
+            <div>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg=w400-h184" style="max-width: 100%;" width="400" /></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-2. 在画面中摆放对象（Layout 画面）
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">按“Layout”按钮即可切换到 Layout 画面。<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="265" data-original-width="217" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="max-width: 100%;" width="197" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">在 Layout 画面中摆放 Rect、Circle、Character、Text 等<strong style="box-sizing: border-box;">对象类节点<br /></strong>，以及 Button、Stick 等<strong style="box-sizing: border-box;">操作类节点</strong>。<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="464" data-original-width="876" height="338" src="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA=w640-h338" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">拖动对象可移动位置，用对象四角的白色手柄调整大小，用上方的圆形手柄调整方向。
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">按“NODE”按钮可返回 NodeEditor。
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-3. 运行程序（Play 画面）
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">按 NodeEditor 或 Layout 画面右上角的<strong style="box-sizing: border-box;"><span style="color: #ffa400;">▶（Play）按钮</span></strong>，即可切换到 Play 画面并运行程序。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">长按 Play 画面右上角的 □<strong style="box-sizing: border-box;"><span style="color: #ffa400;">（Stop）按钮</span></strong>即可停止 Play 并返回编辑画面。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">在 Play 画面中，对象节点每 1/60 秒（1 帧）绘制一次，并随物理运算一起运动。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">可以通过触摸屏幕、JoyStick、键盘、鼠标等方式进行操作。<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj2mtifbvqP9FBbyj1ZUKSBPAkQFq01_rm7nl0-2i5JcJcspALQ2FeGWetsp6DiqzReaKXKZaT9bFK9wEM7QIm4KI8vHrTDzujX8f6L-Yw4M_F1Pux_dUqiZ07KcxH9Frs_6DwXoELvUNxqavf20Btp4R5WbeEtY0ndfjEAVSga6tzuRHcw9o-M8PGnuoc" style="margin-left: 1em; margin-right: 1em;"></a>
+              <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="294" src="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY=w640-h294" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </div>
+          </li>
+        </ul>
+        <div style="color: #282828; text-align: center;">
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+            <li><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">在 Play 画面中也可以表现重力。<br /></span>制作弹球或马里奥这类游戏时，请打开 Dynamics（物理运算）。<br style="font-size: 16px;" /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><b><span style="color: #ffa400;">添加 Setting 节点</span></b>并在 Property 中打开 Dynamics，整个程序的 Dynamics 处理就会生效。<br />各个对象类节点也都有各自的 Dynamics 设置项，需要单独打开。<br /><br /></span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="views" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">3. 三个视图的说明与操作
+        </h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-1. NodeEditor 的操作
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">这是排列节点并用连线连接的节点搭建画面。<br /><br />
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="360" data-original-width="914" height="253" src="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E=w640-h253" style="max-width: 100%;" width="640" /></a>
+        </div><br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">操作
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">内容
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">单指拖动背景
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">移动视图
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">双指捏合、鼠标滚轮
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">放大 / 缩小视图
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">双击后拖动（背景）
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">框选（选中多个节点）
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">长按背景
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">打开 CREATE NEW NODE 画面
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">拖动节点
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">移动节点（选中多个时一起移动）
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">双击 / 长按节点
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">打开属性画面（选中多个时为多节点处理菜单）
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">在端子之间拖动
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">连接连线（为防止误操作，点按后需稍作停顿再拖动）
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">长按连线 / 向外拖出
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">断开连接<br />从端子向外拖动并松开也可以断开
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-2. Layout 画面的操作
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">这是决定对象位置、大小和旋转的画面。灰色矩形表示 Play 时的显示区域。
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="411" data-original-width="804" height="328" src="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E=w640-h328" style="max-width: 100%;" width="640" /></a>
+        </div><br />基本上与 NodeEditor 的操作相同。<br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">操作
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">内容
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">单指拖动（背景）
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">移动视图
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">鼠标滚轮 / 双指捏合
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">放大 / 缩小
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">拖动对象
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">移动（选中多个时一起移动）
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">点击对象
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">选中。该选中状态与 NodeEditor 共享
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">拖动手柄
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">改变大小 / 旋转
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">双击后拖动（背景）
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">框选（多选）
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">长按背景
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">打开 CREATE NODE 画面
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">长按选中项
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><span style="color: #282828;">打开属性画面（选中多个时为 Duplicate/Delete 菜单）</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>选中对象后，右侧会出现“50”之类的数字。<br />这个数字是 SortingLayer 值，数值越大显示得越靠前，越小则越靠后。<br />用下方的 ▲▼ 按钮可以增减。<br /><br />另外，在 SETTING 节点中可以设置 GridSnap。<br />打开后，对象将以 10 像素为单位移动。<br /><br />灰色画面的大小可以在 Setting 节点中更改。</section>
+      <section id="menu" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+        <h2 class="sec" style='border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;'>4. MENU
+        </h2>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="351" data-original-width="374" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" width="256" /></a>
+        </div>
+        <p>
+        </p>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>按住画面右上角的<b>MENU</b>按钮，把手指朝目标项目的方向滑动后松开，即可执行该项目。也可以当作普通按钮点击。<br /><br />按右上角的播放按钮 ▶ 会进入 Play 画面并运行程序。<br /><b>Layout </b>则会切换到 Layout 画面。
+        </p>
+        <p style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-items">4-1. 菜单项目
+        </h3>
+        <table style='border-collapse: collapse; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; margin: 14px 0px; max-width: 100%;'>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW NODE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">打开 CREATE NODE 画面来新建节点。长按背景也可以打开。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SAVE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">为当前程序命名并保存（参见 <a href="#menu-save" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-2</a>）。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">LOAD
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">读取已保存的程序（参见 <a href="#menu-load" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-3</a>）。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">UNDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">撤销上一步操作。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">REDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">重做被撤销的操作。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">FIT
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">调整显示倍率和位置，使所有节点都能显示在画面内。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">全部清除并新建。</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SETTING
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">打开整个应用的设置（参见 <a href="#menu-setting" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-4</a>）。与 SETTING 节点是不同的东西。
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">OPEN HELP
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">打开本帮助页面。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>在 Compo 内部进行编辑时，左侧的项目会变成 Compo 专用的项目。这部分将在“Compo 节点”一章中说明。
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-save">4-2. SAVE（保存）
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>命名后保存到本机。若已有同名文件则会覆盖保存。名称可使用半角英文字母、数字和部分符号。<br /><b>AUTO</b>后将启用<b>自动保存</b>，之后每 30 秒自动保存一次（Play 运行期间不会保存）。<br /><b>EXPORT</b>可以把程序导出为文件，便于备份或交给他人。<br />导出格式可以从 <b>.ngz（gzip 压缩）</b> 和 <b>.json（文本）</b> 两种中选择。<br />.ngz 只需把扩展名改为 <b>.gz</b>，就能用常见的解压软件取出其中的内容（JSON）。
+        </p>
+        <p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'><span style="color: #282828;">最多可以保存 <b>256 个</b>。保存位置在所使用的浏览器内部，因此在其他设备或其他浏览器上看不到。<br />保存的数据存放在 nodegram 内部，因此如果删除手机上 nodegram 的快捷方式，数据也可能一并消失。<br /></span><span style="color: red;"><b>重要的数据建议用 EXPORT 保存成文件。</b></span>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-load">4-3. LOAD（读取）
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>会列出已保存的程序列表。通过名称旁边的按钮也可以删除。<br /><b>IMPORT</b>可以读取用 EXPORT 导出的文件。读取方式有两种：<b>读取</b> 会替换当前内容，<b>追加读取</b> 则保留当前程序并追加到其下方。</p><p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>导入用 3D 软件制作的 <b>.obj</b> 文件后，3D 数据会作为 POLYGON 节点，或作为连接到 LINE 节点（3D 显示用）的 ARRAY 节点被读入。详情请参见 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 对象</a>。
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-setting">4-4. SETTING（应用设置）
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">整个应用的设置。这里更改的内容不会保存到程序中，只保留在本机上。</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Wire</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：选择连线的形状（曲线／直线）。</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>NodeColor</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：选择节点的配色。</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Language</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：切换显示语言。
+        </span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">日语、英语、中文（简体字）、法语、德语、印地语、印尼语、意大利语、韩语、葡萄牙语、俄语、西班牙语、泰语、土耳其语、越南语</span></p><p style="box-sizing: border-box; margin: 8px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;">每个场景的设置（FPS、Dynamics 等）不在这里，而是在 </span><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>SETTING 节点</b><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;"> 中进行。两者名称相同，请注意区分。</span></p>
+      </section>
+      <section id="mobile" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">5. 在手机和电脑上的表现
+        </h2><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>在手机上<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">触摸操作：</b><br />单指平移，双指捏合缩放。长按、双击后拖动等操作与电脑上相同。<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">横竖屏切换：</b><br />旋转设备时画面会跟随横竖方向。Play 中的显示方向遵循 SETTING 节点所指定的方向（横=Horizontal／竖=Vertical），方向与预期不符时会显示提示。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">iOS 的注意事项：</b> <br />在 iPhone 等 iOS 设备上要全屏显示时，从 Safari 菜单点击下面的 ①、②，隐藏工具栏后就接近全屏，使用起来更方便。<br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="641" data-original-width="1289" height="199" src="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0=w400-h199" style="max-width: 100%;" width="400" /></a>
+            </div>若要完全全屏显示，请从 Safari 菜单点按共享图标，选择“添加到主屏幕”。这样 nodegram 就能像应用一样使用，推荐这种方式。<br /><b><span style="color: red;">但删除添加到主屏幕的图标后，SAVE 的数据也可能消失。重要的数据请 Export 到手机内的文件夹中。</span></b>
+          </li>
+        </ul><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>在电脑上<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">快捷键：<br /></b><br />
+            <p dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">NodeEditor / Layout 画面通用</span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">按键</span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">操作</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Delete</code> 或 <code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Backspace</code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">删除选中的节点（选中多个时一起删除，会有确认对话框）</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Ctrl+D</code>（Mac 为 <code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Cmd+D</code>）</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">复制选中的节点（会有确认对话框）</span>
+                    </td>
+                  </tr>
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 15ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="el" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Y 或 Ctrl+Shift+Z<br /></span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 8ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Redo</span></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;"><br />打开 TEXTURE 编辑器时（在上述基础上）</span></span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">按键</span></span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">操作</span></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+V</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">粘贴剪贴板中的图像</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+C</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">将正在编辑的整张纹理复制到剪贴板</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">纹理编辑的 Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="color: #0b0b0b; font-family: arial; font-size: 13px; font-variant-ligatures: none;">Ctrl+Y 或 Ctrl+Shift+Z</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">纹理编辑的 Redo</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table><br />Mac 同样支持。</div>
+          </li>
+        </ul>
+      </section>
+      <section id="nodes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">6. 全部节点说明
+        </h2>
+        <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; font-size: 16px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhElpzs_62w4PYYXXQvNbziDoolx0vATkkN2Ig3P6kEp5H3Lq3BPvt3RsEMt0PryRdXOvahVj7zSL0eINC3SZtWlxKOx82JQ0RBHTXmjSAK8uOAu4Hw_BhMUc79piLzYsIAIRbzM8hVjXueKiIzsP7GhXu6bc2FgSc4x9mexzcZSzq1-AanVmqE8SLBI4I" style="margin-left: 1em; margin-right: 1em;"></a>
+          <div class="separator" style="clear: both;"><br />
+          </div>
+          <div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E"><img alt="" data-original-height="1072" data-original-width="2262" height="304" src="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E=w640-h304" style="max-width: 100%;" width="640" /></a>
+          </div><br />
+        </div>
+        <p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">入／出为输入端子数／输出端子数。
+        </p>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"> 常量
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">输入数/输出数</th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-green" style="background: rgb(46, 166, 110); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Constant
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出 Value 中设置的数字。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-blue" style="background: rgb(31, 115, 224); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 计算类
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出 </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">＋
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1</td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出 输入① ＋ 输入② 的结果。<br />其实不用加法节点也可以：所有节点的输入端子都能连接多条连线并自动求和，所以在输入①上接两条线同样会输出相加的结果。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">－
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出 输入① － 输入② 的结果
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">×
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出 输入① × 输入② 的结果
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">÷
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出 输入① ÷ 输入② 的结果。分母为 0 时输出 0。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;"><span style="font-family: trebuchet;">√</span>
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出输入①的平方根。输入小于等于 0 时返回 0。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Compare
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">比较输入①和输入②（= &gt; &lt; ≠ ≧ ≦）。成立输出 1，不成立输出 0。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Not ( ! )
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输入①为 0 时输出 1，否则输出 0。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Pos Angle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">由位置求角度。以度为单位输出 ArcTan2(输入②, 输入①)。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Angle Pos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">由角度求位置。根据角度（度）输出 (cos, sin)。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Random
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出 0 以上、小于 Number 的随机整数。在 Play 开始时，以及输入①不为 0 的每一帧更新数值。打开 Use Seed 并指定 Seed 值后，每次开始 Play 都会重现相同顺序的随机数。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Int
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">取整。可在 Round 属性中选择 Floor / Round / Integer。<br />默认的 Floor 是取不大于输入值的最接近整数，2.8 变成 2，-0.1 变成 -1。Round 为四舍五入，Integer 为取整数部分。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-cyan" style="background: rgb(0, 191, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 数值操作类
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Trigger
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">仅在输入从 0 变为非 0 的瞬间输出 1，持续 1 帧。<br />用 DELAY(F) 可以延迟指定帧数后再输出 1。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Counter
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">计数器。每帧加上输入①的数字，减去输入②，并输出内部保存的数字。<br />Type＝Clamp 时指定最大值和最小值，Loop 时在范围内循环。可设置 Value（初始值）和 Min/Max。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Var
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">可作为变量使用的节点。输出节点内保存的一个数值。<br />当输入②的置位信号为非 0 数值时，记住输入①。<br />可设置初始值。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Array
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">可作为数组使用的节点。<br />指定输入②的索引（数组中的位置，第 1 个为 0）即可输出数组中的值。索引从 0 开始，因此长度为 3 的数组索引是 0、1、2。指定小于 0 或大于等于 3 的值时视为无值，返回 0。<br />用输入③的置位信号，把输入①的值覆盖写入索引②所指定的数组元素。<br />初始值列表请用“,”（逗号）或换行分隔多个数字后填写。<br />数组可以与 Sound 节点配合当作乐谱使用，也可以与 Line 节点配合显示折线图形。还可以通过属性中的 SEQUENCER / LINE 按钮，在编辑器中以乐谱或折线图形的方式编辑（详见下文）。<br />此外，它也用于存放 3D 线框数据（参见 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 对象</a>）。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetPos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">获取父对象当前的 X、Y 位置。可切换 WORLD/LOCAL。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetRot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">以逆时针为正，输出父对象当前的角度。可切换 WORLD/LOCAL。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Velocity
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">以每秒的数值输出父对象的 X/Y 速度（Y 以向上为正）。增大 Frames 会参考更多帧，变化更平缓。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">Array 的专用编辑器（SEQUENCER / LINE）
+          </h3>
+          <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;"><br />
+          </p>
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+            <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">LINE 编辑器</b>：<br />这是绘制连接到 Line 节点的折线的工具。<br />编辑区域以中心为原点，X 向右为＋、Y 向上为＋，范围为 -99〜99。<br />用 DRAW 绘制折线。绘制过程中 DRAW 按钮会变为 Endpoint 按钮，按下即可确定这一笔。<br />用 MOVE 移动顶点，用 ERASE 删除单条线段，用 VIEW 移动视点，用 ◁ ▷ 撤销 / 重做。关闭后会转换为 x,y 的数列，x,y =（9999,9999）表示线在此处断开。<br />把 LINE 节点指定为 Array 节点的父节点后，LINE 节点就会按 Array 的信息进行绘制。一个 Array 节点也可以指定多个父节点（LINE 节点）。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="364" data-original-width="494" height="236" src="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ=w320-h236" style="max-width: 100%;" width="320" /></a>
+              </div><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box; font-size: 16px;">SEQUENCER 编辑器</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">：</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">这是制作连接到 Sound 节点的乐谱 Array 的工具。仅限八分音符、1 小节＝8 个、最多 500 小节、</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">3 个八度。</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">在 DRAW 模式下点击或拖动放置音符，在 ERASE 模式下拖动删除。</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">关闭后会变成以 Do 为 0、Re 为 1 的八分音符数组，休止符为 </span><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="box-sizing: border-box; font-size: 16px;">99（超过 80 的数值全部视为休止符）</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">，最后一个音符所在小节的末尾之前会用休止符填满。半音按 0.5 处理。<br /></span>勾选 Chromatic 复选框后，12 音阶（Do=0、Do♯=1、Re=2、Re♯=3、Mi=4、Fa=5、Fa♯=6、Sol=7、Sol♯=8、La=9、La♯=10、Si=11）各占一格，数字上一个八度也变为 12。Sound 节点上也有相同的复选框，请保持设置一致。<br /><br /><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">仅有 Array 是不会发出声音的，还需要类似下面链接中的程序。</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">
+              <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"></span>
+              </p>
+              <div class="links" style="box-sizing: border-box; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/xtty3xoo2man3cppp2vw0/turip02.json?rlkey=ber1bizk17rugdkbe8czrm9cx&amp;st=4itsm9sm&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ 打开示例</a>
+              </div></span>
+            </li>
+          </ul>
+        </div>
+        <div style="font-size: 16px;">
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="327" data-original-width="528" height="198" src="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="max-width: 100%;" width="320" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;"><br />
+          </div>
+          <div class="separator" style="clear: both;"> 也可以同时编辑多个序列（Array）。
+          </div>
+          <div class="separator" style="clear: both;"> 在 NodeEditor 中一起选中多个 Array 节点，长按节点后
+          </div>
+          <div class="separator" style="clear: both;"> 选择“SEQUENCER”。
+          </div>
+          <div class="separator" style="clear: both;"> 点击编号按钮可选择要编辑的 Array，长按可打开音量调整菜单，
+          </div>
+          <div class="separator" style="clear: both;"> 拖动还可以改变顺序。<br /><br />
+          </div>
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="549" data-original-width="1010" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU=w400-h217" style="max-width: 100%;" width="400" /></a>
+            </div>
+          </div>
+          <div class="separator" style="clear: both;"><br />
+          </div><br /><span class="swatch nc-purple" style="background: rgb(163, 51, 191); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span style="background-color: white; color: #161616; font-size: 18px;"> 输出类</span>
+        </div>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Text
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">显示文本。输入未连接时显示 Text 属性中指定的文字，连接后显示数值。用输入②控制显示的开关。数值会对小数点后第 6 位四舍五入，显示到第 5 位。可设置文字颜色、布局以及周围方框的显示开关。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Rect
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">矩形对象。Dynamics Off 时输入①/②为 x、y 坐标；Dynamics On 时为外力 x、y。输入③控制显示的开／关。可设置颜色、边框、Tag、大小、旋转、Sorting Layer 等。Broken by 1～3 用于指定能够破坏该对象的对方的 My Tag。<br />关于 Dynamics 和 Tag，请参考 <a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9. 规格与细节</a>。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Circle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">圆形对象。除形状和 Radius 之外，输入和属性都与 RECT 相同。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Character
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">可以移动和跳跃的角色。输入①/②为移动速度，输入③在从 0 以下变为正值的瞬间跳跃。<br />跳跃力与输入值成正比，且仅在接地时有效。要使用物理和跳跃，需要同时打开 SETTING 和 Character 的 Dynamics。制作俯视视角游戏时，可以保持 Dynamics 打开而把 Gravity 设为 0。Flip 会根据朝向左右翻转纹理，AutoRot 会让朝向自动跟随前进方向，KeepOnScr 会把移动范围限制在屏幕内。<br />虽然有子端子，但不能作为对象的子节点。能指定为父节点的只有 WARP IN。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Shot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">用输入①发射子弹。Bullet Count 为可同时存在的子弹数。My Tag 与对方的 Broken by 一致时会破坏对方；SHOT 一侧的 Broken by 1～3 用于指定会让子弹消失的对方种类或 Tag。只有成功发射的那一帧输出为 1。开启 Keep Off-Screen 后画面外的子弹会保留，超过子弹上限时旧的子弹会消失。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Line
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">5/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">绘制从 (X1,Y1) 到 (X2,Y2) 的线。连接了输入⑤(SET) 时，输入为非 0 值时更新外观，为 0 期间保持之前的形状。未连接时每帧更新。<br />把 ARRAY 指定为子节点后会忽略输入①～④，把数组按 x1,y1,x2,y2,,, 当作一笔画的折线绘制。x=9999, y=9999 表示线的断点。Coord 可选择 WORLD/LOCAL。<br />当子 ARRAY 为 3D 数据（x,y,z 三元组）时，会自动作为<b>3D LINE</b>绘制。详情请参见 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 对象</a>。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Sound
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输入①为音阶（Do=0、Re=1、…），输入②为音量，输入③为播放信号。输入①/②未连接时使用 Tone/Volume 属性。持续音在信号非 0 期间持续发声，衰减音和音效则在信号上升沿或音高改变时发声一次。音阶超过 80 的数值（如 99）为休止符。Tone 属性以 0.5 为步进（半音），但输入①可以使用连续的小数值。<br />打开 Chromatic 后，Tone 变为以半音为步进的 12 音阶数值（0=Do、1=Do#、2=Re…）。关闭时为 7 音阶，0.5 表示黑键。把 Array 作为音阶连接时，请与该 Array 的 SEQUENCER 一侧的 Chromatic 设置保持一致，否则音高会错位。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Polygon
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">7/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">用于显示 3D 模型面（多边形）的对象。无法从 CREATE NEW NODE 创建，只能通过 IMPORT .obj 文件生成。<br />输入包含 3D 位置坐标、3D 旋转和缩放。<br />详情请参见 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 对象</a>。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-orange" style="background: rgb(217, 115, 26); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 操作类
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Stick
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">虚拟摇杆。摇杆的 X 方向倾斜=输出①，Y 方向=输出②。支持模拟/数字切换，以及键盘/手柄的按键分配。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Button
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">虚拟按钮。按下期间输出 1。支持键盘/手柄的按键分配。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Keyboard
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">指定的按键被按下时输出 1。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Touch
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">屏幕触摸。触摸位置 X=输出①、Y=输出②（中心为 0,0），触摸期间输出③=1。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-yellow" style="background: rgb(230, 191, 0); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 其他节点
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">TEXTURE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">编辑并保存像素图，把图案贴到指定为父节点的对象上。可分配给 Rect、Circle、Chara、Shot、BG。可以指定多个父节点（对象节点）。<br />输入 0 时隐藏。把多个纹理连到同一个对象上，只让其中一个 Visible，就可以切换显示的纹理。<br />贴到对象上时可以选择是拉伸适配还是平铺。<br />不指定父节点时，也可以把纹理作为平面单独显示。<br />当背景图等需要大量使用同一张图时，也可以把一个纹理分配给多个对象。<br />纹理编辑器的详细用法请参见<a href="#texeditor" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">“TEXTURE 编辑器”</a>。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SENSOR
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出与传感器区域（在 Layout 画面中设定的范围）重叠的对象数量。只要符合 Target 的条件或 Tag 1〜3 中的任意一个即视为对象，同一个对象即使符合多个条件也只计为 1 个。Target=SCREEN 时，返回传感器区域是否与当前显示范围重叠（0/1）。指定父节点后传感器会跟随父节点，且该父节点自身会被排除在判定之外。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ONBREAK
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">输出当前帧中被破坏的父对象或指定 Tag 的对象数量。父对象可以指定多个。<br />如果 Onbreak 节点不指定参照对象，也可以当作特效节点使用。当输入①从 0 变为非 0 值时，也会在节点位置产生特效。特效可以设置种类 (NONE, PARTICLE, LINE, CIRCLE, BOX) 和颜色。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ROTATE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">用于旋转父子对象的旋转铰链。以 ROTATE 为父节点的对象会继承它的位置和旋转。输入①是相对于在 Layout 中设定的初始角度的旋转偏移量，正值表示逆时针角度。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SCREEN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">控制 Play 时的摄像机。X/Y 为摄像机位置（有父节点时是相对父节点位置的偏移，Y 以向上为正），S 为缩放，最小 0.05。以 SCREEN 为父节点的对象会成为不受摄像机影响的固定 HUD。
+                <br />把玩家对象指定为 SCREEN 的父节点后，视图就会跟随玩家移动。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">RESTART
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">当输入从 0 变为非 0 时，把整个程序恢复到 Play 开始时的状态。运行中的位置、变量、计数器、数组、子弹等都会被初始化。触发重启的那个输入值在重启后仍会保留在输出上，因此可用于继承剩余生命数或分数。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">COMPO
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">把多个节点合为一个的部件。E＝启用/禁用，1 和 2＝与内部交换数值。<br />Compo 节点的详情请参见 <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo 节点</a>。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li id="texeditor" style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">TEXTURE 编辑器</b>：<br />从 TEXTURE 节点属性中的“Edit Texture”按钮打开。可以绘制像素图，并贴到指定为父节点的对象上。<div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="404" data-original-width="492" height="263" src="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo=w320-h263" width="320" /></a></div><table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%;"><tbody><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Draw</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">用所选颜色画点。拖动可以连续绘制。</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Paint</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">把相连的同色区域一次性填充。</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Pick</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">吸取图中的颜色作为当前颜色。</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">View</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">进行视图的放大和移动。</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Copy / Paste</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">选择范围复制，并粘贴到其他位置。</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">◁ / ▷</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">UNDO / REDO</td></tr></tbody></table><p style="box-sizing: border-box; margin: 8px 0px;">颜色从下方的调色板中选择。想要擦除时，请选择透明色后绘制。<br />点数可在属性的 Size 中更改。图像尺寸最大可到 256*256，但 UNDO 次数会减少，编辑器也会变慢。SHOT 对象请尽量使用较小的纹理。<br />编辑结束后，用右上角的 × 关闭。<br />长按调色板可以从全色中选择颜色。</p><p style="box-sizing: border-box; margin: 8px 0px;">在电脑上，可以把在其他软件中复制的图像粘贴到编辑器的画布中。在手机上，根据软件和机型的不同也可能可以。</p></div>
+          </li>
+        </ul>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-warpin" style="background: rgb(122, 133, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-warpout" style="background: rgb(223, 107, 246); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 传送类
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpin" style="background: rgb(122, 133, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">把对象瞬间移动到别处的机制的“入口”。作用于指定为子节点的对象。输入非 0 时，指定为子节点的对象会移动到具有相同 Index 的 WARP OUT 的位置和角度。在持续输入非 0 期间会固定在那里，变为 0 后解除固定，重新可以自由移动。属性只有 Index。不能放入 Compo 中。
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpout" style="background: rgb(223, 107, 246); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">传送的“出口”。由具有相同 Index 的 WARP IN 送来的对象会移动到这个位置和角度。属性只有 Index。在 Layout 画面中可以移动位置和旋转（因为没有大小，所以无法调整尺寸）。也可以指定父对象让它一起移动。不能放入 Compo 中。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-sigout" style="background: rgb(255, 131, 131); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 连接类
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigin" style="background: rgb(96, 157, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">在把节点的输出连到很远的地方时使用。连接到 IN 节点的信号会输出到具有相同索引的 OUT 节点。不能创建多个具有相同索引的 IN 节点。指定 Compo 节点的索引后，也可用于访问 Compo 内部。<br />关于 Compo 节点请参见 <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo 节点</a>。</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigout" style="background: rgb(255, 131, 131); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">在从很远的地方连到节点的输入时使用。连接到 IN 节点的信号会输出到具有相同索引的 OUT 节点。可以创建多个具有相同索引的 OUT 节点。进入 IN 的数值会输出到所有具有相同索引的 OUT 节点。指定 Compo 节点的索引后，也可用于访问 Compo 内部。<br />关于 Compo 节点请参见 <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo 节点</a>。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-gray" style="background: rgb(107, 114, 128); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>设置类
+        </h3>
+        <div style="font-size: 16px;">
+          <section style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+            <div class="tblwrap" style="box-sizing: border-box; overflow-x: auto;">
+              <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+                <tbody style="box-sizing: border-box;">
+                  <tr style="box-sizing: border-box;">
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">节点
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">入/出
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">说明
+                    </th>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">MEMO
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">写在画面上的注释（备忘）。Play 时不会显示。
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">BG
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">运行画面的背景。每个场景一个，始终位于最底层。<br />分配 TEXTURE 节点后，会把该图案平铺满整个背景。未分配 TEXTURE 时，用 Color 的单色填充。
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SETTING
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">设置整个场景。<br />可以更改手机的横竖屏设置（ScreenOrient）、Play 画面尺寸指定（ScreenSize、ScreenLong、ScreenShort）、FPS、Dynamics（Gravity、Friction%、Bounce%、Drag%）、Play 停止按钮颜色（StopBtnCol）以及 GridSnap 设置。每个场景只能创建一个。
+                    <br />当场景中存在 3D 相关节点时，还会显示用于指定视点高度和到屏幕距离的属性。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section id="compo" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">7. Compo 节点
+        </h2>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>可以把多个节点当作一个节点来使用的特殊节点。<br /></b></span><b><br /></b>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="534" data-original-width="1030" height="297" src="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q=w571-h297" style="max-width: 100%;" width="571" /></a>
+              </div><br />比如说，如果同样处理的节点组合在程序中出现了 10 次，总会想以某种方式集中到一处来复用吧。<br />在 nodegram 中，可以把多个节点合并成一个 Compo 节点，然后复制这个 Compo 节点来使用。<br /><br />想做 10 个相同的敌人时，可以先做好 1 个的程序，把这 1 个所用的节点们合并成一个 Compo，再复制 Compo 并摆放到 Layout 中。<br /><br />复制出来的 Compo 节点在程序上是同一个东西，所以改动其中一个程序，其他 Compo 的程序也会随之改变；但各自持有的坐标、变量、生存时间等会按 Compo 分别处理。<br /><br />
+            </li>
+          </ul>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo 节点的创建步骤</b></span><br />
+            </li>
+          </ul>
+          <ol>
+            <li>先一起选中想要合并的节点们。<br />批量选中使用双击＋拖动来完成。<br />双击的第二次点击不要松开鼠标，直接拖动进行框选。<br />在手机上大概是“咚、咚、—”的感觉。<br />（这个示例程序中，左边是自机，方框圈住的区域是一架靠近自机的敌机的程序）<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="432" data-original-width="1419" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw=w640-h194" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>在选中多个节点的状态下长按其中任意一个节点，就会出现菜单。选择“MAKE COMPO”后会询问是否合并为 Compo，按“Yes”即可。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="440" data-original-width="1347" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY=w640-h210" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="147" data-original-width="402" height="117" src="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="max-width: 100%;" width="320" /></a><br /><br />
+              </div>
+            </li>
+            <li>多个节点变成了一个名为“C1”的 Compo 节点。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="307" data-original-width="1026" height="192" src="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw=w640-h192" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </li>
+            <li>长按（或双击）C1 节点，就会进入编辑 Compo 内部的 NodeEditor。<br />原先连到 Compo 的连接线，变成了名为“C1  1”“C1  2”的 OUT 节点。<br /><br />按右侧的“MENU”按钮，可以看到左列已变成 Compo 相关的命令。<br />按“Duplicate”会复制这个 Compo 节点。<br />按右下角的“PARENT”按钮，会离开这个 NodeEditor，返回上一层的 NodeEditor。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="963" height="254" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU=w640-h254" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>在上层的 NodeEditor 中可以确认已经生成了多个 Compo 节点。<br />因为也想给“C1 (2)”传入相同的输入值，所以把它的输入输出也连接起来。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="304" data-original-width="957" height="204" src="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I=w640-h204" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>按“LAYOUT”按钮，逐个调整各 Compo 的布局。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="429" data-original-width="918" height="188" src="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug=w400-h188" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>按 Play 按钮“▶”，可以看到有多架敌机，并且各自独立运动。<br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="453" data-original-width="907" height="200" src="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU=w400-h200" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>想大量复制 Compo 时，请一起选中 Compo 节点，长按后执行“Duplicate”。<br />另外，要给所有 Compo 节点传入相同数值时，使用 IN 节点和 OUT 节点会很方便。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="352" data-original-width="1164" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ=w640-h194" style="max-width: 100%;" width="640" /></a>
+              </div>
+            </li>
+          </ol>
+          <ol><br />
+          </ol>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>Compo 节点与实例<br /></b></span><br />当两个 Compo 节点内容相同，且编辑其中一个的内容会导致另一个也随之改变时，我们称“这两个节点是实例关系”；用复制来创建时，称为“创建 Compo 节点的实例”。<br />Compo 编号相同的节点互为实例关系，共用同一个程序。<br />（顺带一提，切断实例关系称为 Unique，位于 Compo 的滑动菜单中。<a href="#compo-unique" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">详见下文</a>）<br /><br />C 后面的编号相同，就是互为实例关系的同一个 Compo。<br />“C1 (1)”和“C1 (2)”是实例关系。<br />“C1 (1)”和“C2 (1)”是不同的 Compo，不是实例关系。<br />( ) 内的数字是用于区分同一个 Compo 的编号。<br /><br />即使 Compo 之间是实例关系，Play 时各个 Compo 的参数也是分别处理的。<br />角色的产生、消失、坐标，以及节点内的 count、var、array 等都持有各自独立的值。<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>Compo 节点内的 MENU<br /></b></span><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="366" data-original-width="458" height="256" src="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo=w320-h256" style="max-width: 100%;" width="320" /></a>
+                </div><br /><b>Duplicate、Delete</b>：复制和删除 Compo 节点。<br /><b><br /><span id="compo-unique">Unique</span></b>：切断 Compo 节点实例关系的功能。想沿用 Compo 的内容制作另一种敌人时使用。Compo 编号会变成别的编号。<br /><b><br />Expand</b>：把正在操作的 Compo 中的节点们放回主 NodeEditor，正在操作的 Compo 随之消失。这是 Make Compo 的逆操作。与之互为实例关系的 Compo 不会一起被 Expand（展开）。<br /><br />
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>Compo 节点与 IN、OUT 节点<br /></b></span><br />Compo 节点只有两个输入和两个输出端子，但通过 IN 节点、OUT 节点可以增加输入。<br />IN、OUT 节点的属性中可以指定 Compo 编号，因此可以把数值传给特定的 Compo。<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="377" data-original-width="1608" height="150" src="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s=w640-h150" style="max-width: 100%;" width="640" /></a>
+                </div><br />在 Compo 内可以使用不带 Compo 编号的 IN 节点。<br />在 Compo 内不能使用不带 Compo 编号的 OUT 节点（因为相同的 OUT 节点不能创建多个）。<br /><br />请注意：带 Compo 编号的 IN、OUT 节点，即使设置完全相同，位于 Compo 内部还是外部，其含义也完全不同。<br />上图中的“IN 节点（蓝色）：C1 索引 2”在 Compo 内和 Compo 外都有，但含义不同。Compo 内的那个连接到 Compo 的输出 2；而 Compo 外的那个连接到 Compo 的输入 2，负责把数值传给 Compo 内的“OUT 节点：C1 索引 2”。<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>Compo 的 Enable 输入与 Enable 输出<br /></b></span><b><br /></b>把 Compo 节点当作角色使用时，可以用 Enable 输入输出来控制该角色的出现和消失。<br /><br />Enable 输出在角色存在期间输出 1，角色因破坏等原因消失后输出 0。<br /><br />当 Enable 输入从 0 变为 1（非 0）时，Compo 内的程序启动，角色变为有效。要让角色持续存在，必须持续输入非 0 值。输入变为 0 或角色被破坏时，角色就会消失。<br />Enable 输入什么都不连接时，等同于一直输入 1。<br /><br />即使是已消失的角色，只要把输入从 0 变为非 0，角色就能从初始状态重新开始。<br />下面是角色被破坏后 3 秒重新在初始位置生成的程序。<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="219" data-original-width="1131" height="124" src="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM=w640-h124" style="max-width: 100%;" width="640" /></a>
+                </div><br />
+              </li>
+            </ul>
+          </div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo 节点内的父只有一个<br /></b></span><b><br /></b>Compo 内对象的父子关系中，不能存在多个父对象节点。目前不支持在一个 Compo 节点中创建两个角色的情况。<br />即使有两个父，只要为这两个设置了共同的父就没有问题。<br />一个对象节点都不持有（没有任何父）的状态也没有问题。<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="488" data-original-width="1203" height="163" src="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg=w400-h163" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo 内无法创建的节点<br /></b></span><br />BG、Setting、Stick、Button、Screen、OnBreak 无法在 Compo 内创建。<br /><br /></li></ul></div></section>
+      <section id="share" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">8. 让别人玩你做的程序
+        </h2>
+        <div style="box-sizing: border-box; margin: 22px 0px 8px;"><span style="background-color: white;"><span style="font-size: small;">只要把 URL 告诉别人，就能让他们玩你做的作品。<br /></span></span><span style="background-color: white;">打开 URL 后会直接从 Play 画面开始，所以玩的人不需要了解 nodegram。</span>
+        </div>
+        <section id="save" style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span>
+          </p>
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'><span style="font-size: 0.9em;"> 后面加上作品所在位置（URL）即可。</span></span>
+          </p>
+          <pre style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(245, 246, 247); border-radius: 8px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; overflow: auto; padding: 12px 14px;"><code style='background: none; border-color: currentcolor; border-image: none; border-radius: 5px; border-style: none; border-width: medium; box-sizing: border-box; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 0.9em; padding: 0px;'>例）<br />https://daisuqe.github.io/nodegram/?url=https://example.com/mygame.json</code>
+          </pre>
+          <p class="small" style="box-sizing: border-box; margin: 12px 0px 8px;"><br />URL 示例（射击游戏）：
+          </p>
+          <div><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ 在浏览器中打开</a><br /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="540" data-original-width="1249" height="277" src="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4=w640-h277" style="max-width: 100%;" width="640" /></a>
+            </div><br />步骤：<br />1. 用 MENU&gt;SAVE&gt;EXPORT 把游戏保存为 .json 格式的文件，存到电脑或手机中。<br />2. </span>把保存好的 .json 文件上传到 <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> 等互联网文件管理服务，然后在该服务中通过“获取链接”之类的功能取得上传后的链接 URL。<br />3. 在“<span style='font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=”</span><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'>后面加上作品所在位置（URL），并在自己的浏览器中打开这段文字。</span>
+          </div><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'><br /></span>
+          <p style="box-sizing: border-box; margin: 8px 0px;">作为文件的上传目的地，<a href="https://www.dropbox.com/home" target="_blank">Dropbox</a> 或 <a href="https://github.co.jp/" target="_blank">GitHub</a> 的 raw URL、GitHub Pages 都可以免费且安全地使用。如果是 Dropbox，从手机上传也很简单。<br />Google Drive 由于浏览器的限制，应用无法直接读取其中的文件，因此不能用作附加的 URL（CORS 限制）。<br /><br />
+          </p>
+        </section>
+      </section>
+      <section id="spec" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">9. 规格与细节</h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-1. 仅限 2D
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">nodegram 仅限 2D。坐标为 X（右为＋）、Y（上为＋）两个轴。在 Setting 节点中打开 Dynamics 后，角色会朝画面下方掉落。<br />制作俯视视角游戏时，请在 SETTING 节点中关闭 Dynamics，或者把整个游戏的重力设为 0。
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-2. FPS
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">目标帧率可在 SETTING 节点中选择 <b style="box-sizing: border-box;">60</b> 或 <b style="box-sizing: border-box;">30</b>（默认 60）。节点的求值和物理都以该 FPS 为基准推进。处理变重时 Play 的表现会变慢，帧率会低于指定值。
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-3. Dynamics（物理行为）
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">Rect、Circle、Character、Shot 等对象可以设置物理模式（Dynamics）。其行为与 Unity 的 Rigidbody2D 基本相同。
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">模式
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">行为
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Off</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">无物理。仅通过节点输入（X,Y）直接移动坐标。
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Static</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">不动的墙壁和地板。不会因重力或碰撞而移动。
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Dynamic</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">受重力和碰撞影响并按物理运动。节点的 X/Y 输入会作为“力”施加。
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Kinematic</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">不会因重力和碰撞移动，但可以通过节点输入强制移动，并能与其他 Dynamic 发生碰撞和干涉。
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small" style="box-sizing: border-box; color: #666666; font-size: 13px; margin: 8px 0px;">没有比重设定，大致以普通木材为基准。
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-4. SortingLayer（显示顺序）
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">由各对象的 <b style="box-sizing: border-box;">SortingLayer</b>（0〜100，默认 50）决定 Play 画面中的显示叠放顺序。<strong style="box-sizing: border-box;">数值越大越靠前（上）</strong>。BG（背景）始终位于最底层。<br />数值相同的对象按添加顺序显示。<br /><span style="background-color: #eef5fb;"><br /></span>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-5. 坐标
+        </h3>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">坐标系为 X（右＋）、Y（上＋）。Layout 的中心是原点 (0,0)。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">角度以度（degree）表示，<b style="box-sizing: border-box;">逆时针为＋</b>。0°＝右（X＋），90°＝上（Y＋），180°＝左（X−），270°＝下（Y−）。ANGLE POS / POS ANGLE / GetRot / ROTATE / 对象的 Angle 属性全部统一为这个方向。
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">通过对象 Property 中的 Coord 属性，节点输入的 X/Y 数值的含义会发生变化。
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">WORLD</b>：把输入值作为绝对坐标应用（有父对象时为以父为基准的局部绝对坐标）。
+              </li>
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">LOCAL</b>：把输入值作为相对于初始摆放位置的相对偏移应用。指定了父对象时，也包含相对父的偏移（Parent 坐标系）。
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">关于 3D 对象的坐标，请参见 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 对象</a>。
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-6. 分辨率
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">Play 时的显示区域是 Layout 中灰色矩形的大小。<br />画面方向（横=Horizontal／竖=Vertical）可在 SETTING 节点（不是 Setting 菜单）中切换，并会按实机的屏幕尺寸适配显示。<br />若要使用固定分辨率，请从 Setting 节点的 ScreenSize 进行设置。<br /><br />
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="701" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo=w400-h217" style="max-width: 100%;" width="400" /></a>
+          </div>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-7. Tag
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">Tag 就是分组。<br />例如可以给所有小兵敌人加上“Enemy_tiny”这个 Tag，或者用“bg_destroyed”“bg”来区分可破坏的背景和不可破坏的背景。<br />Shot、OnBreak、Rect、Circle、Character 等节点都会使用 Tag。</p><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br /></p><h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-8. 节点的操作</h3><div style="text-align: start;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="346" data-original-width="517" height="243" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w=w363-h243" style="max-width: 100%;" width="363" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div></div><ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: start;"><li style="box-sizing: border-box; margin: 4px 0px;">一个节点的输入可以连接多条线。有多个输入时，会把这些数值之和传给节点。图中最上面的端子接收的是 10+20→30。<br /><br /></li><li style="box-sizing: border-box; margin: 4px 0px;">节点之间的父子连接（从上方端子连到下方端子），除了控制对象的移动（Transform）之外，也用于指定“关系”。<br />例如 Texture 节点与对象类节点、OnBreak 节点与被检测的对象节点、Array 节点与 Line 节点。<br />通常一个父可以有多个子，但一个子不能指定多个父。<br />Texture 节点、OnBreak 节点、Array 节点可以持有多个父（分配目标）。</li></ul><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br />
+          </p>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-9. 一帧内的处理
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">所有节点都是同时处理的。<br />不会因为先创建了哪个节点而改变结果。<br /><br />对象节点等每帧处理一次。<br />Counter、Var、Trigger、Random、Array 等“记住数值的节点”也是每帧只更新一次。<br />＋ 和 × 这类计算节点不记忆数值，因此在需要时才计算。<br />不过，当计算节点构成回路时，一个节点在一帧内也只会被处理一次。<br /><br />
+          </p>
+        </div>
+        <p>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-10. UNDO / REDO
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">MENU 的 <b>UNDO</b> / <b>REDO</b> 可以撤销和重做节点的创建、删除、移动、连接、属性更改等操作。<b>最多可回退 50 步</b>。
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">TEXTURE / LINE / SEQUENCER 各编辑器都拥有各自独立的 UNDO 历史。请使用编辑器内的 ◁ / ▷ 按钮操作。LINE Editor、SEQUENCER 也可回退 50 步，TEXTURE 的可撤销次数则随尺寸而变化。</p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">另外，Play 的运行不在撤销范围内，保存和读取也无法撤销。
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;" id="spec-3d">9-11. 3D 对象
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="215" data-original-width="526" height="202" src="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0=w492-h202" width="492" /></a></div><br />nodegram 中有 <b>Polygon</b> 和 <b>ARRAY + LINE（3D 显示用）</b> 这两种用于显示 3D 对象的节点。两者都只能通过 IMPORT .obj 文件来创建（无法从 CREATE NEW NODE 创建）。<p></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">不过 nodegram 本身终究是<b>2D 平台</b>。3D 对象只是把它的外观当作 2D 素材来使用，和其他 2D 对象一样，显示顺序由 <b>Sorting Layer</b> 的设置决定。位于同一 Sorting Layer 的多个 Polygon 节点会作为一个 3D 显示统一处理，前后的深度关系也会正确地叠放绘制。
+        <br /><br />3D 对象具有 Z 坐标。屏幕所在位置为 z=0，向里为 +z，视点方向为 -z。从视点到屏幕的距离以及视点的高度可在 setting 节点中更改。<br />也可以与 2D 对象建立父子关系，但此时建议在 z=0 下使用。<br /><br /></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">要作为 LINE（3D 显示用）绘制，需要把作为 LINE 节点子节点的 ARRAY 的值设为 <b>x,y,z 三元组排列的数列</b>。在遇到分隔符 (9999,9999,9999) 之前的部分会连成一条线，之后的部分作为新的线处理（格式：x,y,z, x,y,z, ,,, 9999,9999,9999, x,y,z, ,,,, 9999,9999,9999）。ARRAY 的父也可以指定多个 LINE。</p>
+      </section>
+      <section id="notes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">10. 注意事项
+        </h2>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">使用手机时<span style="font-weight: 400;">：<br />把 nodegram 的快捷方式添加到主屏幕后，就能像应用一样使用。但和应用一样，删除它（删除主屏幕的快捷方式）后 Save 的数据很可能会消失。完成的程序请使用 Export 备份为外部文件。<br /><br />在某些手机浏览器上，显示或操作位置可能会错位。</span><br /><span style="font-weight: 400;">这种情况下，请</span><span style="font-weight: 400;">退出 nodegram，清除任务（不是删除应用），把手机方向摆正为横向后重新启动，即可恢复正常。<br /><br /></span></b>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">自动保存：</b><br />当 save 画面中的“auto save”处于打开状态时，每 1 分钟会覆盖保存到上一个文件。想以别的名称保留时，请用 Save 取一个新名字。<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">权利：</b> <br />用 nodegram 创作的作品，其全部权利归创作者所有。我们不会擅自使用或主张权利。<br />关于 nodegram 的代码和规格，权利归我（harada）所有。未经许可请勿再分发 nodegram 的代码。<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">关于著作权与纠纷：</b> <br />请勿不加考虑地使用有著作权的内容。<br />另外，因使用 nodegram 而产生的问题，我们概不负责（我们不会故意加入会引发问题的代码）。
+          </li>
+        </ul>
+      </section>
+      <section id="contact" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">11. 联系方式
+        </h2>
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><span style="box-sizing: border-box;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">如有 Bug 报告或其他联系事宜，请通过 X 联系</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif"><b><a href="https://x.com/daiii">https://x.com/daiii</a></b></span><br /></span>
+              </li>
+        </ul>
+      </section></main>
+      <footer style='box-sizing: border-box; color: #666666; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 13px; padding: 16px 20px 24px;'>
+        <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">nodegram users guide
+        </div>
+      </footer>
+    </div>
+  </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>nodegram 사용 설명서</title>
+  <style>
+    body { margin: 0; background: #ffffff; color: #282828;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; }
+    /* keep images with a height attribute from stretching when the page narrows */
+    img { max-width: 100%; height: auto; }
+    iframe { max-width: 100%; height: auto; }
+    table { max-width: 100%; }
+  </style>
+</head>
+<body>
+<div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 32px 0px;">
+<h1 style="text-align: left;"></h1><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"><br /></span></div><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"> <span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="letter-spacing: 0.3px;"><b>nodegram</b></span></span></div><div style="text-align: left;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiDstkyryoE0SJSgoUgAbrjBqCLne_phBA-cSV50I-G-TFO3lvBmK5IIqH0dsW08cW7-X2i0X5Fx4l9m7pUkgrBoIDhyMyGwSXDHSFwLFOTUpKtLJSWQ9vyPgTvXBDkv1HjMhd2k-m7KJ5GokqW-PQ2RdA2Xv09I-rEi-QPLg6KHvkktXDXvWaA0O7g8n0" style="margin-left: 1em; margin-right: 1em;"><span style="font-size: small;"></span></a><span style="font-size: small;"><div class="separator" style="clear: both; text-align: center;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="350" data-original-width="1065" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw=w640-h210" width="640" /></a></div></div><br /></span><div style="text-align: left;"><b style="color: #444444; font-size: large;"><span><span><span><span>노드로 프로그래밍하는 도구입니다.</span></span></span></span></b></div><div style="text-align: left;"><span style="color: #444444; font-size: medium;"><b>스마트폰, 태블릿, PC의 브라우저에서 바로 프로그래밍할 수 있습니다.</b></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: medium;"><br /></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: large;">nodegram : </span></div><div style="text-align: left;"><a href="https://daisuqe.github.io/nodegram/" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">https://daisuqe.github.io/nodegram/</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  브라우저에서 nodegram 열기</a></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666; font-size: x-large;"><div style="color: black; font-size: medium;"><br />짧은 URL</div><div style="color: black; font-size: medium;"><a href="https://bit.ly/nodegram" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">bit.ly/nodegram</a></div><a href="https://i.gg/ng" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">i.gg/ng</a></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666;"><span style="font-size: medium;"><br />예제 프로그램(슈팅 게임):</span></span></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  브라우저에서 예제 열기</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="562" data-original-width="1000" height="225" src="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY=w400-h225" width="400" /></a></div></div></div>
+</div>
+<header class="hero" style="background-attachment: initial; background-clip: initial; background-image: none; background-origin: initial; background-position: initial; background-repeat: initial; background-size: initial; border: 0px; box-sizing: border-box; padding: 0px;">
+  <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">
+    <div style="text-align: center;"><main style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 6px 16px 48px; text-align: start;">
+      <nav class="toc" style='background: rgb(250, 250, 250); border-radius: 10px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 20px 0px; padding: 14px 18px;'>
+        <h2 style="box-sizing: border-box; color: #666666; font-size: 13px; letter-spacing: 1px; margin: 0px 0px 8px; text-transform: uppercase;">목차
+        </h2>
+        <ol style="box-sizing: border-box; column-gap: 26px; columns: 2; margin: 0px; padding-left: 20px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#about" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">nodegram이란</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#basic" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">시작하는 방법</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#views" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">세 가지 화면</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#menu" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">MENU</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#mobile" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">스마트폰과 PC에서</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#nodes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">노드 설명</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">Compo 노드</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#share" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">만든 프로그램을 남에게 플레이하게 하기</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">사양</a></li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#notes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">알아두면 좋은 것</a>
+          </li>
+        </ol>
+      </nav>
+      <section id="about" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">1. nodegram이란
+        </h2>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">nodegram은 <strong style="box-sizing: border-box;"><span style="color: #ffa400;">노드로 프로그래밍하는 도구</span></strong>입니다.<br /><br />Stick 노드를 Character 노드에 연결하기만 해도 캐릭터가 움직입니다.
+        <br /><br /></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="2051" data-original-width="3950" height="261" src="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4=w503-h261" width="503" /></a><br /><br /></div><p></p>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• 스마트폰에서도 PC에서도 프로그래밍할 수 있습니다.</p><p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• 만든 게임을 다른 사람이 플레이하게 할 수 있습니다.<br />• nodegram은 웹에서 동작하므로 인터넷만 연결되어 있으면 어디서든 프로그래밍할 수 있습니다(nodegram 프로그램 하나의 용량은 사진 한 장 정도입니다).<br /><br /></p><div class="column" style="background: #f7fafd; border: 1px solid #cfe0ef; border-left: 4px solid #3d85c6; border-radius: 8px; box-sizing: border-box; margin: 18px 0px; padding: 14px 16px;"><div style="box-sizing: border-box; color: #3d85c6; font-weight: 700; margin-bottom: 8px;">노드 프로그래밍(Node Programming)이란</div><div style="box-sizing: border-box; color: #282828;">nodegram에는 더하기만 하는 노드, 숫자를 기억하는 노드, 키가 눌렸는지 확인하는 노드 등 40종류가 넘는 노드가 있습니다.<br />노드 프로그래밍은 여러 일꾼(노드)이 서로 정보를 주고받으며 하나의 큰 일을 해내는 방식입니다. 각 일꾼은 앞 사람에게서 값을 받아 자기 몫의 작은 일을 하고 결과를 넘겨줍니다. 모든 일꾼이 쉬지 않고 계속 일합니다.<br />반면 글로 쓰는 프로그래밍은 방식이 다릅니다. 한 명의 일꾼이 명령을 하나씩 읽으며 차례대로 처리합니다.</div></div><p style="color: #282828;"></p>
+        <div class="separator" style="clear: both; color: #282828; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /><br /><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a>
+          </div>
+        </div>
+      </section>
+      <section id="basic" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <br />
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">2. 시작하는 방법</h2><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;"></p><p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px; text-align: center;'><video controls playsinline preload="metadata" width="440" style="max-width: 100%;"><source src="sample_shoot_blog.mp4" type="video/mp4" />브라우저가 이 동영상을 재생할 수 없습니다.</video><br />슈팅 게임 만드는 법(2분)<br /></p>nodegram에는 세 가지 화면이 있습니다.<br /> 프로그램을 짜는 <b style="box-sizing: border-box;"><span style="color: #ffa400;">NodeEditor</span></b><br /> 오브젝트를 배치하는 <span style="box-sizing: border-box;"><span style="color: #ffa400;"><b>Layout</b><br /><span style="color: #282828;"><b> </b>프로그램을 실행하는 </span><b style="box-sizing: border-box; color: #282828; font-weight: bold;"><span style="color: #ffa400;">Play</span></b><b style="box-sizing: border-box; color: #282828; font-weight: bold;"> </b></span></span><p></p><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">입니다.<br /><br /></p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-1. 노드 만들기(NodeEditor)
+        </h3>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">NodeEditor에서 <strong style="box-sizing: border-box;"><span style="color: #ffa400;">배경(비어 있는 검은 부분)을 길게 누르</span></strong>면 “<b><span style="color: #ffa400;">CREATE NEW NODE</span></b>” 창이 열립니다.<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="412" data-original-width="709" height="373" src="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI=w640-h373" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">목록에서 원하는 노드를 고르면 NodeEditor에 만들어집니다.
+          </li>
+          <li style="color: #282828;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>만들어진 노드를 길게 누르거나 더블클릭하면 세부 설정을 하는 Property 창이 열립니다.<br />오브젝트의 색 같은 설정은 여기서 바꿉니다.<br />OK 버튼은 없으며 바꾸는 즉시 반영됩니다. 오른쪽 위의 ×를 누르거나 창 바깥을 터치해 닫으세요.<br />DUPLICATE는 노드를 복제하고 DELETE는 삭제합니다.<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="229" src="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs=w498-h229" style="max-width: 100%;" width="498" /></a>
+            </div><br /></span>
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">노드를 드래그(터치한 채 움직이기)하면 위치를 옮길 수 있습니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">노드 오른쪽의 출력 단자에서 (다른 노드 왼쪽의) 입력 단자로 드래그하면 </span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">선이 연결됩니다</span></strong><span style="color: #282828;">. 연결되면 프로그램이 실행될 때 값이 그 선을 따라 빨간 단자에서 파란 단자로 흐릅니다.</span><br /><br />
+            <div class="separator" style="clear: both; color: #282828; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8=w400-h184" style="max-width: 100%;" width="400" /></a><br /><br />
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>위쪽에 단자(자식 단자)가 있는 노드는 그곳에서 (다른 노드 아래쪽의) 부모 단자로 연결할 수 있습니다. 그러면 둘은 부모-자식 관계가 되어 부모가 움직일 때 자식도 함께 움직입니다.<br /></span>예를 들어 플레이어가 총을 쏜다면 총알이 나가는 곳을 자식으로, 플레이어를 부모로 삼습니다.<br />
+            <div><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'><br /></span>
+            </div>
+            <div>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg=w400-h184" style="max-width: 100%;" width="400" /></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-2. 오브젝트 배치하기(Layout 화면)
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">“Layout” 버튼을 눌러 Layout 화면으로 이동합니다.<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="265" data-original-width="217" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="max-width: 100%;" width="197" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">Layout에는 Rect, Circle, Character, Text 같은 <strong style="box-sizing: border-box;">오브젝트 노드<br /></strong>와 Button, Stick 같은 <strong style="box-sizing: border-box;">조작 노드</strong>를 배치합니다.<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="464" data-original-width="876" height="338" src="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA=w640-h338" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">오브젝트를 드래그해 옮기고, 네 모서리의 흰색 핸들로 크기를 바꾸고, 그 위의 둥근 핸들로 방향을 정합니다.
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">“NODE” 버튼을 누르면 NodeEditor로 돌아갑니다.
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-3. 프로그램 실행하기(Play 화면)
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">NodeEditor나 Layout 화면 오른쪽 위의 <strong style="box-sizing: border-box;"><span style="color: #ffa400;">▶(Play) 버튼</span></strong>으로 Play 화면으로 넘어가 프로그램이 실행됩니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">Play 화면 오른쪽 위의 □ <strong style="box-sizing: border-box;"><span style="color: #ffa400;">(Stop) 버튼을 길게 누르</span></strong>면 Play가 멈추고 편집 화면으로 돌아옵니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">Play에서는 오브젝트 노드가 1/60초(1프레임)마다 그려지며 물리 연산과 함께 움직입니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">화면 터치, 화면 위의 JoyStick, 키보드, 마우스로 조작할 수 있습니다.<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj2mtifbvqP9FBbyj1ZUKSBPAkQFq01_rm7nl0-2i5JcJcspALQ2FeGWetsp6DiqzReaKXKZaT9bFK9wEM7QIm4KI8vHrTDzujX8f6L-Yw4M_F1Pux_dUqiZ07KcxH9Frs_6DwXoELvUNxqavf20Btp4R5WbeEtY0ndfjEAVSga6tzuRHcw9o-M8PGnuoc" style="margin-left: 1em; margin-right: 1em;"></a>
+              <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="294" src="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY=w640-h294" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </div>
+          </li>
+        </ul>
+        <div style="color: #282828; text-align: center;">
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+            <li><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">Play 화면에서는 중력도 표현할 수 있습니다.<br /></span>핀볼이나 마리오 같은 게임을 만들려면 Dynamics(물리 연산)를 켜세요. <br style="font-size: 16px;" /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><b><span style="color: #ffa400;">Setting 노드</span></b>를 추가하고 그 Property에서 Dynamics를 켜면 프로그램 전체에 물리 연산이 적용됩니다.<br />각 오브젝트 노드에도 저마다 Dynamics 설정이 있으므로 개별적으로 켜야 합니다.<br /><br /></span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="views" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">3. 세 가지 화면
+        </h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-1. NodeEditor 사용법
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">노드를 배치하고 선으로 연결하는 화면입니다.<br /><br />
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="360" data-original-width="914" height="253" src="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E=w640-h253" style="max-width: 100%;" width="640" /></a>
+        </div><br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">조작
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">결과
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">배경에서 한 손가락 드래그
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">화면 이동
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">두 손가락 핀치, 마우스 휠
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">화면 확대·축소
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">더블클릭 후 드래그(배경)
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">범위 선택(여러 노드 선택)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">배경 길게 누르기
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">CREATE NEW NODE 열기
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">노드 드래그
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">노드 이동(여러 개 선택했다면 모두 함께)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">노드 더블클릭 또는 길게 누르기
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Property 열기(여러 개 선택했다면 다중 노드 메뉴)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">단자 사이 드래그
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">선 연결(잘못 연결되지 않도록 터치 후 잠시 멈췄다가 드래그하세요)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">선 길게 누르기 또는 밖으로 빼내기
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">연결 끊기<br />단자에서 바깥으로 드래그해 놓아도 끊을 수 있습니다
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-2. Layout 화면 사용법
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">오브젝트의 위치, 크기, 회전을 정하는 화면입니다. 회색 사각형이 Play할 때 보이는 범위입니다.
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="411" data-original-width="804" height="328" src="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E=w640-h328" style="max-width: 100%;" width="640" /></a>
+        </div><br />조작 방법은 기본적으로 NodeEditor와 같습니다.<br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">조작
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">결과
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">한 손가락 드래그(배경)
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">화면 이동
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">마우스 휠 / 두 손가락 핀치
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">확대·축소
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">오브젝트 드래그
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">이동(여러 개 선택했다면 모두 함께)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">오브젝트 탭
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">선택. 이 선택은 NodeEditor에서도 유지됩니다
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">핸들 드래그
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">크기 변경 / 회전
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">더블클릭 후 드래그(배경)
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">범위 선택
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">배경 길게 누르기
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">CREATE NODE 열기
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">선택한 것 길게 누르기
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><span style="color: #282828;">Property 열기(여러 오브젝트를 선택했다면 Duplicate/Delete 메뉴)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>오브젝트를 선택하면 오른쪽에 “50” 같은 숫자가 표시됩니다.<br />이 숫자가 SortingLayer이며, 값이 클수록 앞쪽에, 작을수록 뒤쪽에 그려집니다.<br />아래의 ▲▼ 버튼으로 값을 조절할 수 있습니다.<br /><br />그 밖에 SETTING 노드에 GridSnap 설정이 있습니다.<br />켜면 오브젝트가 10픽셀 단위로 움직입니다.<br /><br />회색 영역의 크기는 Setting 노드에서 바꿉니다.</section>
+      <section id="menu" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+        <h2 class="sec" style='border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;'>4. MENU
+        </h2>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="351" data-original-width="374" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" width="256" /></a>
+        </div>
+        <p>
+        </p>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>오른쪽 위의 <b>MENU</b> 버튼을 누른 채 손가락을 항목 방향으로 밀었다가 떼면 그 항목이 실행됩니다. 보통 버튼처럼 눌러도 됩니다.<br /><br />오른쪽 위의 ▶ 버튼을 누르면 Play 화면으로 넘어가 프로그램이 실행됩니다.<br /><b>Layout </b>을 누르면 Layout 화면으로 이동합니다.
+        </p>
+        <p style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-items">4-1. 메뉴 항목
+        </h3>
+        <table style='border-collapse: collapse; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; margin: 14px 0px; max-width: 100%;'>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW NODE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">새 노드를 추가하는 CREATE NODE를 엽니다. 배경을 길게 눌러도 같은 창이 열립니다.
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SAVE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">현재 프로그램에 이름을 붙여 저장합니다(<a href="#menu-save" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-2</a> 참조).
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">LOAD
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">저장한 프로그램을 불러옵니다(<a href="#menu-load" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-3</a> 참조).
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">UNDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">직전 조작을 취소합니다.
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">REDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">취소한 조작을 다시 실행합니다.
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">FIT
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">모든 노드가 화면에 들어오도록 확대율과 위치를 맞춥니다.
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">전부 지우고 새로 만듭니다.</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SETTING
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">앱 자체의 설정을 엽니다(<a href="#menu-setting" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-4</a> 참조). SETTING 노드와는 다른 것입니다.
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">OPEN HELP
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">이 도움말 페이지를 엽니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>Compo 안에서 편집할 때는 왼쪽 항목이 Compo용 항목으로 바뀝니다. 자세한 내용은 “Compo 노드” 장에서 설명합니다.
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-save">4-2. SAVE(저장)
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>이름을 붙여 이 기기에 저장합니다. 같은 이름이 이미 있으면 덮어씁니다. 이름에는 영문자, 숫자, 일부 기호를 쓸 수 있습니다.<br /><b>AUTO</b>에 체크하면 <b>자동 저장</b>이 켜져 이후 30초마다 자동으로 저장됩니다(Play 중에는 저장하지 않습니다).<br /><b>EXPORT</b>을 누르면 프로그램을 파일로 내보낼 수 있습니다. 백업하거나 남에게 건넬 때 편리합니다.<br />형식은 <b>.ngz(gzip 압축)</b>와 <b>.json(텍스트)</b> 중에서 고를 수 있습니다.<br />.ngz 파일의 확장자를 <b>.gz</b>로 바꾸기만 하면 일반 압축 해제 프로그램으로 JSON을 꺼낼 수 있습니다.
+        </p>
+        <p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'><span style="color: #282828;">저장은 최대 <b>256개</b>까지 할 수 있습니다. 사용 중인 브라우저 안에 저장되므로 다른 기기나 브라우저에서는 보이지 않습니다.<br />저장 데이터는 nodegram 안에 들어 있으므로 스마트폰에서 nodegram 바로가기를 지우면 데이터도 함께 사라질 수 있습니다.<br /></span><span style="color: red;"><b>중요한 것은 EXPORT로 파일을 남겨 두는 편이 좋습니다.</b></span>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-load">4-3. LOAD(불러오기)
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>저장된 프로그램 목록이 표시됩니다. 이름 옆의 버튼으로 삭제할 수도 있습니다.<br /><b>IMPORT</b>를 누르면 EXPORT로 내보낸 파일을 불러올 수 있습니다. 불러오는 방식은 두 가지로, <b>불러오기</b>는 현재 내용을 대체하고 <b>추가로 불러오기</b>는 현재 프로그램을 그대로 두고 그 아래에 파일을 이어 붙입니다.</p><p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>3D 소프트웨어로 만든 <b>.obj</b> 파일을 IMPORT하면 3D 데이터가 POLYGON 노드로, 또는 LINE 노드(3D 표시)에 붙는 ARRAY 노드로 읽힙니다. 자세한 내용은 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 오브젝트</a>를 참조하세요.
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-setting">4-4. SETTING(앱 설정)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">앱 자체의 설정입니다. 여기서 바꾼 내용은 프로그램에 저장되지 않고 이 기기에만 남습니다.</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Wire</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：선의 모양(곡선／직선)을 고릅니다.</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>NodeColor</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：노드의 색을 고릅니다.</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Language</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：표시 언어를 바꿉니다.
+        </span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">일본어, 영어, 중국어(간체), 프랑스어, 독일어, 힌디어, 인도네시아어, 이탈리아어, 한국어, 포르투갈어, 러시아어, 스페인어, 태국어, 튀르키예어, 베트남어</span></p><p style="box-sizing: border-box; margin: 8px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;">FPS나 Dynamics 같은 장면별 설정은 여기가 아니라 </span><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>SETTING 노드</b><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;">에 있습니다. 이름이 비슷하니 헷갈리지 마세요.</span></p>
+      </section>
+      <section id="mobile" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">5. 스마트폰과 PC에서
+        </h2><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>스마트폰에서<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">터치 조작:</b><br />한 손가락으로 밀고 두 손가락으로 확대합니다. 길게 누르기, 더블탭 후 드래그 등은 PC와 똑같이 동작합니다.<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">화면 회전:</b><br />기기의 방향에 따라 화면도 함께 회전합니다. Play 중에는 SETTING 노드에서 정한 방향(가로=Horizontal／세로=Vertical)이 적용되며, 반대로 들고 있으면 안내가 표시됩니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">iOS 관련 안내:</b> <br />iPhone 등 iOS 기기에서는 Safari 메뉴에서 아래의 ①, ②를 탭해 툴바를 숨기면 전체 화면에 가까워져 nodegram을 훨씬 편하게 쓸 수 있습니다.<br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="641" data-original-width="1289" height="199" src="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0=w400-h199" style="max-width: 100%;" width="400" /></a>
+            </div>완전한 전체 화면을 원한다면 Safari의 공유 메뉴에서 “홈 화면에 추가”를 선택하세요. nodegram이 앱처럼 동작하므로 이 방법을 권장합니다.<br /><b><span style="color: red;">다만 홈 화면에서 그 아이콘을 지우면 저장 데이터도 사라질 수 있으니 주의하세요. 중요한 것은 기기의 폴더에 Export 해 두세요.</span></b>
+          </li>
+        </ul><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>PC에서<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">단축키:<br /></b><br />
+            <p dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">NodeEditor / Layout 공통</span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">키</span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">동작</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Delete</code> 또는 <code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Backspace</code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">선택한 노드 삭제(여러 개 선택 시 한꺼번에. 확인 창이 뜹니다)</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Ctrl+D</code>(Mac에서는 Cmd+D<code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Cmd+D</code>)</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">선택한 노드 복제(확인 창이 뜹니다)</span>
+                    </td>
+                  </tr>
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 15ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="el" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Y 또는 Ctrl+Shift+Z<br /></span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 8ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Redo</span></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;"><br />TEXTURE 에디터를 열었을 때(위의 것에 더해)</span></span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">키</span></span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">동작</span></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+V</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">클립보드의 이미지 붙여넣기</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+C</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">편집 중인 텍스처 전체를 클립보드로 복사</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">텍스처 편집의 Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="color: #0b0b0b; font-family: arial; font-size: 13px; font-variant-ligatures: none;">Ctrl+Y 또는 Ctrl+Shift+Z</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">텍스처 편집의 Redo</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table><br />Mac도 지원합니다.</div>
+          </li>
+        </ul>
+      </section>
+      <section id="nodes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">6. 노드 설명
+        </h2>
+        <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; font-size: 16px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhElpzs_62w4PYYXXQvNbziDoolx0vATkkN2Ig3P6kEp5H3Lq3BPvt3RsEMt0PryRdXOvahVj7zSL0eINC3SZtWlxKOx82JQ0RBHTXmjSAK8uOAu4Hw_BhMUc79piLzYsIAIRbzM8hVjXueKiIzsP7GhXu6bc2FgSc4x9mexzcZSzq1-AanVmqE8SLBI4I" style="margin-left: 1em; margin-right: 1em;"></a>
+          <div class="separator" style="clear: both;"><br />
+          </div>
+          <div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E"><img alt="" data-original-height="1072" data-original-width="2262" height="304" src="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E=w640-h304" style="max-width: 100%;" width="640" /></a>
+          </div><br />
+        </div>
+        <p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">In/Out은 입력 단자 수／출력 단자 수를 뜻합니다.
+        </p>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"> 상수
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">입력/출력</th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-green" style="background: rgb(46, 166, 110); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Constant
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Value에 설정한 숫자를 출력합니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-blue" style="background: rgb(31, 115, 224); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 계산
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">＋
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1</td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력① ＋ 입력②의 결과를 출력합니다.<br />덧셈 노드가 늘 필요한 것은 아닙니다. 입력 단자 하나에 여러 선을 연결하면 자동으로 더해지므로 입력①에 선 두 개를 연결하기만 해도 그 합을 얻을 수 있습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">－
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력① － 입력②의 결과를 출력합니다
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">×
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력① × 입력②의 결과를 출력합니다
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">÷
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력① ÷ 입력②의 결과를 출력합니다. 분모가 0이면 0을 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;"><span style="font-family: trebuchet;">√</span>
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력①의 제곱근을 출력합니다. 입력이 0 이하면 0을 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Compare
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력①과 입력②를 비교합니다(=, &gt;, &lt;, ≠, ≥, ≤). 조건이 맞으면 1, 아니면 0을 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Not ( ! )
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력①이 0이면 1을, 그렇지 않으면 0을 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Pos Angle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">위치를 각도로. ArcTan2(입력②, 입력①)를 도 단위로 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Angle Pos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">각도를 위치로. 도 단위의 각도에 대해 (cos, sin)을 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Random
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 이상 Number 미만의 정수 난수를 출력합니다. Play를 시작할 때와 입력①이 0이 아닌 프레임마다 새 값을 뽑습니다. Use Seed를 켜고 Seed 값을 지정하면 Play할 때마다 같은 순서가 반복됩니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Int
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">정수로 만듭니다. Round 속성에서 Floor / Round / Integer를 고를 수 있습니다.<br />기본값인 Floor는 입력보다 작거나 같은 가장 가까운 정수를 취해 2.8은 2, -0.1은 -1이 됩니다. Round는 가까운 쪽으로 반올림하고, Integer는 정수 부분만 남깁니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-cyan" style="background: rgb(0, 191, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 값과 시간
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Trigger
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력이 0에서 다른 값으로 바뀌는 그 한 프레임만 1을 출력합니다.<br />DELAY(F)를 쓰면 그 1을 지정한 프레임 수만큼 늦춥니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Counter
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">카운터입니다. 매 프레임 입력①을 더하고 입력②를 빼며, 지니고 있는 값을 출력합니다.<br />Type＝Clamp는 값을 Min과 Max 사이로 묶고, Loop는 그 범위 안에서 순환시킵니다. Value(초깃값), Min, Max를 설정할 수 있습니다.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Var
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">변수처럼 쓰입니다. 숫자 하나를 지니고 출력합니다.<br />입력②의 세트 신호가 0이 아니면 입력①을 기억합니다.<br />초깃값을 설정할 수 있습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Array
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">배열처럼 쓰입니다.<br />입력②에 인덱스(배열에서의 위치. 첫 번째가 0)를 주면 그 요소를 출력합니다. 0부터 세므로 길이가 3인 배열에서는 0, 1, 2를 쓰며 0 미만이나 3 이상에서는 0이 나옵니다.<br />입력③의 세트 신호로 인덱스(입력②) 위치의 요소를 입력①의 값으로 덮어씁니다.<br />초깃값 목록의 숫자는 “,”(쉼표)나 줄바꿈으로 구분합니다.<br />배열은 Sound 노드의 악보로, Line 노드의 꺾은선으로도 쓸 수 있습니다. Property의 SEQUENCER / LINE 버튼을 누르면 바로 그 두 용도에 맞춘 에디터가 열립니다(아래 참조).<br />그 밖에 3D 와이어프레임을 담는 데에도 쓰입니다(<a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 오브젝트</a> 참조).</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetPos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">부모 오브젝트의 현재 X, Y 위치를 읽습니다. WORLD/LOCAL로 전환할 수 있습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetRot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">부모 오브젝트의 현재 각도를 출력합니다. 반시계 방향이 양수입니다. WORLD/LOCAL로 전환할 수 있습니다.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Velocity
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">부모 오브젝트의 초당 X/Y 속도를 출력합니다(Y는 위쪽이 양수). Frames를 크게 하면 더 많은 프레임을 평균 내어 값이 완만해집니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">ARRAY 전용 에디터(SEQUENCER / LINE)
+          </h3>
+          <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;"><br />
+          </p>
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+            <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">LINE 에디터</b>：<br />Line 노드에 줄 꺾은선을 그리는 도구입니다.<br />편집 영역의 한가운데가 원점이며 X는 오른쪽이 ＋, Y는 위쪽이 ＋로 각각 -99〜99입니다.<br />DRAW로 선을 그립니다. 그리는 동안 DRAW 버튼은 Endpoint로 바뀌며, 누르면 그리던 선이 마무리됩니다.<br />MOVE는 점을 옮기고, ERASE는 선 하나를 지우고, VIEW는 화면을 옮기며, ◁ ▷는 Undo / Redo입니다. 닫으면 x,y 숫자 목록이 되며 x,y = (9999,9999)가 선을 끊습니다.<br />ARRAY 노드의 부모로 LINE 노드를 지정하면 그 LINE 노드가 배열의 내용대로 그림을 그립니다. ARRAY 노드에는 부모(LINE 노드)를 여러 개 지정할 수도 있습니다.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="364" data-original-width="494" height="236" src="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ=w320-h236" style="max-width: 100%;" width="320" /></a>
+              </div><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box; font-size: 16px;">SEQUENCER 에디터</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">：</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">Sound 노드에 줄 악보 ARRAY를 만드는 도구입니다. 8분음표만, 1마디＝8개, 최대 500마디, </span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">3옥타브입니다.</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">DRAW 모드에서는 클릭하거나 드래그해 음을 놓고, ERASE 모드에서는 드래그해 지웁니다.</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">닫으면 도가 0, 레가 1인 8분음표 배열이 만들어집니다. 쉼표는 </span><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="box-sizing: border-box; font-size: 16px;">99(실제로는 80을 넘는 값은 모두 쉼표로 처리됩니다)</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">이며, 마지막 음이 있는 마디는 끝까지 쉼표로 채워집니다. 반음은 0.5로 적습니다.<br /></span>Chromatic에 체크하면 칸 하나가 12개의 반음 중 하나가 되어(도=0, 도♯=1, 레=2, 레♯=3, 미=4, 파=5, 파♯=6, 솔=7, 솔♯=8, 라=9, 라♯=10, 시=11) 한 옥타브가 12가 됩니다. Sound 노드에도 같은 체크박스가 있으니 둘의 설정을 맞추세요.<br /><br /><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">ARRAY만으로는 소리가 나지 않습니다. 아래 링크 같은 프로그램이 필요합니다.</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">
+              <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"></span>
+              </p>
+              <div class="links" style="box-sizing: border-box; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/xtty3xoo2man3cppp2vw0/turip02.json?rlkey=ber1bizk17rugdkbe8czrm9cx&amp;st=4itsm9sm&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ 예제 열기</a>
+              </div></span>
+            </li>
+          </ul>
+        </div>
+        <div style="font-size: 16px;">
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="327" data-original-width="528" height="198" src="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="max-width: 100%;" width="320" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;"><br />
+          </div>
+          <div class="separator" style="clear: both;"> 여러 시퀀스(ARRAY)를 동시에 편집할 수도 있습니다.
+          </div>
+          <div class="separator" style="clear: both;"> NodeEditor에서 ARRAY 노드를 여러 개 선택한 뒤 그중 하나를 길게 눌러
+          </div>
+          <div class="separator" style="clear: both;"> “SEQUENCER”를 고르세요.
+          </div>
+          <div class="separator" style="clear: both;"> 숫자 버튼으로 편집할 배열을 고르고, 길게 누르면 음량 메뉴가 열리며,
+          </div>
+          <div class="separator" style="clear: both;"> 드래그해 순서를 바꿀 수도 있습니다.<br /><br />
+          </div>
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="549" data-original-width="1010" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU=w400-h217" style="max-width: 100%;" width="400" /></a>
+            </div>
+          </div>
+          <div class="separator" style="clear: both;"><br />
+          </div><br /><span class="swatch nc-purple" style="background: rgb(163, 51, 191); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span style="background-color: white; color: #161616; font-size: 18px;"> 출력과 오브젝트</span>
+        </div>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Text
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">문자를 표시합니다. 아무것도 연결하지 않으면 Text 속성에 적은 글이, 선을 연결하면 그 값이 표시됩니다. 입력②로 표시를 켜고 끕니다. 숫자는 소수점 여섯째 자리에서 반올림해 다섯째 자리까지 표시합니다. 글자 색, 배치, 둘레의 테두리를 설정할 수 있습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Rect
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">사각형 오브젝트입니다. Dynamics가 꺼져 있으면 입력①②는 x, y 좌표이고, 켜져 있으면 외부 힘의 x, y가 됩니다. 입력③은 표시를 켜고 끕니다. 색, 테두리, Tag, 크기, 회전, Sorting Layer 등을 설정할 수 있습니다. Broken by 1〜3에는 이것을 파괴할 수 있는 상대의 My Tag를 지정합니다.<br />Dynamics와 Tag에 대해서는 <a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9. 사양</a>을 참조하세요.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Circle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">원 오브젝트입니다. 모양과 Radius 속성을 빼면 입력과 속성은 RECT와 같습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Character
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">걷고 뛸 수 있는 캐릭터입니다. 입력①②는 속도이며, 입력③이 0 이하에서 양수로 바뀌는 순간 점프합니다.<br />점프 높이는 입력값에 비례하며 땅에 닿아 있을 때만 작동합니다. 물리와 점프가 동작하려면 SETTING과 Character 양쪽에서 Dynamics를 켜야 합니다. 위에서 내려다보는 게임을 만들 때는 Dynamics를 켠 채 Gravity를 0으로 하세요. Flip은 방향에 맞춰 텍스처를 뒤집고, AutoRot은 진행 방향으로 캐릭터를 돌리며, KeepOnScr은 화면 안에 머물게 합니다.<br />자식 단자는 있지만 오브젝트의 자식이 될 수는 없습니다. 부모가 될 수 있는 것은 WARP IN뿐입니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Shot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력①로 총알을 발사합니다. Bullet Count는 동시에 존재할 수 있는 총알 수입니다. My Tag는 그것과 맞는 Broken by를 가진 대상을 파괴하며, SHOT 노드의 Broken by 1〜3은 그 총알이 무엇에 부딪혀 사라지는지를 노드 종류나 Tag로 지정합니다. 출력은 실제로 발사한 프레임에만 1이 됩니다. Keep Off-Screen은 화면 밖의 총알을 유지하며, 상한을 넘으면 오래된 총알부터 사라집니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Line
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">5/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">(X1,Y1)에서 (X2,Y2)까지 선을 그립니다. 입력⑤(SET)를 연결하면 그 입력이 0이 아닌 동안 모양이 갱신되고, 0이면 이전 모양을 유지합니다. 연결하지 않으면 매 프레임 갱신됩니다.<br />자식으로 ARRAY를 두면 입력①〜④는 무시되고, 배열을 x1,y1,x2,y2,…로 읽어 하나로 이어진 꺾은선을 그립니다. x=9999, y=9999는 선을 끊습니다. Coord로 WORLD/LOCAL을 고를 수 있습니다.<br />자식 ARRAY에 3D 데이터(x,y,z 세 개씩)가 들어 있으면 자동으로 <b>3D LINE</b>으로 그려집니다. 자세한 내용은 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 오브젝트</a>를 참조하세요.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Sound
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력①은 음높이(도=0, 레=1, …), 입력②는 음량, 입력③은 재생 신호입니다. 입력①②를 연결하지 않으면 Tone, Volume 속성이 쓰입니다. 지속음은 신호가 0이 아닌 동안 계속 울리고, 감쇠음과 효과음은 신호가 올라가는 순간이나 음이 바뀔 때 한 번 울립니다. 80을 넘는 음높이(예: 99)는 쉼표입니다. Tone 속성은 0.5(반음) 단위지만 입력①에는 어떤 소수든 넣을 수 있습니다.<br />Chromatic을 켜면 Tone이 12개의 반음 번호가 됩니다(0=도, 1=도#, 2=레…). 끄면 0.5가 검은건반이 되는 7음계가 됩니다. 배열을 음높이로 넣을 때는 그 배열의 SEQUENCER에 있는 Chromatic 설정과 맞추세요. 어긋나면 음이 틀어집니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Polygon
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">7/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3D 모델의 면(폴리곤)을 표시하는 오브젝트입니다. CREATE NEW NODE로는 만들 수 없고 .obj 파일을 IMPORT할 때만 만들어집니다.<br />입력은 3D 위치, 3D 회전, 배율입니다.<br />자세한 내용은 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 오브젝트</a>를 참조하세요.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-orange" style="background: rgb(217, 115, 26); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 조작
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Stick
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">화면 위의 조이스틱입니다. 스틱의 가로 기울기가 출력①, 세로가 출력②입니다. 아날로그／디지털을 고를 수 있고 키보드나 게임패드에 할당할 수도 있습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Button
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">화면 위의 버튼입니다. 누르고 있는 동안 1을 출력합니다. 키보드나 게임패드에 할당할 수 있습니다.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Keyboard
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">지정한 키를 누르고 있는 동안 1을 출력합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Touch
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">화면 터치입니다. 터치한 곳의 X가 출력①, Y가 출력②이며(가운데가 0,0), 화면을 만지고 있는 동안 출력③이 1이 됩니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-yellow" style="background: rgb(230, 191, 0); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 그 밖의 노드
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">TEXTURE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">직접 그린 픽셀 그림을 담아 부모로 지정한 오브젝트에 붙입니다. Rect, Circle, Chara, Shot, BG에 붙일 수 있으며 부모(오브젝트 노드)를 여러 개 지정할 수도 있습니다.<br />입력이 0이면 숨겨집니다. 한 오브젝트에 여러 텍스처를 연결하고 하나만 Visible로 두면 표시할 텍스처를 바꿀 수 있습니다.<br />오브젝트에 붙일 때 그림을 맞출지 타일처럼 깔지 고를 수 있습니다.<br />부모를 지정하지 않으면 텍스처만 평면 그림처럼 표시할 수도 있습니다.<br />배경처럼 같은 그림이 여러 곳에 필요할 때는 하나의 텍스처를 여러 오브젝트에 지정할 수 있습니다.<br />텍스처 에디터의 자세한 사용법은 <a href="#texeditor" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">“TEXTURE 에디터”</a>를 참조하세요.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SENSOR
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">센서 범위(Layout 화면에서 정한 범위)에 닿은 오브젝트 수를 출력합니다. Target 조건이나 Tag 1〜3 중 하나에 맞으면 세며, 한 오브젝트가 여러 조건에 맞더라도 1로만 셉니다. Target=SCREEN이면 센서 범위가 현재 보이는 화면과 겹치는지를 0/1로 출력합니다. 부모를 지정하면 센서가 그것을 따라 움직이며, 그 부모 자신은 감지에서 제외됩니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ONBREAK
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">이번 프레임에 파괴된 부모 오브젝트나 지정한 Tag를 가진 오브젝트의 수를 출력합니다. 부모 오브젝트는 여러 개 지정할 수 있습니다.<br />Onbreak 노드는 감시 대상을 지정하지 않아도 이펙트 노드로 쓸 수 있습니다. 입력①이 0에서 다른 값으로 바뀔 때에도 노드 위치에 이펙트를 냅니다. 이펙트 종류(NONE, PARTICLE, LINE, CIRCLE, BOX)와 색을 설정할 수 있습니다.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ROTATE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">부모-자식 오브젝트를 회전시키는 경첩입니다. ROTATE를 부모로 둔 오브젝트는 그 위치와 회전을 따릅니다. 입력①은 Layout에서 정한 처음 각도로부터의 회전 차이이며, 양수면 반시계 방향으로 돕니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SCREEN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Play 중의 카메라를 조작합니다. X/Y는 카메라 위치(부모가 있으면 그 위치로부터의 차이. Y는 위쪽이 양수), S는 확대율이며 최솟값은 0.05입니다. SCREEN을 부모로 둔 오브젝트는 카메라의 영향을 받지 않는 고정 HUD가 됩니다.
+                <br />SCREEN의 부모로 플레이어 오브젝트를 지정하면 화면이 플레이어를 따라갑니다.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">RESTART
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">입력이 0에서 다른 값으로 바뀌면 프로그램 전체가 Play를 시작했을 때의 상태로 돌아갑니다. 위치, 변수, 카운터, 배열, 총알 등이 초기화됩니다. 다시 시작하게 만든 값은 그 뒤에도 출력에 남으므로 남은 목숨이나 점수를 이어받을 때 편리합니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">COMPO
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">여러 노드를 하나로 묶은 부품입니다. E＝켜기/끄기, ①과 ②＝안쪽과 값을 주고받습니다.<br />자세한 내용은 <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo 노드</a>를 참조하세요.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li id="texeditor" style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">TEXTURE 에디터</b>：<br />TEXTURE 노드의 Property에 있는 “Edit Texture” 버튼으로 엽니다. 여기서 픽셀 그림을 그려 부모로 지정한 오브젝트에 붙일 수 있습니다.<div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="404" data-original-width="492" height="263" src="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo=w320-h263" width="320" /></a></div><table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%;"><tbody><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Draw</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">고른 색으로 점을 찍습니다. 드래그하면 계속 그려집니다.</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Paint</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">같은 색으로 이어진 영역을 한 번에 칠합니다.</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Pick</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">그림에서 색을 집어 현재 색으로 삼습니다.</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">View</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">화면을 확대하고 이동합니다.</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Copy / Paste</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">선택한 영역을 복사해 다른 곳에 붙입니다.</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">◁ / ▷</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">UNDO / REDO</td></tr></tbody></table><p style="box-sizing: border-box; margin: 8px 0px;">색은 아래의 팔레트에서 고릅니다. 지울 때는 투명한 색을 골라 그리세요.<br />점의 개수는 Property의 Size로 바꿉니다. 256*256까지 키울 수 있지만 Undo 횟수가 줄고 에디터도 느려집니다. SHOT 오브젝트의 텍스처는 되도록 작게 만드세요.<br />다 그렸으면 오른쪽 위의 ×로 닫습니다.<br />색 팔레트를 길게 누르면 원하는 색을 자유롭게 고를 수 있습니다.</p><p style="box-sizing: border-box; margin: 8px 0px;">PC에서는 다른 프로그램에서 복사한 이미지를 에디터에 바로 붙여 넣을 수 있습니다. 앱과 기기에 따라 스마트폰에서도 가능합니다.</p></div>
+          </li>
+        </ul>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-warpin" style="background: rgb(122, 133, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-warpout" style="background: rgb(223, 107, 246); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 워프
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpin" style="background: rgb(122, 133, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">오브젝트를 옮기는 장치의 “입구”입니다. 자식으로 지정한 오브젝트에 작용합니다. 입력이 0이 아니게 되면 그 자식은 같은 Index를 가진 WARP OUT의 위치와 각도로 이동하며, 입력이 0이 아닌 동안 그곳에 고정됩니다. 0으로 돌아오면 풀려나 다시 자유롭게 움직입니다. 속성은 Index뿐입니다. Compo 안에는 놓을 수 없습니다.
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpout" style="background: rgb(223, 107, 246); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">워프의 “출구”입니다. 같은 Index를 가진 WARP IN이 보낸 오브젝트가 이 위치와 각도로 나타납니다. 속성은 Index뿐입니다. Layout 화면에서 옮기고 회전시킬 수 있습니다(크기가 없으므로 확대·축소는 되지 않습니다). 오브젝트를 부모로 두면 함께 움직입니다. Compo 안에는 놓을 수 없습니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-sigout" style="background: rgb(255, 131, 131); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> 신호
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigin" style="background: rgb(96, 157, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">노드의 출력을 멀리까지 보내는 데 씁니다. IN 노드에 연결한 신호는 같은 인덱스를 가진 모든 OUT 노드에서 나옵니다. 같은 인덱스의 IN 노드를 두 개 만들 수는 없습니다. Compo 인덱스를 지정하면 그 Compo 안까지 닿습니다.<br />Compo 노드에 대해서는 <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo 노드</a>를 참조하세요.</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigout" style="background: rgb(255, 131, 131); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">멀리서 보낸 값을 받는 데 씁니다. IN 노드에 들어간 값이 이곳, 즉 그 인덱스를 가진 모든 OUT 노드에서 나옵니다. 같은 인덱스의 OUT 노드는 여러 개 만들 수 있습니다. Compo 인덱스를 지정하면 그 Compo 안까지 닿습니다.<br />Compo 노드에 대해서는 <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo 노드</a>를 참조하세요.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-gray" style="background: rgb(107, 114, 128); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>장면 설정
+        </h3>
+        <div style="font-size: 16px;">
+          <section style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+            <div class="tblwrap" style="box-sizing: border-box; overflow-x: auto;">
+              <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+                <tbody style="box-sizing: border-box;">
+                  <tr style="box-sizing: border-box;">
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">노드
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">In/Out
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">설명
+                    </th>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">MEMO
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">작업 화면에 적어 두는 메모입니다. Play 중에는 그려지지 않습니다.
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">BG
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Play 화면의 배경입니다. 장면마다 하나이며 언제나 가장 뒤에 있습니다.<br />TEXTURE 노드를 지정하면 그 그림이 배경 전체에 타일처럼 깔립니다. TEXTURE가 없으면 Color의 단색으로 채워집니다.
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SETTING
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">장면 전체의 설정입니다.<br />스마트폰 화면 방향(ScreenOrient), Play 영역 크기(ScreenSize, ScreenLong, ScreenShort), FPS, Dynamics(Gravity, Friction%, Bounce%, Drag%), Play 정지 버튼 색(StopBtnCol), GridSnap을 바꿀 수 있습니다. 장면마다 하나만 만들 수 있습니다.
+                    <br />장면에 3D 관련 노드가 있으면 시점의 높이와 화면까지의 거리를 정하는 속성도 나타납니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section id="compo" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">7. Compo 노드
+        </h2>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>여러 노드를 하나의 노드처럼 다룰 수 있게 해 주는 특별한 노드입니다.<br /></b></span><b><br /></b>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="534" data-original-width="1030" height="297" src="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q=w571-h297" style="max-width: 100%;" width="571" /></a>
+              </div><br />같은 노드 조합이 프로그램 안에 열 번 나온다고 해 봅시다. 한 번만 만들어 두고 다시 쓰고 싶어집니다.<br />nodegram에서는 여러 노드를 하나의 Compo 노드로 묶고 그 Compo를 복제해서 씁니다.<br /><br />같은 적을 열 개 만들려면 먼저 하나의 프로그램을 만들고, 그 노드들을 Compo로 묶고, Compo를 복제해 Layout에 배치하세요.<br /><br />복제한 Compo 노드는 프로그램으로서는 같은 것이라 하나를 고치면 나머지도 바뀝니다. 다만 좌표, 변수, 수명 등은 실행 중에 Compo마다 따로 움직입니다.<br /><br />
+            </li>
+          </ul>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo 노드를 만드는 순서</b></span><br />
+            </li>
+          </ul>
+          <ol>
+            <li>묶고 싶은 노드들을 선택합니다.<br />여러 개를 한꺼번에 고르려면 더블클릭한 뒤 드래그하세요.<br />더블클릭의 두 번째 클릭에서 마우스를 떼지 말고 그대로 드래그해 범위를 감쌉니다.<br />스마트폰에서는 “톡, 톡 누른 채, 쓱” 하는 느낌입니다.<br />(이 예에서는 왼쪽이 플레이어 기체이고, 네모로 감싼 부분이 다가오는 적 기체 하나의 프로그램입니다.)<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="432" data-original-width="1419" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw=w640-h194" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>노드를 여러 개 선택한 상태에서 그중 하나를 길게 누르면 메뉴가 나옵니다. “MAKE COMPO”를 고르고 확인 창에서 “Yes”를 누르세요.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="440" data-original-width="1347" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY=w640-h210" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="147" data-original-width="402" height="117" src="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="max-width: 100%;" width="320" /></a><br /><br />
+              </div>
+            </li>
+            <li>여러 노드가 “C1”이라는 하나의 Compo 노드가 되었습니다.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="307" data-original-width="1026" height="192" src="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw=w640-h192" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </li>
+            <li>C1 노드를 길게 누르거나 더블클릭하면 Compo 안의 NodeEditor가 열립니다.<br />Compo에 연결되어 있던 선은 “C1  1”, “C1  2”라는 OUT 노드가 되어 있습니다.<br /><br />오른쪽의 “MENU”를 누르면 왼쪽 줄이 Compo 관련 명령으로 바뀝니다.<br />“Duplicate”를 누르면 이 Compo 노드가 복제됩니다.<br />오른쪽 아래의 “PARENT”를 누르면 이 NodeEditor를 나와 위쪽 NodeEditor로 돌아갑니다.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="963" height="254" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU=w640-h254" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>위쪽 NodeEditor를 보면 Compo 노드가 여러 개 생긴 것을 알 수 있습니다.<br />“C1 (2)”에도 같은 입력을 주어야 하므로 입출력을 똑같이 연결하세요.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="304" data-original-width="957" height="204" src="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I=w640-h204" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>“LAYOUT”을 눌러 각 Compo의 위치를 정합니다.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="429" data-original-width="918" height="188" src="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug=w400-h188" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>Play “▶”를 누르면 적 기체가 여러 대 나오고 저마다 따로 움직입니다.<br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="453" data-original-width="907" height="200" src="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU=w400-h200" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>많이 복제하려면 Compo 노드들을 함께 선택한 뒤 그중 하나를 길게 눌러 “Duplicate”하세요.<br />그리고 모든 Compo 노드에 같은 값을 주고 싶다면 IN 노드와 OUT 노드가 편리합니다.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="352" data-original-width="1164" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ=w640-h194" style="max-width: 100%;" width="640" /></a>
+              </div>
+            </li>
+          </ol>
+          <ol><br />
+          </ol>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>Compo 노드와 인스턴스<br /></b></span><br />두 Compo 노드의 내용이 같아서 한쪽을 고치면 다른 쪽도 바뀔 때 “두 노드는 인스턴스 관계”라고 하며, 복제해서 만드는 것을 “Compo 노드의 인스턴스를 만든다”고 합니다.<br />같은 Compo 번호를 가진 Compo 노드는 인스턴스 관계이며 하나의 프로그램을 함께 씁니다.<br />(참고로 인스턴스 관계를 끊는 것을 Unique라고 하며 Compo의 플릭 메뉴에 있습니다. <a href="#compo-unique" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">아래 참조</a>)<br /><br />C 뒤의 숫자가 같으면 인스턴스 관계인 같은 Compo입니다.<br />“C1 (1)”과 “C1 (2)”는 인스턴스 관계입니다.<br />“C1 (1)”과 “C2 (1)”은 다른 Compo이며 인스턴스 관계가 아닙니다.<br />( ) 안의 숫자는 같은 Compo의 복제본을 구별하기 위한 것입니다.<br /><br />Compo끼리 인스턴스 관계라도 Play 중에는 Compo마다 매개변수가 따로 다뤄집니다.<br />캐릭터의 등장과 소멸, 좌표, 그리고 노드 안의 count, var, array 등은 각각 자기 값을 지닙니다.<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>Compo 노드 안의 MENU<br /></b></span><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="366" data-original-width="458" height="256" src="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo=w320-h256" style="max-width: 100%;" width="320" /></a>
+                </div><br /><b>Duplicate, Delete</b>：Compo 노드의 복제와 삭제입니다.<br /><b><br /><span id="compo-unique">Unique</span></b>：이 Compo 노드의 인스턴스 관계를 끊는 항목입니다. 어떤 Compo의 내용을 가져와 다른 적을 만들고 싶을 때 씁니다. Compo 번호가 새 번호로 바뀝니다.<br /><b><br />Expand</b>：편집 중인 Compo 안의 노드를 메인 NodeEditor로 되돌리고 그 Compo 자체는 사라집니다. Make Compo의 반대입니다. 인스턴스 관계인 Compo는 함께 Expand되지 않습니다.<br /><br />
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>Compo 노드와 IN, OUT 노드<br /></b></span><br />Compo 노드에는 입력 단자와 출력 단자가 두 개씩뿐이지만 IN 노드와 OUT 노드로 입력을 늘릴 수 있습니다.<br />IN, OUT 노드의 속성에는 Compo 번호를 지정할 수 있어 특정 Compo에 값을 보낼 수 있습니다.<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="377" data-original-width="1608" height="150" src="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s=w640-h150" style="max-width: 100%;" width="640" /></a>
+                </div><br />Compo 안에서는 Compo 번호가 없는 IN 노드를 쓸 수 있습니다.<br />Compo 안에서는 Compo 번호가 없는 OUT 노드를 쓸 수 없습니다(같은 OUT 노드를 여러 개 만들 수 없기 때문입니다).<br /><br />주의하세요. Compo 번호가 붙은 IN, OUT 노드는 똑같이 생겼어도 Compo 안에 있느냐 밖에 있느냐에 따라 뜻이 완전히 달라집니다.<br />위 그림의 “IN 노드(파랑): C1 인덱스2”는 Compo 안에도 밖에도 있지만 둘은 같은 것이 아닙니다. 안쪽 것은 Compo의 출력②에 이어지고, 바깥쪽 것은 Compo의 입력②에 이어져 안쪽의 “OUT 노드: C1 인덱스2”로 값을 전합니다.<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>Compo의 Enable 입력과 Enable 출력<br /></b></span><b><br /></b>Compo 노드를 캐릭터로 쓸 때는 Enable 입출력으로 그 캐릭터가 나타나고 사라지는 것을 조절할 수 있습니다.<br /><br />Enable 출력은 캐릭터가 있는 동안 1이고 파괴되면 0이 됩니다.<br /><br />Enable 입력이 0에서 1(0이 아닌 값)로 바뀌면 Compo 안의 프로그램이 시작되고 캐릭터가 활성화됩니다. 캐릭터를 유지하려면 0이 아닌 값을 계속 주어야 하며, 입력이 0이 되거나 캐릭터가 파괴되면 사라집니다.<br />Enable 입력에 아무것도 연결하지 않으면 1을 계속 주는 것과 같습니다.<br /><br />이미 사라진 캐릭터라도 입력이 다시 0에서 다른 값으로 바뀌면 처음 상태부터 다시 시작합니다.<br />아래는 캐릭터가 파괴된 뒤 3초 후에 처음 위치에 다시 나타나게 하는 프로그램입니다.<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="219" data-original-width="1131" height="124" src="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM=w640-h124" style="max-width: 100%;" width="640" /></a>
+                </div><br />
+              </li>
+            </ul>
+          </div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo 노드 안의 부모는 하나만<br /></b></span><b><br /></b>Compo 안에서 오브젝트의 부모-자식 관계에 가장 위의 부모 오브젝트 노드가 둘 이상 있으면 안 됩니다. 하나의 Compo 노드로 캐릭터 둘을 만드는 것은 상정하지 않았습니다.<br />부모가 둘이라도 그 둘에게 공통의 부모가 지정되어 있다면 문제없습니다.<br />오브젝트 노드가 하나도 없는(부모가 없는) 경우도 괜찮습니다.<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="488" data-original-width="1203" height="163" src="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg=w400-h163" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo 안에 만들 수 없는 노드<br /></b></span><br />BG, Setting, Stick, Button, Screen, OnBreak는 Compo 안에 만들 수 없습니다.<br /><br /></li></ul></div></section>
+      <section id="share" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">8. 만든 프로그램을 남에게 플레이하게 하기
+        </h2>
+        <div style="box-sizing: border-box; margin: 22px 0px 8px;"><span style="background-color: white;"><span style="font-size: small;">URL만 알려 주면 자기가 만든 것을 남이 플레이하게 할 수 있습니다.<br /></span></span><span style="background-color: white;">URL을 열면 곧바로 Play 화면에서 시작하므로 플레이하는 사람은 nodegram을 몰라도 됩니다.</span>
+        </div>
+        <section id="save" style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span>
+          </p>
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'><span style="font-size: 0.9em;"> 뒤에 작품이 있는 곳(URL)을 붙이기만 하면 됩니다.</span></span>
+          </p>
+          <pre style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(245, 246, 247); border-radius: 8px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; overflow: auto; padding: 12px 14px;"><code style='background: none; border-color: currentcolor; border-image: none; border-radius: 5px; border-style: none; border-width: medium; box-sizing: border-box; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 0.9em; padding: 0px;'>예)<br />https://daisuqe.github.io/nodegram/?url=https://example.com/mygame.json</code>
+          </pre>
+          <p class="small" style="box-sizing: border-box; margin: 12px 0px 8px;"><br />URL 예(슈팅 게임):
+          </p>
+          <div><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ 브라우저에서 열기</a><br /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="540" data-original-width="1249" height="277" src="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4=w640-h277" style="max-width: 100%;" width="640" /></a>
+            </div><br />순서:<br />1. MENU&gt;SAVE&gt;EXPORT로 게임을 .json 형식으로 PC나 스마트폰에 저장합니다.<br />2. </span>저장한 .json 파일을 <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> 같은 인터넷 파일 서비스에 올리고, 그 서비스의 “링크 복사” 같은 기능으로 URL을 얻습니다.<br />3. <span style='font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'> 뒤에 작품이 있는 곳(URL)을 붙인 문자열을 브라우저에서 엽니다.</span>
+          </div><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'><br /></span>
+          <p style="box-sizing: border-box; margin: 8px 0px;">파일을 올릴 곳으로는 <a href="https://www.dropbox.com/home" target="_blank">Dropbox</a>나 <a href="https://github.co.jp/" target="_blank">GitHub</a>의 raw URL, GitHub Pages를 무료로 안전하게 쓸 수 있습니다. Dropbox라면 스마트폰에서 올리기도 쉽습니다.<br />Google Drive는 이 뒤에 붙이는 URL로는 쓸 수 없습니다. 브라우저의 제약 때문에 앱이 그 파일을 직접 읽을 수 없기 때문입니다(CORS 제약).<br /><br />
+          </p>
+        </section>
+      </section>
+      <section id="spec" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">9. 사양</h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-1. 2D 전용
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">nodegram은 2D 전용입니다. 좌표는 X(오른쪽이 ＋)와 Y(위쪽이 ＋) 두 축입니다. Setting 노드에서 Dynamics를 켜면 캐릭터가 화면 아래쪽으로 떨어집니다.<br />위에서 내려다보는 게임을 만들 때는 SETTING 노드에서 Dynamics를 끄거나 전체 중력을 0으로 하세요.
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-2. FPS
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">목표 프레임 레이트는 SETTING 노드에서 <b style="box-sizing: border-box;">60</b> 또는 <b style="box-sizing: border-box;">30</b>을 고릅니다(기본값 60). 노드 계산도 물리 연산도 이 FPS에 맞춰 진행됩니다. 처리가 무거워지면 Play가 느려져 실제 프레임 레이트가 설정값보다 떨어집니다.
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-3. Dynamics(물리 거동)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">Rect, Circle, Character, Shot 같은 오브젝트에는 물리 모드(Dynamics)를 지정할 수 있습니다. 거동은 Unity의 Rigidbody2D와 거의 같습니다.
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">모드
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">거동
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Off</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">물리 없음. 노드 입력(X,Y)이 좌표를 그대로 옮깁니다.
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Static</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">움직이지 않는 벽이나 바닥입니다. 중력이나 충돌로 움직이지 않습니다.
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Dynamic</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">중력과 충돌로 물리적으로 움직입니다. 노드의 X/Y 입력은 “힘”으로 작용합니다.
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Kinematic</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">중력과 충돌로는 움직이지 않지만 노드 입력으로는 움직일 수 있으며, Dynamic 오브젝트와 부딪혀 밀어낼 수도 있습니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small" style="box-sizing: border-box; color: #666666; font-size: 13px; margin: 8px 0px;">밀도 설정은 없으며 대체로 평범한 나무 정도로 다룹니다.
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-4. SortingLayer(표시 순서)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">각 오브젝트의 <b style="box-sizing: border-box;">SortingLayer</b>(0〜100, 기본값 50)가 Play 화면에서의 겹침 순서를 정합니다. <strong style="box-sizing: border-box;">숫자가 클수록 앞쪽(위)</strong>에 그려집니다. BG(배경)는 언제나 가장 뒤입니다.<br />값이 같으면 추가한 순서대로 표시됩니다.<br /><span style="background-color: #eef5fb;"><br /></span>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-5. 좌표
+        </h3>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">좌표는 X(오른쪽이 ＋)와 Y(위쪽이 ＋)입니다. Layout의 한가운데가 원점(0,0)입니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">각도는 도 단위이며 <b style="box-sizing: border-box;">반시계 방향이 ＋</b>입니다. 0°＝오른쪽(X＋), 90°＝위(Y＋), 180°＝왼쪽(X−), 270°＝아래(Y−)입니다. ANGLE POS / POS ANGLE / GetRot / ROTATE / 오브젝트의 Angle 속성이 모두 이 기준을 따릅니다.
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">오브젝트의 Property에 있는 Coord 속성으로 노드 입력 X/Y의 뜻이 달라집니다.
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">WORLD</b>：입력값이 절대 좌표로 작용합니다(부모가 있으면 그에 대한 상대 좌표).
+              </li>
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">LOCAL</b>：입력값이 처음 배치한 곳으로부터의 차이로 작용합니다. 부모가 지정되어 있으면 부모로부터의 차이도 함께 적용됩니다(Parent 좌표).
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">3D 오브젝트의 좌표는 <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D 오브젝트</a>를 참조하세요.
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-6. 해상도
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">Play할 때 보이는 범위는 Layout의 회색 사각형만큼입니다.<br />화면 방향(가로=Horizontal／세로=Vertical)은 Setting 메뉴가 아니라 SETTING 노드에서 바꾸며, 실제 화면 크기에 맞춰 표시됩니다.<br />해상도를 고정하고 싶다면 Setting 노드의 ScreenSize를 쓰세요.<br /><br />
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="701" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo=w400-h217" style="max-width: 100%;" width="400" /></a>
+          </div>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-7. Tag
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">Tag는 그룹입니다.<br />예를 들어 작은 적 모두에게 “Enemy_tiny” Tag를 붙이거나, 부술 수 있는 배경과 고정 배경을 “bg_destroyed”, “bg”로 구분할 수 있습니다.<br />Shot, OnBreak, Rect, Circle, Character 같은 노드가 Tag를 씁니다.</p><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br /></p><h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-8. 노드 다루기</h3><div style="text-align: start;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="346" data-original-width="517" height="243" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w=w363-h243" style="max-width: 100%;" width="363" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div></div><ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: start;"><li style="box-sizing: border-box; margin: 4px 0px;">노드 하나의 입력에는 선을 여러 개 연결할 수 있습니다. 입력이 여럿이면 그 합이 노드에 전해집니다. 그림에서는 맨 위 단자에 10+20→30이 들어갑니다.<br /><br /></li><li style="box-sizing: border-box; margin: 4px 0px;">노드끼리의 부모-자식 연결(위쪽 단자에서 아래쪽 단자로)은 오브젝트를 함께 움직이는(Transform) 것 말고도 “관계”를 나타내는 데 쓰입니다.<br />예를 들어 Texture 노드와 오브젝트 노드, OnBreak 노드와 감시할 오브젝트, Array 노드와 Line 노드가 그렇습니다.<br />보통 부모 하나에 자식은 여럿일 수 있지만 자식 하나에 부모는 하나뿐입니다.<br />Texture 노드, OnBreak 노드, Array 노드는 예외로 각각 부모를 여러 개 가질 수 있습니다.</li></ul><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br />
+          </p>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-9. 1프레임 안의 처리
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">모든 노드가 동시에 처리됩니다.<br />어느 노드를 먼저 만들었는지에 따라 결과가 달라지지 않습니다.<br /><br />오브젝트 노드 등은 1프레임에 한 번 처리됩니다.<br />Counter, Var, Trigger, Random, Array처럼 “값을 기억하는 노드”도 1프레임에 한 번만 갱신됩니다.<br />＋나 × 같은 계산 노드는 값을 기억하지 않으므로 값이 필요할 때 계산됩니다.<br />계산 노드가 고리를 이루더라도 한 노드는 1프레임에 한 번만 처리됩니다.<br /><br />
+          </p>
+        </div>
+        <p>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-10. UNDO / REDO
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">MENU의 <b>UNDO</b> / <b>REDO</b>로 노드의 생성, 삭제, 이동, 연결, Property 변경 등을 취소하거나 다시 실행할 수 있습니다. <b>50단계까지</b> 되돌릴 수 있습니다.
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">TEXTURE / LINE / SEQUENCER 각 에디터는 저마다 따로 UNDO 이력을 가집니다. 에디터 안의 ◁ / ▷ 버튼을 쓰세요. LINE Editor와 SEQUENCER도 50단계까지 되돌아가며, TEXTURE는 크기에 따라 횟수가 달라집니다.</p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">참고로 Play 실행은 취소할 수 없고 저장과 불러오기도 취소할 수 없습니다.
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;" id="spec-3d">9-11. 3D 오브젝트
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="215" data-original-width="526" height="202" src="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0=w492-h202" width="492" /></a></div><br />nodegram에서 3D 오브젝트를 표시하는 방법은 <b>Polygon</b>과 <b>ARRAY＋LINE(3D 표시용)</b> 두 가지입니다. 둘 다 .obj 파일을 IMPORT할 때만 만들어집니다(CREATE NEW NODE로는 만들 수 없습니다).<p></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">다만 nodegram 자체는 어디까지나 <b>2D 무대</b>입니다. 3D 오브젝트는 3D처럼 보이는 그림을 2D 소재로 쓰기 위한 것일 뿐이며, 다른 2D 오브젝트와 마찬가지로 표시 순서는 <b>Sorting Layer</b> 설정으로 정해집니다. 같은 Sorting Layer의 Polygon 노드는 하나의 3D 장면처럼 함께 처리되므로 깊이의 앞뒤도 제대로 표현됩니다.
+        <br /><br />3D 오브젝트에는 Z 좌표가 있습니다. 화면의 위치가 z=0이고 안쪽이 +z, 보는 쪽이 -z입니다. 시점에서 화면까지의 거리와 시점의 높이는 setting 노드에서 바꿀 수 있습니다.<br />2D 오브젝트와 부모-자식 관계를 맺을 수도 있지만 그때는 z=0에서 작업하는 것이 좋습니다.<br /><br /></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">LINE(3D 표시)으로 만들려면 LINE 노드의 자식인 ARRAY의 값을 <b>x,y,z 세 개씩의 연속</b>으로 넣으세요. 구분자(9999,9999,9999)까지가 하나로 이어진 선이 되고 그 뒤는 새로운 선이 됩니다(형식: x,y,z, x,y,z, ,,, 9999,9999,9999, x,y,z, ,,,, 9999,9999,9999). ARRAY의 부모로 LINE을 여러 개 지정할 수도 있습니다.</p>
+      </section>
+      <section id="notes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">10. 알아두면 좋은 것
+        </h2>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">스마트폰에서 쓸 때<span style="font-weight: 400;">：<br />nodegram 바로가기를 홈 화면에 추가하면 앱처럼 쓸 수 있습니다. 다만 앱과 마찬가지로 그것을 지우면(홈 화면의 바로가기를 지우면) 저장 데이터도 함께 사라질 가능성이 높습니다. 완성한 프로그램은 Export로 따로 파일에 남겨 두세요.<br /><br />일부 스마트폰 브라우저에서는 표시나 터치 위치가 어긋날 수 있습니다.</span><br /><span style="font-weight: 400;">그럴 때는 </span><span style="font-weight: 400;">nodegram을 종료하고 태스크를 지운 뒤(앱을 지우는 것과는 다릅니다) 기기를 가로 방향으로 반듯하게 들고 다시 실행하면 나아집니다.<br /><br /></span></b>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">자동 저장:</b><br />save 화면에서 “auto save”가 켜져 있으면 1분마다 직전 파일에 덮어씁니다. 따로 남기고 싶다면 Save로 새 이름을 붙이세요.<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">권리:</b> <br />nodegram으로 만든 작품의 권리는 모두 만든 사람의 것입니다. 저희가 마음대로 쓰거나 권리를 주장하지 않습니다.<br />nodegram의 코드와 사양에 대한 권리는 저(harada)에게 있습니다. nodegram의 코드를 허락 없이 재배포하지 말아 주세요.<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">저작권과 문제:</b> <br />저작권이 있는 것을 가볍게 쓰지 말아 주세요.<br />또한 nodegram을 써서 생긴 문제에 대해서는 책임을 지지 못합니다(물론 문제를 일으키는 코드를 일부러 넣는 일은 없습니다).
+          </li>
+        </ul>
+      </section>
+      <section id="contact" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">11. 연락처
+        </h2>
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><span style="box-sizing: border-box;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">버그 신고 등은 X로 연락 주세요</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif"><b><a href="https://x.com/daiii">https://x.com/daiii</a></b></span><br /></span>
+              </li>
+        </ul>
+      </section></main>
+      <footer style='box-sizing: border-box; color: #666666; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 13px; padding: 16px 20px 24px;'>
+        <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">nodegram users guide
+        </div>
+      </footer>
+    </div>
+  </div>
+</header>
+</body>
+</html>

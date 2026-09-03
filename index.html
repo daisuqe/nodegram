@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>nodegram</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <canvas id="cv"></canvas>
+
+  <!-- 右上のコントローラ（元デザイン準拠：▶ と MENU） -->
+  <div id="playBtn" class="cbtn cplay">▶</div>
+  <div id="menuBtn" class="cbtn cmenu">MENU</div>
+  <div id="modeBtn" class="cbtn cmode">LAYOUT</div>
+  <div id="parentBtn" class="cbtn cparent">PARENT</div>
+  <div id="layerVal" class="clayerval"></div>
+  <div id="layerUp" class="cbtn clayerbtn">▲</div>
+  <div id="layerDn" class="cbtn clayerbtn">▼</div>
+  <div id="flick"></div>
+
+  <div id="pad">
+    <div class="k up"    data-d="U"></div>
+    <div class="k down"  data-d="D"></div>
+    <div class="k left"  data-d="L"></div>
+    <div class="k right" data-d="R"></div>
+  </div>
+  <!-- 文言は app.js が言語に応じて設定する -->
+  <div id="hint" class="hidden"></div>
+
+  <div id="compoNum"></div>
+  <div id="menuBackdrop"></div>
+  <div id="createMenu"></div>
+  <div id="multiMenu"></div>
+  <div id="wireMenu"></div>
+  <div id="propBackdrop"></div>
+  <div id="propPanel"></div>
+
+  <!-- テクスチャエディタのツール（左に縦並び）＋右上に閉じる -->
+  <div id="texBar">
+    <button class="tbtn" id="texDraw">Draw</button>
+    <button class="tbtn" id="texPick">Pick</button>
+    <button class="tbtn" id="texPaint">Paint</button>
+    <div id="texWork"></div>
+    <div id="texCopyPasteRow" style="display:flex; gap:calc(6px * var(--tex-sc, 1)); width:78px;">
+      <button class="tbtn tsmall" id="texCopyBtn">Copy</button>
+      <button class="tbtn tsmall" id="texPasteBtn">Paste</button>
+    </div>
+    <button class="tbtn" id="texView">View</button>
+    <div id="texUndoRow">
+      <button class="tbtn tundo" id="texUndo">◁</button>
+      <button class="tbtn tundo" id="texRedo">▷</button>
+    </div>
+  </div>
+  <button id="texCloseBtn" class="pclose">×</button>
+  <button id="texConfirmBtn" class="cbtn" style="position:absolute; right:14px; bottom:14px; z-index:17; display:none; background:#1FACB6; color:#fff; font-size:18px;">Copy</button>
+
+  <!-- DRAWエディタ（ARRAY→LINE用の折れ線エディタ） -->
+  <div id="drawBar">
+    <button class="tbtn" id="drawDrawBtn">DRAW</button>
+    <button class="tbtn" id="drawMoveBtn">MOVE</button>
+    <button class="tbtn" id="drawEraseBtn">ERASE</button>
+    <button class="tbtn" id="drawViewBtn">VIEW</button>
+    <div id="drawUndoRow">
+      <button class="tbtn tundo" id="drawUndo">◁</button>
+      <button class="tbtn tundo" id="drawRedo">▷</button>
+    </div>
+  </div>
+  <button id="drawHelpBtn" class="phelp">？</button>
+  <button id="drawCloseBtn" class="pclose">×</button>
+
+  <!-- SEQUENCERエディタ（ARRAY→SOUND用の作曲ツール） -->
+  <div id="seqBar">
+    <div class="seqCap" id="seqCapUp" style="display:none;"><span>▲</span></div>
+    <div id="seqBarScroll">
+      <button class="tbtn" id="seqPlayBtn">▶</button>
+      <button class="tbtn" id="seqDrawBtn">DRAW</button>
+      <button class="tbtn" id="seqEraseBtn">ERASE</button>
+      <div id="seqCopyPasteRow" style="display:flex; gap:calc(6px * var(--seq-sc, 1)); width:78px;">
+        <button class="tbtn tsmall" id="seqCopyBtn">Copy</button>
+        <button class="tbtn tsmall" id="seqPasteBtn">Paste</button>
+      </div>
+      <button class="tbtn" id="seqViewBtn">VIEW</button>
+      <div id="seqUndoRow">
+        <button class="tbtn tundo" id="seqUndo">◁</button>
+        <button class="tbtn tundo" id="seqRedo">▷</button>
+      </div>
+      <select id="seqInstSel"></select>
+      <div class="seqBpmRow"><label>BPM</label><input type="number" id="seqBpmInp" min="20" max="400" step="1"></div>
+      <label class="seqMajorRow"><input type="checkbox" id="seqChromaticChk">CHROMATIC</label>
+      <label class="seqMajorRow"><input type="checkbox" id="seqMajorChk">MAJOR</label>
+      <div id="seqMultiRow"></div>
+    </div>
+    <div class="seqCap" id="seqCapDn" style="display:none;"><span>▼</span></div>
+  </div>
+  <button id="seqHelpBtn" class="phelp">？</button>
+  <button id="seqCloseBtn" class="pclose">×</button>
+  <button id="seqConfirmBtn" class="cbtn" style="position:absolute; right:14px; bottom:14px; z-index:17; display:none; background:#1FACB6; color:#fff; font-size:18px;">Copy</button>
+</div>
+
+<script src="vendor_matterjs.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

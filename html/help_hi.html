@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>nodegram उपयोगकर्ता गाइड</title>
+  <style>
+    body { margin: 0; background: #ffffff; color: #282828;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; }
+    /* keep images with a height attribute from stretching when the page narrows */
+    img { max-width: 100%; height: auto; }
+    iframe { max-width: 100%; height: auto; }
+    table { max-width: 100%; }
+  </style>
+</head>
+<body>
+<div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 32px 0px;">
+<h1 style="text-align: left;"></h1><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"><br /></span></div><div style="text-align: left;"><span style="color: #0b5394; font-size: x-large;"> <span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="letter-spacing: 0.3px;"><b>nodegram</b></span></span></div><div style="text-align: left;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiDstkyryoE0SJSgoUgAbrjBqCLne_phBA-cSV50I-G-TFO3lvBmK5IIqH0dsW08cW7-X2i0X5Fx4l9m7pUkgrBoIDhyMyGwSXDHSFwLFOTUpKtLJSWQ9vyPgTvXBDkv1HjMhd2k-m7KJ5GokqW-PQ2RdA2Xv09I-rEi-QPLg6KHvkktXDXvWaA0O7g8n0" style="margin-left: 1em; margin-right: 1em;"><span style="font-size: small;"></span></a><span style="font-size: small;"><div class="separator" style="clear: both; text-align: center;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="350" data-original-width="1065" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEiaV7Ep-CaJ5Wpcrx87phHZAou9dvIVBxN_B_i_af6iClZJhWQizihjNj3LiCa0l56l4r3LwBirAmqMoP-g7QYM4zeTxdDx96AWZdX4vFf7jJ597zwD_PdhYh3VoePjXQe6ci92WMP_1_oVjhHIKILTqRtWdiLdoEllmxiaWOANmLWWLMDCco_2OKwaOjw=w640-h210" width="640" /></a></div></div><br /></span><div style="text-align: left;"><b style="color: #444444; font-size: large;"><span><span><span><span>नोड से प्रोग्रामिंग करने का एक टूल।</span></span></span></span></b></div><div style="text-align: left;"><span style="color: #444444; font-size: medium;"><b>फ़ोन, टैबलेट या PC — किसी भी ब्राउज़र में सीधे प्रोग्रामिंग कीजिए।</b></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: medium;"><br /></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #444444; font-size: large;">nodegram : </span></div><div style="text-align: left;"><a href="https://daisuqe.github.io/nodegram/" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">https://daisuqe.github.io/nodegram/</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  ब्राउज़र में nodegram खोलें</a></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666; font-size: x-large;"><div style="color: black; font-size: medium;"><br />छोटे URL</div><div style="color: black; font-size: medium;"><a href="https://bit.ly/nodegram" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">bit.ly/nodegram</a></div><a href="https://i.gg/ng" rel="noopener" style='box-sizing: border-box; color: #1466b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: x-large;' target="_blank">i.gg/ng</a></span></div><div style="text-align: left;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #666666;"><span style="font-size: medium;"><br />नमूना प्रोग्राम (शूटिंग गेम):</span></span></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style='background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;' target="_blank">▶  ब्राउज़र में नमूना खोलें</a></div><div style="text-align: left;"><br /></div><div style="text-align: left;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="562" data-original-width="1000" height="225" src="https://blogger.googleusercontent.com/img/a/AVvXsEjKtymOvIcoSIz2NEEnWHfUTYOKNX7y7Wd2gHDNrlXQ1XfEGh6JeSBOYSPsgcAnssTiYfkz_0p2axPnkZAiYnWIRxZDfPb1ce59UOYjrUOAHG6aCU3QPdEGTvxf5ImF9SRBDQavuLHQj8NXOzrx9-GbE028fKbSkp1TJVKq5xI1g2xS5Rx3OvhOhJRHmvY=w400-h225" width="400" /></a></div></div></div>
+</div>
+<header class="hero" style="background-attachment: initial; background-clip: initial; background-image: none; background-origin: initial; background-position: initial; background-repeat: initial; background-size: initial; border: 0px; box-sizing: border-box; padding: 0px;">
+  <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">
+    <div style="text-align: center;"><main style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 6px 16px 48px; text-align: start;">
+      <nav class="toc" style='background: rgb(250, 250, 250); border-radius: 10px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 20px 0px; padding: 14px 18px;'>
+        <h2 style="box-sizing: border-box; color: #666666; font-size: 13px; letter-spacing: 1px; margin: 0px 0px 8px; text-transform: uppercase;">विषय-सूची
+        </h2>
+        <ol style="box-sizing: border-box; column-gap: 26px; columns: 2; margin: 0px; padding-left: 20px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#about" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">nodegram क्या है</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#basic" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">शुरुआत कैसे करें</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#views" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">तीन व्यू</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#menu" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">MENU</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#mobile" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">फ़ोन और PC पर</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#nodes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">सभी नोड का विवरण</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">Compo नोड</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#share" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">अपना प्रोग्राम दूसरों को खिलाना</a>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">विनिर्देश</a></li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><a href="#notes" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">ध्यान देने योग्य बातें</a>
+          </li>
+        </ol>
+      </nav>
+      <section id="about" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">1. nodegram क्या है
+        </h2>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">nodegram <strong style="box-sizing: border-box;"><span style="color: #ffa400;">नोड से प्रोग्रामिंग करने का टूल</span></strong> है।<br /><br />बस एक स्टिक नोड को कैरेक्टर नोड से जोड़िए और कैरेक्टर चलने लगता है।
+        <br /><br /></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="2051" data-original-width="3950" height="261" src="https://blogger.googleusercontent.com/img/a/AVvXsEjVIJd_MlSJYVScGI5hF2AaBf2KQjZygJ_IC8xsSRr8KdiTCkotrJcWzOLSI9R88e-r_aIBhIgKBTH9_z88FsO89poZiP7FcXpswTpyKYY_p_0wxc-fhYjpAGvBryCewIJ7MhUwbOwtTH53PSXHMgN_AU6oa1LJArPv8MCzdY-kxVT-7uMOPGzzOqdc0L4=w503-h261" width="503" /></a><br /><br /></div><p></p>
+        <p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• फ़ोन पर भी और PC पर भी प्रोग्रामिंग कर सकते हैं।</p><p style="box-sizing: border-box; color: #282828; margin: 8px 0px;">• अपने बनाए गेम दूसरों को खिला सकते हैं।<br />• nodegram इंटरनेट पर चलता है, इसलिए जहाँ कनेक्शन हो वहीं प्रोग्रामिंग हो सकती है (एक nodegram प्रोग्राम का आकार लगभग एक तस्वीर जितना ही होता है)।<br /><br /></p><div class="column" style="background: #f7fafd; border: 1px solid #cfe0ef; border-left: 4px solid #3d85c6; border-radius: 8px; box-sizing: border-box; margin: 18px 0px; padding: 14px 16px;"><div style="box-sizing: border-box; color: #3d85c6; font-weight: 700; margin-bottom: 8px;">नोड प्रोग्रामिंग (Node Programming) क्या है</div><div style="box-sizing: border-box; color: #282828;">nodegram में 40 से अधिक तरह के नोड हैं — केवल जोड़ने वाला नोड, कोई संख्या याद रखने वाला नोड, यह जाँचने वाला नोड कि कोई कुंजी दबी है या नहीं, इत्यादि।<br />नोड प्रोग्रामिंग यानी कई कार्यकर्ता (Node) आपस में सूचना बाँटते हुए एक बड़ा काम पूरा करते हैं। हर कार्यकर्ता पिछले से मिला मान लेता है, अपना छोटा-सा काम करता है और अगले को सौंप देता है। सभी कार्यकर्ता लगातार काम करते रहते हैं।<br />इसके उलट, सामान्य लिखित प्रोग्रामिंग में एक ही कार्यकर्ता निर्देशों को क्रम से पढ़कर एक-एक करके पूरा करता है।</div></div><p style="color: #282828;"></p>
+        <div class="separator" style="clear: both; color: #282828; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /><br /><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiumdZwnpm86NlmeDxChU_GgxXBfj3fhB_cLrHaLCp2r-O1LMJ_MKWrxiVrD9LL_TrjI3dkJDe1kstR8UsMwR5Up-k90bGkIt8gO80dbqX1y6Z_Lf72eklEmTatr6SDcUtwywU2LtPrquyiBYrPRJDXgqz9iiiND6b4bQ0uwxvKCKenw5EUJbWbBio9noY" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><br /></a>
+          </div>
+        </div>
+      </section>
+      <section id="basic" style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <br />
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">2. शुरुआत कैसे करें</h2><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;"></p><p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px; text-align: center;'><video controls playsinline preload="metadata" width="440" style="max-width: 100%;"><source src="sample_shoot_blog.mp4" type="video/mp4" />आपका ब्राउज़र यह वीडियो नहीं चला सकता।</video><br />शूटिंग गेम कैसे बनाएँ (2 मिनट)<br /></p>nodegram में तीन व्यू हैं:<br /> प्रोग्राम लिखने का <b style="box-sizing: border-box;"><span style="color: #ffa400;">NodeEditor</span></b><br /> ऑब्जेक्ट रखने का <span style="box-sizing: border-box;"><span style="color: #ffa400;"><b>Layout</b><br /><span style="color: #282828;"><b> </b>प्रोग्राम चलाने का </span><b style="box-sizing: border-box; color: #282828; font-weight: bold;"><span style="color: #ffa400;">Play</span></b><b style="box-sizing: border-box; color: #282828; font-weight: bold;"> </b></span></span><p></p><p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">।<br /><br /></p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-1. नोड बनाना (NodeEditor)
+        </h3>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">NodeEditor में <strong style="box-sizing: border-box;"><span style="color: #ffa400;">पृष्ठभूमि (खाली काला क्षेत्र) को देर तक दबाइए</span></strong> तो “<b><span style="color: #ffa400;">CREATE NEW NODE</span></b>” डायलॉग खुलता है।<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="412" data-original-width="709" height="373" src="https://blogger.googleusercontent.com/img/a/AVvXsEgc0m2kT7vxxgYmpTTsJ7e9_iS12NVGwPlZu5BmJHI8RZ0eKZ4MsPZXv7LhcaOjaceNTOwKNKT4F268AQoM5Cw9O8ueZa641hMV3bqmjOkhp4okWflU_aI6sBmt-l_cX9vXpJ_TimZuP8Aza4CRY_pzgpbukoafMnOR9UtAbNGsvvnDeO127tsGQN9HGyI=w640-h373" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">सूची में से जो नोड चाहिए उसे चुनिए, वह NodeEditor में बन जाएगा।
+          </li>
+          <li style="color: #282828;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>बने हुए नोड को देर तक दबाने या डबल-क्लिक करने पर उसकी विस्तृत सेटिंग वाला Property डायलॉग खुलता है।<br />ऑब्जेक्ट का रंग जैसी सेटिंग यहीं बदली जाती हैं।<br />“OK” बटन नहीं है; बदलाव तुरंत लागू हो जाता है। ऊपर दाईं ओर के × से या डायलॉग के बाहर छूकर उसे बंद कीजिए।<br />DUPLICATE नोड की नकल बनाता है और DELETE उसे हटाता है।<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="229" src="https://blogger.googleusercontent.com/img/a/AVvXsEhD6D2fuvNhahmZ7S8_2uu7-DzA82rg_qkyG9nGtXJPSsDqc450kZxPVSbl_OCwu2NgWiOwYdnsxTbZoQJjFsPuNoMvtTwwXWGRchAUmduxEgw2gz5UUYzDaZPGR8-n08ed_0yxFHx08nTeNhSzh86cyP8kW5GbcxNNTge3oCU0QKhxt9g_O66FN50JWXs=w498-h229" style="max-width: 100%;" width="498" /></a>
+            </div><br /></span>
+          </li>
+          <li style="box-sizing: border-box; color: #282828; margin: 4px 0px;">नोड को खींचकर (छूकर हिलाकर) उसकी जगह बदली जा सकती है।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span style="color: #282828;">नोड के दाईं ओर के आउटपुट पोर्ट से (दूसरे नोड के बाईं ओर के) इनपुट पोर्ट तक खींचकर </span><strong style="box-sizing: border-box;"><span style="color: #ffa400;">तार जोड़िए</span></strong><span style="color: #282828;">। जुड़ने के बाद, प्रोग्राम चलते समय मान लाल सिरे से नीले सिरे तक जाते हैं।</span><br /><br />
+            <div class="separator" style="clear: both; color: #282828; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEikffa4-ygGNPpQMGFo7mgYk-3hRsT2_pRKYmG2R43ZOymiwD_YQqAscI2ME7wOgshMZlcJHVc7rvs9KcOucAFE9KTu6fkBz3zVTXiOEkFBYN2yjkGtCBmv2NB3EDe6iFAuDX0C7tyqlDUCfaUj8YLyVT4C2CFLPCyvvXeNpDETGfv6Kj5CNpzB3Z3Wuj8=w400-h184" style="max-width: 100%;" width="400" /></a><br /><br />
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'>जिन नोड के ऊपर सिरा (चाइल्ड सिरा) होता है, उन्हें वहाँ से (दूसरे नोड के नीचे वाले) पैरेंट सिरे से जोड़ने पर पैरेंट-चाइल्ड संबंध बनता है और पैरेंट के हिलने पर चाइल्ड भी साथ हिलता है।<br /></span>जैसे खिलाड़ी गोली चलाता हो, तो गोली निकलने की जगह को चाइल्ड और खिलाड़ी को पैरेंट बनाइए।<br />
+            <div><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif'><br /></span>
+            </div>
+            <div>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="184" src="https://blogger.googleusercontent.com/img/a/AVvXsEjmvC4WKImXF0aZKwTeOGz4gKIoANIhQ8xpjKyk84lYi8M6RLrLzkwJ-p6Yn78T_v-G5FL-iYDn2PpMz-UK8yWzgsLpKFvOcRoZQ_-DH_ebnDUJ9wK-tiy4sXUbTwIyx4jcY2jjVhk5ILX53pBPCpUqJlhtqp8VHn5ZP9Tp4TY9WMzKi7XVp9onIQCcZdg=w400-h184" style="max-width: 100%;" width="400" /></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-2. ऑब्जेक्ट रखना (Layout व्यू)
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">“Layout” बटन दबाकर Layout व्यू पर जाइए।<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="265" data-original-width="217" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgDV8Qkoa8Y8Uh6bp-1f80Suii-lomD4wANQmSjhflCkwf-gQnoJc1fP9wzFU3CYnTzIMXqxcfYuUJS-BSmgcwhPTdQF1tXPA4xjHsYZFW-D_Zv4KEQBGzvlaIIs5F3b-OOJhv4LsliufHY2asm_JnSK03IW_FD-UJCPDgp9B2dlzjjOKMbZ_jsrptEK6U" style="max-width: 100%;" width="197" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">Layout में Rect, Circle, Character, Text जैसे <strong style="box-sizing: border-box;">ऑब्जेक्ट नोड<br /></strong>, तथा Button, Stick जैसे <strong style="box-sizing: border-box;">कंट्रोल नोड</strong> रखे जाते हैं।<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="464" data-original-width="876" height="338" src="https://blogger.googleusercontent.com/img/a/AVvXsEhIbEZ9cxrd4QTClFGm5ckgDoqG5j_zZvqPTHZ5L1AxbMdKi3zkUepnISqp3tpeIAAvAPBszlpbWC4_KwyK-6HXceGgNPkcps7cDFAvS87L9xPAp6P4gN9lzgxtogKsrRnRYOHoW7dGxIeMXsUW_TYq0tdjiM6VXmZr7GeleTugctzrUiKDJ85_-5HPPOA=w640-h338" style="max-width: 100%;" width="640" /></a>
+            </div><br />
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">ऑब्जेक्ट को खींचकर हिलाइए, उसके चारों कोनों के सफ़ेद हैंडल से आकार बदलिए और ऊपर के गोल हैंडल से दिशा तय कीजिए।
+          </li>
+          <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;">“NODE” बटन दबाने पर NodeEditor पर वापस आ जाते हैं।
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">2-3. प्रोग्राम चलाना (Play व्यू)
+        </h3>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">NodeEditor या Layout व्यू में ऊपर दाईं ओर के <strong style="box-sizing: border-box;"><span style="color: #ffa400;">▶ (Play) बटन</span></strong> से Play व्यू पर जाकर प्रोग्राम चलता है।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">Play व्यू में ऊपर दाईं ओर के □ <strong style="box-sizing: border-box;"><span style="color: #ffa400;">(Stop) बटन को देर तक दबाने</span></strong> से Play रुक जाता है और संपादन पर वापसी होती है।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">Play में ऑब्जेक्ट नोड हर 1/60 सेकंड (एक फ़्रेम) पर बनाए जाते हैं और भौतिकी के साथ चलते हैं।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">स्क्रीन छूकर, JoyStick, कीबोर्ड या माउस से इन्हें चलाया जा सकता है।<br /><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj2mtifbvqP9FBbyj1ZUKSBPAkQFq01_rm7nl0-2i5JcJcspALQ2FeGWetsp6DiqzReaKXKZaT9bFK9wEM7QIm4KI8vHrTDzujX8f6L-Yw4M_F1Pux_dUqiZ07KcxH9Frs_6DwXoELvUNxqavf20Btp4R5WbeEtY0ndfjEAVSga6tzuRHcw9o-M8PGnuoc" style="margin-left: 1em; margin-right: 1em;"></a>
+              <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1206" data-original-width="2622" height="294" src="https://blogger.googleusercontent.com/img/a/AVvXsEiRi7WUovRuMsQwjNGZAfylKSN9Jq84KOueULpnYkuDpShoDMhn_BOu4xIRkysU6VTD16RN1LPTBopMjGtIFSxrAiy-tP6wiQWNrGxMzPNwpbxDAidvxnebLSOFH4bNlvQOmPxGm_u_JjDLyy08ouyYFe30m8XMex0ijogYjWD03Mam41HOxqjfI4evmRY=w640-h294" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </div>
+          </li>
+        </ul>
+        <div style="color: #282828; text-align: center;">
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: left;">
+            <li><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">Play व्यू में गुरुत्वाकर्षण भी दिखाया जा सकता है।<br /></span>पिनबॉल या मारियो जैसे गेम के लिए Dynamics (भौतिकी) चालू कीजिए। <br style="font-size: 16px;" /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><b><span style="color: #ffa400;">Setting नोड</span></b> जोड़िए और उसकी Property में Dynamics चालू कीजिए, तब पूरे प्रोग्राम में भौतिकी लागू होगी।<br />हर ऑब्जेक्ट नोड में भी अपनी Dynamics सेटिंग होती है, इसलिए उन्हें अलग-अलग चालू करना पड़ता है।<br /><br /></span>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="views" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">3. तीन व्यू
+        </h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-1. NodeEditor का उपयोग
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">यह वह स्क्रीन है जहाँ नोड सजाकर तारों से जोड़े जाते हैं।<br /><br />
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="360" data-original-width="914" height="253" src="https://blogger.googleusercontent.com/img/a/AVvXsEi2_hDdE8uxwfJ7o5nyxCfE5bYCMSIGGDP9O6NZASyS2mg3mDiFYd-SfVXNPt0HYs8Hu-PU8ihiI7BEOYVhPNNPe9ck1d4CpHjxYR0dVdytCZTWpfCfFJzHvye09BU0Q7sXHNhlhpi1njg9MeSL7TBzwO_KeNg5dKF58iMh2XBWErZbw8gUtLbHIQGQE-E=w640-h253" style="max-width: 100%;" width="640" /></a>
+        </div><br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">क्रिया
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">परिणाम
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पृष्ठभूमि पर एक उँगली से खींचना
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">व्यू हिलाना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">दो उँगलियों से पिंच, माउस व्हील
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">व्यू बड़ा/छोटा करना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">डबल-क्लिक करके खींचना (पृष्ठभूमि)
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">घेरकर चुनना (कई नोड चुनना)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पृष्ठभूमि देर तक दबाना
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">CREATE NEW NODE खोलना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">नोड खींचना
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">नोड हिलाना (कई चुने हों तो सब एक साथ)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">नोड पर डबल-क्लिक या देर तक दबाना
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Property खोलना (कई चुने हों तो बहु-नोड मेन्यू)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">सिरों के बीच खींचना
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">तार जोड़ना (ग़लती से न हो, इसके लिए टैप के बाद ज़रा रुककर खींचिए)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">तार को देर तक दबाना / बाहर खींचना
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">जोड़ हटाना<br />सिरे से बाहर की ओर खींचकर छोड़ने पर भी जोड़ हट जाता है
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">3-2. Layout व्यू का उपयोग
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">यह वह स्क्रीन है जहाँ ऑब्जेक्ट की जगह, आकार और घुमाव तय होते हैं। धूसर आयत Play के समय दिखने वाला क्षेत्र है।
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="411" data-original-width="804" height="328" src="https://blogger.googleusercontent.com/img/a/AVvXsEg5Vzc8EJCcqtMnAR9MOI2oi_y_WeABzt8N0BrlqHbmZZL1SoCiaXFU06oTwzPPUoKTGRwl3Fm9IiqYs1oStL814Wpq8JAcfyFekey5V3jS6t8_fmuEysjwnIx-pXcS2zfL1_AItD2NmeE7CUZ1R7QUMs7phUHRo0vwO41e2sieKKjusSMaTYflMOuoi3E=w640-h328" style="max-width: 100%;" width="640" /></a>
+        </div><br />नियंत्रण मूलतः NodeEditor जैसे ही हैं।<br />
+        <p>
+        </p>
+        <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">क्रिया
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">परिणाम
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">एक उँगली से खींचना (पृष्ठभूमि)
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">व्यू हिलाना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">माउस व्हील / दो उँगलियों से पिंच
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">बड़ा/छोटा करना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ऑब्जेक्ट खींचना
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">हिलाना (कई चुने हों तो सब एक साथ)
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">ऑब्जेक्ट पर टैप
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">चुनना। यह चयन NodeEditor के साथ साझा रहता है
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">हैंडल खींचना
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">आकार बदलना / घुमाना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">डबल-क्लिक करके खींचना (पृष्ठभूमि)
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">घेरकर चुनना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पृष्ठभूमि देर तक दबाना
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">CREATE NODE खोलना
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">चयन को देर तक दबाना
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><span style="color: #282828;">Property खोलना (कई ऑब्जेक्ट चुने हों तो Duplicate/Delete मेन्यू)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>कोई ऑब्जेक्ट चुनने पर उसके दाईं ओर “50” जैसी संख्या दिखती है।<br />यह संख्या SortingLayer है: यह जितनी बड़ी होगी ऑब्जेक्ट उतना आगे बनेगा, जितनी छोटी उतना पीछे।<br />नीचे के ▲▼ बटनों से इसे घटाया-बढ़ाया जा सकता है।<br /><br />इसके अलावा SETTING नोड में GridSnap की सेटिंग है।<br />चालू होने पर ऑब्जेक्ट 10 पिक्सेल की इकाई में हिलते हैं।<br /><br />धूसर क्षेत्र का आकार Setting नोड में बदला जाता है।</section>
+      <section id="menu" style="box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+        <h2 class="sec" style='border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;'>4. MENU
+        </h2>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>
+        </p>
+        <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="351" data-original-width="374" height="240" src="https://blogger.googleusercontent.com/img/a/AVvXsEgdWsq42A-emzGY-YQBmNez6vYr-e8VlD01vSwkosSB5WTR1bKMz03ABU4ldpC5ivtvZT9aNeAZ2VZUxTxaoE4wgWTEnXW27Hy9hkCcNh7zaF4nH9SWpbB7WbMz3m0gznorVR-6nh5HHEgqcn14e4ui2TgP-1rKJ2lXLFum97a1w0V_6qADsxk6tqNW7E4" width="256" /></a>
+        </div>
+        <p>
+        </p>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>ऊपर दाईं ओर के <b>MENU</b> बटन को दबाए रखकर उँगली किसी विकल्प की दिशा में सरकाकर छोड़िए, वह विकल्प चल जाएगा। इसे साधारण बटन की तरह भी दबाया जा सकता है।<br /><br />ऊपर दाईं ओर के ▶ बटन से Play व्यू पर जाकर प्रोग्राम चलता है।<br /><b>Layout </b> दबाने पर Layout व्यू पर चले जाते हैं।
+        </p>
+        <p style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-items">4-1. मेन्यू के विकल्प
+        </h3>
+        <table style='border-collapse: collapse; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 14px; margin: 14px 0px; max-width: 100%;'>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW NODE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">नया नोड बनाने के लिए CREATE NODE खोलता है। पृष्ठभूमि देर तक दबाने पर भी यही खुलता है।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SAVE
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">वर्तमान प्रोग्राम को नाम देकर सहेजता है (देखिए <a href="#menu-save" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-2</a>)।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">LOAD
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">सहेजा हुआ प्रोग्राम पढ़ता है (देखिए <a href="#menu-load" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-3</a>)।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">UNDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">पिछली क्रिया रद्द करता है।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">REDO
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">रद्द की गई क्रिया फिर से करता है।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">FIT
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">ज़ूम और स्थिति ऐसी करता है कि सभी नोड स्क्रीन में आ जाएँ।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">NEW
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">सब मिटाकर नया बनाता है।</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">SETTING
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">पूरे ऐप की सेटिंग खोलता है (देखिए <a href="#menu-setting" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">4-4</a>)। यह SETTING नोड से अलग चीज़ है।
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">OPEN HELP
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">यह सहायता पृष्ठ खोलता है।
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>Compo के भीतर संपादन करते समय बाईं ओर के विकल्प Compo वाले हो जाते हैं। उनका वर्णन “Compo नोड” अध्याय में है।
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-save">4-2. SAVE (सहेजना)
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>नाम देकर इसी डिवाइस में सहेजता है। वही नाम पहले से हो तो ऊपर लिख जाता है। नाम में अंग्रेज़ी अक्षर, अंक और कुछ चिह्न चलते हैं।<br /><b>AUTO</b> पर निशान लगाने से <b>स्वतः सहेजना</b> चालू हो जाता है और उसके बाद हर 30 सेकंड में अपने आप सहेजा जाता है (Play के दौरान नहीं)।<br /><b>EXPORT</b> दबाने पर प्रोग्राम फ़ाइल के रूप में निकाला जा सकता है — बैकअप के लिए या किसी और को देने के लिए।<br />फ़ॉर्मैट <b>.ngz (gzip संपीड़ित)</b> और <b>.json (टेक्स्ट)</b> में से चुना जा सकता है।<br />.ngz का एक्सटेंशन बस <b>.gz</b> कर दीजिए, फिर किसी भी सामान्य अनज़िप सॉफ़्टवेयर से उसका JSON निकाला जा सकता है।
+        </p>
+        <p style='box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'><span style="color: #282828;">अधिकतम <b>256</b> प्रोग्राम सहेजे जा सकते हैं। ये आपके ब्राउज़र के भीतर रहते हैं, इसलिए दूसरे डिवाइस या ब्राउज़र से नहीं दिखते।<br />सहेजा गया डेटा nodegram के भीतर ही रहता है, इसलिए फ़ोन से nodegram का शॉर्टकट हटाने पर वह डेटा भी मिट सकता है।<br /></span><span style="color: red;"><b>ज़रूरी चीज़ों के लिए EXPORT से फ़ाइल बनाकर रखना बेहतर है।</b></span>
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-load">4-3. LOAD (पढ़ना)
+        </h3>
+        <p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>सहेजे गए प्रोग्रामों की सूची दिखती है। नाम के बगल वाले बटन से उन्हें हटाया भी जा सकता है।<br /><b>IMPORT</b> दबाने पर EXPORT से निकाली गई फ़ाइल पढ़ी जा सकती है। पढ़ने के दो तरीके हैं: <b>पढ़ना</b> वर्तमान सामग्री की जगह ले लेता है, जबकि <b>जोड़कर पढ़ना</b> वर्तमान प्रोग्राम को रखते हुए फ़ाइल को उसके नीचे जोड़ देता है।</p><p style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 8px 0px;'>3D सॉफ़्टवेयर में बनी <b>.obj</b> फ़ाइल को IMPORT करने पर 3D डेटा POLYGON नोड के रूप में, या LINE नोड (3D प्रदर्शन) से जुड़ने वाले ARRAY नोड के रूप में पढ़ा जाता है। विवरण के लिए देखिए <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D ऑब्जेक्ट</a>।
+        </p>
+        <h3 style='box-sizing: border-box; color: #161616; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 18px; margin: 22px 0px 8px;' id="menu-setting">4-4. SETTING (ऐप सेटिंग)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">पूरे ऐप की सेटिंग। यहाँ बदली गई बातें प्रोग्राम में नहीं सहेजी जातीं, केवल इसी डिवाइस पर रहती हैं।</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Wire</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：तार का आकार (वक्र／सीधा) चुनता है।</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>NodeColor</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：नोड के रंग चुनता है।</span><br /><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>Language</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">：प्रदर्शन की भाषा बदलता है।
+        </span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif" style="color: #282828;">जापानी, अंग्रेज़ी, चीनी (सरलीकृत), फ़्रेंच, जर्मन, हिन्दी, इंडोनेशियाई, इतालवी, कोरियाई, पुर्तगाली, रूसी, स्पेनिश, थाई, तुर्की, वियतनामी</span></p><p style="box-sizing: border-box; margin: 8px 0px;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;">हर सीन की सेटिंग (FPS, Dynamics आदि) यहाँ नहीं, बल्कि </span><b style='color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px;'>SETTING नोड</b><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="color: #282828; font-size: 16px;"> में होती है। नाम मिलते-जुलते हैं, इसलिए सावधान रहिए।</span></p>
+      </section>
+      <section id="mobile" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">5. फ़ोन और PC पर
+        </h2><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>फ़ोन पर<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">स्पर्श नियंत्रण:</b><br />एक उँगली से खिसकाइए, दो से पिंच करके ज़ूम कीजिए। देर तक दबाना, डबल-टैप करके खींचना आदि PC जैसा ही चलता है।<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">स्क्रीन घुमाना:</b><br />डिवाइस घुमाने पर व्यू भी उसी दिशा में हो जाता है। Play के दौरान दिशा वही रहती है जो SETTING नोड में तय है (चौड़ी=Horizontal／खड़ी=Vertical), और उलटी दिशा में पकड़ने पर सूचना दिखती है।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">iOS के लिए सूचना:</b> <br />iPhone जैसे iOS डिवाइस पर पूरी स्क्रीन के लिए Safari के मेन्यू से नीचे दिए ①, ② पर टैप करके टूलबार छिपा दीजिए; इससे लगभग पूरी स्क्रीन मिल जाती है और उपयोग आसान हो जाता है।<br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="641" data-original-width="1289" height="199" src="https://blogger.googleusercontent.com/img/a/AVvXsEiK7K2bqBB9EGUZkcmxd-FC_zjqazSDzkCD3ByJfDKxYWLXGtnRS-dOTQbl_2crlfBnLY21furMZC8Od6hGctkZeB0HyYTvMLmXCT4b0F3rQtDy6ch5Avl2v2RDGdUX9vkUIG3_Km6jL2uJaGaG1HwZi2a56ODUFeDrvAtI9VIZR4nyNtdfM4djXBogtY0=w400-h199" style="max-width: 100%;" width="400" /></a>
+            </div>पूरी तरह फ़ुल स्क्रीन के लिए Safari के शेयर मेन्यू से “होम स्क्रीन में जोड़ें” चुनिए। तब nodegram किसी ऐप की तरह चलता है — यही सुझाव है।<br /><b><span style="color: red;">ध्यान रहे, होम स्क्रीन से वह आइकॉन हटाने पर सहेजा गया डेटा मिट सकता है। ज़रूरी चीज़ें फ़ोन के किसी फ़ोल्डर में Export कर लीजिए।</span></b>
+          </li>
+        </ul><br /><b style="box-sizing: border-box;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-right: 8px; vertical-align: middle; width: 14px;"> </span>PC पर<br /><br /></b>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">शॉर्टकट:<br /></b><br />
+            <p dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">NodeEditor / Layout दोनों में</span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">कुंजी</span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">क्रिया</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Delete</code> या <code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Backspace</code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">चुने हुए नोड हटाना (कई चुने हों तो सब एक साथ; पुष्टि का डायलॉग आता है)</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Ctrl+D</code> (Mac पर Cmd+D<code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>Cmd+D</code>)</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">चुने हुए नोड की नकल बनाना (पुष्टि का डायलॉग आता है)</span>
+                    </td>
+                  </tr>
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 15ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="el" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code></span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Y या Ctrl+Shift+Z<br /></span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 8ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">Redo</span></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p dir="ltr" style="background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;"><br />TEXTURE एडिटर खुला हो तब (ऊपर वालों के अतिरिक्त)</span></span>
+            </p>
+            <div class="overflow-x-auto" dir="ltr" style='background-color: #fcfcfb; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-family: anthropic-sans, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; margin: 0px; outline-color: rgb(37, 106, 191); overflow-x: auto; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'>
+              <table style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); font: inherit; margin: 0px; max-width: 100%; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-indent: 0px; text-rendering: optimizelegibility; width: 470.469px;">
+                <thead style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr class="_wordAnimating_yu34g_11" style="animation: 0.1s linear 30ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 35ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">कुंजी</span></span>
+                    </th>
+                    <th scope="col" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.06); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; font-weight: 500; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-align: left; text-rendering: optimizelegibility; vertical-align: top;"><span class="_wordAnimating_yu34g_11" data-wf="" style="animation: 0.1s linear 40ms 1 normal both running _fadeInText_yu34g_1; border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; opacity: 1; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;"><span style="font-family: arial;">क्रिया</span></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+V</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">क्लिपबोर्ड की छवि चिपकाना</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+C</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">संपादित हो रही पूरी टेक्सचर क्लिपबोर्ड में कॉपी करना</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><code data-epitaxy-inline-code="" style='background: 0px 0px; border-image: none; border-radius: 4px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; color: #0b0b0b; font-feature-settings: "calt" 0, "liga" 0; font-size: 13px; font-variant-ligatures: none; font-variation-settings: normal; line-height: 1.4; margin: 0px; outline-color: rgb(37, 106, 191); padding-block: 1px; padding-inline: 2px; padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;'><span style="font-family: arial;">Ctrl+Z</span></code>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">टेक्सचर संपादन में Undo</span>
+                    </td>
+                  </tr>
+                  <tr style="border-image: none; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); padding: 0px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility;">
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="color: #0b0b0b; font-family: arial; font-size: 13px; font-variant-ligatures: none;">Ctrl+Y या Ctrl+Shift+Z</span>
+                    </td>
+                    <td style="background: none 0% 0% / auto repeat scroll padding-box border-box rgba(11, 11, 11, 0.04); border-image: none; border-radius: 3px; border-style: solid; border-width: 0px; border: 0px solid color(srgb 0.0431373 0.0431373 0.0431373 / 0.1); box-sizing: border-box; margin: 0px; outline-color: rgb(37, 106, 191); overflow-wrap: break-word; padding: 6px; scrollbar-color: rgba(30, 30, 29, 0.35) rgba(0, 0, 0, 0); scrollbar-width: thin; text-rendering: optimizelegibility; vertical-align: top;"><span style="font-family: arial;">टेक्सचर संपादन में Redo</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table><br />Mac भी समर्थित है।</div>
+          </li>
+        </ul>
+      </section>
+      <section id="nodes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">6. सभी नोड का विवरण
+        </h2>
+        <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; font-size: 16px; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhElpzs_62w4PYYXXQvNbziDoolx0vATkkN2Ig3P6kEp5H3Lq3BPvt3RsEMt0PryRdXOvahVj7zSL0eINC3SZtWlxKOx82JQ0RBHTXmjSAK8uOAu4Hw_BhMUc79piLzYsIAIRbzM8hVjXueKiIzsP7GhXu6bc2FgSc4x9mexzcZSzq1-AanVmqE8SLBI4I" style="margin-left: 1em; margin-right: 1em;"></a>
+          <div class="separator" style="clear: both;"><br />
+          </div>
+          <div><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E"><img alt="" data-original-height="1072" data-original-width="2262" height="304" src="https://blogger.googleusercontent.com/img/a/AVvXsEgcnkGCIC9b1CvKQu90VaZH42-aZ-XcR0VdtntZHrIuP93eC1autWVVaFP63JtUM8WcvIaSl-cqY4nlCMECkAb3nL1fwyTc-TbSlShPKLNRXNDZmp_IQ_Nvd4uhut6ET525udLAXFkuT5mWQCHBIEj8oRAgKAIp_MRFEvDnQgDhGca3wtuJWrxF8sdsn2E=w640-h304" style="max-width: 100%;" width="640" /></a>
+          </div><br />
+        </div>
+        <p style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px;">इन／आउट का अर्थ है इनपुट सिरों की संख्या／आउटपुट सिरों की संख्या।
+        </p>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"> स्थिरांक
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इनपुट/आउटपुट</th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-green" style="background: rgb(46, 166, 110); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Constant
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Value में तय की गई संख्या देता है।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-blue" style="background: rgb(31, 115, 224); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> गणना
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">＋
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1</td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 ＋ इनपुट 2 का परिणाम देता है।<br />जोड़ने वाला नोड हमेशा ज़रूरी नहीं: हर इनपुट सिरे पर कई तार जोड़े जा सकते हैं और वे अपने आप जुड़ जाते हैं, इसलिए इनपुट 1 पर दो तार लगाने से ही उनका योग मिल जाता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">－
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 － इनपुट 2 का परिणाम देता है
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">×
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 × इनपुट 2 का परिणाम देता है
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">÷
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 ÷ इनपुट 2 का परिणाम देता है। हर 0 हो तो 0 देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;"><span style="font-family: trebuchet;">√</span>
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 का वर्गमूल देता है। इनपुट 0 या उससे कम हो तो 0 देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Compare
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 और इनपुट 2 की तुलना करता है (=, &gt;, &lt;, ≠, ≥, ≤)। शर्त सही हो तो 1, नहीं तो 0 देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Not ( ! )
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 के 0 होने पर 1, अन्यथा 0 देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Pos Angle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">स्थिति से कोण। ArcTan2(इनपुट 2, इनपुट 1) को डिग्री में देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Angle Pos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">कोण से स्थिति। डिग्री में दिए कोण से (cos, sin) देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Random
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0 से लेकर Number से कम तक का यादृच्छिक पूर्णांक देता है। Play शुरू होते समय, और हर उस फ़्रेम में जब इनपुट 1 शून्य नहीं होता, नया मान चुना जाता है। Use Seed चालू करके Seed मान देने पर हर बार Play करने पर वही क्रम दोहराया जाता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-blue" style="background: rgb(31, 115, 224); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Int
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पूर्णांक बनाता है। Round प्रॉपर्टी में Floor / Round / Integer चुने जा सकते हैं।<br />डिफ़ॉल्ट Floor इनपुट से छोटा या बराबर निकटतम पूर्णांक लेता है: 2.8 का 2 और -0.1 का -1 बनता है। Round निकटतम पर पूर्णांकित करता है और Integer केवल पूर्णांक भाग रखता है।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-cyan" style="background: rgb(0, 191, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> मान और समय
+        </h3>
+        <div>
+          <table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Trigger
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">जिस क्षण इनपुट 0 से बदलकर कुछ और होता है, केवल उसी एक फ़्रेम में 1 देता है।<br />DELAY(F) से वह 1 बताई गई फ़्रेम संख्या बाद में मिलता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Counter
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">काउंटर। हर फ़्रेम में इनपुट 1 जोड़ता है, इनपुट 2 घटाता है और अपने पास रखी संख्या देता है।<br />Type＝Clamp इसे Min और Max के बीच रखता है, Loop उसी सीमा में चक्र चलाता है। Value (आरंभिक मान), Min/Max तय किए जा सकते हैं।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Var
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">चर (variable) की तरह काम करता है: एक संख्या अपने पास रखकर देता है।<br />इनपुट 2 का सेट संकेत शून्य से भिन्न होने पर इनपुट 1 याद कर लेता है।<br />आरंभिक मान तय किया जा सकता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Array
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">सरणी (array) की तरह काम करता है।<br />इनपुट 2 पर सूचकांक (सरणी में स्थान, पहला 0) देने पर वह तत्व देता है। सूचकांक 0 से शुरू होते हैं, इसलिए 3 लंबाई की सरणी में 0, 1 या 2 चलते हैं; 0 से कम या 3 और उससे बड़े पर 0 मिलता है।<br />इनपुट 3 के सेट संकेत से सूचकांक (इनपुट 2) वाले तत्व पर इनपुट 1 का मान लिख दिया जाता है।<br />आरंभिक मानों की सूची में संख्याएँ “,” (अल्पविराम) या नई पंक्ति से अलग कीजिए।<br />सरणी को Sound नोड के साथ स्वरलिपि की तरह और Line नोड के साथ रेखाचित्र की तरह इस्तेमाल किया जा सकता है। Property के SEQUENCER / LINE बटनों से इन्हीं दोनों रूपों में एडिटर में संपादन भी हो सकता है (नीचे देखिए)।<br />इसके अलावा यह 3D वायरफ़्रेम रखने के लिए भी काम आती है (देखिए <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D ऑब्जेक्ट</a>)।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetPos
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पैरेंट ऑब्जेक्ट की वर्तमान X, Y स्थिति लेता है। WORLD/LOCAL बदला जा सकता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">GetRot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पैरेंट ऑब्जेक्ट का वर्तमान कोण देता है, वामावर्त दिशा धनात्मक। WORLD/LOCAL बदला जा सकता है।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-cyan" style="background: rgb(0, 191, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Velocity
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पैरेंट ऑब्जेक्ट की X/Y गति प्रति सेकंड देता है (Y ऊपर की ओर धनात्मक)। Frames बढ़ाने पर अधिक फ़्रेम का औसत लिया जाता है और बदलाव धीमा दिखता है।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">ARRAY के विशेष एडिटर (SEQUENCER / LINE)
+          </h3>
+          <p style="box-sizing: border-box; font-size: 16px; margin: 8px 0px;"><br />
+          </p>
+          <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+            <li style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">LINE एडिटर</b>：<br />यह वह टूल है जिससे Line नोड को दी जाने वाली टूटी रेखा बनाई जाती है।<br />संपादन क्षेत्र का केंद्र मूल बिंदु है; X दाईं ओर ＋ और Y ऊपर की ओर ＋, दोनों -99〜99 तक।<br />DRAW से रेखा बनती है। बनाते समय DRAW बटन Endpoint बन जाता है; उसे दबाने पर वर्तमान रेखा पूरी हो जाती है।<br />MOVE से शीर्ष हिलता है, ERASE से एक रेखाखंड मिटता है, VIEW से दृश्य खिसकता है और ◁ ▷ से Undo / Redo होता है। बंद करने पर यह x,y संख्याओं की सूची बन जाती है, जहाँ x,y = (9999,9999) रेखा को तोड़ देता है।<br />ARRAY नोड के पैरेंट के रूप में LINE नोड तय करने पर वह LINE नोड सरणी की जानकारी से चित्र बनाता है। एक ARRAY नोड के कई पैरेंट (कई LINE नोड) भी हो सकते हैं।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="364" data-original-width="494" height="236" src="https://blogger.googleusercontent.com/img/a/AVvXsEhJui-iU5LjKq-VqVIdimLgdTsDEzPPGZ_BbkNYBRp0zYUuVhXVj_fSWtMtGF0HsIR8bX1G1QoitvxNRx2Cijl9SnQf1nPVGZjBrBuZbsNcIStCPGGusQwRd67sdbtqSOpKa6vI4lSLfIDvbJrTD-RmRlGTsmmnuzcX-s0vMMlRCnzw7DAKXpLoPTW-ZmQ=w320-h236" style="max-width: 100%;" width="320" /></a>
+              </div><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box; font-size: 16px;">SEQUENCER एडिटर</b><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">：</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">यह वह टूल है जिससे Sound नोड को दी जाने वाली स्वरलिपि की ARRAY बनाई जाती है। केवल अष्टांश स्वर, 1 ताल＝8, अधिकतम 500 ताल, </span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">3 सप्तक।</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">DRAW मोड में क्लिक या खींचकर स्वर रखिए और ERASE मोड में खींचकर मिटाइए।</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">बंद करने पर ऐसी सरणी बनती है जिसमें सा 0 और रे 1 है; विराम के लिए </span><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="box-sizing: border-box; font-size: 16px;">99 (वास्तव में 80 से बड़ा हर मान विराम माना जाता है)</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">, और अंतिम स्वर वाले ताल के अंत तक विराम भर दिए जाते हैं। आधे स्वर 0.5 के रूप में लिखे जाते हैं।<br /></span>Chromatic पर निशान लगाने से हर खाना 12 स्वरों में से एक बन जाता है (सा=0, सा♯=1, रे=2, रे♯=3, ग=4, म=5, म♯=6, प=7, प♯=8, ध=9, ध♯=10, नि=11) और एक सप्तक 12 का हो जाता है। Sound नोड में भी यही चेकबॉक्स है — दोनों की सेटिंग एक जैसी रखिए।<br /><br /><br />
+            </li>
+            <li style="box-sizing: border-box; margin: 4px 0px;"><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">केवल ARRAY से आवाज़ नहीं आती; नीचे दिए लिंक जैसा प्रोग्राम चाहिए।</span><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif">
+              <p class="small" style="box-sizing: border-box; color: #666666; margin: 12px 0px 8px;"><span style="font-size: large;"></span>
+              </p>
+              <div class="links" style="box-sizing: border-box; display: flex; flex-wrap: wrap; font-size: 16px; gap: 10px; margin-top: 10px;"><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/xtty3xoo2man3cppp2vw0/turip02.json?rlkey=ber1bizk17rugdkbe8czrm9cx&amp;st=4itsm9sm&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline-block; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ नमूना खोलें</a>
+              </div></span>
+            </li>
+          </ul>
+        </div>
+        <div style="font-size: 16px;">
+          <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="327" data-original-width="528" height="198" src="https://blogger.googleusercontent.com/img/a/AVvXsEjHz_ZYjTltvt2l_4zVOQvLQi_0ESUwDLLrO3rdsqQu5NEyH6_ziGpMHYH14mi8zC-tQ-lCznXQtJAzOnwisrwjZ0da7PHBdxRu0xYVjwrfZS6AgsyREhVjE9vy2ZoTXjjgLv5B7StH2Pxn1tbNIlGabrt4LyOCuJzYV3zBa49QvwJD261pXL_3Bl88_3E" style="max-width: 100%;" width="320" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;"><br />
+          </div>
+          <div class="separator" style="clear: both;"> कई अनुक्रम (ARRAY) एक साथ संपादित करने की सुविधा भी है।
+          </div>
+          <div class="separator" style="clear: both;"> NodeEditor में कई ARRAY नोड एक साथ चुनिए, किसी एक को देर तक दबाइए
+          </div>
+          <div class="separator" style="clear: both;"> और “SEQUENCER” चुनिए।
+          </div>
+          <div class="separator" style="clear: both;"> अंक वाले बटन से संपादित होने वाली ARRAY चुनिए, देर तक दबाने पर आवाज़ का मेन्यू आता है,
+          </div>
+          <div class="separator" style="clear: both;"> और खींचकर क्रम भी बदला जा सकता है।<br /><br />
+          </div>
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="549" data-original-width="1010" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEgjXsuUfGVzz5VV1AIwIEBnqx9xNj0T46x6w2uR533Vv_XjqEh78UOSAqGr6LAFGMRwAGjY8x7ODH8Yd5IWVyZue2npFiz55Nd43ekcv2rqbvQkQD2b89TRC89ygfLoHFWvyfEfkKM6Ss3s4Ujdvpz0pVwRBopnGgNF6ueBjnFCT-dqEitFllC1Xyb6rhU=w400-h217" style="max-width: 100%;" width="400" /></a>
+            </div>
+          </div>
+          <div class="separator" style="clear: both;"><br />
+          </div><br /><span class="swatch nc-purple" style="background: rgb(163, 51, 191); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; color: #161616; display: inline-block; font-size: 18px; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span style="background-color: white; color: #161616; font-size: 18px;"> आउटपुट और ऑब्जेक्ट</span>
+        </div>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Text
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">2/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पाठ दिखाता है। कुछ जुड़ा न हो तो Text प्रॉपर्टी में लिखा पाठ दिखता है, तार जुड़ा हो तो वह संख्या। इनपुट 2 से प्रदर्शन चालू-बंद होता है। संख्याएँ दशमलव के छठे स्थान पर पूर्णांकित होकर पाँचवें तक दिखती हैं। पाठ का रंग, विन्यास और चारों ओर का चौखटा तय किए जा सकते हैं।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Rect
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">आयत ऑब्जेक्ट। Dynamics बंद हो तो इनपुट 1/2 x, y निर्देशांक हैं; चालू हो तो बाहरी बल x, y। इनपुट 3 प्रदर्शन चालू/बंद करता है। रंग, किनारा, Tag, आकार, घुमाव, Sorting Layer आदि तय किए जा सकते हैं। Broken by 1–3 में उन वस्तुओं का My Tag दिया जाता है जो इसे नष्ट कर सकती हैं।<br />Dynamics और Tag के लिए देखिए <a href="#spec" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9. विनिर्देश</a>।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Circle
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">वृत्त ऑब्जेक्ट। आकार और Radius के अलावा इसके इनपुट और प्रॉपर्टी RECT जैसे ही हैं।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Character
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">चलने और कूदने वाला कैरेक्टर। इनपुट 1/2 चाल हैं; इनपुट 3 जिस क्षण 0 या उससे कम से बदलकर धनात्मक होता है उसी क्षण छलाँग लगती है।<br />छलाँग की ऊँचाई इनपुट मान के अनुपात में होती है और केवल ज़मीन पर होने पर काम करती है। भौतिकी और छलाँग के लिए SETTING तथा Character दोनों में Dynamics चालू कीजिए। ऊपर से दिखने वाले खेल के लिए Dynamics चालू रखते हुए Gravity 0 कर दीजिए। Flip दिशा के अनुसार टेक्सचर पलटता है, AutoRot चाल की दिशा में मुँह कर देता है और KeepOnScr गति को स्क्रीन के भीतर रखता है।<br />इसमें चाइल्ड सिरा तो है, पर यह किसी ऑब्जेक्ट का चाइल्ड नहीं बन सकता। इसका पैरेंट केवल WARP IN हो सकता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Shot
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 से गोली चलती है। Bullet Count एक साथ रह सकने वाली गोलियों की संख्या है। My Tag उस चीज़ को नष्ट करता है जिसका Broken by उससे मेल खाता है, जबकि SHOT का अपना Broken by 1–3 बताता है कि किससे टकराकर उसकी गोलियाँ मिटेंगी — नोड के प्रकार या Tag से। जिस फ़्रेम में सचमुच गोली चली, केवल उसी में आउटपुट 1 होता है। Keep Off-Screen से स्क्रीन के बाहर की गोलियाँ बनी रहती हैं, और सीमा पार होने पर पुरानी गोलियाँ मिट जाती हैं।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Line
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">5/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">(X1,Y1) से (X2,Y2) तक रेखा खींचता है। इनपुट 5 (SET) जुड़ा हो तो जब तक वह शून्य नहीं है तब तक रूप बदलता रहता है, और 0 रहने पर पिछला रूप बना रहता है। कुछ जुड़ा न हो तो हर फ़्रेम में बदलता है।<br />चाइल्ड के रूप में ARRAY देने पर इनपुट 1–4 अनदेखे हो जाते हैं: सरणी को x1,y1,x2,y2,… मानकर एक ही लगातार टूटी रेखा बनाई जाती है। x=9999, y=9999 रेखा को तोड़ता है। Coord से WORLD/LOCAL चुना जा सकता है।<br />चाइल्ड ARRAY में 3D डेटा (x,y,z की तिकड़ी) हो तो वह अपने आप <b>3D LINE</b> के रूप में बनता है। विवरण के लिए देखिए <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D ऑब्जेक्ट</a>।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Sound
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 1 स्वर है (सा=0, रे=1, …), इनपुट 2 आवाज़ और इनपुट 3 बजाने का संकेत। इनपुट 1/2 जुड़े न हों तो Tone/Volume प्रॉपर्टी काम आती हैं। ठहरी हुई ध्वनि तब तक बजती रहती है जब तक संकेत शून्य नहीं है, जबकि घटती ध्वनि और प्रभाव संकेत उठते समय या स्वर बदलते समय एक बार बजते हैं। 80 से बड़ा कोई भी स्वर (जैसे 99) विराम है। Tone प्रॉपर्टी 0.5 (आधा स्वर) की इकाई में चलती है, पर इनपुट 1 कोई भी दशमलव मान ले सकता है।<br />Chromatic चालू करने पर Tone 12 आधे स्वरों की संख्या बन जाता है (0=सा, 1=सा#, 2=रे…)। बंद हो तो 7 स्वरों का क्रम मिलता है जिसमें 0.5 काली कुंजी है। ARRAY को स्वर के रूप में जोड़ते समय उस ARRAY के SEQUENCER की Chromatic सेटिंग से मिलाइए, वरना स्वर ग़लत हो जाएँगे।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-purple" style="background: rgb(163, 51, 191); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Polygon
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">7/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3D मॉडल के फलक (बहुभुज) दिखाने वाला ऑब्जेक्ट। इसे CREATE NEW NODE से नहीं बनाया जा सकता; यह केवल .obj फ़ाइल IMPORT करने पर बनता है।<br />इसके इनपुट 3D स्थिति, 3D घुमाव और स्केल हैं।<br />विवरण के लिए देखिए <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D ऑब्जेक्ट</a>।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-orange" style="background: rgb(217, 115, 26); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> नियंत्रण
+        </h3>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">
+          </h3><table style="background-color: white; border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Stick
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">स्क्रीन पर जॉयस्टिक। स्टिक का X झुकाव=आउटपुट 1, Y=आउटपुट 2। एनालॉग/डिजिटल, तथा कीबोर्ड/गेमपैड पर सौंपने की सुविधा।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Button
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">स्क्रीन पर बटन। दबे रहने तक 1 देता है। कीबोर्ड/गेमपैड पर सौंपा जा सकता है।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Keyboard
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">तय की गई कुंजी दबी हो तो 1 देता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-orange" style="background: rgb(217, 115, 26); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">Touch
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">स्क्रीन स्पर्श। स्पर्श की जगह X=आउटपुट 1, Y=आउटपुट 2 (केंद्र 0,0), और छूते रहने पर आउटपुट 3=1।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-yellow" style="background: rgb(230, 191, 0); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> अन्य नोड
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">TEXTURE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पिक्सेल चित्र बनाकर रखता है और पैरेंट बनाए गए ऑब्जेक्ट पर चिपका देता है। Rect, Circle, Chara, Shot, BG पर लगाया जा सकता है। इसके कई पैरेंट (कई ऑब्जेक्ट नोड) भी हो सकते हैं।<br />इनपुट 0 पर छिप जाता है। एक ही ऑब्जेक्ट पर कई टेक्सचर जोड़कर केवल एक को Visible रखने से दिखने वाली टेक्सचर बदली जा सकती है।<br />ऑब्जेक्ट पर चिपकाते समय चुना जा सकता है कि चित्र फ़िट किया जाए या टाइल की तरह बिछाया जाए।<br />पैरेंट तय न करने पर टेक्सचर को अकेले, एक समतल चित्र की तरह भी दिखाया जा सकता है।<br />पृष्ठभूमि जैसे बहुत जगह एक ही चित्र चाहिए हो, तो एक टेक्सचर कई ऑब्जेक्ट को सौंपी जा सकती है।<br />टेक्सचर एडिटर के विस्तृत उपयोग के लिए देखिए <a href="#texeditor" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">“TEXTURE एडिटर”</a>।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SENSOR
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">सेंसर क्षेत्र (Layout व्यू में तय की गई सीमा) से टकराने वाली वस्तुओं की संख्या देता है। Target की शर्त या Tag 1〜3 में से किसी एक से मेल खाने पर वस्तु गिनी जाती है, और एक ही वस्तु कई शर्तों पर खरी उतरे तब भी केवल एक ही गिनी जाती है। Target=SCREEN होने पर यह 0/1 देता है कि सेंसर क्षेत्र वर्तमान दृश्य से टकराता है या नहीं। पैरेंट तय करने पर सेंसर उसके साथ चलता है और वह पैरेंट स्वयं जाँच से बाहर रहता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ONBREAK
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">वर्तमान फ़्रेम में नष्ट हुए पैरेंट ऑब्जेक्ट या तय Tag वाली वस्तुओं की संख्या देता है। पैरेंट ऑब्जेक्ट कई तय किए जा सकते हैं।<br />Onbreak नोड में कोई संदर्भ तय न हो तो इसे प्रभाव (effect) नोड की तरह भी काम में लिया जा सकता है। इनपुट 1 के 0 से बदलकर कुछ और होने पर भी यह अपनी जगह प्रभाव दिखाता है। प्रभाव का प्रकार (NONE, PARTICLE, LINE, CIRCLE, BOX) और रंग तय किए जा सकते हैं।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">ROTATE
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पैरेंट-चाइल्ड ऑब्जेक्ट घुमाने का कब्ज़ा। ROTATE को पैरेंट बनाने वाला ऑब्जेक्ट उसकी स्थिति और घुमाव अपना लेता है। इनपुट 1 Layout में तय आरंभिक कोण से घुमाव का अंतर है, और धनात्मक मान वामावर्त घुमाते हैं।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SCREEN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/2
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Play के समय कैमरा नियंत्रित करता है। X/Y कैमरे की स्थिति हैं (पैरेंट हो तो उसकी स्थिति से अंतर; Y ऊपर की ओर धनात्मक) और S ज़ूम है, न्यूनतम 0.05। SCREEN को पैरेंट बनाने वाला ऑब्जेक्ट ऐसा स्थिर HUD बन जाता है जिस पर कैमरे का असर नहीं होता।
+                <br />SCREEN के पैरेंट के रूप में खिलाड़ी का ऑब्जेक्ट तय करने पर दृश्य खिलाड़ी के पीछे-पीछे चलता है।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">RESTART
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">इनपुट 0 से बदलकर कुछ और होने पर पूरा प्रोग्राम Play शुरू होने वाली स्थिति पर लौट आता है। चलती हुई स्थिति, चर, काउंटर, सरणियाँ, गोलियाँ आदि आरंभिक कर दी जाती हैं। जिस मान से पुनः आरंभ हुआ वह बाद में भी आउटपुट पर बना रहता है, इसलिए बची हुई ज़िंदगियाँ या अंक आगे ले जाने में यह काम आता है।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-yellow" style="background: rgb(224, 192, 32); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">COMPO
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">3/3
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">कई नोड को एक में समेटा हुआ पुर्ज़ा। E＝चालू/बंद, 1 और 2＝भीतर से मानों का आदान-प्रदान।<br />विवरण के लिए देखिए <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo नोड</a>।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li id="texeditor" style="box-sizing: border-box; font-size: 16px; margin: 4px 0px;"><b style="box-sizing: border-box;">TEXTURE एडिटर</b>：<br />TEXTURE नोड की Property में “Edit Texture” बटन से खुलता है। यहाँ पिक्सेल चित्र बनाकर उसे पैरेंट बनाए गए ऑब्जेक्ट पर चिपकाया जा सकता है।<div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="404" data-original-width="492" height="263" src="https://blogger.googleusercontent.com/img/a/AVvXsEicX3x03rEPUK2-SvoAYRbk5Tl9r5gws9YdqLyvRJnpKLea67ZBZWQIueyy598_OCKzMvWl9TZ0MmZ0qZZJ9eao5VazXzw_8UsbdABTPS5K4IqYeZszqMpwlj2CM6VLjdpfTYEfrVH_HJjEAAjGuPrxnp36lbV0Y1gTNBXBlv9E5g-jENAj9AirJxOnbyo=w320-h263" width="320" /></a></div><table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%;"><tbody><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Draw</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">चुने हुए रंग से बिंदु बनाता है। खींचने पर लगातार बनते जाते हैं।</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Paint</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">एक ही रंग का जुड़ा हुआ क्षेत्र एक साथ भर देता है।</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Pick</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">चित्र में से रंग उठाकर उसे वर्तमान रंग बना देता है।</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">View</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">दृश्य को बड़ा करता और खिसकाता है।</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">Copy / Paste</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">चुना हुआ क्षेत्र कॉपी करके कहीं और चिपकाता है।</td></tr><tr><td style="border: 1px solid rgb(226, 226, 226); font-weight: 700; padding: 8px 10px; vertical-align: top; white-space: nowrap;">◁ / ▷</td><td style="border: 1px solid rgb(226, 226, 226); padding: 8px 10px; vertical-align: top;">UNDO / REDO</td></tr></tbody></table><p style="box-sizing: border-box; margin: 8px 0px;">रंग नीचे की पट्टिका से चुनिए। मिटाना हो तो पारदर्शी रंग चुनकर बनाइए।<br />बिंदुओं की संख्या Property के Size से बदली जाती है। आकार 256*256 तक बढ़ाया जा सकता है, पर तब Undo की गिनती घट जाती है और एडिटर भी धीमा हो जाता है। SHOT ऑब्जेक्ट के लिए जितनी छोटी टेक्सचर हो सके उतना अच्छा।<br />संपादन पूरा होने पर ऊपर दाईं ओर के × से बंद कीजिए।<br />रंग पट्टिका को देर तक दबाकर पूरे रंग-संसार में से रंग चुना जा सकता है।</p><p style="box-sizing: border-box; margin: 8px 0px;">PC पर किसी और सॉफ़्टवेयर से कॉपी की गई छवि एडिटर में सीधे चिपकाई जा सकती है। ऐप और डिवाइस के अनुसार फ़ोन पर भी यह संभव हो सकता है।</p></div>
+          </li>
+        </ul>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-warpin" style="background: rgb(122, 133, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-warpout" style="background: rgb(223, 107, 246); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> वार्प
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpin" style="background: rgb(122, 133, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">किसी ऑब्जेक्ट को दूसरी जगह पहुँचाने वाली व्यवस्था का “प्रवेश”। यह उसी ऑब्जेक्ट पर लागू होता है जो इसका चाइल्ड है। इनपुट शून्य से भिन्न होते ही वह चाइल्ड उसी Index वाले WARP OUT की स्थिति और कोण पर पहुँच जाता है। जब तक इनपुट शून्य नहीं है तब तक वह वहीं टिका रहता है, और 0 होते ही मुक्त होकर फिर स्वतंत्र रूप से चलने लगता है। इसकी एकमात्र प्रॉपर्टी Index है। इसे Compo के भीतर नहीं रखा जा सकता।
+                </td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-warpout" style="background: rgb(223, 107, 246); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">WARP OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">वार्प का “निकास”। उसी Index वाले WARP IN से भेजी गई वस्तुएँ इसी स्थिति और कोण पर आ जाती हैं। इसकी एकमात्र प्रॉपर्टी Index है। Layout व्यू में इसे हिलाया और घुमाया जा सकता है (इसका आकार नहीं होता, इसलिए आकार नहीं बदलता)। किसी ऑब्जेक्ट को पैरेंट बनाकर इसे साथ भी चलाया जा सकता है। इसे Compo के भीतर नहीं रखा जा सकता।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-sigin" style="background: rgb(96, 157, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span><span class="swatch nc-sigout" style="background: rgb(255, 131, 131); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span> संकेत
+        </h3>
+        <div class="tblwrap" style="background-color: white; box-sizing: border-box; font-size: 16px; overflow-x: auto;">
+          <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+            <tbody style="box-sizing: border-box;">
+              <tr style="box-sizing: border-box;">
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                </th>
+                <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                </th>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigin" style="background: rgb(96, 157, 255); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">IN
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">1/0
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">नोड का आउटपुट दूर तक पहुँचाने के लिए। IN नोड से जोड़ा गया संकेत उसी सूचकांक वाले हर OUT नोड से निकलता है। एक ही सूचकांक वाले दो IN नोड नहीं बनाए जा सकते। Compo का सूचकांक देने पर यह Compo के भीतर भी पहुँचता है।<br />Compo नोड के लिए देखिए <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo नोड</a>।</td>
+              </tr>
+              <tr style="box-sizing: border-box;">
+                <td class="nc nc-sigout" style="background: rgb(255, 131, 131); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">OUT
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/1
+                </td>
+                <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">दूर से आया मान लेने के लिए। IN नोड में गया मान यहाँ, उसी सूचकांक वाले हर OUT नोड पर निकलता है — एक ही सूचकांक वाले कई OUT नोड बनाए जा सकते हैं। Compo का सूचकांक देने पर यह Compo के भीतर भी पहुँचता है।<br />Compo नोड के लिए देखिए <a href="#compo" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">7. Compo नोड</a>।
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="background-color: white; box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;"><span class="swatch nc-gray" style="background: rgb(107, 114, 128); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; box-sizing: border-box; display: inline-block; height: 14px; margin-left: 8px; vertical-align: middle; width: 14px;"></span>सीन सेटिंग
+        </h3>
+        <div style="font-size: 16px;">
+          <section style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+            <div class="tblwrap" style="box-sizing: border-box; overflow-x: auto;">
+              <table style="border-collapse: collapse; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+                <tbody style="box-sizing: border-box;">
+                  <tr style="box-sizing: border-box;">
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">नोड
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">इन/आउट
+                    </th>
+                    <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">विवरण
+                    </th>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">MEMO
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">स्क्रीन पर लिखी जाने वाली टिप्पणी। Play के समय यह नहीं दिखती।
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">BG
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">Play स्क्रीन की पृष्ठभूमि। हर सीन में एक, हमेशा सबसे पीछे।<br />TEXTURE नोड सौंपने पर वह चित्र टाइल की तरह पूरी पृष्ठभूमि पर बिछ जाता है। TEXTURE न हो तो Color के एक ही रंग से भर दिया जाता है।
+                    </td>
+                  </tr>
+                  <tr style="box-sizing: border-box;">
+                    <td class="nc nc-gray" style="background: rgb(107, 114, 128); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: white; font-weight: 700; padding: 8px 10px; text-align: center; text-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px; vertical-align: top; white-space: nowrap;">SETTING
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">0/0
+                    </td>
+                    <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">पूरे सीन की सेटिंग।<br />फ़ोन की खड़ी-चौड़ी दिशा (ScreenOrient), Play क्षेत्र का आकार (ScreenSize, ScreenLong, ScreenShort), FPS, Dynamics (Gravity, Friction%, Bounce%, Drag%), Play रोकने वाले बटन का रंग (StopBtnCol) और GridSnap बदले जा सकते हैं। हर सीन में केवल एक ही बन सकता है।
+                    <br />सीन में 3D से जुड़े नोड हों तो दृष्टिबिंदु की ऊँचाई और स्क्रीन तक की दूरी तय करने वाली प्रॉपर्टी भी दिखने लगती हैं।</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section id="compo" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">7. Compo नोड
+        </h2>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>यह एक विशेष नोड है जिससे कई नोड को एक ही नोड की तरह बरता जा सकता है।<br /></b></span><b><br /></b>
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="534" data-original-width="1030" height="297" src="https://blogger.googleusercontent.com/img/a/AVvXsEgOWbobD9FtfwhonjBkLvQD6QaQ1874tIBomFGs9HwiVF2w-gfBE-s_FkqNgOEXewzytjsg8KNc8_hClvgXK6aOyJuHRyCz62uTcy4riXeFm87Lq7Dmq6O_kJkANe2IDRd_4yozQxmmHNQYQbJ2Ftm0dpE1Z4snk5OFKX1YUwWeZ2wDgRiseKXIOvS7f6Q=w571-h297" style="max-width: 100%;" width="571" /></a>
+              </div><br />मान लीजिए एक ही तरह का नोड-समूह प्रोग्राम में दस बार आ जाए — तब मन करता है कि उसे एक जगह समेटकर दोबारा इस्तेमाल किया जाए।<br />nodegram में कई नोड को एक Compo नोड में समेटकर उसी Compo की नकल बनाकर काम लिया जा सकता है।<br /><br />एक जैसे दस दुश्मन बनाने हों तो पहले एक का प्रोग्राम बनाइए, उसके नोड एक Compo में समेटिए, Compo की नकल बनाइए और Layout में रख दीजिए।<br /><br />नकल किए गए Compo नोड प्रोग्राम की दृष्टि से एक ही होते हैं, इसलिए एक का प्रोग्राम बदलने पर बाकी भी बदल जाते हैं; पर हर एक के अपने निर्देशांक, चर, आयु आदि Compo के हिसाब से अलग-अलग चलते हैं।<br /><br />
+            </li>
+          </ul>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo नोड बनाने के चरण</b></span><br />
+            </li>
+          </ul>
+          <ol>
+            <li>जिन नोड को एक साथ समेटना है उन्हें चुनिए।<br />कई को एक साथ चुनने के लिए डबल-क्लिक करके खींचिए।<br />डबल-क्लिक की दूसरी क्लिक पर माउस छोड़े बिना खींचकर घेरा बनाइए।<br />फ़ोन पर यह “टप, टप-दबाए रखना, सरकाना” जैसा लगता है।<br />(इस नमूने में बाईं ओर अपना विमान है और घेरा गया क्षेत्र उस एक दुश्मन विमान का प्रोग्राम है जो पास आता है।)<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="432" data-original-width="1419" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEgRT07KzOFvmvfaOdbgP1GvWgzQyamTym66XLhL_ruZfSMfFaH3f0CDp-yEj3XONIrvAB-FHCKsWFro8B6mdRTgnA1Pt85GxIpOjb33pzfHM41M7U4rtB4bz4GacrPzFspGVXh7IOYqBdSX2nu5srzmIOhTjW059ekkCjCtKkJGw-7IVqg8lTm0KRA1Mcw=w640-h194" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>कई नोड चुने होने पर उनमें से किसी एक को देर तक दबाइए, मेन्यू आ जाएगा। “MAKE COMPO” चुनने पर पूछा जाएगा कि Compo बनाना है या नहीं — “Yes” दबाइए।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="440" data-original-width="1347" height="210" src="https://blogger.googleusercontent.com/img/a/AVvXsEi_Y-C9hb1lwIQSMtBc_iVMcwDClPexo-jc3U-es7jMt8mYIW_UGOhJmn4I_GgWac9lugZUfF_eWtV_-PcTYYUCXrx2FROR1mkLKPjQO3AmIigYV2TzZoi4vL8mJDuouwl36rUXVYctYG2jCIW9bxy-1sRcSxbUNDcSTZT8qoHtdCCGZQyKbdQSVjtfVzY=w640-h210" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="147" data-original-width="402" height="117" src="https://blogger.googleusercontent.com/img/a/AVvXsEjfNlXk8_MFi22DeYqkx2BUjUzTpW--hlD0prX4qWjCTR_CQ6Dm9jDxlb8nxqZALvxLlv5EGMESkCiLmW-oU1mAecWSLrnbbu9T-yCvVqfkdhOlr06ZYxpAjavZIdxmhMvsXjabmsoaESHyqkLx2fOS5TJYNqlmi_b-Gix9WO66O-dVewePyKvZahsPfd8" style="max-width: 100%;" width="320" /></a><br /><br />
+              </div>
+            </li>
+            <li>कई नोड मिलकर “C1” नाम का एक Compo नोड बन गए।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="307" data-original-width="1026" height="192" src="https://blogger.googleusercontent.com/img/a/AVvXsEjF1D1_hN00jByh76RUQ8y-gnobCdfIi_45kgt6j9xMwCMAtph8sTyt79k3HCvLB3fS2R_h23tZE326K_CJY9KcaRMA5Ern6jxmXpkVvmsr2-DxeeN6TIttpgYMiLHEYAJDfn6o0o3jaq2WITDccKpl93M_ciL84ClXzoDFn_UGYHjuTTrfDTrK-K9xibw=w640-h192" style="max-width: 100%;" width="640" /></a>
+              </div><br />
+            </li>
+            <li>C1 नोड को देर तक दबाने (या डबल-क्लिक करने) पर Compo के भीतर का NodeEditor खुल जाता है।<br />Compo से जुड़े हुए तार अब “C1  1”, “C1  2” नाम के OUT नोड बन गए हैं।<br /><br />दाईं ओर “MENU” दबाइए, बाईं पंक्ति में अब Compo से जुड़ी कमांड दिखेंगी।<br />“Duplicate” दबाने पर इस Compo नोड की नकल बन जाती है।<br />नीचे दाईं ओर “PARENT” दबाने पर यह NodeEditor छोड़कर ऊपर वाले NodeEditor पर लौट आते हैं।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="963" height="254" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHI2eWYapFJEn9sMNB-cnu_7tnrOg3_x0HJnP7Lb0q8oEbJ-f25EOgYP3FNc8OGherS1odXZ0FSIGFHR-fwhKbTY9zhEabo5MIxh8ZMHXP3Xs1ytRR_xE5mnXzR7Jfu87b9SiUSgbe4asY5Qpt6f2APRZpf19LBygKLpdf4f3gfg5nWM2M5xQSiw_EpnU=w640-h254" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>ऊपर वाले NodeEditor में देखा जा सकता है कि अब कई Compo नोड बन चुके हैं।<br />“C1 (2)” को भी वही इनपुट देना है, इसलिए उसके इनपुट-आउटपुट भी जोड़ दीजिए।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="304" data-original-width="957" height="204" src="https://blogger.googleusercontent.com/img/a/AVvXsEiCx1MzY27uHwOOP14vU14WIIvVeXCnAB578tA2pMCkHvtsK_dLuiBgT0Qvaj_daPVtFaTtuKXhJnGt9iv8evRMv2-cj1ArGBMh4vBFf2eidSdOcs4d--PDN9Mf-bef-alT1wZt4n2s7Ga7aEqYtIwVvKmvnGcPP5wV1J1vem-jrqUegt8reQt2eBVdd1I=w640-h204" style="max-width: 100%;" width="640" /></a><br /><br />
+              </div>
+            </li>
+            <li>“LAYOUT” दबाकर हर Compo की जगह ठीक कीजिए।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="429" data-original-width="918" height="188" src="https://blogger.googleusercontent.com/img/a/AVvXsEj_DQJJ7XPPCrnTgrY2QbctuvTho4akVvxqBNNoQR_JHXJitZnNascqtD3qqmVuT3bXKdRze47GRTEUbpTvGStpLszLPaxghzsSFXxdJ3Xs8OjJJG3HWVQ0wZdYmplVSNJfpZKX3ECMjMllprlsklrj70KldresBoiplxevzYpcpnJxAnDfaozzfidvLug=w400-h188" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>Play बटन “▶” दबाइए — कई दुश्मन विमान दिखेंगे और हर एक अपनी तरह चलता मिलेगा।<br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="453" data-original-width="907" height="200" src="https://blogger.googleusercontent.com/img/a/AVvXsEiIpmlFa0-CIMVlrDySsufxMBb4_hx59qsXZ5KvHl8xMfu7ogwcGsULIGuX2SuK3gQUWBkBpbT-9AkZqL-lnWJeTmi7s0oJm4TpCA3WqOKklZULHvLBUI2iKXBiA8Ta5CLjqj2DSjsEW8MZS9CEAdVL1Uz5WxrK00brvg6ngwIPWozbnJZ7wrqP7Iy0iiU=w400-h200" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+            <li>बहुत सारी नकलें बनानी हों तो Compo नोड एक साथ चुनकर, किसी एक को देर तक दबाकर “Duplicate” कीजिए।<br />और यदि सभी Compo नोड को एक ही मान देना हो तो IN नोड और OUT नोड बड़े काम आते हैं।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="352" data-original-width="1164" height="194" src="https://blogger.googleusercontent.com/img/a/AVvXsEj76Ff597j6sOcKWEPEmqgE6alMlBmmHlZZc1lEaZ09vmwgcFl1MV8t1mpletcBQj7tp_XoX7Rkoa_M8h8TLTswVEKpoF70ZnaSeDBNu9uBxlWv-8AerN4P_AftixHoozDLRTYSl-F5Ge6ffR7p5CTN8oZhjFSZOQBB2NeSKeggB7YXpmgeBIeHDTECYvQ=w640-h194" style="max-width: 100%;" width="640" /></a>
+              </div>
+            </li>
+          </ol>
+          <ol><br />
+          </ol>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>Compo नोड और इंस्टेंस<br /></b></span><br />जब दो Compo नोड की सामग्री एक ही हो और एक को बदलने पर दूसरा भी बदल जाए, तब कहते हैं कि “दोनों नोड इंस्टेंस के संबंध में हैं”; नकल बनाकर बनाने को “Compo नोड का इंस्टेंस बनाना” कहते हैं।<br />एक ही Compo संख्या वाले नोड इंस्टेंस के संबंध में होते हैं और एक ही प्रोग्राम साझा करते हैं।<br />(वैसे, इंस्टेंस का संबंध तोड़ने को Unique कहते हैं; यह Compo के फ़्लिक मेन्यू में है। <a href="#compo-unique" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">आगे देखिए</a>)<br /><br />C के बाद की संख्या एक ही हो तो वे इंस्टेंस के संबंध वाले एक ही Compo हैं।<br />“C1 (1)” और “C1 (2)” इंस्टेंस के संबंध में हैं।<br />“C1 (1)” और “C2 (1)” अलग-अलग Compo हैं, इनमें इंस्टेंस का संबंध नहीं है।<br />( ) के भीतर की संख्या एक ही Compo की प्रतियों को पहचानने के लिए है।<br /><br />Compo आपस में इंस्टेंस के संबंध में हों तब भी Play के समय हर Compo के पैरामीटर अलग-अलग चलते हैं।<br />कैरेक्टर का बनना-मिटना, निर्देशांक, तथा नोड के भीतर के count, var, array आदि सबके अपने-अपने मान होते हैं।<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>Compo नोड के भीतर का MENU<br /></b></span><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="366" data-original-width="458" height="256" src="https://blogger.googleusercontent.com/img/a/AVvXsEjvuw21fu1z8rm9eYRAVF-mLU_Rdps550CLU5snqpZZkrb0Pag2EGCDcpd2iAF8ghjTyGYzd_yvxFNqX8BbzZMicS-ptjP4c0Cg7gn9w89nl_TDgfzk-M4f0wzZPhuFX931R8C-L_60BVgUHCOykphLHPXjmRceWGk7_0C9UF2ksL8XI_ZW5Mp526Oh4Fo=w320-h256" style="max-width: 100%;" width="320" /></a>
+                </div><br /><b>Duplicate, Delete</b>：Compo नोड की नकल और उसका मिटाना।<br /><b><br /><span id="compo-unique">Unique</span></b>：Compo नोड का इंस्टेंस संबंध तोड़ने वाला विकल्प। किसी Compo की सामग्री लेकर दूसरा दुश्मन बनाना हो तब काम आता है। Compo संख्या बदलकर दूसरी हो जाती है।<br /><b><br />Expand</b>：जिस Compo पर काम चल रहा है उसके भीतर के नोड मुख्य NodeEditor में लौटा देता है और वह Compo मिट जाता है। यह Make Compo का उलटा है। जो Compo इसके इंस्टेंस हैं वे साथ में Expand नहीं होते।<br /><br />
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><span style="box-sizing: border-box;"><b>Compo नोड तथा IN, OUT नोड<br /></b></span><br />Compo नोड में केवल दो इनपुट और दो आउटपुट सिरे होते हैं, पर IN नोड और OUT नोड से इनपुट बढ़ाए जा सकते हैं।<br />IN, OUT नोड की प्रॉपर्टी में Compo संख्या दी जा सकती है, इसलिए किसी एक विशेष Compo को मान भेजा जा सकता है।<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="377" data-original-width="1608" height="150" src="https://blogger.googleusercontent.com/img/a/AVvXsEjtqLcCqsHDHzul537nsPEuhPFxR-hmVykshVczll6WnmZxEp_gSa04obqFb00NzXsnQqBOnpZM6bWvEaKq373SQrhliu_mFBpTrEHl7iW8IJ-q9kYd9bfPC_SFbsI2vKKMXgEZlEUPG2_9b6BgQoVbGmn5mFZChbmz3i_yu3FNKmgN_atv9CHJ_gxJz1s=w640-h150" style="max-width: 100%;" width="640" /></a>
+                </div><br />Compo के भीतर बिना Compo संख्या वाला IN नोड काम में लिया जा सकता है।<br />Compo के भीतर बिना Compo संख्या वाला OUT नोड काम में नहीं लिया जा सकता (क्योंकि एक जैसे OUT नोड कई नहीं बन सकते)।<br /><br />ध्यान रहे: Compo संख्या वाले IN, OUT नोड बिलकुल एक जैसे हों तब भी Compo के भीतर हैं या बाहर, इससे उनका अर्थ पूरी तरह बदल जाता है।<br />ऊपर के चित्र में “IN नोड (नीला): C1 सूचकांक 2” Compo के भीतर भी है और बाहर भी, पर दोनों का अर्थ अलग है। भीतर वाला Compo के आउटपुट 2 से जुड़ता है, जबकि बाहर वाला Compo के इनपुट 2 से जुड़कर भीतर के “OUT नोड: C1 सूचकांक 2” तक मान पहुँचाता है।<br /><br />
+              </li>
+              <li><span style="box-sizing: border-box;"><b>Compo का Enable इनपुट और Enable आउटपुट<br /></b></span><b><br /></b>Compo नोड को कैरेक्टर की तरह इस्तेमाल करते समय उसके आने और मिटने को Enable इनपुट-आउटपुट से नियंत्रित किया जा सकता है।<br /><br />Enable आउटपुट कैरेक्टर के रहते 1 देता है और नष्ट होने पर 0।<br /><br />Enable इनपुट 0 से 1 (शून्य से भिन्न) होते ही Compo के भीतर का प्रोग्राम चालू हो जाता है और कैरेक्टर सक्रिय हो जाता है। कैरेक्टर को बनाए रखने के लिए शून्य से भिन्न मान लगातार देना पड़ता है। इनपुट 0 हो जाए या कैरेक्टर नष्ट हो जाए तो वह मिट जाता है।<br />Enable इनपुट पर कुछ न जुड़ा हो तो मानो 1 लगातार दिया जा रहा हो।<br /><br />मिट चुका कैरेक्टर भी इनपुट को 0 से बदलकर कुछ और करते ही आरंभिक स्थिति से फिर शुरू हो जाता है।<br />नीचे वह प्रोग्राम है जिसमें कैरेक्टर टूटने के 3 सेकंड बाद पहली जगह पर फिर से बन जाता है।<br /><br />
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="219" data-original-width="1131" height="124" src="https://blogger.googleusercontent.com/img/a/AVvXsEi-ljiYB82Pdu7PzvUqlHTS_MM7SwaE44WaMkZnn9yxBR4e0h7QirlUF5Tu3p2D5ZF9gBeA8tDWdTSTz5CFjOKtX6ibW4mMT7zKbcwbCs8Af9fws9JjSg_FWzbBjzsEvWziXcft4UF6T4UAnySCpS1cnRqGqmMFsFD16cTbDI_4VXrstpBnjT1zm1jCmOM=w640-h124" style="max-width: 100%;" width="640" /></a>
+                </div><br />
+              </li>
+            </ul>
+          </div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo नोड के भीतर पैरेंट एक ही<br /></b></span><b><br /></b>Compo के भीतर ऑब्जेक्ट के पैरेंट-चाइल्ड संबंध में एक से अधिक पैरेंट ऑब्जेक्ट नोड नहीं होने चाहिए। एक ही Compo नोड में दो कैरेक्टर बनाने की स्थिति अभी सोची नहीं गई है।<br />दो पैरेंट हों तब भी यदि उन दोनों का कोई साझा पैरेंट तय हो तो कोई दिक्कत नहीं।<br />एक भी ऑब्जेक्ट नोड न हो (कोई पैरेंट न हो) — यह स्थिति भी ठीक है।<br /><br />
+              <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="488" data-original-width="1203" height="163" src="https://blogger.googleusercontent.com/img/a/AVvXsEgtpK3UYHDKoztSwNUzSO_P7V8nNuTs5ZBs_-MbjIIgyiIMjyDJAp0Q1f_c13Juj1mfIePGEqEEGUf4f4INNx7uA1UrhwfklcSZZjElVPqULZKbWK38oLSACbkBsTV4S5xbPmY3mUbs-1afRFWm6HourS78iVCy49WS3K7_vdJsmYzX9KA5O0xqioE55Yg=w400-h163" style="max-width: 100%;" width="400" /></a>
+              </div><br />
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><span style="box-sizing: border-box;"><b>Compo के भीतर न बन सकने वाले नोड<br /></b></span><br />BG, Setting, Stick, Button, Screen, OnBreak — ये Compo के भीतर नहीं बनाए जा सकते।<br /><br /></li></ul></div></section>
+      <section id="share" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">8. अपना प्रोग्राम दूसरों को खिलाना
+        </h2>
+        <div style="box-sizing: border-box; margin: 22px 0px 8px;"><span style="background-color: white;"><span style="font-size: small;">बस URL बता देने भर से अपनी बनाई रचना दूसरों को खिलाई जा सकती है।<br /></span></span><span style="background-color: white;">URL खोलते ही Play स्क्रीन से शुरुआत होती है, इसलिए खेलने वाले को nodegram की जानकारी होना ज़रूरी नहीं।</span>
+        </div>
+        <section id="save" style="background-color: white; box-sizing: border-box; margin: 28px 0px; scroll-margin-top: 12px;">
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span>
+          </p>
+          <p style="box-sizing: border-box; margin: 8px 0px;"><span style='background-color: initial; font-family: "SF Mono", Consolas, Menlo, monospace;'><span style="font-size: 0.9em;"> के बाद रचना जहाँ रखी है वह जगह (URL) जोड़ देना भर है।</span></span>
+          </p>
+          <pre style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(245, 246, 247); border-radius: 8px; border: 1px solid rgb(226, 226, 226); box-sizing: border-box; overflow: auto; padding: 12px 14px;"><code style='background: none; border-color: currentcolor; border-image: none; border-radius: 5px; border-style: none; border-width: medium; box-sizing: border-box; font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 0.9em; padding: 0px;'>उदाहरण)<br />https://daisuqe.github.io/nodegram/?url=https://example.com/mygame.json</code>
+          </pre>
+          <p class="small" style="box-sizing: border-box; margin: 12px 0px 8px;"><br />URL का नमूना (शूटिंग गेम):
+          </p>
+          <div><a class="btn play" href="https://daisuqe.github.io/nodegram/?url=https://www.dropbox.com/scl/fi/cikjbcn27ka3j8dig37r4/shoot_test1.json?rlkey=6xp5eq89wcaujtaqi3tgpe3k8&amp;st=7wfnoxc4&amp;dl=0" rel="noopener" style="background: none 0% 0% / auto repeat scroll padding-box border-box rgb(47, 125, 79); border-radius: 8px; border: 1px solid transparent; box-sizing: border-box; color: white; display: inline; font-size: 14px; font-weight: 600; padding: 8px 14px; text-decoration: none;" target="_blank">▶ ब्राउज़र में खोलें</a><br /><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;"><br />
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="540" data-original-width="1249" height="277" src="https://blogger.googleusercontent.com/img/a/AVvXsEiNrBJrxCmHxBIukRllbWwanHix4VdvXgDy2x7jYtddvt3nzUp17GGEKZC45QWJuPXy5QsFH8ljrlDENom_jSVlSJF3o6a3CgI1dN1pRudtPkTf7cDvfizmpXn0Xepbg8Rk7JCQpei9eHLELagZlMKhMGfjl5UsvkvWGlVYz8lGc_dxyg-CPSbFvR_u4P4=w640-h277" style="max-width: 100%;" width="640" /></a>
+            </div><br />क्रम:<br />1. MENU&gt;SAVE&gt;EXPORT से गेम को .json रूप में PC या फ़ोन में सहेजिए।<br />2. </span>सहेजी गई .json फ़ाइल को <a href="https://www.dropbox.com/" target="_blank">Dropbox</a> जैसी इंटरनेट फ़ाइल सेवा पर अपलोड कीजिए और उस सेवा में “लिंक कॉपी करें” जैसी सुविधा से उसका URL ले लीजिए।<br />3. <span style='font-family: "SF Mono", Consolas, Menlo, monospace;'>https://daisuqe.github.io/nodegram/?url=</span><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'> के बाद रचना की जगह (URL) जोड़कर बनी हुई पंक्ति को अपने ब्राउज़र में खोलिए।</span>
+          </div><span style='font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 14.4px;'><br /></span>
+          <p style="box-sizing: border-box; margin: 8px 0px;">फ़ाइल अपलोड करने के लिए <a href="https://www.dropbox.com/home" target="_blank">Dropbox</a> या <a href="https://github.co.jp/" target="_blank">GitHub</a> के raw URL और GitHub Pages मुफ़्त तथा सुरक्षित रूप से काम में लिए जा सकते हैं। Dropbox से तो फ़ोन से अपलोड करना भी आसान है।<br />Google Drive को इस अतिरिक्त URL के रूप में काम में नहीं लिया जा सकता, क्योंकि ब्राउज़र की पाबंदी के कारण ऐप उसकी फ़ाइल सीधे नहीं पढ़ पाता (CORS पाबंदी)।<br /><br />
+          </p>
+        </section>
+      </section>
+      <section id="spec" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 16px; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">9. विनिर्देश</h2>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-1. केवल 2D
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">nodegram केवल 2D के लिए है। निर्देशांक दो अक्षों में हैं: X (दाईं ओर ＋) और Y (ऊपर की ओर ＋)। Setting नोड में Dynamics चालू करने पर कैरेक्टर स्क्रीन के नीचे की ओर गिरते हैं।<br />ऊपर से दिखने वाला खेल बनाते समय SETTING नोड में Dynamics बंद कर दीजिए, या पूरे खेल का गुरुत्व 0 कर दीजिए।
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-2. FPS
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">लक्ष्य फ़्रेम दर के लिए SETTING नोड में <b style="box-sizing: border-box;">60</b> या <b style="box-sizing: border-box;">30</b> चुना जाता है (डिफ़ॉल्ट 60)। नोड की गणना और भौतिकी, दोनों इसी FPS के हिसाब से चलती हैं। काम भारी हो जाए तो Play धीमा पड़ता है और फ़्रेम दर तय मान से नीचे चली जाती है।
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-3. Dynamics (भौतिक व्यवहार)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">Rect, Circle, Character, Shot जैसी वस्तुओं पर भौतिक मोड (Dynamics) तय किया जा सकता है। व्यवहार Unity के Rigidbody2D जैसा ही है।
+        </p>
+        <table style="border-collapse: collapse; color: #282828; font-size: 14px; margin: 14px 0px; max-width: 100%; width: 704px;">
+          <tbody style="box-sizing: border-box;">
+            <tr style="box-sizing: border-box;">
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">मोड
+              </th>
+              <th style="background: rgb(242, 243, 244); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; color: #161616; padding: 8px 10px; text-align: left; vertical-align: top;">व्यवहार
+              </th>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Off</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">भौतिकी नहीं। नोड इनपुट (X,Y) से निर्देशांक सीधे बदल जाते हैं।
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Static</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">न हिलने वाली दीवार या फ़र्श। गुरुत्व या टक्कर से नहीं हिलती।
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Dynamic</b>
+              </td>
+              <td style="background: rgb(250, 250, 250); border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">गुरुत्व और टक्कर से भौतिक रूप से चलती है। नोड के X/Y इनपुट “बल” की तरह लगते हैं।
+              </td>
+            </tr>
+            <tr style="box-sizing: border-box;">
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;"><b style="box-sizing: border-box;">Kinematic</b>
+              </td>
+              <td style="border: 1px solid rgb(226, 226, 226); box-sizing: border-box; padding: 8px 10px; vertical-align: top;">गुरुत्व और टक्कर से नहीं हिलती, पर नोड इनपुट से हिलाई जा सकती है, और दूसरी Dynamic वस्तुओं से टकराकर उन्हें धकेल भी सकती है।
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small" style="box-sizing: border-box; color: #666666; font-size: 13px; margin: 8px 0px;">घनत्व तय करने की सुविधा नहीं है; मोटे तौर पर सब कुछ साधारण लकड़ी जैसा माना गया है।
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-4. SortingLayer (दिखने का क्रम)
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">हर ऑब्जेक्ट का <b style="box-sizing: border-box;">SortingLayer</b> (0〜100, डिफ़ॉल्ट 50) Play स्क्रीन पर ऊपर-नीचे का क्रम तय करता है। <strong style="box-sizing: border-box;">संख्या जितनी बड़ी उतना आगे (ऊपर)</strong> बनता है। BG (पृष्ठभूमि) हमेशा सबसे पीछे रहती है।<br />समान मान वाले जिस क्रम में जोड़े गए, उसी क्रम में दिखते हैं।<br /><span style="background-color: #eef5fb;"><br /></span>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-5. निर्देशांक
+        </h3>
+        <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">निर्देशांक X (दाईं ओर ＋) और Y (ऊपर ＋) हैं। Layout का केंद्र मूल बिंदु (0,0) है।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">कोण डिग्री में हैं और <b style="box-sizing: border-box;">वामावर्त दिशा ＋ है</b>। 0°＝दाएँ (X＋), 90°＝ऊपर (Y＋), 180°＝बाएँ (X−), 270°＝नीचे (Y−)। ANGLE POS / POS ANGLE / GetRot / ROTATE / ऑब्जेक्ट की Angle प्रॉपर्टी — सब इसी दिशा के अनुसार हैं।
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;">ऑब्जेक्ट की Property में Coord प्रॉपर्टी से नोड इनपुट के X/Y का अर्थ बदल जाता है।
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">WORLD</b>：इनपुट मान निरपेक्ष निर्देशांक की तरह लगता है (पैरेंट हो तो उसके सापेक्ष)।
+              </li>
+              <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">LOCAL</b>：इनपुट मान आरंभिक जगह से अंतर की तरह लगता है। पैरेंट तय हो तो पैरेंट से अंतर भी इसमें शामिल रहता है (Parent निर्देशांक)।
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul style="box-sizing: border-box; color: #282828; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;">3D ऑब्जेक्ट के निर्देशांक के लिए देखिए <a href="#spec-3d" style="box-sizing: border-box; color: #1466b8; text-decoration: none;">9-11. 3D ऑब्जेक्ट</a>।
+          </li>
+        </ul>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-6. रिज़ॉल्यूशन
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">Play के समय दिखने वाला क्षेत्र Layout के धूसर आयत जितना होता है।<br />स्क्रीन की दिशा (चौड़ी=Horizontal／खड़ी=Vertical) SETTING नोड में बदली जाती है (Setting मेन्यू में नहीं) और असली स्क्रीन के आकार के अनुसार फ़िट होकर दिखती है।<br />स्थिर रिज़ॉल्यूशन चाहिए तो Setting नोड के ScreenSize से कीजिए।<br /><br />
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">
+        </p>
+        <div class="separator" style="clear: both; text-align: center;">
+          <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="382" data-original-width="701" height="217" src="https://blogger.googleusercontent.com/img/a/AVvXsEhamlVVdd2jWurMeUE3WtJQyz00_tHcNuDz1Vzgs4hfzuTAmlI_SZ6VR1j46Wn-0oa0RI7mxqYQPXGxxVVP3KXkT-6mSU0HXRxYAnanUqWYxiRSulDdoHmwn9soFxhz9wR5FoU27ctQWwSfhdWWtyVIUGhYxtG7s-GCJh6r8hoHL4pQd9So_LjPx6dlffo=w400-h217" style="max-width: 100%;" width="400" /></a>
+          </div>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-7. Tag
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">Tag एक समूह है।<br />जैसे सभी छोटे दुश्मनों पर “Enemy_tiny” Tag लगा दीजिए, या टूटने वाली और न टूटने वाली पृष्ठभूमि के लिए “bg_destroyed” और “bg” जैसे Tag रखिए।<br />Shot, OnBreak, Rect, Circle, Character जैसे नोड Tag का उपयोग करते हैं।</p><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br /></p><h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-8. नोड का संचालन</h3><div style="text-align: start;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="346" data-original-width="517" height="243" src="https://blogger.googleusercontent.com/img/a/AVvXsEgHPlsJ0uYDcYLnAsJs3Vqvpe3zuCvYes6eqPETMqO4EFJeNPYds2cID0kJhLSF9spE28zUAvUETx2RPb-HgrzHH2CIiJM8_ss1Q_49X3RMF8WLSh9MYUFWLLiVMeVR3fcjsK_1jKsLwXjKXDP0GkRNgALHbjCMUiFfGi879BS8Ml_H9rhaFoEiUrcaT5w=w363-h243" style="max-width: 100%;" width="363" /></a></div><div class="separator" style="clear: both; text-align: center;"><br /></div></div><ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px; text-align: start;"><li style="box-sizing: border-box; margin: 4px 0px;">एक नोड के इनपुट पर कई तार जोड़े जा सकते हैं। कई इनपुट होने पर उनका योग नोड को मिलता है। चित्र में सबसे ऊपर वाले सिरे पर 10+20→30 जाता है।<br /><br /></li><li style="box-sizing: border-box; margin: 4px 0px;">नोड के बीच का पैरेंट-चाइल्ड जोड़ (ऊपर के सिरे से नीचे के सिरे तक) ऑब्जेक्ट के हिलने (Transform) के अलावा “संबंध” बताने के लिए भी काम आता है।<br />जैसे Texture नोड और ऑब्जेक्ट नोड, OnBreak नोड और जिस ऑब्जेक्ट पर नज़र है वह, तथा Array नोड और Line नोड।<br />सामान्यतः एक पैरेंट के कई चाइल्ड हो सकते हैं, पर एक चाइल्ड के कई पैरेंट नहीं हो सकते।<br />Texture नोड, OnBreak नोड और Array नोड इसका अपवाद हैं: इनके कई पैरेंट (कई जगह) हो सकते हैं।</li></ul><p style="box-sizing: border-box; margin: 8px 0px; text-align: left;"><br />
+          </p>
+          <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px; text-align: left;">9-9. एक फ़्रेम के भीतर की प्रक्रिया
+          </h3>
+          <p style="box-sizing: border-box; margin: 8px 0px; text-align: left;">सभी नोड एक साथ संसाधित होते हैं।<br />कौन-सा नोड पहले बनाया गया, इससे परिणाम नहीं बदलता।<br /><br />ऑब्जेक्ट नोड आदि एक फ़्रेम में एक बार संसाधित होते हैं।<br />Counter, Var, Trigger, Random, Array जैसे “मान याद रखने वाले नोड” भी एक फ़्रेम में एक ही बार अद्यतन होते हैं।<br />＋ या × जैसे गणना नोड मान याद नहीं रखते, इसलिए जब ज़रूरत पड़े तभी गणना होती है।<br />फिर भी, गणना नोड का चक्र बन जाए तो एक नोड एक फ़्रेम में एक ही बार संसाधित होता है।<br /><br />
+          </p>
+        </div>
+        <p>
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;">9-10. UNDO / REDO
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;">MENU के <b>UNDO</b> / <b>REDO</b> से नोड बनाना, मिटाना, हिलाना, जोड़ना, प्रॉपर्टी बदलना आदि रद्द या दोबारा किया जा सकता है। <b>50 कदम पीछे तक</b> लौटा जा सकता है।
+        </p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">TEXTURE / LINE / SEQUENCER — हर एडिटर का अपना अलग UNDO इतिहास होता है। एडिटर के भीतर के ◁ / ▷ बटनों से काम कीजिए। LINE Editor और SEQUENCER भी 50 कदम पीछे जाते हैं; TEXTURE में यह संख्या आकार के अनुसार बदलती है।</p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">ध्यान रहे, Play चलाना रद्द नहीं किया जा सकता, और न ही सहेजना या पढ़ना।
+        </p>
+        <h3 style="box-sizing: border-box; color: #161616; font-size: 18px; margin: 22px 0px 8px;" id="spec-3d">9-11. 3D ऑब्जेक्ट
+        </h3>
+        <p style="box-sizing: border-box; margin: 8px 0px;"></p><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="215" data-original-width="526" height="202" src="https://blogger.googleusercontent.com/img/a/AVvXsEi5A3aKrDvmSmqxDhJBJd6jnjPoLJlpgv2dz5lbNg6SvIjgCQ3foi-SV8Knpem0uAu-8ukMNHCgPTwvTlNvPjFFsWidgBpbCkQYgG7Zfuy9q75R4nb9_mG1HCL7pGAiNAMf38Lk5plwrlXBdOSSMLbDPu7OM7bN6DK-ixdbFRIMy7ExShwbZ-uVJrhKNx0=w492-h202" width="492" /></a></div><br />nodegram में 3D ऑब्जेक्ट दिखाने के लिए <b>Polygon</b> और <b>ARRAY + LINE (3D प्रदर्शन के लिए)</b> — ये दो तरीके हैं। दोनों केवल .obj फ़ाइल IMPORT करने पर ही बनते हैं (CREATE NEW NODE से नहीं बनाए जा सकते)।<p></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">फिर भी nodegram स्वयं तो <b>2D मंच</b> ही है। 3D ऑब्जेक्ट बस इतना है कि उसकी दिखावट को 2D सामग्री की तरह काम में लिया जा सके, और बाकी 2D वस्तुओं की तरह इसका क्रम भी <b>Sorting Layer</b> की सेटिंग से तय होता है। एक ही Sorting Layer वाले कई Polygon नोड मिलकर एक ही 3D दृश्य की तरह संसाधित होते हैं, इसलिए गहराई का आगे-पीछे भी ठीक-ठीक बनता है।
+        <br /><br />3D ऑब्जेक्ट में Z निर्देशांक होता है। स्क्रीन की जगह z=0 है, भीतर की ओर +z और दृष्टि की ओर -z। दृष्टिबिंदु से स्क्रीन तक की दूरी और दृष्टिबिंदु की ऊँचाई setting नोड में बदली जा सकती है।<br />2D ऑब्जेक्ट के साथ पैरेंट-चाइल्ड संबंध भी बनाया जा सकता है, पर तब z=0 पर काम करना ठीक रहता है।<br /><br /></p>
+        <p style="box-sizing: border-box; margin: 8px 0px;">LINE (3D प्रदर्शन) की तरह बनाने के लिए LINE नोड के चाइल्ड बने ARRAY के मान <b>x,y,z की तिकड़ियों की एक लड़ी</b> के रूप में रखिए। (9999,9999,9999) का विभाजक आने तक का हिस्सा एक लगातार रेखा बनता है और उसके बाद वाला नई रेखा माना जाता है (रूप: x,y,z, x,y,z, ,,, 9999,9999,9999, x,y,z, ,,,, 9999,9999,9999)। ARRAY के पैरेंट के रूप में कई LINE भी तय किए जा सकते हैं।</p>
+      </section>
+      <section id="notes" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">10. ध्यान देने योग्य बातें
+        </h2>
+        <ul style="box-sizing: border-box; font-size: 16px; margin: 8px 0px; padding-left: 22px;">
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">फ़ोन पर उपयोग करते समय<span style="font-weight: 400;">：<br />nodegram का शॉर्टकट होम स्क्रीन पर जोड़ लेने से इसे ऐप की तरह बरता जा सकता है। पर ऐप की ही तरह, उसे हटाने (होम स्क्रीन का शॉर्टकट मिटाने) पर सहेजा हुआ डेटा मिट जाने की पूरी संभावना रहती है। पूरे हो चुके प्रोग्राम Export से बाहरी फ़ाइल के रूप में सुरक्षित रखिए।<br /><br />कुछ फ़ोन ब्राउज़रों में प्रदर्शन या स्पर्श की जगह खिसक सकती है।</span><br /><span style="font-weight: 400;">ऐसे में </span><span style="font-weight: 400;">nodegram बंद कीजिए, टास्क हटाइए (ऐप मिटाना नहीं), फ़ोन को अच्छी तरह चौड़ी दिशा में पकड़कर फिर से चालू कीजिए — ठीक हो जाएगा।<br /><br /></span></b>
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">स्वतः सहेजना:</b><br />save स्क्रीन में “auto save” चालू हो तो हर 1 मिनट में पिछली फ़ाइल पर ही लिख दिया जाता है। अलग नाम से रखना हो तो Save से नया नाम दीजिए।<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">अधिकार:</b> <br />nodegram से बनाई रचना पर सारे अधिकार बनाने वाले के हैं। हम उसे मनमाने ढंग से इस्तेमाल नहीं करेंगे और न ही उस पर अधिकार जताएँगे।<br />nodegram की कोड और उसके विनिर्देश पर अधिकार मेरा (harada) है। nodegram की कोड बिना अनुमति दोबारा वितरित न कीजिए।<br /><br />
+          </li>
+          <li style="box-sizing: border-box; margin: 4px 0px;"><b style="box-sizing: border-box;">कॉपीराइट और विवाद:</b> <br />कॉपीराइट वाली सामग्री बिना सोचे-समझे इस्तेमाल न कीजिए।<br />साथ ही, nodegram के उपयोग से हुई किसी समस्या की ज़िम्मेदारी हमारी नहीं होगी (हम जान-बूझकर ऐसी कोड नहीं डालते जिससे समस्या हो)।
+          </li>
+        </ul>
+      </section>
+      <section id="contact" style='box-sizing: border-box; color: #282828; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: medium; margin: 28px 0px; scroll-margin-top: 12px;'>
+        <h2 class="sec" style="border-left: 4px solid rgb(47, 125, 79); box-sizing: border-box; color: #161616; font-size: 21px; margin: 0px 0px 12px; padding-left: 10px;">11. संपर्क
+        </h2>
+            <ul style="box-sizing: border-box; margin: 8px 0px; padding-left: 22px;">
+              <li style="box-sizing: border-box; margin: 4px 0px;"><span style="box-sizing: border-box;"><span face='-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif' style="font-size: 16px;">बग की सूचना या कोई और बात हो तो X पर संपर्क कीजिए</span><br /><span face="-apple-system, BlinkMacSystemFont, Segoe UI, Hiragino Sans, Noto Sans JP, Meiryo, sans-serif"><b><a href="https://x.com/daiii">https://x.com/daiii</a></b></span><br /></span>
+              </li>
+        </ul>
+      </section></main>
+      <footer style='box-sizing: border-box; color: #666666; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif; font-size: 13px; padding: 16px 20px 24px;'>
+        <div class="wrap" style="box-sizing: border-box; margin: 0px auto; max-width: 736px; padding: 24px 16px 0px;">nodegram users guide
+        </div>
+      </footer>
+    </div>
+  </div>
+</header>
+</body>
+</html>
