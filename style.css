@@ -1,0 +1,174 @@
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { width:100%; height:100%; overflow:hidden; background:#12141a;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+    user-select:none; -webkit-user-select:none; touch-action:none; -webkit-touch-callout:none; }
+  #app { position:fixed; inset:0; }
+  /* touch-callout等はAndroidの長押し（テキスト選択/コンテキストメニュー＝バイブが鳴る挙動）を抑止するため */
+  #cv { position:absolute; inset:0; display:block;
+    -webkit-touch-callout:none; -webkit-user-select:none; user-select:none; touch-action:none; }
+
+  /* 右上コントローラ（▶ / MENU） */
+  @keyframes texFlashYellow {
+    0% { background-color: #ffcc00; box-shadow: 0 0 20px #ffcc00; transform: scale(1.1); color: #000; }
+    100% { background-color: #1FACB6; box-shadow: none; transform: scale(1); color: #fff; }
+  }
+  .flash-yellow { animation: texFlashYellow 0.4s ease-out !important; }
+  .cbtn { position:absolute; right:14px; width:72px; height:72px; border-radius:14px; z-index:12;
+    display:flex; align-items:center; justify-content:center; font-weight:800; cursor:pointer;
+    border:1px solid rgba(0,0,0,.35); user-select:none; }
+  .cplay { top:14px; background:#EB8E00; color:#fff; font-size:34px; overflow:hidden; }
+  .cplay.stop { background:transparent; border-color:transparent; }
+  .cplay .stopsq { width:57px; height:57px; border-radius:12px; border:2px solid #fff; background:transparent; position:relative; z-index:2; overflow:hidden; }
+  /* 停止長押しの「下から白く埋まる」フィル：角丸正方形(stopsq)いっぱい */
+  .cplay .stopsq .holdfill { position:absolute; left:0; right:0; bottom:0; height:0%; background:rgba(255,255,255,.9); pointer-events:none; }
+  .cmenu { top:98px; background:#1660FF; color:#fff; font-size:19px; letter-spacing:.03em; }
+  .cmenu:active { background:#3a7bff; }
+  .cparent { top:182px; background:#e0c020; color:#fff; font-size:19px; letter-spacing:-1.5px; display:none; } /* Compoノードと同色 */
+  .cparent:active { background:#efd23f; }
+  .cmode { top:182px; background:#1FACB6; color:#fff; font-size:19px; letter-spacing:-1.5px; } /* NODE/LAYOUT切替。MENUと同サイズ */
+  .clayerval { position:absolute; z-index:12; display:none; color:#eef0f4; font-size:65px; font-weight:900;
+    text-shadow:0 2px 6px rgba(0,0,0,.8); text-align:right; pointer-events:none; line-height:1; } /* 数字のみ・2.5倍・枠背景なし＋ドロップシャドウ */
+  .clayerbtn { width:39px; height:39px; background:#4a5262; color:#fff; font-size:19px; border-radius:9px; display:none; }
+  .clayerbtn:active { background:#5b657a; }
+  #flick { position:absolute; inset:0; z-index:11; display:none; }
+  #flick .fi { position:absolute; width:105px; height:60px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:18px; font-weight:800; color:#fff; border:2px solid rgba(255,255,255,.25);
+    background:#2b3140; box-shadow:0 6px 20px rgba(0,0,0,.5); }
+  #flick .fi.hot { border-color:#fff; transform:scale(1.08); }
+  .swatch { width:16px; height:16px; border-radius:4px; display:inline-block; margin-right:8px; vertical-align:-2px; }
+
+  /* 再生中のオンスクリーン操作 */
+  #pad { position:absolute; left:14px; bottom:14px; width:150px; height:150px; z-index:9; display:none;
+    touch-action:none; }
+  #pad .k { position:absolute; width:48px; height:48px; border-radius:10px; background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25); }
+  #pad .up{left:51px;top:0} #pad .down{left:51px;bottom:0} #pad .left{left:0;top:51px} #pad .right{right:0;top:51px}
+  #hint { position:absolute; right:10px; bottom:10px; color:#8a92a6; font-size:12px; z-index:9; }
+  .hidden { display:none !important; }
+
+  #texBar { position:absolute; left:12px; top:78px; z-index:16; display:none; flex-direction:column; gap:calc(10px * var(--tex-sc, 1)); }
+  #texBar .tbtn { width:78px; height:calc(35px * var(--tex-sc, 1)); border-radius:10px; border:1px solid #6b7690;
+    background:#171a22; color:#b7bfcf; font-size:calc(16px * var(--tex-sc, 1)); font-weight:800; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0; }
+  #texBar .tbtn.tsmall { flex:1; width:auto; font-size:calc(12px * var(--tex-sc, 1)); }
+  #texBar .tbtn.tsmall.dim { opacity:0.3; pointer-events:none; }
+  #texBar .tbtn.active { background:#21b3d6; border-color:#21b3d6; color:#fff; }
+  #texWork { display:grid; grid-template-columns:1fr 1fr; gap:calc(8px * var(--tex-sc, 1)); margin-top:calc(6px * var(--tex-sc, 1)); }
+  #texUndoRow { display:flex; gap:calc(8px * var(--tex-sc, 1)); }
+  #texBar .tbtn.tundo { width:35px; height:calc(35px * var(--tex-sc, 1)); font-size:calc(20px * var(--tex-sc, 1)); }
+  #texBar .tbtn.tundo.dim { color:#5a6272; }
+  #texWork .tsw { width:35px; height:calc(35px * var(--tex-sc, 1)); border-radius:8px; border:3px solid #6b7690; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; }
+  #texWork .tsw.sel { border-color:#ffcc00; border-width:5px; transform:scale(1.1); }
+  #texWork .tsw-trans { background-color:#2a2f3a;
+      background-image: conic-gradient(#5a6070 90deg, transparent 90deg 180deg, #5a6070 180deg 270deg, transparent 270deg);
+      background-size: 50% 50%; color:#e8ecf5; font-size:calc(16px * var(--tex-sc, 1)); font-weight:700; line-height:1; }
+  #texCloseBtn { position:absolute; top:14px; right:14px; z-index:17; display:none; }
+
+  #drawBar { position:absolute; left:12px; top:78px; z-index:16; display:none; flex-direction:column; gap:calc(10px * var(--draw-sc, 1)); }
+  #drawBar .tbtn { width:78px; height:calc(35px * var(--draw-sc, 1)); border-radius:10px; border:1px solid #6b7690;
+    background:#171a22; color:#b7bfcf; font-size:calc(15px * var(--draw-sc, 1)); font-weight:800; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0; }
+  #drawBar .tbtn.active { background:#21b3d6; border-color:#21b3d6; color:#fff; }
+  #drawBar .tbtn.endpoint { background:#c9726e; border-color:#c9726e; color:#fff; } /* 明るいグレーと赤の中間色 */
+  #drawUndoRow { display:flex; gap:calc(8px * var(--draw-sc, 1)); }
+  #drawBar .tbtn.tundo { width:35px; height:calc(35px * var(--draw-sc, 1)); font-size:calc(20px * var(--draw-sc, 1)); }
+  #drawBar .tbtn.tundo.dim { color:#5a6272; }
+  #drawCloseBtn { position:absolute; top:14px; right:14px; z-index:17; display:none; }
+  #drawHelpBtn { position:absolute; top:14px; right:66px; z-index:17; display:none; }
+
+  #seqBar { position:absolute; left:12px; top:78px; z-index:16; display:none; flex-direction:column; width:100px; }
+  /* 上下の▲▼はスクロールしない専用の小さいエリア（枠線無し）。他のWidgetとは重ならず、実際に押せる分だけ表示 */
+  #seqBar .seqCap { flex:0 0 auto; height:18px; display:none; align-items:center; justify-content:center;
+    color:#b7bfcf; font-size:13px; font-weight:800; cursor:pointer; touch-action:none; user-select:none; }
+  #seqBar .seqCap:active { color:#fff; }
+  #seqBar .seqCap span.hide { visibility:hidden; }
+  #seqBarScroll { display:flex; flex-direction:column; gap:calc(10px * var(--seq-sc, 1));
+    scrollbar-width:none; -ms-overflow-style:none; } /* スクロールバーは表示しない（▲▼またはドラッグでのスクロールのみ） */
+  #seqBarScroll > * { flex-shrink:0; } /* スクロール時にブラウザ任せで潰れないように。高さは常に--seq-scの計算値のみで決める */
+  #seqBarScroll::-webkit-scrollbar { display:none; width:0; height:0; }
+  #seqBar .tbtn { width:100px; height:calc(35px * var(--seq-sc, 1)); border-radius:10px; border:1px solid #6b7690;
+    background:#171a22; color:#b7bfcf; font-size:calc(16px * var(--seq-sc, 1)); font-weight:800; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0; }
+  #seqBar .tbtn.active { background:#21b3d6; border-color:#21b3d6; color:#fff; }
+  #seqBar .tbtn.playing { background:#4BCD0B; border-color:#4BCD0B; color:#fff; } /* 再生中：指定の黄緑背景・白文字（停止ボタン扱い） */
+  #seqBar .tbtn.tsmall { width:auto; flex:1; height:calc(35px * var(--seq-sc, 1)); font-size:calc(12px * var(--seq-sc, 1)); }
+  #seqBar .tbtn.tsmall.dim { opacity:0.3; pointer-events:none; }
+  #seqUndoRow { display:flex; gap:calc(8px * var(--seq-sc, 1)); }
+  #seqBar .tbtn.tundo { width:35px; height:calc(35px * var(--seq-sc, 1)); font-size:calc(20px * var(--seq-sc, 1)); }
+  #seqBar .tbtn.tundo.dim { color:#5a6272; }
+  #seqBar select#seqInstSel { width:100px; height:calc(35px * var(--seq-sc, 1)); border-radius:10px; border:1px solid #6b7690;
+    background:#171a22; color:#fff; font-size:calc(12px * var(--seq-sc, 1)); font-weight:700; }
+  #seqBar .seqBpmRow { display:flex; flex-direction:column; gap:2px; color:#b7bfcf; font-size:calc(11px * var(--seq-sc, 1)); font-weight:700; }
+  #seqBar .seqBpmRow input { width:100px; height:calc(32px * var(--seq-sc, 1)); border-radius:8px; border:1px solid #6b7690;
+    background:#242a37; color:#fff; font-size:calc(14px * var(--seq-sc, 1)); font-weight:700; text-align:center; box-sizing:border-box; }
+  #seqBar .seqMajorRow { display:flex; align-items:center; gap:6px; color:#b7bfcf; font-size:calc(12px * var(--seq-sc, 1)); font-weight:700; }
+  #seqBar .seqMajorRow input { width:calc(20px * var(--seq-sc, 1)); height:calc(20px * var(--seq-sc, 1)); }
+  /* 複数Array編集：番号ボタン＋色Pick＋音源選択（メニュー最下部。Arrayの数だけ縦に並ぶ） */
+  #seqMultiRow { display:flex; flex-direction:column; gap:calc(10px * var(--seq-sc, 1)); margin-top:calc(4px * var(--seq-sc, 1)); }
+  #seqMultiRow .smi { display:flex; flex-direction:column; gap:calc(4px * var(--seq-sc, 1)); }
+  #seqMultiRow .smi.dragging { opacity:.6; }
+  #seqMultiRow .smTop { display:flex; gap:calc(6px * var(--seq-sc, 1)); align-items:center; }
+  #seqMultiRow .smNum { width:calc(59px * var(--seq-sc, 1)); height:calc(35px * var(--seq-sc, 1)); border-radius:8px; border:1px solid #6b7690;
+    background:#242a37; color:#b7bfcf; font-size:calc(15px * var(--seq-sc, 1)); font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; touch-action:none; }
+  #seqMultiRow .smNum.active { background:#21b3d6; border-color:#21b3d6; color:#fff; }
+  #seqMultiRow .smNum.muted { background:#15181f; border-color:#3a4150; color:#5a6272; } /* 長押しでミュート：暗く表示 */
+  #seqMultiRow .smNum.muted.active { background:#1c3a44; border-color:#215a68; color:#7ba3ab; }
+  #seqMultiRow .smColor { width:calc(35px * var(--seq-sc, 1)); height:calc(35px * var(--seq-sc, 1)); flex:0 0 auto; border-radius:8px; border:1px solid #6b7690; cursor:pointer; }
+  #seqMultiRow .smInst { width:100px; height:calc(30px * var(--seq-sc, 1)); border-radius:8px; border:1px solid #6b7690;
+    background:#171a22; color:#fff; font-size:calc(12px * var(--seq-sc, 1)); font-weight:700; }
+  #seqCloseBtn { position:absolute; top:14px; right:14px; z-index:17; display:none; }
+  #seqHelpBtn { position:absolute; top:14px; right:66px; z-index:17; display:none; }
+
+  /* 背景長押しの Create New Node メニュー */
+  #createMenu { position:absolute; z-index:20; background:rgba(28,32,42,.98); border:1px solid #6b7690;
+    border-radius:14px; padding:12px; display:none; box-shadow:0 10px 32px rgba(0,0,0,.6);
+    max-height:calc(100vh - 24px); overflow-y:auto; }
+  #createMenu .title { color:#b7bfcf; font-size:13px; font-weight:800; padding:2px 4px 10px; letter-spacing:.05em; }
+  #createMenu .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+  #createMenu .ci { height:40px; padding:0 4px; border-radius:10px; border:1px solid rgba(0,0,0,.35);
+    color:#fff; font-size:17.2px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    text-align:center; text-shadow:0 1px 2px rgba(0,0,0,.5); overflow:hidden; white-space:nowrap; }
+  #createMenu .ci:active { background:#2f3646; }
+
+  /* 複数選択メニュー（Duplicate/Delete）／ワイヤー長押しメニュー（Delete） */
+  #multiMenu, #wireMenu { position:absolute; z-index:21; background:rgba(28,32,42,.98); border:1px solid #6b7690;
+    border-radius:14px; padding:10px; display:none; box-shadow:0 10px 32px rgba(0,0,0,.6); }
+  #multiMenu .mi, #wireMenu .mi { height:52px; min-width:180px; padding:0 18px; border-radius:11px; border:1px solid #6b7690;
+    color:#fff; font-size:17px; font-weight:800; cursor:pointer; display:flex; align-items:center; margin:4px 0; }
+  #multiMenu .mi.dup { background:#2b6fd0; border-color:#1c4887; } #multiMenu .mi.del, #wireMenu .mi.del { background:#a12b2b; border-color:#691c1c; }
+  #multiMenu .mi:active, #wireMenu .mi:active { filter:brightness(1.2); }
+
+  /* プロパティパネル（選択ノード） */
+  /* 背後のPlayボタン等を触れないようにするための透明バックドロップ（タップで閉じる） */
+  #propBackdrop { position:absolute; inset:0; z-index:14; display:none; background:rgba(0,0,0,.55); }
+  #menuBackdrop { position:absolute; inset:0; z-index:19; display:none; background:rgba(0,0,0,.55); } /* CreateNode/Multiメニューの暗転 */
+  /* Compo内編集：右上(再生ボタンの左)にコンポ番号を大きく表示 */
+  #compoNum { position:absolute; top:20px; z-index:10; display:none; color:#ffffff; font-size:60px; font-weight:900;
+    height:72px; line-height:72px; text-shadow:0 2px 6px rgba(0,0,0,.6); letter-spacing:.02em; pointer-events:none; } /* z-index<flick(11)＝フリックの裏。72pxで再生ボタンと縦中央一致 */
+  #propPanel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:15;
+    background:rgba(28,32,42,.98); border:1px solid #6b7690; border-radius:14px; padding:16px 18px; display:none;
+    min-width:240px; max-width:calc(100vw - 20px); box-shadow:0 12px 36px rgba(0,0,0,.6); }
+  #propPanel .pbody { display:grid; grid-template-columns:1fr; gap:0 16px; }
+  #propPanel .pt { color:#fff; font-size:17px; font-weight:800; margin-bottom:10px; display:flex; align-items:center; }
+  .pclose { margin-left:auto; width:44px; height:44px; border-radius:8px; border:1px solid #2a91ad;
+    background:#21b3d6; color:#fff; font-size:40px; font-weight:800; cursor:pointer; line-height:1; }
+  .pclose:active { background:#1a94b3; }
+  /* プロパティパネル/各エディタの「？」（ヘルプ）。×の左に並べる */
+  .phelp { margin-left:auto; width:44px; height:44px; border-radius:8px; border:1px solid #6b7690;
+    background:#5a6890; color:#fff; font-size:22px; font-weight:800; cursor:pointer; line-height:1; }
+  .phelp:active { background:#6c7ba6; }
+  /* ？がある時は×の margin-left:auto を無効化し、2つを右端で隣り合わせる */
+  #propPanel .pt .phelp + .pclose { margin-left:8px; }
+  /* ラベルは左半分固定、コントロールは右半分(50%上限)。入力欄の左位置を揃える */
+  #propPanel .prow { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  #propPanel label { color:#b7bfcf; font-size:16px; font-weight:700; flex:0 0 46%; min-width:0; }
+  #propPanel input { flex:0 0 50%; width:50%; max-width:50%; box-sizing:border-box; height:44px; border-radius:9px; border:1px solid #6b7690; background:#181c26;
+    color:#e6e9ef; font-size:18px; font-weight:700; text-align:center; }
+  #propPanel input[type=checkbox] { flex:0 0 auto; width:32px; height:32px; max-width:none; }
+  /* DDLは50%上限だが中身が入りきらない場合は超えてよい */
+  #propPanel select { flex:0 1 auto; min-width:50%; max-width:100%; height:44px; border-radius:9px; border:1px solid #6b7690; background:#181c26;
+    color:#e6e9ef; font-size:16px; font-weight:700; }
+  #propPanel .del { width:100%; height:48px; border-radius:10px; border:1px solid #cc3b3b; background:#a12b2b;
+    color:#fff; font-size:16px; font-weight:800; cursor:pointer; }
+  #propPanel .del:active { background:#cc3b3b; }
+  .touch-locked { pointer-events: none !important; }
